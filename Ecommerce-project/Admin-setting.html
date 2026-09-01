@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Settings</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Lato -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --bg-dark: #0A2540;
+      --primary-blue: #0796FE;
+      --sub-text: #797979;
+      --white: #FFFFFF;
+      --light-bg: #F0F2F5;
+      --border-color: #cbd5e1;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--light-bg);
+      margin: 0;
+      padding: 0;
+      color: #334155;
+      scroll-behavior: smooth;
+    }
+
+    /* Sidebar Style */
+    .sidebar {
+      background-color: var(--bg-dark);
+      height: 100vh;
+      color: var(--white);
+      position: fixed;
+      width: 240px;
+      z-index: 1050; /* Higher priority to overlay on mobile */
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+      transition: left 0.3s ease-in-out;
+      left: 0;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .sidebar .logo-area {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 160px;
+      height: auto;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      transition: 0.3s;
+      margin: 5px 10px;
+      border-radius: 5px;
+      border-left: 5px solid transparent;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--primary-blue);
+      border-left: 5px solid var(--primary-blue);
+    }
+
+    .sidebar i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .sidebar a:hover i,
+    .sidebar a.active i {
+      color: var(--primary-blue);
+    }
+
+    /* Toggle Button Style */
+    .toggle-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 24px;
+      display: none; /* Hidden on desktop */
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--bg-dark);
+      border: none;
+      background: transparent;
+      margin-left: -10px;
+      margin-right: 10px;
+    }
+
+    .toggle-btn:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+    }
+
+    /* EXACT HEADER STYLE */
+    .top-header {
+      background: #FFFFFF;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      border-bottom: 1px solid #E2E8F0;
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      z-index: 999;
+      transition: left 0.3s ease-in-out;
+    }
+
+    .search-bar {
+      background: #F8F9FA;
+      border: 1px solid #E9E9E9;
+      border-radius: 8px;
+      width: 450px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
+
+    .search-bar i {
+      color: #A0A0A0;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 14px;
+      color: #333;
+      margin: 0 10px;
+      min-width: 0;
+    }
+
+    .search-bar input::placeholder {
+      color: #A0A0A0;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .notification-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      color: var(--sub-text);
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .notification-btn .noti-text {
+      font-size: 10px;
+      margin-top: 2px;
+      color: var(--sub-text);
+    }
+
+    .notification-btn .badge {
+      position: absolute;
+      top: -2px;
+      right: 4px;
+      background: #EF4444;
+      color: white;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      background: #0F477C;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* Content Body Area offset */
+    .content-body {
+      padding: 30px;
+      padding-top: 100px;
+      flex: 1;
+    }
+
+    /* Title Block */
+    .page-title-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .page-title-block h1 {
+      font-size: 30px;
+      font-weight: 400;
+      color: #0A2540;
+      margin: 0 0 8px 0;
+    }
+
+    .page-title-block p {
+      font-size: 14px;
+      color: #3a3a3a;
+      margin: 0;
+      max-width: 800px;
+      line-height: 1.5;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-reset {
+      background: #FFFFFF;
+      color: #0796FE;
+      border: 1px solid #0796FE;
+      border-radius: 6px;
+      padding: 8px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: rgba(7, 150, 254, 0.05);
+    }
+
+    .btn-save {
+      background: #0796FE;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-save:hover {
+      background: #027cd6;
+    }
+
+    /* Custom settings cards */
+    .custom-card {
+      background: #FFFFFF;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(15, 41, 86, 0.03);
+      scroll-margin-top: 90px;
+    }
+
+    .card-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0A2540;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-heading i {
+      color: #0796FE;
+      font-size: 20px;
+    }
+
+    /* Left panel categories list */
+    .categories-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #FFFFFF;
+      overflow: hidden;
+      padding: 10px 0;
+      position: sticky;
+      top: 90px;
+    }
+
+    .categories-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0A2540;
+      padding: 10px 20px 15px 20px;
+      margin: 0;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      color: #475569;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-left: 4px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .category-link i {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+      color: #64748b;
+    }
+
+    .category-link:hover {
+      background: #F8FAFC;
+      color: #0A2540;
+    }
+
+    .category-link.active {
+      background: #F3F6FC;
+      color: #0796FE;
+      border-left: 4px solid #0796FE;
+    }
+
+    .category-link.active i {
+      color: #0796FE;
+    }
+
+    /* System Health Box */
+    .system-health-box {
+      background: #0796FE;
+      color: #FFFFFF;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 24px;
+      position: sticky;
+      top: 480px;
+    }
+
+    .health-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .health-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .health-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .status-dot-green {
+      width: 10px;
+      height: 10px;
+      background: #10B981;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px #10B981;
+    }
+
+    /* Form Fields */
+    .form-group-custom {
+      margin-bottom: 20px;
+    }
+
+    .form-group-custom label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-input-custom {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      height: 44px;
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #1E293B;
+      transition: all 0.2s;
+    }
+
+    .form-input-custom:focus {
+      background: #FFFFFF;
+      border-color: #0796FE;
+      box-shadow: 0 0 0 3px rgba(7, 150, 254, 0.15);
+      outline: none;
+    }
+
+    .form-input-error {
+      border-color: #EF4444 !important;
+      background-color: #FFF5F5 !important;
+    }
+
+    .verified-msg {
+      font-size: 11px;
+      color: #0796FE;
+      font-weight: 700;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .error-msg {
+      color: #EF4444;
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* Dashed Upload box */
+    .logo-upload-dropzone {
+      border: 1px dashed #cbd5e1;
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .logo-upload-dropzone:hover {
+      background: #F1F5F9;
+      border-color: #0796FE;
+    }
+
+    .logo-upload-dropzone i {
+      font-size: 32px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .logo-upload-dropzone p {
+      font-size: 14px;
+      color: #475569;
+      margin: 0 0 6px 0;
+      font-weight: 600;
+    }
+
+    .logo-upload-dropzone span {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    /* Roles & Permissions Card */
+    .admin-role-banner {
+      background: #F3F6FC;
+      border-radius: 6px;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .admin-role-banner h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0A2540;
+      margin: 0 0 4px 0;
+    }
+
+    .admin-role-banner p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .badge-master-role {
+      background: #007bff;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Switch list grid */
+    .permissions-grid-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .permission-toggle-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FFFFFF;
+      transition: all 0.2s;
+    }
+
+    .permission-toggle-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .permission-toggle-card h5 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0A2540;
+      margin: 0 0 4px 0;
+    }
+
+    .permission-toggle-card p {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* Switches */
+    .toggle-switch-control {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch-control input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider-bar {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .toggle-slider-bar:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider-bar.switch-green {
+      background-color: #10B981;
+    }
+
+    input:checked + .toggle-slider-bar.switch-blue {
+      background-color: #0796FE;
+    }
+
+    input:checked + .toggle-slider-bar:before {
+      transform: translateX(20px);
+    }
+
+    /* Custom Form Select styling */
+    .form-select-custom {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 14px 12px;
+    }
+
+    /* Input group design for tax input suffix */
+    .input-group-custom {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .input-group-custom input {
+      flex: 1;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .input-group-addon-custom {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: none;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      height: 44px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    /* Environment Radios styling */
+    .env-radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      height: 44px;
+    }
+
+    .env-radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1E293B;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .env-radio-group input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: #0796FE;
+    }
+
+    /* Send test email button styling */
+    .btn-send-test {
+      background: #0796FE;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-send-test:hover {
+      background: #027cd6;
+    }
+
+    /* Footer Action Bar */
+    .footer-action-bar {
+      background: #F3F6FC;
+      border-top: 1px solid #cbd5e1;
+      padding: 15px 30px;
+      margin-top: 40px;
+      margin-left: -30px;
+      margin-right: -30px;
+    }
+
+    .cancel-link {
+      color: #475569;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .cancel-link:hover {
+      color: #1e293b;
+    }
+
+    .btn-footer-reset {
+      background: #FFFFFF;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 24px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .btn-footer-reset:hover {
+      background: #F8FAFC;
+    }
+
+    .btn-footer-save {
+      background: #0796FE;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 24px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .btn-footer-save:hover {
+      background: #027cd6;
+    }
+
+    .copyright-text {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Sidebar Overlay Backdrop */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .sidebar-overlay.show {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ======================================================
+       RESPONSIVE DESIGN (CLEAN & UNIFIED)
+    ====================================================== */
+
+    /* For Mobile and Tablets (max-width: 991.98px) */
+    @media (max-width: 991.98px) {
+      .sidebar {
+        left: -240px; /* Hidden offscreen by default */
+        z-index: 1050; /* Stays above backdrop and header */
+      }
+
+      .sidebar.show {
+        left: 0; /* Slide out menu */
+      }
+
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+      }
+
+      .top-header {
+        left: 0 !important;
+        padding: 0 20px;
+      }
+
+      .toggle-btn {
+        display: flex !important; /* Show hamburger button on mobile & tablets */
+      }
+
+      .page-title-block {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .header-actions {
+        width: 100%;
+      }
+
+      .btn-save, .btn-reset {
+        flex: 1;
+        text-align: center;
+      }
+
+      .categories-box {
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 20px;
+      }
+
+      .system-health-box {
+        position: relative !important;
+        top: 0 !important;
+        margin-top: 0;
+      }
+    }
+
+    /* Tablets (max-width: 768px) */
+    @media (max-width: 768px) {
+      .top-header {
+        height: auto;
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .header-right {
+        justify-content: space-between;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .content-body {
+        padding: 20px;
+        padding-top: 160px; /* adjusted for taller stacked double-row header */
+      }
+
+      .custom-card {
+        padding: 18px;
+      }
+    }
+
+    /* Mobile Phones (max-width: 576px) */
+    @media (max-width: 576px) {
+      .content-body {
+        padding-top: 170px;
+      }
+
+      .page-title-block h1 {
+        font-size: 24px;
+      }
+
+      .permissions-grid-box {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-toggle-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .admin-role-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .input-group-custom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .input-group-addon-custom {
+        width: 100%;
+        border-left: 1px solid #E2E8F0;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        justify-content: center;
+      }
+
+      .env-radio-group {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        gap: 12px;
+      }
+
+      .footer-action-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 15px 20px;
+      }
+
+      .btn-footer-save,
+      .btn-footer-reset {
+        width: 100%;
+      }
+    }
+
+    /* Small Phones (max-width: 400px) */
+    @media (max-width: 400px) {
+      .content-body {
+        padding: 15px;
+        padding-top: 175px;
+      }
+
+      .search-bar {
+        height: 40px;
+      }
+
+      .card-heading {
+        font-size: 16px;
+      }
+
+      .custom-card {
+        padding: 15px;
+      }
+
+      .form-input-custom {
+        font-size: 13px;
+      }
+
+      .page-title-block h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar Overlay Backdrop -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo-area">
+      <img src="./img/creativesweb.png" alt="Logo" class="logo-img" onclick="window.location.href='index.html';"
+        style="cursor:pointer;" />
+    </div>
+    <nav>
+      <a href="adminpanel.html">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="product.html">
+        <i class="fa-solid fa-box"></i>
+        <span>Products</span>
+      </a>
+
+      <a href="admin-order.html">
+        <i class="fa-solid fa-shopping-cart"></i>
+        <span>Orders</span>
+      </a>
+
+      <a href="licence-dashboard.html">
+        <i class="fa-solid fa-id-card"></i>
+        <span>License</span>
+      </a>
+
+      <a href="admin-user.html">
+        <i class="fa-regular fa-user"></i>
+        <span>User</span>
+      </a>
+
+      <a href="admin-settings.html" class="active">
+        <i class="bi bi-gear me-2"></i>
+        <span>Setting</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="d-flex align-items-center">
+        <button class="btn toggle-btn" id="sidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text" id="globalSearch" placeholder="Search settings...">
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="notification-btn" id="notifBtn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="badge" id="notifBadge">10</span>
+          <small class="noti-text">Notification</small>
+        </div>
+        <div class="profile-wrapper">
+          <div class="user-avatar" id="userAvatar">
+            AU
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Body -->
+    <div class="content-body">
+      <!-- Title Block -->
+      <div class="page-title-block">
+        <div>
+          <h1>Admin Settings</h1>
+          <p>Configure and manage platform-wide settings, administrator permissions, payment gateway, notifications, and security.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-reset">Reset Changes</button>
+          <button class="btn-save">+Save Changes</button>
+        </div>
+      </div>
+
+      <!-- Settings Grid -->
+      <div class="row">
+        <!-- Left Panel: Categories & Health -->
+        <div class="col-lg-3 col-md-4 mb-4">
+          <div class="categories-box">
+            <h3 class="categories-title">Settings Categories</h3>
+            <div class="categories-list">
+              <a href="#general-settings" class="category-link active">
+                <i class="fa-solid fa-store"></i>
+                <span>General Settings</span>
+              </a>
+              <a href="#roles-permissions" class="category-link">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Roles & Permissions</span>
+              </a>
+              <a href="#payment-gateway" class="category-link">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Payment Gateway</span>
+              </a>
+              <a href="#tax-configuration" class="category-link">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Tax Configuration</span>
+              </a>
+              <a href="#email-configuration" class="category-link">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Email Configuration</span>
+              </a>
+              <a href="#notification-settings" class="category-link">
+                <i class="fa-solid fa-bell"></i>
+                <span>Notification Settings</span>
+              </a>
+              <a href="#security-settings" class="category-link">
+                <i class="fa-solid fa-lock"></i>
+                <span>Security Settings</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- System Health Card -->
+          <div class="system-health-box">
+            <div class="health-title">System Health</div>
+            <div class="health-row">
+              <span>Database Connection</span>
+              <span class="status-dot-green"></span>
+            </div>
+            <div class="health-row">
+              <span>API Latency</span>
+              <span style="font-weight: 700;">42ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Forms & Configurations -->
+        <div class="col-lg-9 col-md-8">
+          <!-- General Settings -->
+          <div class="custom-card" id="general-settings">
+            <div class="card-heading">
+              <i class="fa-solid fa-store"></i>
+              <span>General Settings</span>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group-custom">
+                <label for="storeName">Store Name</label>
+                <input type="text" id="storeName" class="form-input-custom" value="">
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" class="form-input-custom" value="">
+              </div>
+            </div>
+            <div class="form-group-custom">
+              <label for="supportEmail">Support Email</label>
+              <input type="email" id="supportEmail" class="form-input-custom" value="">
+              <span class="verified-msg">Email address is valid and verified.</span>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group-custom">
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" id="contactNumber" class="form-input-custom" value="">
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <label for="officeAddress">Office Address</label>
+                <input type="text" id="officeAddress" class="form-input-custom" value="">
+              </div>
+            </div>
+            <div class="form-group-custom">
+              <label>Logo Upload</label>
+              <div class="logo-upload-dropzone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Click or drag & drop to upload new logo</p>
+                <span>Recommended size 512x512px, Max 2MB.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Roles & Permissions -->
+          <div class="custom-card" id="roles-permissions">
+            <div class="card-heading justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Roles & Permissions</span>
+              </div>
+              <a href="#" style="text-decoration: none; color: #0796FE; font-size: 14px; font-weight: 700;">+ Add New Role</a>
+            </div>
+
+            <!-- Administrator Role banner -->
+            <div class="admin-role-banner">
+              <div>
+                <h4>Administrator Role</h4>
+                <p>Full system access with master administrative controls.</p>
+              </div>
+              <span class="badge-master-role">MASTER ROLE</span>
+            </div>
+
+            <!-- Permissions Grid -->
+            <div class="permissions-grid-box">
+              <div class="permission-toggle-card">
+                <div>
+                  <h5>Dashboard Access</h5>
+                  <p>View real-time store analytics</p>
+                </div>
+                <label class="toggle-switch-control">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider-bar switch-green"></span>
+                </label>
+              </div>
+              <div class="permission-toggle-card">
+                <div>
+                  <h5>Product Management</h5>
+                  <p>Add, Edit, Delete platform products</p>
+                </div>
+                <label class="toggle-switch-control">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider-bar switch-green"></span>
+                </label>
+              </div>
+              <div class="permission-toggle-card">
+                <div>
+                  <h5>User Management</h5>
+                  <p>Manage customer profiles & support</p>
+                </div>
+                <label class="toggle-switch-control">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider-bar switch-green"></span>
+                </label>
+              </div>
+              <div class="permission-toggle-card">
+                <div>
+                  <h5>Finance & Billing</h5>
+                  <p>Access invoices & transaction logs</p>
+                </div>
+                <label class="toggle-switch-control">
+                  <input type="checkbox">
+                  <span class="toggle-slider-bar switch-green"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Gateway -->
+          <div class="custom-card" id="payment-gateway">
+            <div class="card-heading justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Payment Gateway</span>
+              </div>
+              <span style="color: #10B981; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 8px;">●</span> ACTIVE CONNECTION
+              </span>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group-custom">
+                <label for="gatewayName">Gateway Name</label>
+                <select id="gatewayName" class="form-input-custom form-select-custom">
+                  <option selected>Stripe Connect</option>
+                  <option>PayPal</option>
+                  <option>Razorpay</option>
+                </select>
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <label>Environment</label>
+                <div class="env-radio-group">
+                  <label><input type="radio" name="environment"> Test</label>
+                  <label><input type="radio" name="environment" checked> Live</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group-custom">
+                <label for="merchantId">Merchant ID</label>
+                <input type="text" id="merchantId" class="form-input-custom form-input-error" value="">
+                <span class="error-msg">Merchant ID is required for live transactions.</span>
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <label for="apiKey">API Key</label>
+                <input type="text" id="apiKey" class="form-input-custom" value="">
+              </div>
+            </div>
+
+            <div class="form-group-custom">
+              <label for="secretKey">Secret Key</label>
+              <div style="position: relative;">
+                <input type="password" id="secretKey" class="form-input-custom" value="" style="padding-right: 40px;">
+                <i class="fa-regular fa-eye-slash" id="toggleSecretEye" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #64748b; font-size: 16px;"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tax Configuration -->
+          <div class="custom-card" id="tax-configuration">
+            <div class="card-heading">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span>Tax Configuration</span>
+            </div>
+
+            <div class="row align-items-center">
+              <div class="col-md-3 form-group-custom">
+                <label>Tax Enabled</label>
+                <label class="toggle-switch-control" style="margin-top: 10px;">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider-bar switch-blue"></span>
+                </label>
+              </div>
+              <div class="col-md-4 form-group-custom">
+                <label>GST Percentage (%) *</label>
+                <div class="input-group-custom">
+                  <input type="text" class="form-input-custom" value="">
+                  <span class="input-group-addon-custom">%</span>
+                </div>
+              </div>
+              <div class="col-md-5 form-group-custom">
+                <label for="displayMethod">Display Method</label>
+                <select id="displayMethod" class="form-input-custom form-select-custom">
+                  <option selected>Exclusive of Price</option>
+                  <option>Inclusive of Price</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email Configuration -->
+          <div class="custom-card" id="email-configuration">
+            <div class="card-heading justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Email Configuration</span>
+              </div>
+              <button class="btn-send-test">
+                <i class="fa-solid fa-paper-plane"></i> Send Test Email
+              </button>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 form-group-custom">
+                <label for="smtpHost">SMTP Host *</label>
+                <input type="text" id="smtpHost" class="form-input-custom" value="">
+              </div>
+              <div class="col-md-4 form-group-custom">
+                <label for="smtpPort">SMTP Port *</label>
+                <input type="text" id="smtpPort" class="form-input-custom" value="">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group-custom">
+                <label for="smtpUser">SMTP Username *</label>
+                <input type="text" id="smtpUser" class="form-input-custom" value="">
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <label for="smtpPassword">SMTP Password *</label>
+                <input type="password" id="smtpPassword" class="form-input-custom" value="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification Settings -->
+          <div class="custom-card" id="notification-settings">
+            <div class="card-heading">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notification Settings</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #E2E8F0;">
+              <div>
+                <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0 0 4px 0;">Order Confirmation</h5>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">Send email when a customer places an order</p>
+              </div>
+              <label class="toggle-switch-control">
+                <input type="checkbox" checked>
+                <span class="toggle-slider-bar switch-blue"></span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #E2E8F0;">
+              <div>
+                <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0 0 4px 0;">Payment Success</h5>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">Send email upon successful transaction</p>
+              </div>
+              <label class="toggle-switch-control">
+                <input type="checkbox" checked>
+                <span class="toggle-slider-bar switch-blue"></span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #E2E8F0;">
+              <div>
+                <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0 0 4px 0;">Product Updates</h5>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">Notify users about new features or releases</p>
+              </div>
+              <label class="toggle-switch-control">
+                <input type="checkbox">
+                <span class="toggle-slider-bar switch-blue"></span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0 5px 0;">
+              <div>
+                <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0 0 4px 0;">Administrative Alerts</h5>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">System-wide critical alerts for admins</p>
+              </div>
+              <label class="toggle-switch-control">
+                <input type="checkbox" checked>
+                <span class="toggle-slider-bar switch-blue"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Security Settings -->
+          <div class="custom-card" id="security-settings">
+            <div class="card-heading justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-lock"></i>
+                <span>Security Settings</span>
+              </div>
+              <span style="background: #E0F2FE; color: #0369A1; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-lock" style="font-size: 11px; color: #0369A1;"></i> ENCRYPTION ENABLED (AES-256)
+              </span>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group-custom">
+                <label for="passwordPolicy">Password Policy</label>
+                <select id="passwordPolicy" class="form-input-custom form-select-custom">
+                  <option selected>Strict (Min 12 chars + Special)</option>
+                  <option>Medium (Min 8 chars + Numbers)</option>
+                  <option>Low (Min 6 chars)</option>
+                </select>
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <label for="sessionTimeout">Session Timeout (Minutes)</label>
+                <input type="text" id="sessionTimeout" class="form-input-custom" value="">
+              </div>
+            </div>
+
+            <div class="row align-items-center">
+              <div class="col-md-6 form-group-custom">
+                <label for="loginLimit">Login Attempt Limit</label>
+                <input type="text" id="loginLimit" class="form-input-custom" value="">
+              </div>
+              <div class="col-md-6 form-group-custom">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0;">SSL Enforcement</h5>
+                    <span style="background: #E0F2FE; color: #0796FE; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">ACTIVE</span>
+                  </div>
+                  <label class="toggle-switch-control">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider-bar switch-blue"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-top: 1px solid #E2E8F0;">
+              <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0;">Force HTTPS on all routes</h5>
+              <label class="toggle-switch-control">
+                <input type="checkbox" checked>
+                <span class="toggle-slider-bar switch-blue"></span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0 5px 0; border-top: 1px solid #E2E8F0;">
+              <h5 style="font-size: 14px; font-weight: 700; color: #0A2540; margin: 0;">Enable Detailed Audit Logs</h5>
+              <label class="toggle-switch-control">
+                <input type="checkbox" checked>
+                <span class="toggle-slider-bar switch-blue"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Footer Action Bar -->
+          <div class="footer-action-bar">
+            <div class="d-flex justify-content-end align-items-center gap-3">
+              <a href="#" class="cancel-link">Cancel</a>
+              <button class="btn-footer-reset">Reset Changes</button>
+              <button class="btn-footer-save">Save Changes</button>
+            </div>
+          </div>
+
+          <!-- Copyright Text -->
+          <div class="copyright-text text-center">
+            Copyright © 2025 - 2026 <strong style="color: #0A2540;">Creative Web Solution</strong>. ALL RIGHTS RESERVED
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Behavior Code -->
+  <script>
+    // Sidebar Toggle with Backdrop Overlay and Prevent Body Scroll
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function toggleSidebar() {
+      sidebar.classList.toggle('show');
+      sidebarOverlay.classList.toggle('show');
+      if (sidebar.classList.contains('show')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (sidebarToggle && sidebarOverlay) {
+      sidebarToggle.addEventListener('click', toggleSidebar);
+      sidebarOverlay.addEventListener('click', toggleSidebar);
+    }
+
+    // Make sure search bar is blank on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const searchBar = document.getElementById('globalSearch');
+      if (searchBar) {
+        searchBar.value = '';
+      }
+    });
+
+    // Eye toggle for secret key visibility
+    const toggleSecretEye = document.getElementById('toggleSecretEye');
+    const secretKeyInput = document.getElementById('secretKey');
+    if (toggleSecretEye && secretKeyInput) {
+      toggleSecretEye.addEventListener('click', () => {
+        const type = secretKeyInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        secretKeyInput.setAttribute('type', type);
+        toggleSecretEye.classList.toggle('fa-eye-slash');
+        toggleSecretEye.classList.toggle('fa-eye');
+      });
+    }
+
+    // Category Links Navigation & Highlight
+    const categoryLinks = document.querySelectorAll('.category-link');
+    const settingsCards = document.querySelectorAll('.custom-card');
+
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // Remove active class from all links
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        // Add active class to clicked link
+        this.classList.add('active');
+
+        // Close sidebar if on mobile screen and open
+        if (window.innerWidth < 992 && sidebar.classList.contains('show')) {
+          toggleSidebar();
+        }
+
+        // Smooth scroll to destination
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = 90; // Top header height + extra padding
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // ScrollSpy: highlight category active link on scroll
+    window.addEventListener('scroll', () => {
+      let currentSectionId = '';
+      const scrollPosition = window.scrollY + 120; // top offset padding
+
+      settingsCards.forEach(card => {
+        const sectionTop = card.offsetTop;
+        if (scrollPosition >= sectionTop) {
+          currentSectionId = card.getAttribute('id');
+        }
+      });
+
+      if (currentSectionId) {
+        categoryLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+
+    // Real-time Settings Search Filtering (Wow factor)
+    const searchBar = document.getElementById('globalSearch');
+    if (searchBar) {
+      searchBar.addEventListener('input', function () {
+        const query = this.value.toLowerCase().trim();
+        settingsCards.forEach(card => {
+          const cardText = card.textContent.toLowerCase();
+          if (cardText.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>

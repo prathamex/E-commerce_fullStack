@@ -1,0 +1,4461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- <script src="/js/admin-guard.js"></script> -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Add Product - Creative Web Solution</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+
+  <!-- Google Fonts (Inter & Plus Jakarta Sans for extreme premium modern look) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Premium HSL Color Palette matching the exact Edit Product image */
+      --sidebar-bg: #092a49;         /* Exact sidebar navy blue from original image */
+      --sidebar-hover: rgba(255, 255, 255, 0.05);
+      --sidebar-active-bg: rgba(255, 255, 255, 0.08);
+      --sidebar-active-border: #1495ff;
+      --sidebar-text: #E5E5E5;
+      
+      --primary: #1495ff;            /* Vibrant sky blue */
+      --primary-hover: #0084f0;
+      --primary-light: rgba(20, 149, 255, 0.06);
+      
+      --light-bg: #f5f7fb;           /* Light grey background between card stacks */
+      --white: #ffffff;
+      
+      --text-main: #1f2937;          /* Slate 800 */
+      --text-heading: #1f2937;       /* Slate 900 */
+      --text-muted: #7c8798;         /* Slate 500 */
+      --border-color: #cbd5e1;       /* Gray border to match the clean image borders */
+      
+      --font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--light-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* ======================= */
+    /* SIDEBAR */
+    /* ======================= */
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 240px;
+      height: 100vh;
+      background: var(--sidebar-bg);
+      z-index: 999;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-area {
+      padding: 24px 18px;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 150px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .sidebar nav {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--sidebar-text);
+      padding: 14px 20px;
+      margin: 0 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: var(--transition);
+      border-left: 4px solid transparent;
+    }
+
+    .sidebar nav a i {
+      width: 18px;
+      font-size: 15px;
+    }
+
+    .sidebar nav a:hover {
+      background: var(--sidebar-hover);
+      color: #ffffff;
+    }
+
+    .sidebar nav a.active {
+      background: var(--sidebar-active-bg);
+      color: var(--primary);
+      border-left: 4px solid var(--sidebar-active-border);
+      font-weight: 500;
+    }
+
+    /* ======================= */
+    /* MAIN */
+    /* ======================= */
+
+    .main-content {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    /* ======================= */
+    /* HEADER */
+    /* ======================= */
+
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      height: 72px;
+      background: var(--white);
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      z-index: 998;
+      transition: var(--transition);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toggle-btn {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 24px;
+      color: var(--text-heading);
+      cursor: pointer;
+    }
+
+    @media (max-width: 991px) {
+    .toggle-btn{
+        margin-top: -6px;
+    }
+}
+
+@media (max-width: 991px) {
+    .toggle-btn{
+        position: relative;
+        top: -2px;
+    }
+}
+
+
+    .search-bar {
+      background: #F8F9FA;
+      border: 1px solid #E9E9E9;
+      border-radius: 8px;
+      padding: 8px 15px;
+      width: 400px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar i {
+      color: #A0A0A0;
+      margin-right: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 16px;
+      color: #6B7280;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .notification-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 20px;
+    }
+
+    .notification-btn small {
+      font-size: 10px;
+    }
+
+    .notification-btn .badge {
+      position: absolute;
+      top: 0px;
+      transform: translate(40%, -40%);
+      background: #EF4444;
+      color: white;
+      font-size: 9px;
+      padding: 3px 5px;
+      border-radius: 50%;
+      border: 2px solid var(--white);
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #0F477C;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* ======================= */
+    /* PAGE CONTENT AREA */
+    /* ======================= */
+
+    .page-wrapper {
+      padding: 92px 18px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Breadcrumbs (Positioned beautifully at the top on light-grey canvas) */
+    .breadcrumb-custom {
+      font-size: 18px;
+      color: #797979;
+      font-weight: 400;
+      margin-bottom: 12px; /* Small, neat margin directly below Home/Breadcrumbs */
+      padding-left: 6px;
+    }
+
+    .breadcrumb-custom span {
+      color: var(--text-muted);
+    }
+    
+    .breadcrumb-custom span.active {
+      color: #0796FE;
+    }
+
+    /* Cards stack container to maintain precise gaps */
+    .cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Precise gap between all stacked cards! */
+    }
+
+    /* ===================================== */
+    /* UNIFIED HEADER & BASIC INFO CARD      */
+    /* ===================================== */
+
+    .unified-first-card {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 4px; /* Squared corners to perfectly match image */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Bar inside the card itself (connected to the card borders) */
+    .page-header-bar-inside {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      color: #101828;
+      margin: 0;
+    }
+
+    .page-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Action Buttons */
+    .btn-custom {
+      height: 40px;
+       min-width: 125px;
+      padding: 0 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-delete {
+      border: 1px solid #ef4444;
+      background: var(--white);
+      color: #BA1A1A;
+    }
+
+    .btn-delete:hover {
+      background: #fef2f2;
+    }
+
+    .btn-discard {
+      border: 1px solid #a0a0a0;
+      background: var(--white);
+      color: #797979;
+    }
+
+    .btn-discard:hover {
+      background: #f8fafc;
+      border-color: #475569;
+    }
+
+    .btn-save {
+      border: none;
+      
+      background: #0796FE;
+      color: #FFFFFF;
+    }
+
+    .btn-save:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(20, 149, 255, 0.2);
+    }
+
+    /* Separator line inside the unified card */
+    .card-divider-line {
+      height: 1px;
+      background: #e5e7eb;
+      width: 100%;
+    }
+
+    /* Basic Info block inside the unified card */
+    .basic-info-content {
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ===================================== */
+    /* STANDALONE STACKED CARDS (2, 3, 4)     */
+    /* ===================================== */
+
+    .form-section-card {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 4px; /* Squared corners to perfectly match image */
+      padding: 28px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 300;
+      color: #0796FE;
+      margin-bottom: 8px;
+      font-family: 'Oswald', sans-serif
+    }
+
+    .section-header i {
+      font-size: 18px;
+    }
+
+    /* Form Fields Styling */
+    .form-group-custom {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #404753;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'Lato',sans-serif;
+    }
+
+    .input-custom {
+      width: 100%;
+      font-weight: 400;
+      height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: #F0F8FF;
+      color: #404753;
+      font-size: 16px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .input-custom:focus {
+      border-color: var(--primary);
+    }
+
+    select.input-custom {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+      background-position: right 12px center;
+      background-repeat: no-repeat;
+      background-size: 18px;
+      padding-right: 36px;
+    }
+
+    .textarea-custom {
+      width: 100%;
+      font-weight: 400;
+      min-height: 110px;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--white);
+      color: #181C22;
+      font-size: 16px;
+      outline: none;
+      resize: vertical;
+      transition: var(--transition);
+      line-height: 1.6;
+      font-family: 'Lato' sans-serif;
+    }
+
+    .textarea-custom:focus {
+      border-color: var(--primary);
+    }
+
+    /* Features List */
+    .features-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .feature-tag {
+      background: #E1F2FF;
+      color: #3C4452;
+      border: 1px solid rgba(20, 149, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-tag i {
+      font-size: 11px;
+      cursor: pointer;
+      color: #93c5fd;
+      transition: var(--transition);
+    }
+
+    .feature-tag i:hover {
+      color: var(--primary);
+    }
+
+    .btn-add-feature {
+      background: var(--white);
+      color: #0796FE;
+      border: 1px dashed rgba(20, 149, 255, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-add-feature:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    /* Thumbnail Gallery */
+    .thumbnail-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .thumbnail-card {
+      aspect-ratio: 16/10;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-dashboard {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 4px;
+    }
+
+    .mockup-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .mockup-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .mockup-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      flex: 1;
+      padding-top: 10px;
+    }
+
+    .mockup-bar {
+      width: 10%;
+      background: linear-gradient(to top, var(--primary), #38bdf8);
+      border-radius: 2px;
+      animation: mockHeight 1.5s ease-out infinite alternate;
+    }
+
+    @keyframes mockHeight {
+      from { height: 20%; }
+      to { height: 80%; }
+    }
+
+    .upload-box {
+      border: 1px dashed var(--border-color);
+      border-radius: 4px;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+      padding: 20px;
+    }
+
+    .upload-box:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .upload-box i {
+      font-size: 20px;
+    }
+
+    .upload-box span {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Commercial & Pricing */
+    .pricing-tiers-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pricing-tier-row {
+      background: #F0F8FF;
+      border: 1px solid #cfe3ff;
+      border-radius: 6px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      transition: var(--transition);
+    }
+
+    .pricing-tier-row:hover {
+      border-color: #1495ff;
+    }
+
+    .tier-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tier-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #181C22;
+    }
+
+    .tier-desc {
+      font-size: 14px;
+      color: #404753;
+    }
+
+    .tier-pricing-action {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .price-input-group {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      height: 36px;
+      padding: 0 10px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #404756;
+    }
+
+    .price-input-group input {
+      border: none;
+      outline: none;
+      width: 60px;
+      text-align: right;
+      padding-right: 4px;
+      font-weight: 400;
+      color: #181C22;
+      font-size: 16px;
+    }
+
+    .price-suffix {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 11px;
+      margin-left: 2px;
+    }
+
+    .btn-delete-tier {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 15px;
+      padding: 6px;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .btn-delete-tier:hover {
+      color: #ef4444;
+      background: #fee2e2;
+    }
+
+    .btn-add-pricing-tier {
+      border: 1px dashed var(--border-color);
+      border-radius: 6px;
+      height: 50px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #404753;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-add-pricing-tier:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Technical Specs */
+    .version-wrapper {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-history {
+      height: 40px;
+      padding: 0 16px;
+      border: none;
+      border-radius: 4px;
+      background: #CEE1FF;
+      color: #52647D;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-history:hover {
+      background: #bae6fd;
+    }
+
+    .package-upload-box {
+      border: 1px dashed #bae6fd;
+      border-radius: 4px;
+      background: #f0f9ff;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #0796FE;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .package-upload-box:hover {
+      background: #e0f2fe;
+      border-color: #0284c7;
+    }
+
+    .package-upload-box i {
+      font-size: 15px;
+    }
+
+    /* Footer */
+    .footer-text {
+      text-align: center;
+      font-size: 16px;
+      color: #797979;
+      margin-top: 24px;
+    }
+
+    .footer-text span {
+      color: #092a49;
+      font-weight: 600;
+    }
+
+   /* ======================= */
+/* RESPONSIVE LAYOUTS */
+/* ======================= */
+
+@media (max-width: 1200px) {
+
+  .search-bar {
+    width: 260px;
+  }
+
+  .thumbnail-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 991px) {
+
+  .sidebar {
+    left: -240px;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .top-header {
+    left: 0;
+    padding: 0 16px;
+  }
+
+  .toggle-btn {
+    display: block;
+  }
+
+  .search-bar {
+    width: 220px;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
+
+  .pricing-tier-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tier-pricing-action {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .page-wrapper {
+    padding: 85px 14px 24px;
+  }
+
+  .basic-info-content,
+  .form-section-card {
+    padding: 18px;
+  }
+
+  .page-header-bar-inside {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .btn-custom {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .thumbnail-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .version-wrapper {
+    flex-direction: column;
+  }
+
+  .btn-history {
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 180px;
+  }
+
+  .breadcrumb-custom {
+    font-size: 15px;
+  }
+
+  .section-header {
+    font-size: 18px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .top-header {
+    height: 60px;
+    padding: 0 12px;
+  }
+
+  .header-right {
+    gap: 14px;
+  }
+
+  .search-bar {
+    display: flex;
+  }
+
+  .page-wrapper {
+    padding: 78px 10px 20px;
+  }
+
+  .page-header-bar-inside {
+    padding: 16px;
+  }
+
+  .basic-info-content,
+  .form-section-card {
+    padding: 16px;
+  }
+
+  .page-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-custom {
+    width: 100%;
+  }
+
+  .pricing-tier-row {
+    padding: 14px;
+  }
+
+  .tier-pricing-action {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .price-input-group {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .price-input-group input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .package-upload-box {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    height: auto;
+  }
+
+  .notification-btn small {
+    display: none;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .section-header {
+    font-size: 17px;
+  }
+
+  .input-custom,
+  .textarea-custom {
+    font-size: 14px;
+  }
+
+}
+
+/* Rahul's Code*/
+/* ===== NOTIFICATION DROPDOWN ===== */
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -10px;
+  width: 340px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+  border: 1px solid #e5e7eb;
+  z-index: 9999;
+  overflow: hidden;
+}
+.notif-dropdown.show { display: block; }
+.notif-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.notif-dropdown-title { font-size: 15px; font-weight: 700; color: #0A2540; }
+.notif-mark-all { font-size: 12px; color: #0796FE; cursor: pointer; }
+.notif-list { max-height: 320px; overflow-y: auto; }
+.notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-items: center;
+}
+.notif-item:hover { background: #f8fafc; }
+.notif-item.unread { background: #EFF6FF; }
+.notif-item.unread:hover { background: #dbeafe; }
+.notif-icon {
+  width: 36px; height: 36px; min-width: 36px;
+  border-radius: 50%; background: #E7F1FF;
+  display: flex; align-items: center; justify-content: center;
+  color: #0796FE; font-size: 14px;
+}
+.notif-content { flex: 1; min-width: 0; }
+.notif-title {
+  font-size: 13px; font-weight: 600; color: #1e293b;
+  margin-bottom: 2px; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.notif-message {
+  font-size: 12px; color: #64748b; margin-bottom: 4px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.notif-time { font-size: 11px; color: #94a3b8; }
+.notif-dot {
+  width: 8px; height: 8px; min-width: 8px;
+  border-radius: 50%; background: #0796FE;
+}
+.notif-loading, .notif-empty {
+  text-align: center; padding: 30px 16px;
+  color: #94a3b8; font-size: 13px; line-height: 1.8;
+}
+.notif-dropdown-footer {
+  padding: 10px 16px; text-align: center;
+  border-top: 1px solid #f1f5f9;
+}
+.notif-dropdown-footer a {
+  font-size: 13px; color: #0796FE;
+  text-decoration: none; font-weight: 600;
+}
+
+@media (max-width: 400px) {
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .btn-custom {
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .breadcrumb-custom {
+    font-size: 13px;
+  }
+
+  .field-label {
+    font-size: 11px;
+  }
+
+  .feature-tag,
+  .btn-add-feature {
+    font-size: 12px;
+  }
+
+}
+/* mahesh code css */
+
+.video-demo-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.custom-input {
+    flex: 1;
+    max-width: 455px;
+    height: 30px;
+    border: 1px solid #cfd6df;
+    border-radius: 2px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #444;
+    outline: none;
+    background: #fff;
+}
+
+.custom-input::placeholder {
+    color: #555;
+}
+
+.video-preview {
+    width: 260px;
+    height: 130px;
+    background: #2b2b2b;
+    position: relative;
+    overflow: hidden;
+    margin-top: -70px;
+}
+
+.video-preview::before {
+    content: "";
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background: #2196f3;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.video-preview i {
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 24px;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .video-demo-wrapper {
+        flex-direction: column;
+    }
+
+    .video-preview {
+        width: 100%;
+        max-width: 180px;
+    }
+
+    .custom-input {
+        max-width: 100%;
+    }
+}
+/* USE CASE */
+.features-list{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+/* Feature Chip */
+.feature-tag{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#e9f4ff;
+    border:1px solid #cfe2ff;
+    color:#495057;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:400;
+    white-space:nowrap;
+}
+
+.feature-tag i{
+    font-size:10px;
+    cursor:pointer;
+    color:#6c757d;
+}
+.custom-textarea {
+    border: 1px solid #d9dde3;
+}
+
+.custom-textarea:focus {
+    border: 1px solid #d9dde3;
+    outline: none;
+    box-shadow: none;
+}
+
+/* FAQ Section */
+.faq-container {
+    margin-top: 10px;
+}
+
+.faq-item {
+    border: 1px solid #d9dde3;
+    background: #fff;
+    margin-bottom: 8px;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3748;
+    cursor: pointer;
+    min-height: 42px;
+}
+
+.faq-question i {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.faq-answer {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.6;
+    border-top: 1px solid #eef1f4;
+    background: #fff;
+}
+.faq-label{
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Add FAQ Button */
+.btn-add-faq {
+    background: #fff;
+    border: 1px dashed #3b82f6;
+    color: #0796FE;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-faq:hover {
+    background: #f0f7ff;
+}
+
+
+.features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.feature-tag {
+    background: #eaf2fb;
+    color: #4b5563;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.btn-add-tech {
+    background: #fff;
+    border: 1px dashed #2196f3;
+    color: #2196f3;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* Document Section */
+
+.document-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.pdf-file-card {
+    flex: 1;
+    border: 1px solid #d9dde3;
+    background: #fff;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.pdf-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pdf-icon {
+    font-size: 34px;
+    color: #e53935;
+}
+
+.pdf-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.pdf-size {
+    font-size: 12px;
+    color: #777;
+    margin-top: 3px;
+}
+
+.trash-icon {
+    color: #888;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.pdf-upload-box {
+    width: 340px;
+    border: 1px dashed #d0d7de;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2196f3;
+    font-size: 14px;
+    cursor: pointer;
+}
+/* Fix horizontal scroll */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.main-content {
+  overflow-x: hidden;
+}
+
+/* * {
+  max-width: 100%;
+} */
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+/* ======================= */
+/* RESPONSIVE LAYOUTS      */
+/* ======================= */
+
+@media (max-width: 1200px) {
+
+  .search-bar {
+    width: 260px;
+  }
+
+  .thumbnail-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 991px) {
+
+  .sidebar {
+    left: -240px;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .top-header {
+    left: 0;
+    padding: 0 16px;
+  }
+
+  .toggle-btn {
+    display: block;
+  }
+
+  .search-bar {
+    width: 220px;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
+
+  .pricing-tier-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tier-pricing-action {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .page-wrapper {
+    padding: 85px 14px 24px;
+  }
+
+  .basic-info-content,
+  .form-section-card {
+    padding: 18px;
+  }
+
+  .page-header-bar-inside {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .btn-custom {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .thumbnail-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .version-wrapper {
+    flex-direction: column;
+  }
+
+  .btn-history {
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 180px;
+  }
+
+  .breadcrumb-custom {
+    font-size: 15px;
+  }
+
+  .section-header {
+    font-size: 18px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  /* Video Demo */
+  .video-demo-wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .custom-input {
+    max-width: 100%;
+  }
+
+  .video-preview {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    margin-top: 0;
+  }
+
+  /* PDF Section */
+  .document-wrapper {
+    flex-direction: column;
+  }
+
+  .pdf-upload-box {
+    width: 100%;
+    min-height: 70px;
+  }
+
+  .pdf-file-card {
+    width: 100%;
+  }
+
+  /* FAQ */
+  .faq-question {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  /* Technical Stack */
+  .features-list {
+    gap: 6px;
+  }
+
+  .feature-tag {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .top-header {
+    height: 60px;
+    padding: 0 12px;
+  }
+
+  .header-right {
+    gap: 14px;
+  }
+
+  .search-bar {
+    display: flex;
+  }
+
+  .page-wrapper {
+    padding: 78px 10px 20px;
+  }
+
+  .page-header-bar-inside {
+    padding: 16px;
+  }
+
+  .basic-info-content,
+  .form-section-card {
+    padding: 16px;
+  }
+
+  .page-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-custom {
+    width: 100%;
+  }
+
+  .pricing-tier-row {
+    padding: 14px;
+  }
+
+  .tier-pricing-action {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .price-input-group {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .price-input-group input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .package-upload-box {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    height: auto;
+  }
+
+  .notification-btn small {
+    display: none;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .section-header {
+    font-size: 17px;
+  }
+
+  .input-custom,
+  .textarea-custom {
+    font-size: 14px;
+  }
+
+  .video-preview {
+    height: 180px;
+  }
+
+  .pdf-name {
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+  .pdf-size {
+    font-size: 11px;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .btn-custom {
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .breadcrumb-custom {
+    font-size: 13px;
+  }
+
+  .field-label {
+    font-size: 11px;
+  }
+
+  .feature-tag,
+  .btn-add-feature {
+    font-size: 12px;
+  }
+
+}
+
+/* .notif-dropdown {
+    width: 340px !important;
+    min-width: 340px !important;
+    max-width: 340px !important;
+    background: red !important;
+} */
+
+.breadcrumb-custom a {
+    color: #797979;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.breadcrumb-custom a:hover {
+    color: #0796FE;
+}
+
+/* mahesh code landspace*/
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar .logo-area {
+    padding: 15px 20px;
+  }
+
+  .sidebar a {
+    padding: 10px 20px;
+  }
+}
+
+/* mahesh code notificaton responsive */
+@media (max-width: 768px){
+
+    .header-right{
+        gap: 12px;
+    }
+
+    .notification-btn{
+        font-size: 18px;
+        position: relative;
+    }
+
+    .notif-dropdown{
+          width: min(280px, calc(100vw - 20px));
+        right: 0;
+        left: auto;
+    }
+}
+
+
+/* Ganesh Added css for the profile dropdown */
+/* Profile Dropdown */
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.profile-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+  </style>
+</head>
+
+<script src="/js/admin-guard.js"></script> 
+
+<body>
+
+  <!-- SIDEBAR -->
+
+  <div class="sidebar">
+
+    <div class="logo-area">
+      <!-- Fallbacks gracefully to text if file is missing -->
+      <img src="./img/creativesweb.png" alt="Creative Web" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <span style="display:none; color:#fff; font-size:16px; font-weight:800; letter-spacing:0.5px;" class="logo-fallback text-center">
+        CREATIVE WEB SOLUTION
+      </span>
+    </div>
+
+    <nav>
+
+      <a href="adminpanel.html">
+        <i class="fa-solid fa-table-columns"></i>
+        Dashboard
+      </a>
+
+      <a href="product.html" class="active">
+        <i class="fa-solid fa-box"></i>
+        Products
+      </a>
+
+      <a href="admin-order.html">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Order
+      </a>
+
+      <a href="licence-dashboard.html">
+        <i class="fa-solid fa-id-card"></i>
+        License
+      </a>
+
+      <a href="admin-user.html">
+        <i class="fa-regular fa-user"></i>
+        User
+      </a>
+
+      <a href="Admin-setting.html">
+        <i class="bi bi-gear"></i>
+        Setting
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+
+  <div class="main-content">
+
+    <!-- TOP HEADER -->
+
+    <div class="top-header">
+
+      <div class="header-left">
+
+        <button class="toggle-btn" id="sidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text" placeholder="Search">
+        </div>
+
+      </div>
+
+      <div class="header-right">
+
+        <!-- <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="badge">1</span>
+          <small>Notification</small>
+        </div>
+
+        <div class="user-avatar">
+          AS
+        </div> -->
+
+        <!-- Rahul's code for Notification Button -->
+<div class="notification-btn" id="notifBtn" onclick="toggleNotifDropdown(event)">
+  <i class="fa-regular fa-bell"></i>
+  <span class="badge" id="notifBadge" style="display:none;">0</span>
+  <small>Notification</small>
+
+  <div class="notif-dropdown" id="notifDropdown" onclick="event.stopPropagation()">
+    <div class="notif-dropdown-header">
+      <span class="notif-dropdown-title">Notifications</span>
+      <span class="notif-mark-all" onclick="markAllRead()">Mark all as read</span>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-loading">Loading...</div>
+    </div>
+    <div class="notif-dropdown-footer">
+      <a href="#" onclick="loadAllNotifications(); return false;">View all notifications</a>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="user-avatar" id="userAvatar">AS</div> -->
+ <div class="profile-wrapper">
+    <div class="user-avatar" id="userAvatar" onclick="toggleProfileDropdown()"></div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+</div>
+
+      </div>
+
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+
+    <div class="page-wrapper">
+
+      <!-- BREADCRUMBS (Sits on light-grey canvas background) -->
+      <div class="breadcrumb-custom">
+        <!-- Home > Products > <span class="active">Add Product</span> -->
+           <a href="index.html">Home</a> >
+           <a href="product.html">Products</a> >
+           <span class="active">Add Product</span>
+      </div>
+
+      <!-- CARDS STACK CONTAINER -->
+      <div class="cards-stack">
+
+        <!-- CARD 1: UNIFIED HEADER BAR & BASIC INFO CARD CONNECTED TOGETHER -->
+        <div class="unified-first-card">
+
+          <!-- Connected White Header Row -->
+          <div class="page-header-bar-inside">
+
+            <h2 class="page-title">
+              Add Product
+            </h2>
+
+            <div class="page-actions">
+
+              <button class="btn-custom btn-delete" id="deleteProductBtn" onclick="deleteCurrentProduct()">
+                Delete
+              </button>
+
+              <button class="btn-custom btn-discard" id="discardBtn" onclick="discardChanges()">
+                Discard Changes
+              </button>
+
+              <button class="btn-custom btn-save" id="saveProductBtn">
+                Save
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- Thin separation line running edge-to-edge -->
+          <div class="card-divider-line"></div>
+
+          <!-- Connected Basic Info Fields -->
+          <div class="basic-info-content">
+
+            <div class="section-header">
+              <i class="bi bi-info-circle"></i>
+              Basic Info
+            </div>
+
+            <div class="row g-4">
+
+              <div class="col-md-6 col-12">
+                <div class="form-group-custom">
+                  <label class="field-label">Product Name</label>
+                  <input type="text" class="input-custom"  placeholder="Enter product name" id="productName">
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="form-group-custom">
+                  <label class="field-label">Category</label>
+                  <select class="input-custom" id="category">
+                    <option value="" selected disabled>Select Category</option>
+                    <option value="ENTERPRISE">Enterprise</option>
+                    <option value="SAAS_PLATFORM">SaaS Platform</option>
+                    <option value="UTILITY_SOFTWARE">Utility Software</option>
+                    <option value="E_COMMERCE">E-Commerce</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="form-group-custom">
+                  <label class="field-label">Price</label>
+                  <input type="text" class="input-custom"  placeholder="Enter price" id="price">
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="form-group-custom">
+                  <label class="field-label">Status</label>
+                  <select class="input-custom" id="status">
+                    <option value="" selected disabled>Select Status</option>
+                    <option value="PUBLISHED">Published</option>
+                    <option value="DRAFT">Draft</option>
+                    <option value="ARCHIVED">Archived</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <label class="field-label">Description</label>
+                  <textarea class="textarea-custom" placeholder="Enter product description" id="shortDescription"></textarea>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 2: FEATURES & CONTENT -->
+        <div class="form-section-card">
+
+          <div class="section-header">
+            <i class="bi bi-card-image"></i>
+            Features & Content
+          </div>
+
+          <div class="row g-4">
+
+            <!-- Features Tags -->
+            <div class="col-12">
+              <div class="form-group-custom">
+                <label class="field-label">Features List</label>
+                <div class="features-list" id="featuresList">
+                  <div class="feature-tag">
+                    AI Pipeline Forecasting
+                    <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+                  </div>
+                  <div class="feature-tag">
+                    Multi-region Sync
+                    <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+                  </div>
+                  <div class="feature-tag">
+                    Custom API Hooks
+                    <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+                  </div>
+                  <button class="btn-add-feature" onclick="addNewFeature()" id="addFeatureBtn">
+                    + Add Feature
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            <div class="col-12">
+              <div class="form-group-custom">
+                <label class="field-label">Thumbnail Gallery</label>
+                
+                <div class="thumbnail-gallery" id="screenshotsContainer">
+
+                  <!-- Image Card 1 -->
+                  <div class="thumbnail-card">
+                    <div class="mockup-dashboard">
+                      <div class="mockup-header">
+                        <div class="mockup-dots">
+                          <div class="mockup-dot"></div>
+                          <div class="mockup-dot"></div>
+                          <div class="mockup-dot"></div>
+                        </div>
+                        <span style="color: rgba(255,255,255,0.4); font-size: 6px;">Live Analytics</span>
+                      </div>
+                      <div class="mockup-bars">
+                        <div class="mockup-bar" style="height: 40%; animation-delay: 0.1s;"></div>
+                        <div class="mockup-bar" style="height: 70%; animation-delay: 0.3s;"></div>
+                        <div class="mockup-bar" style="height: 55%; animation-delay: 0.2s;"></div>
+                        <div class="mockup-bar" style="height: 90%; animation-delay: 0.5s;"></div>
+                        <div class="mockup-bar" style="height: 35%; animation-delay: 0.4s;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Image Card 2 -->
+                  <div class="thumbnail-card">
+                    <div class="mockup-dashboard" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
+                      <div class="mockup-header">
+                        <div class="mockup-dots">
+                          <div class="mockup-dot"></div>
+                          <div class="mockup-dot"></div>
+                        </div>
+                      </div>
+                      <div class="mockup-bars" style="align-items: center; justify-content: center;">
+                        <i class="bi bi-pie-chart-fill" style="font-size: 32px; color: rgba(255,255,255,0.85);"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                     <!-- Ganesh added -->
+                  <input type="file"
+                    id="thumbnailFile"
+                    accept="image/*"
+                    hidden
+                   />
+
+                  <!-- Upload Box -->
+                  <div class="upload-box" id="thumbnailUploadBox">
+                    <i class="bi bi-file-earmark-arrow-up"></i>
+                    <span>Upload Image</span>
+                  </div>
+
+                </div>
+
+                
+
+              </div>
+            </div>
+
+                <div class="col-12">
+    <div class="form-group-custom">
+
+        <label class="field-label">Product Screenshots</label>
+
+        <div class="thumbnail-gallery" id="productScreenshotsContainer">
+
+            <input
+                type="file"
+                id="screenshotsFile"
+                accept="image/*"
+                multiple
+                hidden
+            />
+
+            <div class="upload-box" id="screenshotsUploadBox">
+                <i class="bi bi-file-earmark-arrow-up"></i>
+                <span>Upload Screenshots</span>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+          </div>
+
+        </div>
+
+         <!-- CARD 3: Video & Demo -->
+          <div class="form-section-card">
+
+    <div class="section-header">
+        <i class="bi bi-play-circle"></i>
+        Video & Demo
+    </div>
+
+    <div class="form-group-custom">
+        <label class="field-label">VIDEO URL (YOUTUBE, VIMEO ETC.)</label>
+        <div class="video-demo-wrapper">
+            <input type="text" class="custom-input"
+                placeholder="https://www.youtube.com/watch?v=abcd1234" id="videoUrl">
+
+            <div class="video-preview">
+                <i class="bi bi-play-fill"></i>
+            </div>
+        </div>
+         <!-- ganesh added for demo video upload -->
+        <div>
+           <label class="field-label ">DEMO VIDEOS</label>
+           <div class="thumbnail-gallery" id="productVideosContainer" style="margin-top: 10px;">
+
+              <div class="upload-box" id="demoVideosUploadBox">
+              <i class="bi bi-file-earmark-arrow-up"></i>
+              <span>Upload Videos</span>
+          </div>
+        </div>
+        <input type="file"
+       id="demoVideosFile"
+       multiple
+       accept="video/*"
+       hidden ">
+    </div>
+  </div>
+
+</div>
+
+
+         <!-- CARD 4: Use Case -->
+          <div class="form-section-card">
+
+    <div class="section-header">
+        <i class="bi bi-diagram-3"></i>
+        Use Case
+    </div>
+
+    <div class="form-group-custom">
+        <label class="field-label">FEATURES LIST</label>
+
+        <div class="features-list" id="useCasesList">
+            <div class="feature-tag">
+                HR & Workforce Management
+                <!-- <i class="bi bi-x-lg"></i> -->
+                 <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+
+            <div class="feature-tag">
+                Employee Self Service
+                <!-- <i class="bi bi-x-lg"></i> -->
+                 <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+
+            <div class="feature-tag">
+                Performance Tracking
+                <!-- <i class="bi bi-x-lg"></i> -->
+                 <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+
+            <div class="feature-tag">
+                Compliance Management
+                <!-- <i class="bi bi-x-lg"></i> -->
+                 <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+
+            <button class="btn-add-feature" id="addUseCaseBtn" onclick="addNewUseCase()">
+                + Add Use Case
+            </button>
+        </div>
+    </div>
+
+    <div class="form-group-custom mt-3">
+        <label class="field-label">DESCRIPTION</label>
+
+        <textarea class="custom-textarea" style="font-size:14px" id="overview" placeholder="" style="padding: 12px 14px;"  ></textarea>
+    </div>
+
+</div>
+
+
+         <!-- CARD 5: FAQ -->
+          <div class="form-section-card">
+
+    <div class="section-header">
+        <i class="bi bi-question-circle"></i>
+        FAQ
+    </div>
+
+    <div class="faq-container" id="faqContainer">
+       <label class="faq-label">FAQ UST</label>
+
+        <!-- <div class="faq-item">
+            <div class="faq-question">
+                What is Employee Management System?
+                <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-trash"
+               onclick="this.closest('.faq-item').remove()"></i>
+            </div>
+
+            <div class="faq-answer">
+                It is a comprehensive platform to automate HR processes,
+                manage employee data, and improve organizational efficiency.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                Is cloud hosting included?
+                <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-trash"
+               onclick="this.closest('.faq-item').remove()"></i>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                Can I integrate with third-party tools?
+                <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-trash"
+               onclick="this.closest('.faq-item').remove()"></i>
+            </div> 
+        </div>-->
+
+        <button class="btn-add-faq" id="addFaqBtn" onclick="addNewFaq()">
+            + Add FAQ
+        </button>
+
+    </div>
+
+</div>
+
+
+         <!-- CARD 6: Technical Stack-->
+          <div class="form-section-card">
+
+    
+    <div class="section-header">
+        <i class="bi bi-link-45deg"></i>
+        Technical Stack
+    </div>
+
+    <div class="form-group-custom">
+        <label class="field-label">TECHNOLOGIES USED</label>
+
+        <div class="features-list" id="technicalRequirementsList">
+
+            <div class="feature-tag">React.js
+              <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+            <div class="feature-tag">Node.js
+              <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+            <div class="feature-tag">MongoDB
+              <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+            <div class="feature-tag">AWS 
+              <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+            <div class="feature-tag">Docker 
+              <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+            </div>
+            <div class="feature-tag">Redis 
+              <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i></div>
+
+            <button class="btn-add-tech" id="addTechnologyBtn" onclick="addNewTechnology()">
+                + Add Technology
+            </button>
+
+        </div>
+    </div>
+
+</div>
+
+
+         <!-- CARD 7:  Document (PDF)-->
+          <div class="form-section-card">
+
+    <div class="section-header">
+        <i class="bi bi-file-earmark-text"></i>
+        Document (PDF)
+    </div>
+
+    <div class="form-group-custom">
+
+        <label class="field-label">UPLOAD DOCUMENT</label>
+
+        <div class="document-wrapper">
+
+            <!-- PDF Card -->
+            <div class="pdf-file-card">
+
+                <div class="pdf-left">
+                    <i class="bi bi-file-earmark-pdf-fill pdf-icon"></i>
+
+                    <div class="pdf-info">
+                        <div class="pdf-name" id="pdfFileName">
+                            Employee Management System Brochure.pdf
+                        </div>
+
+                        <div class="pdf-size">
+                            2.4MB
+                        </div>
+                    </div>
+                </div>
+
+                <i class="bi bi-trash trash-icon" onclick="removePdfFile()"></i>
+
+            </div>
+              <!--added for the upload pdf GAnesh Added  -->
+            <input
+              type="file"
+              id="pdfFile"
+              accept=".pdf"
+              hidden
+            />
+            <!-- Upload Box -->
+            <div class="pdf-upload-box" id="pdfUploadBox">
+                + Upload PDF
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+         <!-- CARD 8: COMMERCIAL & PRICING -->
+        <div class="form-section-card">
+
+          <div class="section-header">
+            <i class="bi bi-cash-stack"></i>
+            Commercial & Pricing
+          </div>
+
+          <div class="pricing-tiers-wrapper" id="pricingTiers">
+
+            <!-- Pricing Tier 1 -->
+            <div class="pricing-tier-row">
+              <div class="tier-info">
+                <span class="tier-name">Starter Tier</span>
+                <span class="tier-desc">Up to 10 users, basic analytics.</span>
+              </div>
+              <div class="tier-pricing-action">
+                <div class="price-input-group">
+                  <span>Rs.</span>
+                  <input type="text" class="tier-price-input" value="499">
+                  <span class="price-suffix">/mo</span>
+                </div>
+                <button class="btn-delete-tier" onclick="this.parentElement.parentElement.remove()">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Pricing Tier 2 -->
+            <div class="pricing-tier-row">
+              <div class="tier-info">
+                <span class="tier-name">Scale Up</span>
+                <span class="tier-desc">Unlimited users, Pro analytics, API access.</span>
+              </div>
+              <div class="tier-pricing-action">
+                <div class="price-input-group">
+                  <span>Rs.</span>
+                  <input type="text" class="tier-price-input" value="1299">
+                  <span class="price-suffix">/mo</span>
+                </div>
+                <button class="btn-delete-tier" onclick="this.parentElement.parentElement.remove()">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Add Pricing Tier Button -->
+          <button class="btn-add-pricing-tier" onclick="addNewPricingTier()" id="addPricingTierBtn">
+            <i class="bi bi-plus-circle"></i>
+            Add New Pricing Tier
+          </button>
+
+        </div>
+
+        <!-- CARD 4: TECHNICAL SPECIFICATIONS -->
+        <div class="form-section-card">
+
+          <div class="section-header">
+            <i class="bi bi-gear-wide-connected"></i>
+            Technical Specifications
+          </div>
+
+          <div class="row g-4">
+
+            <!-- Version Input -->
+            <div class="col-md-6 col-12">
+              <div class="form-group-custom">
+                <label class="field-label">Version</label>
+                <div class="version-wrapper">
+                  <input type="text" class="input-custom" value="v2.4.0" style="flex: 1;" id="currentVersion">
+                  <button class="btn-history" id="versionHistoryBtn" onclick="addNewVersion()">
+                    History
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- New Version Upload Box -->
+            <div class="col-md-6 col-12">
+              <div class="form-group-custom">
+                <label class="field-label">New Version Package</label>
+
+                <input
+                 type="file"
+                 id="packageFile"
+                 accept=".zip,.tar.gz"
+                 hidden
+                />
+                <div class="package-upload-box" id="packageUploadBox">
+                  <i class="bi bi-upload"></i>
+                  Upload .zip or .tar.gz
+                </div>
+              </div>
+            </div>
+
+            <!-- Release Notes TextArea -->
+            <div class="col-12">
+              <div class="form-group-custom">
+                <label class="field-label">Release Notes (Markdown Support)</label>
+                <textarea class="textarea-custom" style="min-height: 120px; font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;" id="releaseNotes" placeholder="Enter Release notes here.."></textarea>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <!-- <div class="footer-text">
+        Copyright © 2025 - 2026
+        <span>Creative Web Solution.</span>
+        ALL RIGHTS RESERVED
+      </div> -->
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS -->
+
+  <script>
+    // MOBILE SIDEBAR TOGGLE
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebar = document.querySelector(".sidebar");
+
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle("show");
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+          sidebar.classList.remove("show");
+        }
+      });
+    }
+
+    // Add feature dynamically
+    function addNewFeature() {
+      const featureText = prompt("Enter new feature tag name:");
+      if (featureText && featureText.trim() !== "") {
+        const list = document.getElementById("featuresList");
+        const btn = list.querySelector(".btn-add-feature");
+        
+        const newTag = document.createElement("div");
+        newTag.className = "feature-tag";
+        newTag.innerHTML = `${escapeHtml(featureText)} <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>`;
+        
+        list.insertBefore(newTag, btn);
+      }
+    }
+// Ganesh added for the use cases
+   function addNewUseCase() {
+  const useCaseText = prompt("Enter new use case:");
+
+  if (useCaseText && useCaseText.trim() !== "") {
+
+    const list = document.getElementById("useCasesList");
+    const btn = list.querySelector(".btn-add-feature");
+
+    const newTag = document.createElement("div");
+    newTag.className = "feature-tag";
+
+    newTag.innerHTML = `
+      ${escapeHtml(useCaseText)}
+      <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+    `;
+
+    list.insertBefore(newTag, btn);
+  }
+}
+
+function addNewFaq() {
+
+    const question = prompt("Enter FAQ Question:");
+
+    if (!question || !question.trim()) {
+        return;
+    }
+
+    const answer = prompt("Enter FAQ Answer:");
+
+    if (!answer || !answer.trim()) {
+        return;
+    }
+
+    const faqContainer = document.getElementById("faqContainer");
+    const addButton = document.getElementById("addFaqBtn");
+
+    const faqItem = document.createElement("div");
+    faqItem.className = "faq-item";
+
+   faqItem.innerHTML = `
+    <div class="faq-question"
+         onclick="toggleFaq(this)">
+        ${escapeHtml(question)}
+
+        <div style="display:flex;gap:10px;align-items:center;">
+            <i class="bi bi-chevron-down faq-chevron"></i>
+
+            <i class="bi bi-trash"
+               onclick="event.stopPropagation();this.closest('.faq-item').remove()"></i>
+        </div>
+    </div>
+
+    <div class="faq-answer" style="display:none;">
+        ${escapeHtml(answer)}
+    </div>
+`;
+
+    faqContainer.insertBefore(faqItem, addButton);
+}
+
+function toggleFaq(questionElement) {
+
+    const answer =
+        questionElement.nextElementSibling;
+
+    const chevron =
+        questionElement.querySelector(".faq-chevron");
+
+    if (!answer) return;
+
+    const isOpen =
+        answer.style.display === "block";
+
+    answer.style.display =
+        isOpen ? "none" : "block";
+
+    if (chevron) {
+        chevron.classList.toggle(
+            "bi-chevron-down",
+            isOpen
+        );
+
+        chevron.classList.toggle(
+            "bi-chevron-up",
+            !isOpen
+        );
+    }
+}
+
+/* =====================================================
+   VERSION HISTORY
+===================================================== */
+
+let versionHistoryData = [];
+
+function addNewVersion() {
+
+     const version =
+        document.getElementById("currentVersion")
+            .value
+            .trim();
+
+    const releasedOn =
+        prompt("Enter Release Date (YYYY-MM-DD)");
+
+    if (!releasedOn || !releasedOn.trim()) {
+        return;
+    }
+
+    versionHistoryData.push({
+        version: version.trim(),
+        releasedOn: releasedOn.trim()
+    });
+
+    // alert("Version added successfully");
+}
+
+    
+function addNewTechnology() {
+
+    const technologyText = prompt("Enter technology name:");
+
+    if (technologyText && technologyText.trim() !== "") {
+
+        const list = document.getElementById("technicalRequirementsList");
+        const btn = document.getElementById("addTechnologyBtn");
+
+        const newTag = document.createElement("div");
+        newTag.className = "feature-tag";
+
+        newTag.innerHTML = `
+            ${escapeHtml(technologyText)}
+            <i class="bi bi-x-lg" onclick="this.parentElement.remove()"></i>
+        `;
+
+        list.insertBefore(newTag, btn);
+    }
+}
+
+    // Add Pricing Tier dynamically
+    function addNewPricingTier() {
+      const name = prompt("Enter Pricing Tier Name (e.g. Enterprise Pro):");
+      if (!name) return;
+      const desc = prompt("Enter Pricing Tier Description (e.g. Dedicated servers, 24/7 Support):");
+      if (!desc) return;
+      const price = prompt("Enter Monthly Price (Rs.):", "1999");
+      if (!price) return;
+
+      const container = document.getElementById("pricingTiers");
+      
+      const newRow = document.createElement("div");
+      newRow.className = "pricing-tier-row";
+      newRow.innerHTML = `
+        <div class="tier-info">
+          <span class="tier-name">${escapeHtml(name)}</span>
+          <span class="tier-desc">${escapeHtml(desc)}</span>
+        </div>
+        <div class="tier-pricing-action">
+          <div class="price-input-group">
+            <span>Rs.</span>
+            <input type="text" class="tier-price-input" value="${escapeHtml(price)}">
+            <span class="price-suffix">/mo</span>
+          </div>
+          <button class="btn-delete-tier" onclick="this.parentElement.parentElement.remove()">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </div>
+      `;
+      
+      container.appendChild(newRow);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+
+  <!-- Notification Script -->
+<script>
+ function getBase() {
+  return window.API_BASE_URL || 'http://127.0.0.1:8081';
+}
+
+function getAuthHeaders() {
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  };
+}
+
+async function loadNotifCount() {
+  try {
+    const res = await fetch(getBase() + '/notifications/unread/count', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const count = data.data;
+    const badge = document.getElementById('notifBadge');
+    if (count > 0) {
+      badge.textContent = count > 99 ? '99+' : count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (err) {
+    console.error('Notif count error:', err);
+  }
+}
+
+function toggleNotifDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById('notifDropdown');
+  const isOpen = dropdown.classList.contains('show');
+  dropdown.classList.toggle('show', !isOpen);
+  if (!isOpen) loadUnreadNotifications();
+}
+
+document.addEventListener('click', function (e) {
+  const btn = document.getElementById('notifBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  if (btn && dropdown && !btn.contains(e.target)) {
+    dropdown.classList.remove('show');
+  }
+});
+
+async function loadUnreadNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+  try {
+    const res = await fetch(getBase() + '/notifications/unread', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    renderNotifItems(data.data || []);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>Could not load notifications.</div>';
+  }
+}
+
+async function loadAllNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading all...</div>';
+  try {
+    const res = await fetch(getBase() + '/notifications?page=0&size=20', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    const items = (data.data && data.data.content) ? data.data.content : [];
+    renderNotifItems(items);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty">Could not load notifications.</div>';
+  }
+}
+
+function getNotifIcon(type) {
+  var map = {
+    'ORDER':   'fa-solid fa-cart-shopping',
+    'PAYMENT': 'fa-solid fa-credit-card',
+    'PRODUCT': 'fa-solid fa-box',
+    'LICENSE': 'fa-solid fa-id-card',
+    'SYSTEM':  'fa-solid fa-gear'
+  };
+  return map[type] || 'fa-solid fa-bell';
+}
+
+function renderNotifItems(notifications) {
+  const list = document.getElementById('notifList');
+  if (!notifications.length) {
+    list.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No new notifications</div>';
+    return;
+  }
+  list.innerHTML = notifications.map(function (n) {
+    return '<div class="notif-item ' + (n.isRead ? '' : 'unread') + '" onclick="markAsRead(' + n.id + ', this)">'
+      + '<div class="notif-icon"><i class="' + getNotifIcon(n.type) + '"></i></div>'
+      + '<div class="notif-content">'
+      + '<div class="notif-title">' + escapeHtml(n.title) + '</div>'
+      + '<div class="notif-message">' + escapeHtml(n.message) + '</div>'
+      + '<div class="notif-time">' + formatNotifTime(n.createdAt) + '</div>'
+      + '</div>'
+      + (!n.isRead ? '<div class="notif-dot"></div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+async function markAsRead(notificationId, element) {
+  try {
+    const res = await fetch(getBase() + '/notifications/' + notificationId + '/read', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    element.classList.remove('unread');
+    const dot = element.querySelector('.notif-dot');
+    if (dot) dot.remove();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAsRead error:', err);
+  }
+}
+
+async function markAllRead() {
+  try {
+    const res = await fetch(getBase() + '/notifications/read-all', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    loadUnreadNotifications();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAllRead error:', err);
+  }
+}
+
+function formatNotifTime(createdAt) {
+  if (!createdAt) return '';
+  const date = new Date(createdAt);
+  const diffMs = Date.now() - date.getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  return Math.floor(hrs / 24) + 'd ago';
+}
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   loadNotifCount();
+//   setInterval(loadNotifCount, 60000);
+
+//   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+//   if (token) {
+//     try {
+//       const payload = JSON.parse(atob(token.split('.')[1]));
+//       const name = payload.sub || payload.email || 'AS';
+//       document.getElementById('userAvatar').textContent =
+//         name.substring(0, 2).toUpperCase();
+//     } catch(e) {}
+//   }
+// });
+// const token = getToken();
+
+
+function loadUserAvatar() {
+
+    const userData =
+        JSON.parse(localStorage.getItem("userData"));
+
+    if (!userData || !userData.name) return;
+
+    const parts = userData.name.trim().split(" ");
+
+    let initials = "";
+
+    if (parts.length >= 2) {
+        initials =
+            parts[0].charAt(0).toUpperCase() +
+            parts[1].charAt(0).toUpperCase();
+    } else {
+        initials =
+            parts[0].charAt(0).toUpperCase();
+    }
+
+    document.getElementById("userAvatar").textContent = initials;
+}
+
+loadUserAvatar();
+</script>
+
+<script>
+  // utility Functions
+  function getToken() {
+    return (
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token")
+    );
+}
+
+
+
+let existingProduct = null;
+// const productId =
+//     new URLSearchParams(window.location.search)
+//         .get("id");
+// <-- file upload handlers -->
+
+/* =====================================================
+   THUMBNAIL UPLOAD
+===================================================== */
+
+document.getElementById("thumbnailUploadBox")
+    .addEventListener("click", () => {
+        document.getElementById("thumbnailFile").click();
+    });
+
+document.getElementById("thumbnailFile")
+    .addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) return;
+
+        const previewUrl = URL.createObjectURL(file);
+
+        document.querySelectorAll(".thumbnail-card")
+            .forEach(card => {
+                card.style.display = "none";
+            });
+
+        document.getElementById("thumbnailUploadBox").innerHTML = `
+            <div style="position:relative;width:100%;height:100%;">
+                <img src="${previewUrl}"
+                     style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+
+                <button type="button"
+                        id="removeThumbnailBtn"
+                        style="
+                            position:absolute;
+                            top:5px;
+                            right:5px;
+                            width:25px;
+                            height:25px;
+                            border:none;
+                            border-radius:50%;
+                            background:red;
+                            color:white;
+                            cursor:pointer;">
+                    ×
+                </button>
+            </div>
+        `;
+
+        document.getElementById("removeThumbnailBtn")
+            .addEventListener("click", removeThumbnail);
+    });
+
+function removeThumbnail() {
+
+    document.getElementById("thumbnailFile").value = "";
+
+    document.getElementById("thumbnailUploadBox").innerHTML = `
+        <i class="bi bi-file-earmark-arrow-up"></i>
+        <span>Upload Image</span>
+    `;
+
+    document.querySelectorAll(".thumbnail-card")
+        .forEach(card => {
+            card.style.display = "flex";
+        });
+}
+
+
+/* =====================================================
+   SCREENSHOT UPLOAD
+===================================================== */
+
+let uploadedScreenshotFiles = [];
+
+document.getElementById("screenshotsUploadBox")
+    .addEventListener("click", () => {
+        document.getElementById("screenshotsFile").click();
+    });
+
+document.getElementById("screenshotsFile")
+    .addEventListener("change", function () {
+
+        const files = Array.from(this.files);
+
+        files.forEach(file => {
+
+            uploadedScreenshotFiles.push(file);
+
+            const previewUrl =
+                URL.createObjectURL(file);
+
+            const card =
+                document.createElement("div");
+
+            card.className = "screenshot-card";
+
+            card.innerHTML = `
+    <div style="position:relative;width:100%;height:100%;">
+
+        <img src="${previewUrl}"
+             style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+
+        <button type="button"
+                onclick="removeScreenshot(this, '${file.name}')"
+                style="
+                    position:absolute;
+                    top:5px;
+                    right:5px;
+                    width:25px;
+                    height:25px;
+                    border:none;
+                    border-radius:50%;
+                    background:red;
+                    color:white;
+                    cursor:pointer;
+                    font-size:16px;">
+            ×
+        </button>
+
+    </div>
+`;
+
+            document
+                .getElementById("productScreenshotsContainer")
+                .insertBefore(
+                    card,
+                    document.getElementById("screenshotsUploadBox")
+                );
+        });
+
+        this.value = "";
+    });
+
+    function removeScreenshot(button, fileName) {
+
+    uploadedScreenshotFiles =
+        uploadedScreenshotFiles.filter(
+            file => file.name !== fileName
+        );
+
+    button
+        .closest(".screenshot-card")
+        .remove();
+}
+
+    /* =====================================================
+   PDF UPLOAD
+===================================================== */
+
+document.getElementById("pdfUploadBox")
+    .addEventListener("click", () => {
+        document.getElementById("pdfFile").click();
+    });
+
+document.getElementById("pdfFile")
+    .addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) return;
+
+        document.getElementById("pdfFileName").textContent =
+            file.name;
+    });
+
+    function removePdfFile() {
+
+    document.getElementById("pdfFile").value = "";
+
+    document.getElementById("pdfFileName").textContent =
+        "No PDF Selected";
+
+    document.querySelector(".pdf-size").textContent =
+        "";
+
+    
+}
+
+    /* =====================================================
+   PACKAGE UPLOAD
+===================================================== */
+
+document.getElementById("packageUploadBox")
+    .addEventListener("click", () => {
+        document.getElementById("packageFile").click();
+    });
+
+document.getElementById("packageFile")
+    .addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) return;
+
+        document.getElementById("packageUploadBox").innerHTML = `
+            <span style="
+                display:flex;
+                align-items:center;
+                justify-content:space-around;
+                width:100%;
+            ">
+                <span>
+                    <i class="bi bi-file-earmark-zip"></i>
+                    ${file.name}
+                </span>
+
+                <i class="bi bi-x-circle-fill"
+                   onclick="event.stopPropagation();removePackageFile();"
+                   style="
+                       color:red;
+                       font-size:18px;
+                       cursor:pointer;
+                   ">
+                </i>
+            </span>
+        `;
+    });
+
+
+function removePackageFile() {
+
+    document.getElementById("packageFile").value = "";
+
+    document.getElementById("packageUploadBox").innerHTML = `
+        <i class="bi bi-upload"></i>
+        Upload .zip or .tar.gz
+    `;
+}
+
+
+    // upload videos
+    let uploadedDemoVideoFiles = [];
+
+    document.getElementById("demoVideosUploadBox")
+    .addEventListener("click", () => {
+        document.getElementById("demoVideosFile").click();
+    });
+
+    document.getElementById("demoVideosFile")
+    .addEventListener("change", function () {
+
+        const files = Array.from(this.files);
+
+        files.forEach(file => {
+
+            uploadedDemoVideoFiles.push(file);
+
+            const previewUrl =
+                URL.createObjectURL(file);
+
+            const card =
+                document.createElement("div");
+
+            card.className = "thumbnail-card";
+
+            card.innerHTML = `
+                <div style="position:relative;width:100%;height:100%;">
+
+                    <video controls
+                           style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+                        <source src="${previewUrl}" type="${file.type}">
+                    </video>
+
+                    <button type="button"
+                            onclick="removeDemoVideo(this, '${file.name}')"
+                            style="
+                                position:absolute;
+                                top:5px;
+                                right:5px;
+                                width:25px;
+                                height:25px;
+                                border:none;
+                                border-radius:50%;
+                                background:red;
+                                color:white;
+                                cursor:pointer;">
+                        ×
+                    </button>
+
+                </div>
+            `;
+
+            document
+                .getElementById("productVideosContainer")
+                .insertBefore(
+                    card,
+                    document.getElementById("demoVideosUploadBox")
+                );
+        });
+
+        this.value = "";
+    });
+
+    function removeDemoVideo(button, fileName) {
+
+    uploadedDemoVideoFiles =
+        uploadedDemoVideoFiles.filter(
+            file => file.name !== fileName
+        );
+
+    button
+        .closest(".thumbnail-card")
+        .remove();
+}
+
+
+
+// save product
+let isSaving = false;
+
+const editProductId =
+    new URLSearchParams(window.location.search)
+        .get("id");
+
+async function saveProduct() {
+
+    if (isSaving) {
+        return;
+    }
+
+    if (!validateForm()) {
+        return;
+    }
+
+    const saveBtn =
+        document.getElementById("saveProductBtn");
+
+    isSaving = true;
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = "Saving...";
+
+    try {
+
+        const thumbnailUrl =
+            await uploadThumbnail();
+
+        const documentationUrl =
+            await uploadDocumentation();
+
+        const downloadFileUrl =
+            await uploadDownloadFile();
+
+        const screenshotUrls =
+            await uploadScreenshots();
+
+        const demoVideoUrls =
+            await uploadDemoVideos();
+
+
+            const finalThumbnailUrl =
+    thumbnailUrl ||
+    existingProduct?.thumbnailImage ||
+    "";
+
+const finalDocumentationUrl =
+    documentationUrl ||
+    existingProduct?.documentationUrl ||
+    "";
+
+const finalDownloadFileUrl =
+    downloadFileUrl ||
+    existingProduct?.downloadFileUrl ||
+    "";
+
+const finalScreenshotUrls =
+    screenshotUrls.length
+        ? screenshotUrls
+        : (existingProduct?.screenshots || []);
+
+const finalDemoVideoUrls =
+    demoVideoUrls.length
+        ? demoVideoUrls
+        : (existingProduct?.demoVideos || []);
+
+        const productRequest =
+          collectProductRequest(
+        finalThumbnailUrl
+         );
+
+        let currentProductId;
+
+        /* ==========================================
+           CREATE OR UPDATE PRODUCT
+        ========================================== */
+
+        if (editProductId) {
+
+            const updateResponse =
+                await updateProduct(
+                    editProductId,
+                    productRequest
+                );
+
+            if (!updateResponse.success) {
+
+                alert(
+                    updateResponse.message ||
+                    "Failed to update product"
+                );
+
+                return;
+            }
+
+            currentProductId = editProductId;
+
+        } else {
+
+            const createResponse =
+                await createProduct(
+                    productRequest
+                );
+
+            if (!createResponse.success) {
+
+                alert(
+                    createResponse.message ||
+                    "Failed to create product"
+                );
+
+                return;
+            }
+
+            currentProductId =
+                createResponse.data.id;
+        }
+
+        /* ==========================================
+           PRODUCT DETAILS
+        ========================================== */
+
+           const detailsRequest =
+          collectProductDetailsRequest(
+        finalScreenshotUrls,
+        finalDocumentationUrl,
+        finalDownloadFileUrl,
+        finalDemoVideoUrls
+         );
+
+        const detailsResponse =
+            await saveProductDetails(
+                currentProductId,
+                detailsRequest
+            );
+
+        if (!detailsResponse.success) {
+
+            alert(
+                detailsResponse.message ||
+                "Failed to save product details"
+            );
+
+            return;
+        }
+
+        alert(
+            editProductId
+                ? "Product updated successfully"
+                : "Product created successfully"
+        );
+
+        window.location.href = "product.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Error while saving product"
+        );
+
+    } finally {
+
+        isSaving = false;
+
+        saveBtn.disabled = false;
+
+        saveBtn.innerHTML = "Save";
+    }
+}
+
+/* =====================================================
+   DATA COLLECTION
+===================================================== */
+
+function collectProductRequest(thumbnailUrl) {
+
+  console.log(
+    "Selected Category:",
+    document.getElementById("category").value
+);
+
+    return {
+        name:
+            document.getElementById("productName").value.trim(),
+
+        shortDescription:
+            document.getElementById("shortDescription").value.trim(),
+
+        thumbnailImage:
+            thumbnailUrl,
+
+        price:
+            parseFloat(
+                document.getElementById("price").value
+            ) || 0,
+
+        discountedPrice: null,
+
+        discountPercent: null,
+
+        currentVersion:
+            document.getElementById("currentVersion").value.trim(),
+
+        status:
+            document.getElementById("status").value,
+        category:
+            document.getElementById("category").value,
+    };
+}
+
+function collectProductDetailsRequest(
+    screenshotUrls,
+    documentationUrl,
+    downloadFileUrl,
+    demoVideoUrls
+) {
+
+  
+
+    return {
+
+        overview:
+            document.getElementById("overview").value.trim(),
+
+        features:
+            collectFeatures(),
+
+        useCases:
+            collectUseCases(),
+
+        screenshots:
+            screenshotUrls,
+
+        technicalRequirements:
+            collectTechnicalRequirements(),
+
+        faqs:
+            collectFaqs(),
+
+        downloadFileUrl:
+            downloadFileUrl,
+
+        documentationUrl:
+            documentationUrl,
+
+        releaseNotes:
+            document.getElementById("releaseNotes").value.trim(),
+
+      
+
+        versionHistory:
+            collectVersionHistory(),
+
+
+        demoUrl:
+           document.getElementById("videoUrl").value.trim(),
+
+        demoVideos:
+          demoVideoUrls,
+    };
+}
+
+function collectFaqs() {
+
+    const faqs = [];
+
+    document
+        .querySelectorAll("#faqContainer .faq-item")
+        .forEach(item => {
+
+            const question =
+                item.querySelector(".faq-question")
+                    .childNodes[0]
+                    .textContent
+                    .trim();
+
+            const answer =
+                item.querySelector(".faq-answer")
+                    ?.textContent
+                    .trim() || "";
+
+            faqs.push({
+                question,
+                answer
+            });
+        });
+
+    return faqs;
+}
+
+function collectFeatures() {
+
+    return [
+        ...document.querySelectorAll(
+            "#featuresList .feature-tag"
+        )
+    ].map(tag =>
+        tag.childNodes[0].textContent.trim()
+    );
+}
+
+function collectUseCases() {
+
+    return [
+        ...document.querySelectorAll(
+            "#useCasesList .feature-tag"
+        )
+    ].map(tag =>
+        tag.childNodes[0].textContent.trim()
+    );
+}
+
+function collectTechnicalRequirements() {
+
+    return [
+        ...document.querySelectorAll(
+            "#technicalRequirementsList .feature-tag"
+        )
+    ].map(tag =>
+        tag.childNodes[0].textContent.trim()
+    );
+}
+
+function collectVersionHistory() {
+
+    return versionHistoryData.map(item => ({
+        version: item.version,
+        releasedOn: item.releasedOn
+    }));
+}
+
+/* =====================================================
+   FILE UPLOAD APIS
+===================================================== */
+
+async function uploadThumbnail() {
+
+    const file =
+        document.getElementById("thumbnailFile").files[0];
+
+    if (!file) {
+        return "";
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+        `${getBase()}/admin/upload/thumbnail`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: formData
+        }
+    );
+
+    const result = await response.json();
+
+    return result.data;
+}
+
+async function uploadScreenshots() {
+
+    if (uploadedScreenshotFiles.length === 0) {
+        return [];
+    }
+
+    const formData = new FormData();
+
+    uploadedScreenshotFiles.forEach(file => {
+        formData.append("files", file);
+    });
+
+    const response = await fetch(
+        `${getBase()}/admin/upload/screenshots`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: formData
+        }
+    );
+
+    const result = await response.json();
+
+    return result.data || [];
+}
+
+async function uploadDemoVideos() {
+
+    if (uploadedDemoVideoFiles.length === 0) {
+        return [];
+    }
+
+    const formData = new FormData();
+
+    uploadedDemoVideoFiles.forEach(file => {
+        formData.append("files", file);
+    });
+
+    const response = await fetch(
+        `${getBase()}/admin/upload/videos`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: formData
+        }
+    );
+
+    const result = await response.json();
+
+    return result.data || [];
+}
+
+async function uploadDocumentation() {
+
+    const file =
+        document.getElementById("pdfFile").files[0];
+
+    if (!file) {
+        return "";
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+        `${getBase()}/admin/upload/documentation`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: formData
+        }
+    );
+
+    const result = await response.json();
+
+    return result.data;
+}
+
+async function uploadDownloadFile() {
+
+    const file =
+        document.getElementById("packageFile").files[0];
+
+    if (!file) {
+        return "";
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+        `${getBase()}/admin/upload/download-file`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: formData
+        }
+    );
+
+    const result = await response.json();
+
+    return result.data;
+}
+
+/* =====================================================
+   PRODUCT APIS
+===================================================== */
+
+async function createProduct(productRequest) {
+
+    const response = await fetch(
+        `${getBase()}/admin/products`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: JSON.stringify(productRequest)
+        }
+    );
+
+    return await response.json();
+}
+
+async function saveProductDetails(
+    productId,
+    detailsRequest
+) {
+
+    const response = await fetch(
+        `${getBase()}/admin/products/${productId}/details`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: JSON.stringify(detailsRequest)
+        }
+    );
+
+    return await response.json();
+}
+
+// to get product details
+async function getProductById(productId) {
+
+    const response = await fetch(
+        `${getBase()}/admin/products/${productId}`,
+        {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        }
+    );
+
+    return await response.json();
+}
+
+// for update product
+
+async function updateProduct(
+    productId,
+    productRequest
+) {
+
+    const response = await fetch(
+        `${getBase()}/admin/products/${productId}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`
+            },
+            body: JSON.stringify(productRequest)
+        }
+    );
+
+    return await response.json();
+}
+
+// form validation
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+function validateForm() {
+
+    const errors = [];
+
+    const productName =
+        document.getElementById("productName").value.trim();
+
+    const shortDescription =
+        document.getElementById("shortDescription").value.trim();
+
+    const price =
+        document.getElementById("price").value.trim();
+
+    const overview =
+        document.getElementById("overview").value.trim();
+
+    const thumbnailFile =
+        document.getElementById("thumbnailFile").files[0];
+
+    if (!productName) {
+        errors.push("• Product Name");
+    }
+
+    if (!shortDescription) {
+        errors.push("• Short Description");
+    }
+
+    if (!editProductId && !thumbnailFile) {
+        errors.push("• Thumbnail Image");
+    }
+
+    if (!price) {
+        errors.push("• Price");
+    } else if (isNaN(price) || Number(price) <= 0) {
+        errors.push("• Valid Price (> 0)");
+    }
+
+    if (!overview) {
+        errors.push("• Overview");
+    }
+
+    if (errors.length > 0) {
+
+        alert(
+            "Please complete the following fields:\n\n" +
+            errors.join("\n")
+        );
+
+        return false;
+    }
+
+    return true;
+}
+
+function loadFeatures(features) {
+
+    const list =
+        document.getElementById("featuresList");
+
+    const addButton =
+        document.getElementById("addFeatureBtn");
+
+    list.querySelectorAll(".feature-tag")
+        .forEach(tag => tag.remove());
+
+    features.forEach(feature => {
+
+        const tag =
+            document.createElement("div");
+
+        tag.className = "feature-tag";
+
+        tag.innerHTML = `
+            ${escapeHtml(feature)}
+            <i class="bi bi-x-lg"
+               onclick="this.parentElement.remove()">
+            </i>
+        `;
+
+        list.insertBefore(
+            tag,
+            addButton
+        );
+    });
+}
+
+function loadUseCases(useCases) {
+
+    const list =
+        document.getElementById("useCasesList");
+
+    const addButton =
+        document.getElementById("addUseCaseBtn");
+
+    list.querySelectorAll(".feature-tag")
+        .forEach(tag => tag.remove());
+
+    useCases.forEach(useCase => {
+
+        const tag =
+            document.createElement("div");
+
+        tag.className = "feature-tag";
+
+        tag.innerHTML = `
+            ${escapeHtml(useCase)}
+            <i class="bi bi-x-lg"
+               onclick="this.parentElement.remove()">
+            </i>
+        `;
+
+        list.insertBefore(
+            tag,
+            addButton
+        );
+    });
+}
+
+function loadTechnicalRequirements(
+    technicalRequirements
+) {
+
+    const list =
+        document.getElementById(
+            "technicalRequirementsList"
+        );
+
+    const addButton =
+        document.getElementById(
+            "addTechnologyBtn"
+        );
+
+    list.querySelectorAll(".feature-tag")
+        .forEach(tag => tag.remove());
+
+    technicalRequirements.forEach(tech => {
+
+        const tag =
+            document.createElement("div");
+
+        tag.className = "feature-tag";
+
+        tag.innerHTML = `
+            ${escapeHtml(tech)}
+            <i class="bi bi-x-lg"
+               onclick="this.parentElement.remove()">
+            </i>
+        `;
+
+        list.insertBefore(
+            tag,
+            addButton
+        );
+    });
+}
+
+function loadFaqs(faqs) {
+
+    const container =
+        document.getElementById("faqContainer");
+
+    const addButton =
+        document.getElementById("addFaqBtn");
+
+    container.querySelectorAll(".faq-item")
+        .forEach(item => item.remove());
+
+    faqs.forEach(faq => {
+
+        const faqItem =
+            document.createElement("div");
+
+        faqItem.className = "faq-item";
+
+        faqItem.innerHTML = `
+            <div class="faq-question">
+                ${escapeHtml(faq.question)}
+                <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-trash"
+                   onclick="this.closest('.faq-item').remove()">
+                </i>
+            </div>
+
+            <div class="faq-answer">
+                ${escapeHtml(faq.answer || "")}
+            </div>
+        `;
+
+        container.insertBefore(
+            faqItem,
+            addButton
+        );
+    });
+}
+
+// load product
+async function loadProduct() {
+
+    if (!editProductId) {
+        return;
+    }
+
+    try {
+
+        const result =
+            await getProductById(editProductId);
+
+        if (!result.success) {
+            alert("Failed to load product");
+            return;
+        }
+
+        existingProduct = result.data;
+        
+
+
+        document.getElementById("productName").value =
+            existingProduct.name || "";
+        
+            
+
+        document.getElementById("shortDescription").value =
+            existingProduct.shortDescription || "";
+
+        document.getElementById("price").value =
+            existingProduct.price || "";
+
+        document.getElementById("currentVersion").value =
+            existingProduct.currentVersion || "";
+
+        document.getElementById("status").value =
+            existingProduct.status || "";
+
+        document.getElementById("overview").value =
+            existingProduct.overview || "";
+
+        document.getElementById("releaseNotes").value =
+            existingProduct.releaseNotes || "";
+        document.getElementById("currentVersion").value =
+            existingProduct.currentVersion || "";
+
+            loadFeatures(
+            existingProduct.features || []
+             );
+
+            loadUseCases(
+           existingProduct.useCases || []
+           );
+             loadTechnicalRequirements(
+             existingProduct.technicalRequirements || []
+             );
+
+             loadFaqs(
+             existingProduct.faqs || []
+                 );
+                 console.log(existingProduct.faqs)
+
+
+                
+
+
+        const videoUrl =
+            document.getElementById("videoUrl");
+
+        if (existingProduct.category) {
+
+        document.getElementById("category").value =
+        existingProduct.category;
+         }
+
+        
+
+        if (videoUrl) {
+            videoUrl.value =
+                existingProduct.demoUrl || "";
+                ;
+        }
+
+      if (existingProduct.thumbnailImage) {
+
+    document.querySelectorAll(".thumbnail-card")
+        .forEach(card => {
+            card.style.display = "none";
+        });
+
+    document.getElementById(
+        "thumbnailUploadBox"
+    ).innerHTML = `
+        <div style="
+            position:relative;
+            width:100%;
+            height:100%;
+        ">
+            <img
+                src="${existingProduct.thumbnailImage}"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:cover;
+                    border-radius:4px;
+                ">
+
+            <button
+                type="button"
+                id="removeThumbnailBtn"
+                style="
+                    position:absolute;
+                    top:5px;
+                    right:5px;
+                    width:25px;
+                    height:25px;
+                    border:none;
+                    border-radius:50%;
+                    background:red;
+                    color:white;
+                    cursor:pointer;">
+                ×
+            </button>
+        </div>
+    `;
+
+    document
+        .getElementById("removeThumbnailBtn")
+        .addEventListener(
+            "click",
+            removeThumbnail
+        );
+}
+
+if (
+    existingProduct.screenshots &&
+    existingProduct.screenshots.length
+) {
+
+    existingProduct.screenshots.forEach(url => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "thumbnail-card";
+
+        card.innerHTML = `
+    <div style="position:relative;width:100%;height:100%;">
+
+        <img src="${url}"
+             style="
+                width:100%;
+                height:100%;
+                object-fit:cover;
+                border-radius:4px;
+             ">
+
+        <button type="button"
+                onclick="removeExistingScreenshot(this, '${url}')"
+                style="
+                    position:absolute;
+                    top:5px;
+                    right:5px;
+                    width:25px;
+                    height:25px;
+                    border:none;
+                    border-radius:50%;
+                    background:red;
+                    color:white;
+                    cursor:pointer;
+                    font-size:16px;">
+            ×
+        </button>
+
+    </div>
+`;
+
+        document
+            .getElementById(
+                "productScreenshotsContainer"
+            )
+            .insertBefore(
+                card,
+                document.getElementById(
+                    "screenshotsUploadBox"
+                )
+            );
+    });
+}
+
+if (
+    existingProduct.demoVideos &&
+    existingProduct.demoVideos.length
+) {
+
+    existingProduct.demoVideos.forEach(url => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "thumbnail-card";
+
+        card.innerHTML = `
+            <div style="position:relative;width:100%;height:100%;">
+
+                <video controls
+                       style="
+                            width:100%;
+                            height:100%;
+                            object-fit:cover;
+                            border-radius:4px;
+                       ">
+                    <source src="${url}">
+                </video>
+
+                <button type="button"
+                        onclick="removeExistingVideo(this, '${url}')"
+                        style="
+                            position:absolute;
+                            top:5px;
+                            right:5px;
+                            width:25px;
+                            height:25px;
+                            border:none;
+                            border-radius:50%;
+                            background:red;
+                            color:white;
+                            cursor:pointer;
+                            font-size:16px;">
+                    ×
+                </button>
+
+            </div>
+        `;
+
+        document
+            .getElementById("productVideosContainer")
+            .insertBefore(
+                card,
+                document.getElementById(
+                    "demoVideosUploadBox"
+                )
+            );
+    });
+}
+
+if (existingProduct.documentationUrl) {
+
+    const pdfName =
+        decodeURIComponent(
+            existingProduct.documentationUrl
+                .split("/")
+                .pop()
+        ).replace(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}_/i,
+            ""
+        );
+
+    document.getElementById("pdfFileName")
+        .textContent = pdfName;
+
+    document.getElementById("pdfFileName")
+        .style.cursor = "pointer";
+
+    document.getElementById("pdfFileName")
+        .onclick = () => {
+            window.open(
+                existingProduct.documentationUrl,
+                "_blank"
+            );
+        };
+}
+
+if (existingProduct.downloadFileUrl) {
+
+    const packageName =
+        decodeURIComponent(
+            existingProduct.downloadFileUrl
+                .split("/")
+                .pop()
+        ).replace(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}_/i,
+            ""
+        );
+
+    document.getElementById("packageUploadBox").innerHTML = `
+        <span style="
+            display:flex;
+            align-items:center;
+            justify-content:space-around;
+            width:100%;
+        ">
+            <span>
+                <i class="bi bi-file-earmark-zip"></i>
+                ${packageName}
+            </span>
+
+            <i class="bi bi-x-circle-fill"
+               onclick="event.stopPropagation();removeExistingPackage();"
+               style="
+                   color:red;
+                   font-size:18px;
+                   cursor:pointer;
+               ">
+            </i>
+        </span>
+    `;
+}
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Unable to load product");
+    }
+}
+
+
+function removeExistingScreenshot(
+    button,
+    screenshotUrl
+) {
+
+    existingProduct.screenshots =
+        existingProduct.screenshots.filter(
+            url => url !== screenshotUrl
+        );
+
+    button
+        .closest(".thumbnail-card")
+        .remove();
+}
+
+function removeExistingVideo(
+    button,
+    videoUrl
+) {
+
+    existingProduct.demoVideos =
+        existingProduct.demoVideos.filter(
+            url => url !== videoUrl
+        );
+
+    button
+        .closest(".thumbnail-card")
+        .remove();
+}
+
+function removeExistingPackage() {
+
+    if (existingProduct) {
+        existingProduct.downloadFileUrl = "";
+    }
+
+    document.getElementById("packageUploadBox").innerHTML = `
+        <i class="bi bi-upload"></i>
+        Upload .zip or .tar.gz
+    `;
+}
+
+
+/* =====================================================
+   PAGE INITIALIZATION
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", async() => {
+
+    const saveBtn =
+        document.getElementById("saveProductBtn");
+
+    if (saveBtn) {
+        saveBtn.addEventListener(
+            "click",
+            saveProduct
+        );
+    }
+
+    await loadProduct();
+
+});
+
+
+
+// discard changes
+
+function discardChanges() {
+
+    if (!confirm("Discard all unsaved changes?")) {
+        return;
+    }
+
+    location.reload();
+}
+
+async function deleteCurrentProduct() {
+
+    if (!editProductId) {
+        alert("Product ID not found");
+        return;
+    }
+
+    const confirmed = confirm(
+        "Are you sure you want to delete this product?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${getBase()}/admin/products/${editProductId}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                }
+            }
+        );
+
+        const result =
+            await response.json();
+
+        if (result.success) {
+
+            alert(
+                "Product deleted successfully"
+            );
+
+            window.location.href =
+                "product.html";
+        } else {
+
+            alert(
+                result.message ||
+                "Failed to delete product"
+            );
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Error while deleting product"
+        );
+    }
+}
+
+
+  
+</script>
+</body>
+
+</html>

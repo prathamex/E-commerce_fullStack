@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>License UI</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================= */
+    /* CSS VARIABLES */
+    /* ======================= */
+    :root {
+      --bg-dark: #092A49;
+      --primary-blue: #0796FE;
+      --sub-text: #797979;
+      --white: #FFFFFF;
+      --light-bg: #F0F2F5;
+      --table-header: #E9F1F9;
+    }
+
+    /* ======================= */
+    /* BASE */
+    /* ======================= */
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--light-bg);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ======================= */
+    /* SIDEBAR */
+    /* ======================= */
+    .sidebar {
+      background-color: var(--bg-dark);
+      min-height: 100vh;
+      color: var(--white);
+      position: fixed;
+      width: 240px;
+      z-index: 1000;
+    }
+
+    .sidebar .logo-area {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 160px;
+      height: auto;
+    }
+
+    .sidebar a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      transition: 0.3s;
+      margin: 5px 10px;
+      border-radius: 5px;
+      border-left: 5px solid transparent;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--primary-blue);
+      border-left: 5px solid var(--primary-blue);
+    }
+
+    .sidebar i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .sidebar a:hover i,
+    .sidebar a.active i {
+      color: var(--primary-blue);
+    }
+
+    .toggle-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      margin-left: -15px;
+    }
+
+@media (max-width: 991px) {
+    .toggle-btn{
+        margin-top: -6px;
+    }
+}
+
+@media (max-width: 991px) {
+    .toggle-btn{
+        position: relative;
+        top: -4px;
+    }
+}
+
+    /* ======================= */
+    /* MAIN CONTENT */
+    /* ======================= */
+    .main-content {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* ======================= */
+    /* TOP HEADER */
+    /* ======================= */
+    .top-header {
+      background: #FFFFFF;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      border-bottom: 1px solid #E0E0E0;
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      z-index: 999;
+    }
+
+    .search-bar {
+      background: #F8F9FA;
+      border: 1px solid #E9E9E9;
+      border-radius: 8px;
+      padding: 8px 15px;
+      width: 450px;
+      display: flex;
+      align-items: center;
+      
+    }
+    
+
+    .search-bar i {
+      color: #A0A0A0;
+      margin-right: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    /* ======================= */
+    /* NOTIFICATION BUTTON */
+    /* ======================= */
+    .notification-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      color: var(--sub-text);
+      font-size: 20px;
+    }
+
+    .notification-btn .noti-text {
+      font-size: 10px;
+      margin-top: 2px;
+      color: var(--sub-text);
+    }
+
+    .notification-btn .badge {
+      position: absolute;
+      top: 0px;
+      transform: translate(40%, -40%);
+      background: #EF4444;
+      color: white;
+      font-size: 9px;
+      padding: 3px 5px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    /* ======================= */
+    /* NOTIFICATION DROPDOWN */
+    /* ======================= */
+    .notif-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 14px);
+      right: -10px;
+      width: 340px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+      border: 1px solid #e5e7eb;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .notif-dropdown.show {
+      display: block;
+    }
+
+    .notif-dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .notif-dropdown-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0A2540;
+    }
+
+    .notif-mark-all {
+      font-size: 12px;
+      color: #0796FE;
+      cursor: pointer;
+    }
+
+    .notif-list {
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .notif-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-items: center;
+    }
+
+    .notif-item:hover { background: #f8fafc; }
+    .notif-item.unread { background: #EFF6FF; }
+    .notif-item.unread:hover { background: #dbeafe; }
+
+    .notif-icon {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      background: #E7F1FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0796FE;
+      font-size: 14px;
+    }
+
+    .notif-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .notif-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .notif-message {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .notif-time { font-size: 11px; color: #94a3b8; }
+
+    .notif-dot {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      border-radius: 50%;
+      background: #0796FE;
+    }
+
+    .notif-loading,
+    .notif-empty {
+      text-align: center;
+      padding: 30px 16px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .notif-dropdown-footer {
+      padding: 10px 16px;
+      text-align: center;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .notif-dropdown-footer a {
+      font-size: 13px;
+      color: #0796FE;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ======================= */
+    /* USER AVATAR */
+    /* ======================= */
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      background: var(--bg-dark);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* ======================= */
+    /* PAGE WRAPPER */
+    /* ======================= */
+    .license-page-wrapper {
+      padding: 92px 18px 18px;
+    }
+
+    /* ======================= */
+    /* BREADCRUMB */
+    /* ======================= */
+    .breadcrumb-custom a {
+      font-size: 18px;
+      color: #797979;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    .breadcrumb-custom a:hover { color: #0796FE; }
+
+    .breadcrumb-custom span {
+      color: #0796FE;
+      font-size: 18px;
+    }
+
+    /* ======================= */
+    /* LICENSE CARD */
+    /* ======================= */
+    .license-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0px;
+      overflow: visible;        /* FIX: was 'hidden' which clipped filter dropdown */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    /* ======================= */
+    /* TOPBAR */
+    /* ======================= */
+    .license-topbar {
+      padding: 18px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .license-title {
+      font-size: 32px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 200 !important;
+      color: #101828;
+    }
+
+    .license-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ======================= */
+    /* TABLE SEARCH */
+    /* ======================= */
+    .table-search {
+      width: 330px;
+      height: 40px;
+      border: 1px solid #dbe1e8;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      background: #fff;
+    }
+
+    .table-search i {
+      color: #9CA3AF;
+      margin-right: 10px;
+      font-size: 13px;
+    }
+
+    .table-search input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .large-filter-icon {
+      font-size: 1.25rem !important;
+      line-height: 1;
+      vertical-align: -0.125em;
+    }
+
+    /* ======================= */
+    /* FILTER BUTTON */
+    /* ======================= */
+    .filter-btn {
+      height: 41px;
+      padding: 0 18px;
+      border: 1px solid #cfe3ff;
+      border-radius: 8px;
+      background: #fff;
+      color: #0796FE;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .filter-btn:hover {
+      background: #0796FE;
+      color: #fff;
+      border-color: #0d8bff;
+      box-shadow: 0 4px 12px rgba(13, 139, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* ======================= */
+    /* GENERATE BUTTON */
+    /* ======================= */
+    .generate-btn {
+      height: 40px;
+      padding: 0 20px;
+      border: none;
+      border-radius: 8px;
+      background: #0796FE;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .generate-btn:hover {
+      background: #0077e6;
+      box-shadow: 0 4px 12px rgba(0, 119, 230, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .generate-btn i {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .generate-btn span {
+      position: relative;
+      top: -1px;
+    }
+
+    /* ======================= */
+    /* FILTER PANEL */
+    /* ======================= */
+    .filter-panel {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      width: 220px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      display: none;
+      z-index: 9999;
+      border: 1px solid #e5e7eb;
+         max-width: calc(100vw - 20px);
+    box-sizing: border-box;
+    }
+
+    .filter-panel.active { display: block; }
+
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .filter-header h4 {
+      font-size: 14px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .clear-btn {
+      font-size: 12px;
+      color: #0d6efd;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .filter-group { margin-bottom: 10px; }
+
+    .filter-group label {
+      font-size: 12px;
+      margin-bottom: 4px;
+      display: block;
+      color: #555;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .apply-btn {
+      width: 100%;
+      padding: 8px;
+      font-size: 13px;
+      background: #0796FE;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .apply-btn:hover { background: #0077e6; }
+
+    /* ======================= */
+    /* TABLE */
+    /* ======================= */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .license-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .license-table thead { background: #E1F2FF; }
+
+    .license-table thead th {
+      padding: 14px 18px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #3C4452;
+      white-space: nowrap;
+    }
+
+    .license-table thead th:last-child { text-align: center; }
+
+    .license-table tbody td {
+      padding: 22px 18px;
+      border-bottom: 1px solid #eef2f7;
+      font-size: 13.46px;
+      color: #092A49;
+      white-space: nowrap;
+    }
+
+    .license-table tbody tr:hover { background: #fafcff; }
+
+    /* ======================= */
+    /* STATUS BADGES */
+    /* ======================= */
+    .status-badge {
+      min-width: 88px;
+      height: 26px;
+      padding: 0 12px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .active-status     { background: #ddf8e8; color: #1F9D55; }
+    .inactive-status   { background: #F2F4F7; color: #667085; }
+    .expired-status    { background: #ffe3e3; color: #d92d20; }
+    .suspended-status  { background: #FFF0E1; color: #f97316; }
+    .pending-status    { background: #fff4d6; color: #e2a500; }
+    .deactivated-status{ background: #f0f0f0; color: #555;    }
+
+    /* ======================= */
+    /* ACTION DROPDOWN */
+    /* ======================= */
+    .action-cell {
+      position: relative;
+      text-align: center;
+    }
+
+    .menu-btn {
+      border: none;
+      background: transparent;
+      color: #64748b;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu-custom {
+      position: absolute;
+      top: 14px;
+      right: 0;
+      width: 115px;
+      background: #fff;
+      border: 1px solid #dbe1e8;
+      border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      display: none;
+      z-index: 999;
+      text-align: left;
+    }
+
+    .dropdown-menu-custom.show { display: block; }
+
+    .dropdown-menu-custom a {
+      display: block;
+      padding: 9px 12px;
+      text-decoration: none;
+      color: #092A49;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu-custom a:hover { background: #f5f7fb; }
+    .dropdown-menu-custom a.text-danger { color: #d92d20; }
+    .dropdown-menu-custom a.text-danger:hover { background: #fff0f0; }
+
+    /* ======================= */
+    /* PAGINATION */
+    /* ======================= */
+    .pagination-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 18px;
+    }
+
+    .pagination-custom {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .page-box {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .page-box:hover   { background: #f0f0f0; }
+    .page-box.active  { background: #007bff; color: #fff; border-color: #007bff; }
+    .page-box.disabled{ pointer-events: none; opacity: 0.4; }
+
+    /* ======================= */
+    /* FOOTER */
+    /* ======================= */
+    .footer-text {
+      text-align: center;
+      font-size: 16px;
+      color: #797979;
+      margin-top: 14px;
+    }
+
+    .footer-text span { color: #092A49; font-weight: 400; }
+
+    /* ======================= */
+    /* RENEW MODAL */
+    /* ======================= */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 28px;
+      width: 380px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-box h3 { font-size: 18px; font-weight: 600; margin: 0 0 16px; color: #101828; }
+    .modal-box label { font-size: 13px; color: #555; display: block; margin-bottom: 6px; }
+    .modal-box input {
+      width: 100%; padding: 9px 12px; border: 1px solid #dbe1e8;
+      border-radius: 6px; font-size: 14px; outline: none; margin-bottom: 16px;
+    }
+
+    .modal-footer { display: flex; gap: 10px; justify-content: flex-end; }
+
+    .btn-cancel-modal {
+      border: 1px solid #dbe1e8; background: #fff; color: #555;
+      padding: 8px 18px; border-radius: 6px; font-size: 14px; cursor: pointer;
+    }
+
+    .btn-submit-modal {
+      background: #0796FE; color: #fff; border: none;
+      padding: 8px 18px; border-radius: 6px; font-size: 14px; cursor: pointer;
+    }
+
+    .btn-submit-modal:hover { background: #0077e6; }
+
+    /* ======================= */
+    /* VIEW MODAL */
+    /* ======================= */
+    .view-modal-box {
+      background: #fff; border-radius: 8px; padding: 28px;
+      width: 520px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-height: 80vh; overflow-y: auto;
+    }
+
+    .view-modal-box h3 { font-size: 18px; font-weight: 600; margin: 0 0 18px; color: #101828; }
+
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .detail-item label {
+      font-size: 11px; color: #888; text-transform: uppercase;
+      letter-spacing: 0.5px; display: block; margin-bottom: 3px;
+    }
+
+    .detail-item span { font-size: 14px; color: #092A49; font-weight: 500; word-break: break-all; }
+    .detail-item.full { grid-column: 1 / -1; }
+
+    /* ======================= */
+    /* TOAST */
+    /* ======================= */
+    .toast-wrap {
+      position: fixed; bottom: 24px; right: 24px;
+      z-index: 99999; display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .toast {
+      padding: 12px 20px; border-radius: 8px; font-size: 14px;
+      color: #fff; font-weight: 500; opacity: 0;
+      transform: translateY(10px); transition: all 0.3s; pointer-events: none;
+    }
+
+    .toast.show   { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .toast.success{ background: #1F9D55; }
+    .toast.error  { background: #d92d20; }
+
+    /* ======================= */
+    /* LOADING / EMPTY ROWS */
+    /* ======================= */
+    .loading-row td { text-align: center; padding: 40px; color: #888; font-size: 14px; }
+    .empty-row td   { text-align: center; padding: 40px; color: #aaa; font-size: 14px; }
+
+    /* ======================= */
+    /* RESPONSIVE */
+    /* ======================= */
+    @media(max-width:991px) {
+      .sidebar { left: -240px; transition: all 0.3s ease; }
+      .sidebar.show { left: 0; }
+      .main-content { margin-left: 0; width: 100%; }
+      .top-header { left: 0; }
+      .toggle-btn { display: block; }
+      .search-bar { width: 180px; }
+      .notification-btn .noti-text { display: none; }
+    }
+
+    @media(max-width:768px) {
+      .license-topbar { flex-direction: column; align-items: flex-start; }
+      .license-actions { width: 100%; }
+      .table-search { width: 100%; }
+    }
+
+    @media(max-width:576px) {
+      .top-header { padding: 0 14px; }
+      .license-page-wrapper { padding: 90px 12px 12px; }
+      .license-title { font-size: 28px; }
+      .license-actions { flex-direction: column; align-items: stretch; }
+      .filter-btn, .generate-btn { width: 100%; justify-content: center; }
+      .pagination-wrapper { justify-content: center; }
+      .search-bar { width: 140px; }
+    }
+
+  
+.top-header .d-flex{
+    flex: 1;
+}
+
+.search-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background: #f5f5f5;
+}
+
+.highlight-row {
+    background: #fff3cd !important;
+}
+
+/* pop up modal */
+
+
+.popup-overlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(6px);
+    z-index:99999;
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-overlay.show{
+    display:flex;
+}
+
+.popup-content{
+    width:90%;
+    max-width:900px;
+    height:85vh;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
+
+.popup-close{
+    position:absolute;
+    top:10px;
+    right:15px;
+    border:none;
+    background:none;
+    font-size:30px;
+    cursor:pointer;
+    z-index:100000;
+     display:none !important;
+}
+
+/* mahesh code landspace */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar .logo-area {
+    padding: 15px 20px;
+  }
+
+  .sidebar a {
+    padding: 10px 20px;
+  }
+}
+
+
+/* mahesh code filter responsive */
+/* Filter Responsive */
+@media (max-width: 768px) {
+
+  .license-actions{
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .table-search,
+  .filter-btn,
+  .generate-btn{
+    width: 100%;
+  }
+
+  .filter-panel{
+    position: fixed;
+    top: 80px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: none;
+    max-height: 75vh;
+    overflow-y: auto;
+    z-index: 99999;
+  }
+}
+
+@media (max-width: 576px){
+
+  .filter-panel{
+    top: 70px;
+    left: 8px;
+    right: 8px;
+    padding: 15px;
+  }
+
+  .filter-group input,
+  .filter-group select{
+    height: 42px;
+  }
+
+  .apply-btn{
+    height: 42px;
+  }
+}
+
+/* landspace mahesh code */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+
+    .filter-panel{
+        position: fixed;
+        top: 75px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90vw;
+        max-width: 500px;
+        right: auto;
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+}
+
+/* mahesh code notificaton responsive */
+@media (max-width: 768px){
+
+    .header-right{
+        gap: 12px;
+    }
+
+    .notification-btn{
+        font-size: 18px;
+        position: relative;
+    }
+
+    .notif-dropdown{
+        width: min(280px, calc(100vw - 20px));
+        right: -22px;
+        left: auto;
+    }
+}
+
+/* Ganesh Added css for the profile dropdown */
+/* Profile Dropdown */
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.profile-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+  </style>
+</head>
+<script src="/js/admin-guard.js"></script>
+<body>
+
+  <!-- ======================= -->
+  <!-- SIDEBAR -->
+  <!-- ======================= -->
+  <div class="sidebar">
+      <div class="logo-area">
+  <img
+    src="./img/creativesweb.png"
+    alt="Logo"
+    class="logo-img"
+    onclick="window.location.href='index.html';"
+    style="cursor:pointer;"
+  />
+</div>
+    <nav>
+      <a href="adminpanel.html">
+        <i class="fa-solid fa-clipboard-list"></i><span>Dashboard</span>
+      </a>
+      <a href="product.html">
+        <i class="fa-solid fa-box"></i><span>Products</span>
+      </a>
+      <a href="admin-order.html">
+        <i class="fa-solid fa-shopping-cart"></i><span>Orders</span>
+      </a>
+      <a href="licence-dashboard.html" class="active">
+        <i class="fa-solid fa-id-card"></i><span>License</span>
+      </a>
+      <a href="admin-user.html">
+        <i class="fa-regular fa-user"></i><span>User</span>
+      </a>
+      <a href="Admin-setting.html">
+        <i class="bi bi-gear me-2"></i><span>Setting</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ======================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ======================= -->
+  <div class="main-content">
+
+    <!-- TOP HEADER -->
+    <div class="top-header">
+      <div class="d-flex align-items-center">
+        <button class="btn d-lg-none me-2 toggle-btn" id="sidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <!-- //Added by harshada -->
+        <div class="search-bar search-wrapper">
+          <i class="fa fa-search"></i>
+          <input type="text" id="headerSearch" placeholder="Search">
+          <div id="searchSuggestions" class="search-suggestions"></div>
+        </div>
+      </div>
+
+      <div class="header-right">
+
+        <!-- NOTIFICATION BUTTON WITH DROPDOWN (FIXED - single clean bell) -->
+        <div class="notification-btn" id="notifBtn" onclick="toggleNotifDropdown(event)">
+          <i class="fa-regular fa-bell"></i>
+          <span class="badge" id="notifBadge" style="display:none;">0</span>
+          <small class="noti-text">Notification</small>
+
+          <!-- Notification Dropdown Panel -->
+          <div class="notif-dropdown" id="notifDropdown" onclick="event.stopPropagation()">
+            <div class="notif-dropdown-header">
+              <span class="notif-dropdown-title">Notifications</span>
+              <span class="notif-mark-all" onclick="markAllRead()">Mark all as read</span>
+            </div>
+            <div class="notif-list" id="notifList">
+              <div class="notif-loading">Loading...</div>
+            </div>
+            <div class="notif-dropdown-footer">
+              <a href="#" onclick="loadAllNotifications(); return false;">View all notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- USER AVATAR (dynamic initials from localStorage) -->
+        <!-- <div class="user-avatar" id="userAvatar"></div> -->
+
+        <div class="profile-wrapper">
+    <div class="user-avatar" id="userAvatar" onclick="toggleProfileDropdown()">
+        AS
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="license-page-wrapper">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb-custom">
+        <a href="adminpanel.html">Home</a> > <span>License</span>
+      </div>
+
+      <!-- LICENSE CARD -->
+      <div class="license-card">
+
+        <!-- TOPBAR -->
+        <div class="license-topbar">
+          <h2 class="license-title">License</h2>
+
+          <div class="license-actions">
+
+            <!-- TABLE SEARCH -->
+            <div class="table-search">
+              <i class="fa fa-search"></i>
+              <input type="text" id="tableSearch" placeholder="Search by name or key...">
+            </div>
+
+            <!-- FILTER BUTTON + PANEL -->
+            <div style="position:relative;">
+              <button class="filter-btn" id="filterToggleBtn">
+                <i class="bi bi-filter large-filter-icon"></i> Filter
+              </button>
+              <div class="filter-panel" id="filterPanel">
+                <div class="filter-header">
+                  <h4>Filter Licenses</h4>
+                  <button class="clear-btn" id="clearFilterBtn">Clear</button>
+                </div>
+                <div class="filter-group">
+                  <label>Activation Status</label>
+                  <select id="filterStatus">
+                    <option value="">All</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="INACTIVE">Inactive</option>
+                    <option value="EXPIRED">Expired</option>
+                    <option value="SUSPENDED">Suspended</option>
+                    <option value="PENDING_RENEWAL">Pending Renewal</option>
+                    <option value="DEACTIVATED">Deactivated</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Product Name</label>
+                  <input type="text" id="filterProduct" placeholder="e.g. Employee Management">
+                </div>
+                <div class="filter-group">
+                  <label>License Type</label>
+                  <select id="filterLicType">
+                    <option value="">All</option>
+                    <option value="TRIAL">Trial</option>
+                    <option value="MONTHLY">Monthly</option>
+                    <option value="YEARLY">Yearly</option>
+                    <option value="LIFETIME">Lifetime</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Expiry From</label>
+                  <input type="date" id="filterExpiryFrom">
+                </div>
+                <div class="filter-group">
+                  <label>Expiry To</label>
+                  <input type="date" id="filterExpiryTo">
+                </div>
+                <button class="apply-btn" id="applyFilterBtn">Apply Filter</button>
+              </div>
+            </div>
+
+            <!-- GENERATE BUTTON -->
+        <!-- //Added by harshada -->
+     <!-- <button class="generate-btn"
+        onclick="window.location.href='generate-new-licence.html'">
+    <i class="bi bi-key-fill"></i>
+    <span>Generate New License</span>
+</button> -->
+    <button class="generate-btn" id="openGenerateLicenseModal">
+    <i class="bi bi-key-fill"></i>
+    <span>Generate New License</span>
+</button>     
+
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-wrapper">
+          <table class="license-table">
+            <thead>
+              <tr>
+                <th>License ID</th>
+                <th>Product Name</th>
+                <th>User Assigned</th>
+                <th>Activation Status</th>
+                <th>Expiry Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="licenseTableBody">
+              <tr class="loading-row">
+                <td colspan="6"><i class="fa fa-spinner fa-spin me-2"></i>Loading licenses...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination-wrapper">
+          <div class="pagination-custom" id="paginationContainer"></div>
+        </div>
+
+      </div>
+      <!-- /license-card -->
+
+      <!-- FOOTER -->
+      <div class="footer-text">
+        Copyright &copy; 2025 - 2026 <span>Creative Web Solution.</span> ALL RIGHTS RESERVED
+      </div>
+
+    </div>
+    <!-- /license-page-wrapper -->
+
+  </div>
+  <!-- /main-content -->
+
+  <!-- ======================= -->
+  <!-- RENEW MODAL -->
+  <!-- ======================= -->
+  <div class="modal-overlay" id="renewModal">
+    <div class="modal-box">
+      <h3>Renew License</h3>
+      <label>New Expiry Date</label>
+      <input type="date" id="renewDateInput" min="">
+      <div class="modal-footer">
+        <button class="btn-cancel-modal" id="renewCancelBtn">Cancel</button>
+        <button class="btn-submit-modal" id="renewSubmitBtn">Renew</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= -->
+  <!-- VIEW MODAL -->
+  <!-- ======================= -->
+  <div class="modal-overlay" id="viewModal">
+    <div class="view-modal-box">
+      <h3>License Details</h3>
+      <div class="detail-grid" id="viewDetailGrid"></div>
+      <div class="modal-footer" style="margin-top:20px;">
+        <button class="btn-cancel-modal" id="viewCloseBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-wrap" id="toastWrap"></div>
+
+<!-- Generate License Modal -->
+<!-- Generate License Popup -->
+<div id="generateLicenseModal" class="popup-overlay">
+    <div class="popup-content">
+        <button class="popup-close" id="closeGenerateLicenseModal">&times;</button>
+
+        <iframe
+            src="generate-new-licence.html"
+            width="100%"
+            height="100%"
+            frameborder="0">
+        </iframe>
+    </div>
+</div>
+
+
+  <!-- ======================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ======================= -->
+  <script>
+
+    
+
+    /* ===========================
+       CONFIG & STATE
+    =========================== */
+    const BASE_URL = 'http://localhost:8081';
+    let currentPage = 0;
+    let totalPages = 0;
+    let isFiltering = false;
+    let currentFilterData = {};
+    let renewLicenseId = null;
+    let searchTimeout = null;
+
+    /* ===========================
+       AUTH HELPERS
+    =========================== */
+    function getToken() {
+      return localStorage.getItem('token') || sessionStorage.getItem('token');
+    }
+
+    function authHeaders() {
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + getToken()
+      };
+    }
+
+    /* ===========================
+       TOAST
+    =========================== */
+    function showToast(msg, type = 'success') {
+      const wrap = document.getElementById('toastWrap');
+      const t = document.createElement('div');
+      t.className = 'toast ' + type;
+      t.textContent = msg;
+      wrap.appendChild(t);
+      requestAnimationFrame(() => t.classList.add('show'));
+      setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => t.remove(), 300);
+      }, 3000);
+    }
+
+    /* ===========================
+       STATUS BADGE
+    =========================== */
+    function statusBadge(status) {
+      const map = {
+        ACTIVE:          ['active-status',      'Active'],
+        INACTIVE:        ['inactive-status',    'Inactive'],
+        EXPIRED:         ['expired-status',     'Expired'],
+        SUSPENDED:       ['suspended-status',   'Suspended'],
+        PENDING_RENEWAL: ['pending-status',     'Pending Renewal'],
+        DEACTIVATED:     ['deactivated-status', 'Deactivated'],
+      };
+      const [cls, label] = map[status] || ['inactive-status', status];
+      return `<span class="status-badge ${cls}">${label}</span>`;
+    }
+
+    /* ===========================
+       DATE FORMAT
+    =========================== */
+    function formatDate(d) {
+      if (!d) return '-';
+      const parts = d.split('-');
+      if (parts.length !== 3) return d;
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    /* ===========================
+       RENDER TABLE
+    =========================== */
+    function renderTable(licenses) {
+      const tbody = document.getElementById('licenseTableBody');
+      if (!licenses || licenses.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No licenses found.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = licenses.map(lic => `
+        <tr>
+          <td>${lic.licenseId || '-'}</td>
+          <td>${lic.productName || '-'}</td>
+          <td>${lic.userAssigned || '-'}</td>
+          <td>${statusBadge(lic.activationStatus)}</td>
+          <td>${formatDate(lic.expiryDate)}</td>
+          <td class="action-cell">
+            <button class="menu-btn" onclick="toggleDropdown(event,this)">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="dropdown-menu-custom">
+              <a onclick="viewLicense(${lic.id})">View</a>
+              <a onclick="activateLicense(${lic.id})">Activate</a>
+              <a onclick="suspendLicense(${lic.id})">Suspend</a>
+              <a onclick="openRenewModal(${lic.id})">Renew</a>
+              <a class="text-danger" onclick="deleteLicense(${lic.id})">Delete</a>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    /* ===========================
+       RENDER PAGINATION
+    =========================== */
+    function renderPagination(current, total) {
+      const container = document.getElementById('paginationContainer');
+      if (total <= 1) { container.innerHTML = ''; return; }
+
+      let html = `<div class="page-box ${current === 0 ? 'disabled' : ''}" onclick="goToPage(${current - 1})">
+        <i class="fa-solid fa-chevron-left"></i></div>`;
+
+      const pages = [];
+      if (total <= 7) {
+        for (let i = 0; i < total; i++) pages.push(i);
+      } else {
+        pages.push(0);
+        if (current > 2) pages.push('...');
+        for (let i = Math.max(1, current - 1); i <= Math.min(total - 2, current + 1); i++) pages.push(i);
+        if (current < total - 3) pages.push('...');
+        pages.push(total - 1);
+      }
+
+      pages.forEach(p => {
+        if (p === '...') {
+          html += `<div class="page-box disabled">...</div>`;
+        } else {
+          html += `<div class="page-box ${p === current ? 'active' : ''}" onclick="goToPage(${p})">${p + 1}</div>`;
+        }
+      });
+
+      html += `<div class="page-box ${current === total - 1 ? 'disabled' : ''}" onclick="goToPage(${current + 1})">
+        <i class="fa-solid fa-chevron-right"></i></div>`;
+
+      container.innerHTML = html;
+    }
+
+    /* ===========================
+       LOAD LICENSES (API)
+    =========================== */
+    async function loadLicenses(page = 0) {
+      const tbody = document.getElementById('licenseTableBody');
+      tbody.innerHTML = '<tr class="loading-row"><td colspan="6"><i class="fa fa-spinner fa-spin me-2"></i>Loading...</td></tr>';
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses?page=${page}&size=10`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Failed to fetch licenses');
+        const result = await res.json();
+        const data = result.data;
+        currentPage = data.currentPage;
+        totalPages = data.totalPages;
+        renderTable(data.content);
+        renderPagination(currentPage, totalPages);
+      } catch (err) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Failed to load licenses. ' + err.message + '</td></tr>';
+      }
+    }
+
+    /* ===========================
+       SEARCH LICENSES
+    =========================== */
+    async function searchLicenses(keyword) {
+      if (!keyword.trim()) { isFiltering = false; loadLicenses(0); return; }
+      const tbody = document.getElementById('licenseTableBody');
+      tbody.innerHTML = '<tr class="loading-row"><td colspan="6"><i class="fa fa-spinner fa-spin me-2"></i>Searching...</td></tr>';
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/search?keyword=${encodeURIComponent(keyword)}`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Search failed');
+        const result = await res.json();
+        renderTable(result.data);
+        document.getElementById('paginationContainer').innerHTML = '';
+      } catch (err) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Search failed. ' + err.message + '</td></tr>';
+      }
+    }
+
+    /* ===========================
+       APPLY FILTER
+    =========================== */
+    async function applyFilter(page = 0) {
+      isFiltering = true;
+      currentFilterData = {
+        activationStatus: document.getElementById('filterStatus').value || null,
+        productName:      document.getElementById('filterProduct').value.trim() || null,
+        licenseType:      document.getElementById('filterLicType').value || null,
+        expiryDateFrom:   document.getElementById('filterExpiryFrom').value || null,
+        expiryDateTo:     document.getElementById('filterExpiryTo').value || null,
+      };
+      const tbody = document.getElementById('licenseTableBody');
+      tbody.innerHTML = '<tr class="loading-row"><td colspan="6"><i class="fa fa-spinner fa-spin me-2"></i>Filtering...</td></tr>';
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/filter?page=${page}&size=10`, {
+          method: 'POST',
+          headers: authHeaders(),
+          body: JSON.stringify(currentFilterData)
+        });
+        if (!res.ok) throw new Error('Filter failed');
+        const result = await res.json();
+        const data = result.data;
+        currentPage = data.currentPage;
+        totalPages = data.totalPages;
+        renderTable(data.content);
+        renderPagination(currentPage, totalPages);
+        document.getElementById('filterPanel').classList.remove('active');
+      } catch (err) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Filter failed. ' + err.message + '</td></tr>';
+      }
+    }
+
+    function goToPage(page) {
+      if (page < 0 || page >= totalPages) return;
+      if (isFiltering) applyFilter(page);
+      else loadLicenses(page);
+    }
+
+    /* ===========================
+       VIEW LICENSE
+    =========================== */
+    async function viewLicense(id) {
+      closeAllDropdowns();
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/${id}`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Failed to fetch details');
+        const result = await res.json();
+        const d = result.data;
+        document.getElementById('viewDetailGrid').innerHTML = `
+          <div class="detail-item full"><label>License Key</label><span>${d.licenseKey || '-'}</span></div>
+          <div class="detail-item"><label>Product</label><span>${d.productName || '-'}</span></div>
+          <div class="detail-item"><label>License Type</label><span>${d.licenseType || '-'}</span></div>
+          <div class="detail-item"><label>License Plan</label><span>${d.licensePlan || 'N/A'}</span></div>
+          <div class="detail-item"><label>Status</label><span>${d.licenseStatus || '-'}</span></div>
+          <div class="detail-item"><label>Customer Name</label><span>${d.customerName || '-'}</span></div>
+          <div class="detail-item"><label>Email</label><span>${d.customerEmail || '-'}</span></div>
+          <div class="detail-item"><label>Mobile</label><span>${d.mobileNumber || '-'}</span></div>
+          <div class="detail-item"><label>Company</label><span>${d.companyName || 'N/A'}</span></div>
+          <div class="detail-item"><label>Assigned User</label><span>${d.assignedUserName || 'N/A'}</span></div>
+          <div class="detail-item"><label>Activation Limit</label><span>${d.activationLimit || '-'} Device(s)</span></div>
+          <div class="detail-item"><label>Manual Key</label><span>${d.manualKey ? 'Yes' : 'No'}</span></div>
+          <div class="detail-item"><label>Activation Date</label><span>${formatDate(d.activationDate)}</span></div>
+          <div class="detail-item"><label>Expiry Date</label><span>${formatDate(d.expiryDate)}</span></div>
+        `;
+        document.getElementById('viewModal').classList.add('show');
+      } catch (err) {
+        showToast('Could not load license details: ' + err.message, 'error');
+      }
+    }
+
+    /* ===========================
+       ACTIVATE LICENSE
+    =========================== */
+    async function activateLicense(id) {
+      closeAllDropdowns();
+      if (!confirm('Activate this license?')) return;
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/${id}/activate`, { method: 'PUT', headers: authHeaders() });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.message || 'Activation failed');
+        showToast('License activated successfully');
+        reloadCurrentView();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    /* ===========================
+       SUSPEND LICENSE
+    =========================== */
+    async function suspendLicense(id) {
+      closeAllDropdowns();
+      if (!confirm('Suspend this license?')) return;
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/${id}/suspend`, { method: 'PUT', headers: authHeaders() });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.message || 'Suspend failed');
+        showToast('License suspended');
+        reloadCurrentView();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    /* ===========================
+       DELETE LICENSE
+    =========================== */
+    async function deleteLicense(id) {
+      closeAllDropdowns();
+      if (!confirm('Delete this license? This action cannot be undone.')) return;
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/${id}`, { method: 'DELETE', headers: authHeaders() });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.message || 'Delete failed');
+        showToast('License deleted');
+        reloadCurrentView();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    /* ===========================
+       RENEW MODAL
+    =========================== */
+    function openRenewModal(id) {
+      closeAllDropdowns();
+      renewLicenseId = id;
+      const today = new Date();
+      today.setDate(today.getDate() + 1);
+      document.getElementById('renewDateInput').min = today.toISOString().split('T')[0];
+      document.getElementById('renewDateInput').value = '';
+      document.getElementById('renewModal').classList.add('show');
+    }
+
+    async function submitRenew() {
+      const newDate = document.getElementById('renewDateInput').value;
+      if (!newDate) { showToast('Please select a new expiry date', 'error'); return; }
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/${renewLicenseId}/renew`, {
+          method: 'PUT',
+          headers: authHeaders(),
+          body: JSON.stringify({ newExpiryDate: newDate })
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.message || 'Renew failed');
+        showToast('License renewed successfully');
+        document.getElementById('renewModal').classList.remove('show');
+        reloadCurrentView();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    function reloadCurrentView() {
+      if (isFiltering) applyFilter(currentPage);
+      else loadLicenses(currentPage);
+    }
+
+    /* ===========================
+       DROPDOWN TOGGLE
+    =========================== */
+    function toggleDropdown(event, button) {
+      event.stopPropagation();
+      const dropdown = button.nextElementSibling;
+      document.querySelectorAll('.dropdown-menu-custom').forEach(m => {
+        if (m !== dropdown) m.classList.remove('show');
+      });
+      dropdown.classList.toggle('show');
+    }
+
+    function closeAllDropdowns() {
+      document.querySelectorAll('.dropdown-menu-custom').forEach(m => m.classList.remove('show'));
+    }
+
+    /* ===========================
+       USER AVATAR
+    =========================== */
+    function setUserAvatar() {
+      try {
+        const ud = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (ud.name) {
+          const parts = ud.name.trim().split(' ');
+          const initials = parts.length >= 2
+            ? parts[0][0] + parts[parts.length - 1][0]
+            : parts[0].substring(0, 2);
+          document.getElementById('userAvatar').textContent = initials.toUpperCase();
+        }
+      } catch (e) {}
+    }
+
+    /* ===========================
+       NOTIFICATION SYSTEM
+    =========================== */
+    const NOTIF_BASE = window.API_BASE_URL || 'http://localhost:8081';
+
+    function getAuthHeadersNotif() {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      };
+    }
+
+    async function loadNotifCount() {
+      try {
+        const res = await fetch(NOTIF_BASE + '/notifications/unread/count', {
+          headers: getAuthHeadersNotif()
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const count = data.data;
+        const badge = document.getElementById('notifBadge');
+        if (count > 0) {
+          badge.textContent = count > 99 ? '99+' : count;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+      } catch (err) {
+        console.error('Notif count error:', err);
+      }
+    }
+
+    function toggleNotifDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById('notifDropdown');
+      const isOpen = dropdown.classList.contains('show');
+      dropdown.classList.toggle('show', !isOpen);
+      if (!isOpen) loadUnreadNotifications();
+    }
+
+    async function loadUnreadNotifications() {
+      const list = document.getElementById('notifList');
+      list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+      try {
+        const res = await fetch(NOTIF_BASE + '/notifications/unread', { headers: getAuthHeadersNotif() });
+        if (!res.ok) throw new Error('Unauthorized');
+        const data = await res.json();
+        renderNotifItems(data.data || []);
+      } catch (err) {
+        document.getElementById('notifList').innerHTML =
+          '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>Could not load notifications.</div>';
+      }
+    }
+
+    async function loadAllNotifications() {
+      const list = document.getElementById('notifList');
+      list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading all...</div>';
+      try {
+        const res = await fetch(NOTIF_BASE + '/notifications?page=0&size=20', { headers: getAuthHeadersNotif() });
+        if (!res.ok) throw new Error('Unauthorized');
+        const data = await res.json();
+        const items = (data.data && data.data.content) ? data.data.content : [];
+        renderNotifItems(items);
+      } catch (err) {
+        document.getElementById('notifList').innerHTML =
+          '<div class="notif-empty">Could not load notifications.</div>';
+      }
+    }
+
+    function renderNotifItems(notifications) {
+      const list = document.getElementById('notifList');
+      if (!notifications.length) {
+        list.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No new notifications</div>';
+        return;
+      }
+      list.innerHTML = notifications.map(function (n) {
+        return '<div class="notif-item ' + (n.isRead ? '' : 'unread') + '" onclick="markAsRead(' + n.id + ', this)">'
+          + '<div class="notif-icon"><i class="fa-solid fa-bell"></i></div>'
+          + '<div class="notif-content">'
+          + '<div class="notif-title">' + escapeHtml(n.title) + '</div>'
+          + '<div class="notif-message">' + escapeHtml(n.message) + '</div>'
+          + '<div class="notif-time">' + formatNotifTime(n.createdAt) + '</div>'
+          + '</div>'
+          + (!n.isRead ? '<div class="notif-dot"></div>' : '')
+          + '</div>';
+      }).join('');
+    }
+
+    async function markAsRead(notificationId, element) {
+      try {
+        const res = await fetch(NOTIF_BASE + '/notifications/' + notificationId + '/read', {
+          method: 'PUT',
+          headers: getAuthHeadersNotif()
+        });
+        if (!res.ok) return;
+        element.classList.remove('unread');
+        const dot = element.querySelector('.notif-dot');
+        if (dot) dot.remove();
+        loadNotifCount();
+      } catch (err) {
+        console.error('markAsRead error:', err);
+      }
+    }
+
+    async function markAllRead() {
+      try {
+        const res = await fetch(NOTIF_BASE + '/notifications/read-all', {
+          method: 'PUT',
+          headers: getAuthHeadersNotif()
+        });
+        if (!res.ok) return;
+        loadUnreadNotifications();
+        loadNotifCount();
+      } catch (err) {
+        console.error('markAllRead error:', err);
+      }
+    }
+
+    function formatNotifTime(createdAt) {
+      if (!createdAt) return '';
+      const date = new Date(createdAt);
+      const diffMs = Date.now() - date.getTime();
+      const mins = Math.floor(diffMs / 60000);
+      if (mins < 1) return 'Just now';
+      if (mins < 60) return mins + 'm ago';
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return hrs + 'h ago';
+      return Math.floor(hrs / 24) + 'd ago';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    /* ===========================
+       DOM READY
+    =========================== */
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // Auth check
+      //if (!getToken()) { window.location.href = 'login.html'; return; }
+
+      // Init
+      setUserAvatar();
+      loadLicenses(0);
+      loadNotifCount();
+      setInterval(loadNotifCount, 60000);
+
+      // Sidebar toggle
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => sidebar.classList.toggle('show'));
+      }
+
+      // Global click: close sidebar, dropdowns, filter panel, notification dropdown
+      document.addEventListener('click', function (e) {
+        // Close sidebar on mobile
+        if (sidebar && !sidebar.contains(e.target) && sidebarToggle && !sidebarToggle.contains(e.target)) {
+          sidebar.classList.remove('show');
+        }
+
+        // Close action dropdowns
+        closeAllDropdowns();
+
+        // Close filter panel
+        const filterBtn   = document.getElementById('filterToggleBtn');
+        const filterPanel = document.getElementById('filterPanel');
+        if (filterBtn && filterPanel &&
+            !filterBtn.contains(e.target) && !filterPanel.contains(e.target)) {
+          filterPanel.classList.remove('active');
+        }
+
+        // Close notification dropdown
+        const notifBtn      = document.getElementById('notifBtn');
+        const notifDropdown = document.getElementById('notifDropdown');
+        if (notifBtn && notifDropdown && !notifBtn.contains(e.target)) {
+          notifDropdown.classList.remove('show');
+        }
+      });
+
+      // Table search with debounce
+      document.getElementById('tableSearch').addEventListener('input', function () {
+        clearTimeout(searchTimeout);
+        const kw = this.value;
+        searchTimeout = setTimeout(() => searchLicenses(kw), 400);
+      });
+
+      // Filter toggle
+      document.getElementById('filterToggleBtn').addEventListener('click', function (e) {
+        e.stopPropagation();
+        document.getElementById('filterPanel').classList.toggle('active');
+      });
+      document.getElementById('filterPanel').addEventListener('click', e => e.stopPropagation());
+      document.getElementById('applyFilterBtn').addEventListener('click', () => applyFilter(0));
+      document.getElementById('clearFilterBtn').addEventListener('click', function () {
+        ['filterStatus', 'filterProduct', 'filterLicType', 'filterExpiryFrom', 'filterExpiryTo']
+          .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        isFiltering = false;
+        loadLicenses(0);
+        document.getElementById('filterPanel').classList.remove('active');
+      });
+
+      // Renew modal
+      document.getElementById('renewCancelBtn').addEventListener('click', () => {
+        document.getElementById('renewModal').classList.remove('show');
+      });
+      document.getElementById('renewSubmitBtn').addEventListener('click', submitRenew);
+      document.getElementById('renewModal').addEventListener('click', function (e) {
+        if (e.target === this) this.classList.remove('show');
+      });
+
+      // View modal close
+      document.getElementById('viewCloseBtn').addEventListener('click', () => {
+        document.getElementById('viewModal').classList.remove('show');
+      });
+      document.getElementById('viewModal').addEventListener('click', function (e) {
+        if (e.target === this) this.classList.remove('show');
+      });
+
+    });
+
+  </script>
+
+
+
+<!-- //Added by harshada -->
+
+ <script>
+const searchBox = document.getElementById("headerSearch");
+const suggestions = document.getElementById("searchSuggestions");
+
+// Search while typing
+searchBox.addEventListener("keyup", function () {
+
+    const keyword = this.value.toLowerCase().trim();
+
+    suggestions.innerHTML = "";
+
+    // Remove highlights if search box is empty
+    if (!keyword) {
+        document.querySelectorAll("#licenseTableBody tr")
+            .forEach(row => row.classList.remove("highlight-row"));
+
+        return;
+    }
+
+    const rows = document.querySelectorAll("#licenseTableBody tr");
+
+    rows.forEach(row => {
+
+        const rowText = row.innerText.toLowerCase();
+
+        if (rowText.includes(keyword)) {
+
+            const item = document.createElement("div");
+
+            item.className = "search-item";
+
+            item.innerText =
+                row.cells[0]?.innerText ||
+                row.innerText.split("\n")[0];
+
+            item.onclick = function () {
+
+                // Remove previous highlights
+                document.querySelectorAll("#licenseTableBody tr")
+                    .forEach(r => r.classList.remove("highlight-row"));
+
+                // Highlight selected row
+                row.classList.add("highlight-row");
+
+                row.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                searchBox.value = item.innerText;
+                suggestions.innerHTML = "";
+            };
+
+            suggestions.appendChild(item);
+        }
+
+    });
+
+});
+
+// Search on Enter key
+searchBox.addEventListener("keydown", function (e) {
+
+    if (e.key === "Enter") {
+
+        const keyword = this.value.toLowerCase().trim();
+
+        // Remove all previous highlights
+        document.querySelectorAll("#licenseTableBody tr")
+            .forEach(row => row.classList.remove("highlight-row"));
+
+        if (!keyword) {
+            suggestions.innerHTML = "";
+            return;
+        }
+
+        const rows = document.querySelectorAll("#licenseTableBody tr");
+
+        rows.forEach(row => {
+
+            if (row.innerText.toLowerCase().includes(keyword)) {
+
+                row.classList.add("highlight-row");
+
+                row.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+
+        });
+
+        suggestions.innerHTML = "";
+    }
+
+});
+
+// Click outside search box
+document.addEventListener("click", function (e) {
+
+    if (
+        !searchBox.contains(e.target) &&
+        !suggestions.contains(e.target)
+    ) {
+
+        // Hide suggestions
+        suggestions.innerHTML = "";
+
+        // Remove all highlights
+        document.querySelectorAll("#licenseTableBody tr")
+            .forEach(row => row.classList.remove("highlight-row"));
+
+    }
+
+});
+// popup model
+const popup = document.getElementById("generateLicenseModal");
+
+document
+.getElementById("openGenerateLicenseModal")
+.addEventListener("click", function () {
+    popup.classList.add("show");
+    document.body.style.overflow = "hidden";
+});
+
+document
+.getElementById("closeGenerateLicenseModal")
+.addEventListener("click", function () {
+    popup.classList.remove("show");
+    document.body.style.overflow = "auto";
+});
+
+popup.addEventListener("click", function(e){
+    if(e.target === popup){
+        popup.classList.remove("show");
+        document.body.style.overflow = "auto";
+    }
+});
+</script>
+</body>
+</html>

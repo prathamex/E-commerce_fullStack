@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase</title>
+  <!-- pratik -->
+  <script src="/js/profile.js"></script>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Oswald and Lato -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@200;400&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --bg-dark: #0A2540;
+      --primary-blue: #0796FE;
+      --sub-text: #797979;
+      --white: #FFFFFF;
+      --light-bg: #F0F2F5;
+      --table-header: #E9F1F9;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color:#ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sidebar Style */
+    .sidebar {
+      background-color: var(--bg-dark);
+      min-height: 100vh;
+      color: var(--white);
+      position: fixed;
+      width: 240px;
+      z-index: 1000;
+    }
+
+    .sidebar .logo-area {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 160px;
+      height: auto;
+    }
+
+    .sidebar a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      transition: 0.3s;
+      margin: 5px 10px;
+      border-radius: 5px;
+      border-left: 5px solid transparent;
+    }
+
+
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--primary-blue);
+      border-left: 5px solid var(--primary-blue);
+    }
+
+    .menu-icon.blue {
+      display: none;
+    }
+
+    .sidebar i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .sidebar a:hover i,
+    .sidebar a.active i {
+      color: var(--primary-blue);
+    }
+
+    .toggle-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      margin-left: -15px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* EXACT HEADER STYLE */
+    .top-header {
+      background: #FFFFFF;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      border-bottom: 1px solid #E0E0E0;
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      z-index: 999;
+    }
+
+    .search-bar {
+      background: #F8F9FA;
+      border: 1px solid #E9E9E9;
+      border-radius: 8px;
+      padding: 8px 15px;
+      width: 450px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar i {
+      color: #A0A0A0;
+      margin-right: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+
+    .notification-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      color: var(--sub-text);
+      font-size: 20px;
+    }
+
+    .notification-btn .noti-text {
+      font-size: 10px;
+      margin-top: 2px;
+      color: var(--sub-text);
+    }
+
+    .notification-btn .bell-icon-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notification-btn .badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      left: auto;
+      transform: none;
+
+      background: #EF4444;
+      color: white;
+      font-size: 9px;
+      line-height: 1;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      background: #0F477C;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .content-body {
+      padding: 30px;
+      padding-top: 85px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .dashboard-title h2 {
+      font-family: 'lato', sans-serif;
+      font-weight: 400;
+      font-size: 35px;
+      margin-bottom: 5px;
+    }
+
+    .dashboard-title p {
+      color: var(--sub-text);
+      font-size: 16px;
+    }
+
+
+    /* Stats Cards */
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 12px 14px;
+    box-shadow: none;
+    min-height: 95px;
+}
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* icon */
+    .icon-box {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-text h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: #0A2540;
+    }
+
+    .stat-text p {
+      margin: 2px 0 0;
+      font-size: 16px;
+      color: #0A2540;
+    }
+
+    .sidebar a:hover .menu-icon.grey {
+      display: none;
+    }
+
+    .sidebar a:hover .menu-icon.blue {
+      display: inline;
+    }
+
+    .sidebar a.active .menu-icon.grey {
+      display: none;
+    }
+
+    .sidebar a.active .menu-icon.blue {
+      display: inline;
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-text h2 {
+        font-size: 20px;
+      }
+
+      .stat-text p {
+        font-size: 13px;
+      }
+    }
+
+    /* icon styles */
+
+
+    .icon-box img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .icon-box.blue {
+      background: #E7F1FF;
+      color: #0d6efd;
+    }
+
+    .icon-box.purple {
+      background: #F3E8FF;
+      color: #9333ea;
+    }
+
+    .icon-box.orange {
+      background: #FFF3E6;
+      color: #f59e0b;
+    }
+
+    .icon-box.green {
+      background: #E6F9F0;
+      color: #10b981;
+    }
+
+
+
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        left: -240px;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+      }
+
+      .top-header {
+        left: 0 !important;
+      }
+
+      .search-bar {
+        width: 150px;
+      }
+
+      .notification-btn .noti-text {
+        display: none;
+      }
+    }
+
+
+
+
+
+    @media (min-width: 992px) {
+      .search-bar {
+        width: 450px;
+      }
+    }
+
+
+
+    /* Mobile only wrap */
+    @media (max-width: 576px) {
+      .stat-card {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Tablet + Desktop */
+    @media (min-width: 577px) {
+      .stat-card {
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+    }
+
+
+
+
+
+
+    /* --- Purchase Main Section Styles --- */
+    .purchase-body-container {
+      padding: 30px;
+      margin-top: 70px;
+      /* Offset for fixed header */
+    }
+
+    .content-box {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      box-shadow: 0 10px 24px rgba(15, 41, 86, 0.06);
+      padding: 20px;
+      margin-bottom: 0 !important
+    }
+
+    /* Header & Title */
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .page-heading {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    /* Action Bar (Search + Filter) */
+    .action-bar {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .inner-search {
+      background: #FFFFFF;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 15px;
+      width: 280px;
+      display: flex;
+      align-items: center;
+    }
+
+    .inner-search i {
+      color: #94a3b8;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .inner-search input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    /* Wrapper */
+    .filter-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Button */
+    .filter-btn {
+      background: var(--primary-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* Wrapper */
+    .filter-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Button */
+    .filter-btn {
+      background: var(--primary-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* DROPDOWN PANEL (SMALL + TIGHT) */
+    .filter-panel {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      width: 240px;
+      /* smaller */
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      display: none;
+      z-index: 9999;
+    }
+
+    /* Show */
+    .filter-panel.active {
+      display: block;
+    }
+
+    /* Header */
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .filter-header h4 {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .clear-btn {
+      font-size: 12px;
+      color: #0d6efd;
+      cursor: pointer;
+    }
+
+    /* Form */
+    .filter-group {
+      margin-bottom: 10px;
+    }
+
+    .filter-group label {
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 12px;
+    }
+
+    /* Date icon */
+    .input-box {
+      position: relative;
+    }
+
+    .input-box i {
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+    }
+
+    .input-box input {
+      padding-left: 24px;
+    }
+
+    /* Button */
+    .apply-btn {
+      width: 100%;
+      padding: 8px;
+      font-size: 13px;
+      background: #1e88e5;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    /* ✅ MOBILE FIX (REAL DROPDOWN, NOT FULL WIDTH) */
+    @media (max-width: 768px) {
+
+      .filter-panel {
+        position: absolute;
+        /* keep dropdown behavior */
+        top: 40px;
+        right: 0;
+        left: auto;
+        /* prevent stretching */
+        width: 220px;
+        /* smaller on mobile */
+        border-radius: 8px;
+      }
+
+    }
+
+    /* EXTRA SMALL DEVICES */
+    @media (max-width: 480px) {
+
+      .filter-panel {
+        width: 200px;
+        /* tighter */
+        padding: 12px;
+      }
+
+    }
+
+    /* Table Container Card */
+    .table-card {
+      background: #FFFFFF;
+      border-radius: 0px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Table Design */
+    .table thead th {
+      background-color: var(--table-header);
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 15px 20px;
+      border-bottom: none;
+      white-space: nowrap;
+    }
+
+    .table tbody td {
+      padding: 15px 20px;
+      color: #334155;
+      font-size: 14px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .order-id {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Product Info Cell */
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .product-cell img {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .product-cell span {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    /* Status Badges */
+    .status-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-badge.completed {
+      background-color: #DBF7EB;
+      color: #0F9F71;
+    }
+
+    .status-badge.processing {
+      background-color: #F1F2F6;
+      color: #6F7F9A;
+    }
+
+    .action-dots {
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 991px) {
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .top-header {
+        left: 0;
+      }
+
+      .inner-search {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .purchase-body-container {
+        padding: 15px;
+      }
+
+      .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .action-bar {
+        width: 100%;
+      }
+
+      .inner-search {
+        flex: 1;
+      }
+    }
+
+
+
+
+
+    .action-menu {
+      display: none;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .action-menu a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .action-menu a:hover {
+      background: #f0f0f0;
+    }
+
+    /* Pagination */
+    /* Base */
+body {
+  font-family: 'lato', sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Container */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  padding: 20px 40px;
+  
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  
+}
+ 
+
+
+
+  /* =====Rahul's code NEW NOTIFICATION CSS  ===== */
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -10px;
+  width: 340px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+  border: 1px solid #e5e7eb;
+  z-index: 9999;
+  overflow: hidden;
+}
+.notif-dropdown.show { display: block; }
+
+.notif-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.notif-dropdown-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0A2540;
+}
+.notif-mark-all {
+  font-size: 12px;
+  color: #0796FE;
+  cursor: pointer;
+}
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+.notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-items: center;
+}
+.notif-item:hover { background: #f8fafc; }
+.notif-item.unread { background: #EFF6FF; }
+.notif-item.unread:hover { background: #dbeafe; }
+
+.notif-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #E7F1FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0796FE;
+  font-size: 14px;
+}
+.notif-content {
+  flex: 1;
+  min-width: 0;
+}
+.notif-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-message {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-time { font-size: 11px; color: #94a3b8; }
+
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: #0796FE;
+}
+.notif-loading, .notif-empty {
+  text-align: center;
+  padding: 30px 16px;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.notif-dropdown-footer {
+  padding: 10px 16px;
+  text-align: center;
+  border-top: 1px solid #f1f5f9;
+}
+.notif-dropdown-footer a {
+  font-size: 13px;
+  color: #0796FE;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+
+/* mahesh changes */
+
+/* ─────────────── CONTENT ─────────────── */
+
+.content{
+    padding:20px;
+    margin-top:70px;
+    
+}
+
+.page-title{
+    display:block !important;
+    font-size:28px;
+    color:#16365d;
+    font-weight:400;
+    margin-bottom:8px;
+}
+
+.page-sub{
+    display:block !important;
+    font-size:14px;
+    color:#797979;
+    margin-bottom:15px;
+}
+  /* ─────────────── STAT CARDS ─────────────── */
+  .stat-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+    margin-bottom: 10px;
+  }
+
+  /* .stat-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 14px 16px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.07);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  } */
+
+.stat-card-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+
+  .stat-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .stat-icon svg { width: 18px; height: 18px; }
+
+  .stat-icon.teal   { background: #e5f9f3; color: #0dba8c; }
+  .stat-icon.blue   { background: #e7f1ff; color: #3b9eff; }
+  .stat-icon.purple { background: #ede8ff; color: #8b65f5; }
+  .stat-icon.orange { background: #fff4e3; color: #f0a030; }
+
+.stat-label {
+    font-size: 18px;
+    color: #16365d;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #16365d;
+    margin-top: 8px;
+    padding-left: 0;
+}
+
+  /* ─────────────── CARDS ─────────────── */
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 20px;
+   background:#fff !important;
+      border-bottom:1px solid #e5e7eb !important;
+}
+
+.card-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:500;
+    color:#000;
+}
+
+.card-header a{
+    font-size:14px;
+    color:#0d6efd;
+    text-decoration:none;
+}
+
+  /* ─────────────── TWO-COL ROW ─────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  /* ─────────────── PURCHASED PRODUCTS ─────────────── */
+.prod-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:0 24px;
+    min-height:78px;
+    background:#fff;
+    position:relative;
+}
+
+.prod-row::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:1px;
+    background:#e5e7eb;
+}
+
+.prod-row:last-child::after{
+    display:none;
+}
+
+.prod-row:last-child{
+    border-bottom:none;
+}
+
+
+
+.prod-info{
+    flex:1;
+    padding-right:15px;
+}
+
+.prod-name{
+    font-size:14px;
+    font-weight:500;
+    color:#16365d;
+    margin-bottom:2px;
+}
+
+.prod-ver{
+    font-size:12px;
+    color:#8b8b8b;
+}
+  .btn-dl {
+    border: 1.5px solid #3b9eff;
+    background: none;
+    color: #3b9eff;
+    border-radius: 5px;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background .15s, color .15s;
+  }
+  .btn-dl:hover { background: #3b9eff; color: #fff; }
+
+  /* ─────────────── RECENT DOWNLOADS ─────────────── */
+/* .dl-row{
+    display:grid;
+    grid-template-columns: 1fr 120px 70px 30px;
+    align-items:center;
+    height:68px;
+    padding:0 16px;
+    border-bottom:1px solid #e5e7eb;
+    background:#fff;
+} */
+/* .card{
+    background:#fff;
+    border:1px solid #dcdcdc;
+    border-radius:4px;
+    overflow:hidden;
+} */
+ 
+ .dl-row{
+    display:grid;
+    grid-template-columns: 1fr 120px 70px 30px;
+    align-items:center;
+    height:78px;
+    padding:0 16px;
+    background:#fff;
+    position:relative;
+}
+
+.dl-row::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:1px;
+    background:#e5e7eb;
+}
+
+.dl-row:last-child::after{
+    display:none;
+}
+
+.dl-name{
+    flex:1;
+    font-size:13px;
+    color:#16365d;
+    font-weight:500;
+}
+
+.dl-date{
+    min-width:100px;
+    text-align:center;
+    font-size:13px;
+    color:#8b8b8b;
+}
+
+.dl-ver{
+    min-width:60px;
+    text-align:center;
+    font-size:13px;
+    font-weight:500;
+    color:#22c55e;
+}
+
+.dl-icon-btn{
+    width:24px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:10px;
+    color:#3b82f6;
+}
+
+ 
+  .dl-name  { flex: 1; font-size: 12.5px; font-weight: 500; color: #1b2036; }
+  .dl-date  { font-size: 11px; color: #9aa0b4; min-width: 78px; text-align: right; }
+  .dl-ver   { font-size: 11.5px; font-weight: 700; min-width: 40px; text-align: right; }
+  .dl-ver.g { color: #0dba8c; }
+  .dl-ver.p { color: #8b65f5; }
+  .dl-ver.b { color: #3b9eff; }
+
+  .dl-icon-btn {
+    color: #3b9eff;
+    cursor: pointer;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+  }
+  .dl-icon-btn svg { width: 15px; height: 15px; }
+
+  /* ─────────────── BOTTOM GRID ─────────────── */
+ .bottom-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px; /* madhla gap kami */
+    margin-top:15px;
+}
+.bottom-grid table tbody tr{
+    height:68px;
+}
+
+.bottom-grid table tbody td{
+    height:68px;
+    vertical-align:middle;
+}
+  /* ─────────────── TABLES ─────────────── */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#E1F2FF;
+}
+
+thead th{
+    padding:10px 8px;
+    font-size:12px;
+    font-weight:500;
+    color:#3C4452;
+    text-align:left;
+}
+
+tbody td{
+    padding:14px 8px;
+    border-bottom:1px solid #e5e7eb;
+    font-size:13px;
+    color:#23395d;
+    vertical-align:middle;
+}
+
+  tbody tr{
+    background:#ffffff;
+}
+
+tbody td{
+    background:#ffffff;
+}
+  tbody tr:last-child { border-bottom: none; }
+  
+
+  /* license key monospace style */
+  
+.lkey{
+    color:#8f96a3;
+    font-size:11px;
+}
+  
+.badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:74px;
+    height:20px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.badge.active{
+    background:#cfeedd;
+    color:#009966;
+}
+
+.badge.expired{
+    background:#f7d9d9;
+    color:#e74c3c;
+}
+  
+  .badge.inactive { background: #f3f4f8; color: #9aa0b4; }
+
+
+  /* invoice amount */
+  /* Invoices Table Fix */
+.card:last-child table{
+    width:100%;
+    table-layout:fixed;
+}
+
+.card:last-child th:nth-child(1),
+.card:last-child td:nth-child(1){
+    width:28%;
+}
+
+.card:last-child th:nth-child(2),
+.card:last-child td:nth-child(2){
+    width:22%;
+}
+
+.card:last-child th:nth-child(3),
+.card:last-child td:nth-child(3){
+    width:30%;
+    text-align:center !important;
+}
+
+.card:last-child th:nth-child(4),
+.card:last-child td:nth-child(4){
+    width:20%;
+    text-align:center !important;
+}
+
+
+
+.card:last-child table th,
+.card:last-child table td{
+    padding-left:8px;
+    padding-right:8px;
+}
+  .inv-amt { font-weight: 600; color: #1b2036; }
+
+  .pdf-icon{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#e74c3c;
+}
+
+.pdf-icon svg{
+    width:16px;
+    height:16px;
+}
+  
+
+  /* ─────────────── SCROLLBAR ─────────────── */
+  .content::-webkit-scrollbar { width: 5px; }
+  .content::-webkit-scrollbar-track { background: transparent; }
+  .content::-webkit-scrollbar-thumb { background: #d0d5e8; border-radius: 4px; }
+
+/* Purchased Products */
+.prod-row{
+    background:#ffffff !important;
+}
+
+/* Recent Downloads */
+
+
+/* Licenses Table */
+.bottom-grid table tbody tr{
+    background:#ffffff !important;
+}
+
+/* Invoices Table */
+.bottom-grid table tbody td{
+    background:#ffffff !important;
+}
+
+/* ================= RESPONSIVE FIX ================= */
+
+@media (max-width: 992px){
+
+  .stat-cards{
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .two-col,
+  .bottom-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .search-bar{
+    width:100%;
+    max-width:250px;
+  }
+
+  .content{
+    padding:15px;
+  }
+
+}
+
+/* Mobile */
+@media (max-width: 768px){
+
+  .top-header{
+    padding:0 15px;
+  }
+
+  .header-right{
+    gap:12px;
+  }
+
+  .search-bar{
+    max-width:180px;
+  }
+
+  .stat-cards{
+    grid-template-columns:1fr;
+  }
+
+  .page-title{
+    font-size:24px;
+  }
+
+  .page-sub{
+    font-size:13px;
+  }
+
+  .prod-row{
+    padding:12px;
+    gap:10px;
+  }
+
+  .prod-name{
+    font-size:13px;
+  }
+
+  .btn-dl{
+    padding:4px 8px;
+    font-size:10px;
+  }
+
+  .dl-row{
+    grid-template-columns: 1fr 80px 55px 25px;
+    padding:0 10px;
+    font-size:12px;
+  }
+
+  .dl-name{
+    font-size:12px;
+  }
+
+  .dl-date,
+  .dl-ver{
+    font-size:11px;
+  }
+
+  .card{
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:650px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px){
+
+  /* .search-bar{
+    display:none;
+  } */
+
+  .content{
+    padding:10px;
+  }
+
+  .page-title{
+    font-size:22px;
+  }
+
+  .stat-value{
+    font-size:20px;
+  }
+
+  .card-header{
+    padding:10px 12px;
+  }
+
+  .card-header h3{
+    font-size:16px;
+  }
+
+  .prod-row{
+    flex-wrap:wrap;
+  }
+
+  .btn-dl{
+    width:100%;
+    margin-top:8px;
+  }
+}
+.prod-img{
+  width:50px;
+  height:50px;
+  border-radius:6px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.prod-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+svg{
+  width:20px;
+  height:24px;
+}
+
+/* Ganesh added for profile dropdown */
+.profile-wrapper{
+    position: relative;
+}
+
+.profile-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+#profileName{
+    color:#16365d;
+    font-size:14px;
+    font-weight:400;
+    font-family:'Lato', sans-serif;
+}
+
+.profile-dropdown{
+    display:none;
+    position:absolute;
+    top:calc(100% + 8px);
+    right:0;
+    min-width:180px;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+    z-index:9999;
+}
+
+.profile-dropdown.show{
+    display:block;
+}
+
+.profile-dropdown a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 15px;
+    text-decoration:none;
+    color:#333;
+}
+
+.profile-dropdown a:hover{
+    background:#f5f5f5;
+}
+
+/* mahesh code landspace */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar .logo-area {
+    padding: 15px 20px;
+  }
+
+  .sidebar a {
+    padding: 10px 20px;
+  }
+}
+
+/* mahesh code notificaton responsive */
+@media (max-width: 768px){
+
+    .header-right{
+        gap: 12px;
+    }
+
+    .notification-btn{
+        font-size: 18px;
+        position: relative;
+    }
+
+    .notif-dropdown{
+        width: min(280px, calc(100vw - 20px));
+        right: -24px;
+        left: auto;
+    }
+}
+
+  </style>
+</head>
+<script src="/js/userauth-protect.js"></script>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+      <div class="logo-area">
+  <img
+    src="./img/creativesweb.png"
+    alt="Logo"
+    class="logo-img"
+    onclick="window.location.href='index.html';"
+    style="cursor:pointer;"
+  />
+</div>
+   <nav class="sidebar-nav">
+    
+    <a href="#" class="active">
+        <i class="fa-solid fa-house"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="myproducts.html">
+        <i class="fa-solid fa-cubes"></i>
+        <span>My Products</span>
+    </a>
+
+    <a href="">
+        <i class="fa-regular fa-id-card"></i>
+        <span>Licenses</span>
+    </a>
+
+  
+
+    <a href="">
+        <i class="fa-regular fa-file-lines"></i>
+        <span>Billing</span>
+    </a>
+
+   
+
+    <a href="">
+        <i class="fa-solid fa-gear"></i>
+        <span>Setting</span>
+    </a>
+
+</nav>
+  </div>
+
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+
+    <div class="top-header">
+      <div class="d-flex align-items-center">
+        <button class="btn d-lg-none me-2 toggle-btn" id="sidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      <!-- //Added by harshada -->
+        <div class="search-bar">
+          <i class="fa fa-search"></i>
+    
+        <div class="search-wrapper">
+ <input type="text" id="globalSearch" placeholder="Search...">
+    <div id="suggestions"></div>
+</div>
+        </div>
+      </div>
+      <div class="header-right">
+
+       
+
+        <!--Rahul's Code for NOTIFICATION  -->
+<div class="notification-btn" id="notifBtn" onclick="toggleNotifDropdown(event)">
+  <span class="bell-icon-wrap">
+    <i class="fa-regular fa-bell"></i>
+    <span class="badge" id="notifBadge" style="display:none;">0</span>
+  </span>
+  <small class="noti-text">Notification</small>
+
+  <div class="notif-dropdown" id="notifDropdown" onclick="event.stopPropagation()">
+    <div class="notif-dropdown-header">
+      <span class="notif-dropdown-title">Notifications</span>
+      <span class="notif-mark-all" onclick="markAllRead()">Mark all as read</span>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-loading">Loading...</div>
+    </div>
+    <div class="notif-dropdown-footer">
+      <a href="#" onclick="loadAllNotifications(); return false;">View all notifications</a>
+    </div>
+  </div>
+</div>
+        <!-- <div class="user-avatar" id="userAvatar"></div> -->
+
+        <div class="profile-wrapper" id="profileContainer">
+
+    <div class="profile-info" id="profileBtn">
+        <div class="user-avatar" id="profileInitials"></div>
+
+        <!-- <span id="profileName"></span> -->
+
+        <!-- <i class="fa-solid fa-chevron-down"></i> -->
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <!-- <a href="user-dashboard.html">
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+        </a> -->
+
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+
+</div>
+      </div>
+    </div>
+
+
+<!-- DASHBOARD -->
+
+ <div class="content">
+
+    <div class="page-title">Dashboard</div>
+    <div class="page-sub">Welcome back, your portfolio is performing well this week.</div>
+
+    <!-- STAT CARDS -->
+    <div class="stat-cards">
+
+      <!-- Purchased Products -->
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+          </div>
+          <div class="stat-label">Purchased Products</div>
+        </div>
+        <div class="stat-value" id="statPurchasedProducts">--</div>
+      </div>
+
+      <!-- Recent Downloads -->
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </div>
+          <div class="stat-label">Recent Downloads</div>
+        </div>
+        <div class="stat-value" id="statRecentDownloads">--</div>
+      </div>
+
+      <!-- Active Licenses -->
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <div class="stat-label">Active Licenses</div>
+        </div>
+        <div class="stat-value" id="statActiveLicenses">--</div>
+      </div>
+
+      <!-- Total Orders -->
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div class="stat-label">Total Orders</div>
+        </div>
+        <div class="stat-value" id="statTotalOrders">--</div>
+      </div>
+
+    </div><!-- /stat-cards -->
+
+    <!-- PURCHASED PRODUCTS + RECENT DOWNLOADS -->
+    <div class="two-col">
+
+      <!-- Purchased Products -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Purchased Products</h3>
+          <a href="#">View All</a>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img c1">
+            <img src="img/logo_1.png">
+          </div>
+          <div class="prod-info">
+            <div class="prod-name">Stock Management System</div>
+            <div class="prod-ver">Version 2.1.0</div>
+          </div>
+          <button class="btn-dl">Download</button>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img c2">
+           <img src="img/logo_2.png">
+          </div>
+          <div class="prod-info">
+            <div class="prod-name">Employee Management System</div>
+            <div class="prod-ver">Version 1.4.3</div>
+          </div>
+          <button class="btn-dl">Download</button>
+        </div>
+
+        <div class="prod-row">
+          <div class="prod-img c3">
+            <img src="img/logo_3.png">
+          </div>
+          <div class="prod-info">
+            <div class="prod-name">Task Management System</div>
+            <div class="prod-ver">Version 3.0.2</div>
+          </div>
+          <button class="btn-dl">Download</button>
+        </div>
+      </div>
+
+      <!-- Recent Downloads -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Recent Downloads</h3>
+          <a href="#">View All</a>
+        </div>
+
+        <div class="dl-row">
+          <span class="dl-name">Stock Management System</span>
+          <span class="dl-date">09 May 2026</span>
+          <span class="dl-ver g">v2.1.0</span>
+          <span class="dl-icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="dl-row">
+          <span class="dl-name">Employee Management System</span>
+          <span class="dl-date">09 May 2026</span>
+          <span class="dl-ver p">v1.4.3</span>
+          <span class="dl-icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="dl-row">
+          <span class="dl-name">Task Management System</span>
+          <span class="dl-date">09 May 2026</span>
+          <span class="dl-ver b">v3.0.2</span>
+          <span class="dl-icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+    </div><!-- /two-col -->
+
+    <!-- LICENSES + INVOICES -->
+    <div class="bottom-grid">
+
+      <!-- Licenses -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Licenses</h3>
+          <a href="#">Manage All</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>License Key</th>
+              <th>Status</th>
+              <th>Expiry Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Stock Management System</td>
+              <td><span class="lkey">EMS-AX7B-9KZL-F8Q1</span></td>
+              <td><span class="badge active">Active</span></td>
+              <td>09 May 2027</td>
+            </tr>
+            <tr>
+              <td>Employee Management<br>System</td>
+              <td><span class="lkey">EMS-AX7B-9KZL-F8Q1</span></td>
+              <td><span class="badge active">Active</span></td>
+              <td>07 May 2027</td>
+            </tr>
+            <tr>
+              <td>Task Management<br>System</td>
+              <td><span class="lkey">EMS-AX7B-9KZL-F8Q1</span></td>
+              <td><span class="badge active">Active</span></td>
+              <td>08 May 2027</td>
+            </tr>
+            <tr>
+              <td>Car Rental Service<br>Website</td>
+              <td><span class="lkey">EMS-AX7B-9KZL-F8Q1</span></td>
+              <td><span class="badge expired">Inactive</span></td>
+              <td><span class="badge expired">Expired</span></td>
+            </tr>
+            <tr>
+              <td>Hostel Management<br>System</td>
+              <td><span class="lkey">EMS-AX7B-9KZL-F8Q1</span></td>
+              <td><span class="badge active">Active</span></td>
+              <td>10 May 2027</td>
+            </tr>
+            <tr>
+              <td>E-commerce Fashion<br>Website</td>
+              <td><span class="lkey">EMS-AX7B-9KZL-F8Q1</span></td>
+              <td><span class="badge active">Active</span></td>
+              <td>04 May 2027</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Invoices -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Invoices</h3>
+          <a href="#">View All</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Invoice #</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INV-1004</td>
+              <td style="color:#9aa0b4;font-size:11px">06 May 2026</td>
+              <td style="text-align:right" class="inv-amt">₹3,599</td>
+              <td style="text-align:center">
+              <svg width="22" height="26" viewBox="0 0 24 28">
+              <!-- Page -->
+              <path d="M4 1h11l5 5v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                    fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+
+              <!-- Fold -->
+              <path d="M15 1v5h5z" fill="#ff6b57"/>
+
+              <!-- PDF Label -->
+              <rect x="2.5" y="14.5" width="19" height="6.5" rx="1"
+                    fill="#f15a4a"/>
+
+              <text x="12" y="19.2"
+                    text-anchor="middle"
+                    font-size="4.5"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                    fill="#fff">PDF</text>
+              </svg>
+              </td>
+            </tr>
+            <tr>
+              <td>INV-1004</td>
+              <td style="color:#9aa0b4;font-size:11px">06 May 2026</td>
+              <td style="text-align:right" class="inv-amt">₹3,599</td>
+              <td style="text-align:center">
+                    <svg width="22" height="26" viewBox="0 0 24 28">
+                <!-- Page -->
+                <path d="M4 1h11l5 5v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                      fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+
+                <!-- Fold -->
+                <path d="M15 1v5h5z" fill="#ff6b57"/>
+
+                <!-- PDF Label -->
+                <rect x="2.5" y="14.5" width="19" height="6.5" rx="1"
+                      fill="#f15a4a"/>
+
+                <text x="12" y="19.2"
+                      text-anchor="middle"
+                      font-size="4.5"
+                      font-family="Arial, sans-serif"
+                      font-weight="700"
+                      fill="#fff">PDF</text>
+              </svg>
+              </td>
+            </tr>
+            <tr>
+              <td>INV-1006</td>
+              <td style="color:#9aa0b4;font-size:11px">09 May 2026</td>
+              <td style="text-align:right" class="inv-amt">₹4,999</td>
+              <td style="text-align:center">
+              <svg width="22" height="26" viewBox="0 0 24 28">
+                  <!-- Page -->
+                  <path d="M4 1h11l5 5v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                        fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+
+                  <!-- Fold -->
+                  <path d="M15 1v5h5z" fill="#ff6b57"/>
+
+                  <!-- PDF Label -->
+                  <rect x="2.5" y="14.5" width="19" height="6.5" rx="1"
+                        fill="#f15a4a"/>
+
+                  <text x="12" y="19.2"
+                        text-anchor="middle"
+                        font-size="4.5"
+                        font-family="Arial, sans-serif"
+                        font-weight="700"
+                        fill="#fff">PDF</text>
+                </svg>
+                </td>
+                </tr>
+            <tr>
+              <td>INV-1005</td>
+              <td style="color:#9aa0b4;font-size:11px">07 May 2026</td>
+              <td style="text-align:right" class="inv-amt">₹7,999</td>
+              <td style="text-align:center">
+             <svg width="22" height="26" viewBox="0 0 24 28">
+                    <!-- Page -->
+                    <path d="M4 1h11l5 5v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                          fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+
+                    <!-- Fold -->
+                    <path d="M15 1v5h5z" fill="#ff6b57"/>
+
+                    <!-- PDF Label -->
+                    <rect x="2.5" y="14.5" width="19" height="6.5" rx="1"
+                          fill="#f15a4a"/>
+
+                    <text x="12" y="19.2"
+                          text-anchor="middle"
+                          font-size="4.5"
+                          font-family="Arial, sans-serif"
+                          font-weight="700"
+                          fill="#fff">PDF</text>
+                  </svg>
+              </td>
+              </tr>
+            <tr>
+              <td>INV-1004</td>
+              <td style="color:#9aa0b4;font-size:11px">06 May 2026</td>
+              <td style="text-align:right" class="inv-amt">₹6,599</td>
+              <td style="text-align:center">
+                                  <svg width="22" height="26" viewBox="0 0 24 28">
+                <!-- Page -->
+                <path d="M4 1h11l5 5v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                      fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+
+                <!-- Fold -->
+                <path d="M15 1v5h5z" fill="#ff6b57"/>
+
+                <!-- PDF Label -->
+                <rect x="2.5" y="14.5" width="19" height="6.5" rx="1"
+                      fill="#f15a4a"/>
+
+                <text x="12" y="19.2"
+                      text-anchor="middle"
+                      font-size="4.5"
+                      font-family="Arial, sans-serif"
+                      font-weight="700"
+                      fill="#fff">PDF</text>
+              </svg>
+              </td>
+              </tr>
+            <tr>
+              <td>INV-1007</td>
+              <td style="color:#9aa0b4;font-size:11px">06 May 2026</td>
+              <td style="text-align:right" class="inv-amt">₹1,459</td>
+              <td style="text-align:center">
+                                  <svg width="22" height="26" viewBox="0 0 24 28">
+              <!-- Page -->
+              <path d="M4 1h11l5 5v19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                    fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+
+              <!-- Fold -->
+              <path d="M15 1v5h5z" fill="#ff6b57"/>
+
+              <!-- PDF Label -->
+              <rect x="2.5" y="14.5" width="19" height="6.5" rx="1"
+                    fill="#f15a4a"/>
+
+              <text x="12" y="19.2"
+                    text-anchor="middle"
+                    font-size="4.5"
+                    font-family="Arial, sans-serif"
+                    font-weight="700"
+                    fill="#fff">PDF</text>
+            </svg>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /bottom-grid -->
+
+  </div>
+       
+
+    
+
+
+
+    <!-- Footer -->
+                <!-- <div class="text-center mt-3" style="font-size: 14px; color:#797979;">
+                    Copyright © 2025 - 2026 <span style="color: #092a09; font-weight: 500;"> Creative Web Solution.</span>
+                    ALL RIGHTS RESERVED
+                </div> -->
+
+
+
+
+
+
+  
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        if (sidebarToggle) {
+          sidebarToggle.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+          });
+        }
+
+        document.addEventListener('click', function (event) {
+          const isClickInsideSidebar = sidebar.contains(event.target);
+          const isClickInsideButton = sidebarToggle.contains(event.target);
+
+          if (!isClickInsideSidebar && !isClickInsideButton && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+          }
+        });
+      });
+    </script>
+
+    <!-- ===== Dashboard summary (stat cards) ===== -->
+    <script>
+async function loadDashboardSummary() {
+  const els = {
+    purchasedProducts: document.getElementById('statPurchasedProducts'),
+    recentDownloads: document.getElementById('statRecentDownloads'),
+    activeLicenses: document.getElementById('statActiveLicenses'),
+    totalOrders: document.getElementById('statTotalOrders')
+  };
+
+  try {
+    const res = await fetch(getBase() + '/user/dashboard/summary', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Dashboard summary request failed: ' + res.status);
+
+    const data = await res.json();
+    if (!data.success || !data.data) throw new Error('Dashboard summary: bad payload');
+
+    const summary = data.data;
+    els.purchasedProducts.textContent = summary.purchasedProducts ?? 0;
+    els.recentDownloads.textContent = summary.recentDownloads ?? 0;
+    els.activeLicenses.textContent = summary.activeLicenses ?? 0;
+    els.totalOrders.textContent = summary.totalOrders ?? 0;
+  } catch (err) {
+    console.error('Dashboard summary error:', err);
+    Object.values(els).forEach(function (el) { el.textContent = '0'; });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadDashboardSummary);
+    </script>
+
+    <!-- ===== Notification implementation (fixed: single copy, includes escapeHtml) ===== -->
+    <script>
+function getBase() {
+  return window.API_BASE_URL || 'http://127.0.0.1:8081';
+}
+
+function getAuthHeaders() {
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  };
+}
+
+async function loadNotifCount() {
+  try {
+    const res = await fetch(getBase() + '/notifications/unread/count', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const count = data.data;
+    const badge = document.getElementById('notifBadge');
+    if (count > 0) {
+      const NOTIF_BADGE_MAX = 99;
+      badge.textContent = count > NOTIF_BADGE_MAX ? NOTIF_BADGE_MAX + '+' : count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (err) {
+    console.error('Notif count error:', err);
+  }
+}
+
+function toggleNotifDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById('notifDropdown');
+  const isOpen = dropdown.classList.contains('show');
+  dropdown.classList.toggle('show', !isOpen);
+  if (!isOpen) loadUnreadNotifications();
+}
+
+document.addEventListener('click', function (e) {
+  const btn = document.getElementById('notifBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  if (btn && dropdown && !btn.contains(e.target)) {
+    dropdown.classList.remove('show');
+  }
+});
+
+async function loadUnreadNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+  try {
+    const res = await fetch(getBase() + '/notifications/unread', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    renderNotifItems(data.data || []);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>Could not load notifications.</div>';
+  }
+}
+
+async function loadAllNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading all...</div>';
+  try {
+    const NOTIF_PAGE_SIZE = 20;
+    const res = await fetch(getBase() + '/notifications?page=0&size=' + NOTIF_PAGE_SIZE, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    const items = (data.data && data.data.content) ? data.data.content : [];
+    renderNotifItems(items);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty">Could not load notifications.</div>';
+  }
+}
+
+function getNotifIcon(type) {
+  var map = {
+    'ORDER':   'fa-solid fa-cart-shopping',
+    'PAYMENT': 'fa-solid fa-credit-card',
+    'PRODUCT': 'fa-solid fa-box',
+    'LICENSE': 'fa-solid fa-id-card',
+    'SYSTEM':  'fa-solid fa-gear'
+  };
+  return map[type] || 'fa-solid fa-bell';
+}
+
+function renderNotifItems(notifications) {
+  const list = document.getElementById('notifList');
+  if (!notifications.length) {
+    list.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No new notifications</div>';
+    return;
+  }
+  list.innerHTML = notifications.map(function (n) {
+    return '<div class="notif-item ' + (n.isRead ? '' : 'unread') + '" data-id="' + n.id + '" onclick="markAsRead(' + n.id + ', this)">'
+      + '<div class="notif-icon"><i class="' + getNotifIcon(n.type) + '"></i></div>'
+      + '<div class="notif-content">'
+      + '<div class="notif-title">' + escapeHtml(n.title) + '</div>'
+      + '<div class="notif-message">' + escapeHtml(n.message) + '</div>'
+      + '<div class="notif-time">' + formatNotifTime(n.createdAt) + '</div>'
+      + '</div>'
+      + (!n.isRead ? '<div class="notif-dot"></div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+async function markAsRead(notificationId, element) {
+  try {
+    if (!notificationId) { console.error('markAsRead: missing id'); return; }
+    const res = await fetch(getBase() + '/notifications/' + notificationId + '/read', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    element.classList.remove('unread');
+    const dot = element.querySelector('.notif-dot');
+    if (dot) dot.remove();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAsRead error:', err);
+  }
+}
+
+async function markAllRead() {
+  try {
+    const res = await fetch(getBase() + '/notifications/read-all', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) {
+      console.error('markAllRead failed:', res.status);
+      return;
+    }
+    loadUnreadNotifications();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAllRead error:', err);
+  }
+}
+
+function formatNotifTime(createdAt) {
+  if (!createdAt) return '';
+  const date = new Date(createdAt);
+  const diffMs = Date.now() - date.getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  return Math.floor(hrs / 24) + 'd ago';
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+const NOTIF_POLL_MS = 60000;
+document.addEventListener('DOMContentLoaded', function () {
+  loadNotifCount();
+  setInterval(loadNotifCount, NOTIF_POLL_MS);
+});
+    </script>
+    </body>
+
+</html>

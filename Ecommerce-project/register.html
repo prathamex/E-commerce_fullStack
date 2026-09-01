@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* BACKGROUND */
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding: 10px 15px;
+overflow-x:hidden;
+background:
+linear-gradient(rgba(10,37,64,0.25),
+rgba(10,37,64,0.25)),
+/* url("img/Register\ Page.png"); */
+url("img/Register\ Page.png");
+
+background-size:cover;
+background-position:center;
+}
+
+/* LOGO */
+.logo{
+position:fixed;
+top:15px;
+right:15px;
+
+}
+
+.logo img{
+width:180px;
+}
+
+/* CARD */
+.register-card{
+
+background:#fff;
+ 
+    padding:15px 20px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+width: 400px;
+max-width: 100%;
+ margin: 15px auto;
+animation:fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn{
+0%{opacity:0; transform:translateY(10px);}
+100%{opacity:1; transform:translateY(0);}
+}
+
+/* TITLE */
+.register-title{
+font-size:28px;
+font-weight:600;
+color:#0796FE;
+font-family:'Segoe UI',sans-serif;
+margin-bottom:15px;
+}
+
+/* LABEL */
+label{
+font-size:16px;
+font-weight:400;
+display:flex;
+align-items:center;
+font-family:'Segoe UI',sans-serif;
+color: #092A49;
+gap:8px; 
+}
+
+label span{
+color:red;
+}
+
+/* INPUT */
+.form-control{
+width:100%;
+padding:10px 12px;
+border:1px solid #f6f6f6;
+border-radius:8px;
+background:#f6f6f6;
+
+height:40px;
+font-size:14px;
+font-family:'Segoe UI',sans-serif;
+}
+
+
+
+.form-control:focus{
+outline:none;
+/* border:1px solid #1e88e5; */
+border:1px solid #0796FE;
+background:#fff;
+}
+
+.error{
+    color:red;
+    font-size:12px;
+    margin-top:4px;   
+    margin-bottom:10px;
+    display:none;
+}
+
+.error-border{
+border:1px solid red !important;
+background:#fff;
+}
+
+/* PASSWORD */
+.password-box{
+position:relative;
+margin-bottom:0px;
+}
+
+.password-box i{
+position:absolute;
+right:12px;
+top:40%;
+transform:translateY(-50%);
+cursor:pointer;
+color:#777;
+margin-top: 6px;
+}
+
+/* CHECKBOX */
+.options input[type="checkbox"]{
+width:18px;
+height:18px;
+cursor:pointer;
+}
+.options{
+margin-bottom:12px;
+}
+
+.options label{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+font-weight:400;
+}
+
+/* BUTTON */
+.btn{
+width:350px;
+height: 45px;
+padding:10px;
+/* background:#0988f7; */
+background: #0796FE;
+border:none;
+border-radius:8px;
+color:#fff;
+font-weight:600;
+cursor:pointer;
+font-size:16px;
+font-family:'Segoe UI',sans-serif;
+}
+
+.btn:hover{
+/* background:#1565c0; */
+/* background: #ff9900; */
+background: #0571c7;
+}
+
+/* DIVIDER */
+hr{
+margin:15px 0;
+border:none;
+border-top:1px solid #282525;
+}
+
+/* LOGIN LINK */
+.login-link{
+text-align:center;
+font-size:14px;
+font-weight: 400;
+color: #092A49;
+}
+
+.login-link a{
+/* color:#1387ed; */
+color: #0796FE;
+font-weight:600;
+text-decoration:none;
+/* border-bottom:2px solid #43a0f1; */
+border-bottom:2px solid #0796FE;;
+}
+
+.login-link a:hover{
+/* color:#1565c0; */
+color: #0571c7;
+}
+
+.mb-2{
+margin-bottom:12px;
+}
+
+.form-label{
+font-size:16px;
+font-weight:500;
+margin-bottom:5px;
+display:block;
+color:#092A49;
+}
+
+.form-check{
+display:flex;
+align-items:center;
+gap:8px;
+margin-bottom:12px;
+}
+
+.form-check-input{
+width:18px;
+height:18px;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+
+body{
+padding:30px 15px;
+height:auto;
+min-height:100vh;
+align-items:center;   
+}
+
+/* CARD */
+.register-card{
+width:100%;
+max-width:100%;
+padding:18px;
+border-radius:15px;
+margin-top:0;   
+}
+
+/* LOGO */
+.logo{
+top:15px;
+right:15px;
+}
+
+.logo img{
+width:110px;
+}
+
+/* TITLE */
+.register-title{
+font-size:22px;
+margin-bottom:15px;
+}
+
+/* INPUT */
+.form-control{
+padding:9px;
+font-size:13px;
+}
+
+/* LABEL */
+label{
+font-size:13px;
+margin-bottom:5px;
+}
+
+/* BUTTON */
+.btn{
+padding:11px;
+font-size:14px;
+}
+
+/* PASSWORD ICON */
+.password-box i{
+top:50%;
+right:10px;
+}
+
+/* CHECKBOX */
+.options label{
+font-size:13px;
+}
+
+.options input[type="checkbox"]{
+width:16px;
+height:16px;
+}
+
+/* LOGIN LINK */
+.login-link{
+font-size:13px;
+}
+
+}
+@media(max-width:480px){
+
+.register-card{
+padding:15px;
+}
+
+.logo img{
+width:95px;
+}
+
+.register-title{
+font-size:20px;
+}
+
+}
+/* responsive */
+@media (max-width:480px){
+
+    body{
+        padding:20px 10px;
+    }
+
+    .register-card{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .register-title{
+        font-size:22px;
+        text-align:center;
+    }
+
+    .form-label{
+        font-size:14px;
+    }
+
+    .form-control{
+        font-size:14px;
+        height:42px;
+    }
+
+    .btn{
+        width:100%;
+        font-size:15px;
+    }
+
+    .logo img{
+        width:90px;
+    }
+
+    .login-link{
+        font-size:13px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGO -->
+<div class="logo">
+    <a href="index.html">
+        <img src="img/creativesweb.png" alt="Creatives Web Logo">
+    </a>
+</div>
+
+<!-- FORM -->
+<div class="register-card">
+
+<h2 class="register-title">Register</h2>
+
+<form id="registerForm">
+
+<div class="mb-2">
+    <label class="form-label">Name<span class="required">*</span></label>
+    <input type="text" class="form-control" id="nameInput"   placeholder="Enter Your Name">
+    <div class="error" id="nameError">Please Enter Your Full Name.</div>
+</div>
+
+<div class="mb-2">
+    <label class="form-label">E-mail <span class="required">*</span></label>
+    <input type="email" class="form-control" id="emailInput" placeholder="Enter Your E-mail">
+    <div class="error" id="emailError">Please Enter a Valid E-mail Address.</div>
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Mobile Number <span class="required">*</span></label>
+    <input type="tel"
+        class="form-control"
+        id="mobileInput"
+        placeholder="Enter Your Mobile Number"
+        pattern="[0-9]{10}"
+        maxlength="10">
+    <div class="error" id="mobileError">
+        Please Enter a Valid 10 Digit Mobile Number.
+    </div>
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Password <span>*</span></label>
+    <div class="password-box">
+        <input type="password" id="passwordInput" class="form-control" placeholder="Your Password">
+        <i class="fa fa-eye-slash toggle-password" data-target="passwordInput"></i>
+    </div>
+    <div class="error" id="passwordError">Password must be at least 8 characters.</div>
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Confirm Password <span>*</span></label>
+    <div class="password-box">
+        <input type="password" id="confirmPasswordInput" class="form-control" placeholder="Confirm Password">
+        <i class="fa fa-eye-slash toggle-password" data-target="confirmPasswordInput"></i>
+    </div>
+    <div class="error" id="confirmPasswordError">Passwords do not match.</div>
+</div>
+
+<!-- <div class="mb-2">
+    <label class="form-label">Role <span class="required">*</span></label>
+    <select class="form-control" id="roleInput">
+        <option value="">Select Role</option>
+        <option value="BUYER">Buyer</option>
+        <option value="SELLER">Seller(Auth)</option>
+    </select>
+    <div class="error" id="roleError">Please Select a Role.</div>
+</div> -->
+
+<div class="mb-2 form-check">
+    <input type="checkbox" class="form-check-input" id="rememberMe">
+    <label class="form-check-label" for="rememberMe">Remember Me</label>
+</div>
+
+<button class="btn">Register</button>
+
+<hr>
+
+<p class="login-link">
+Already have an account?
+<a href="login.html">Login</a>
+</p>
+
+</form>
+
+</div>
+
+<script>
+
+// REGEX PATTERNS for input fields
+const patterns = {
+    nameInput: /^[a-zA-Z\s]{3,50}$/,
+    emailInput: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    mobileInput: /^[6-9]\d{9}$/,
+    passwordInput: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/
+};
+
+// validate function to validate input field
+function validateField(input){
+    const id = input.id;
+    const error = document.getElementById(id.replace("Input","Error"));
+    let value = input.value.trim();
+    let valid = true;
+
+    if(value === ""){
+        valid = false;
+    }
+    else if(id === "confirmPasswordInput"){
+        const passwordInput = document.getElementById("passwordInput");
+        valid = value === passwordInput.value;
+    }
+    // else if(id === "roleInput"){
+    //     valid = value !== "";
+    // }
+    else if(patterns[id]){
+        valid = patterns[id].test(value);
+    }
+
+    error.style.display = valid ? "none" : "block";
+    input.classList.toggle("error-border", !valid);
+
+    return valid;
+}
+// Name input check allow only character.
+function setupNameBlocker(){
+    const name = document.getElementById("nameInput");
+
+    name.addEventListener("input", function(){
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        validateField(this);
+    });
+}
+
+//  MOBILE INPUT check function
+function setupMobileBlocker(){
+    const mobile = document.getElementById("mobileInput");
+
+    mobile.addEventListener("input", function(){
+        this.value = this.value.replace(/[^0-9]/g,'').slice(0,10);
+        validateField(this);
+    });
+}
+
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded", function(){
+
+    setupMobileBlocker();
+    setupNameBlocker();
+
+    document.querySelectorAll(".form-control").forEach(input=>{
+        input.addEventListener("input", ()=>validateField(input));
+        input.addEventListener("blur", ()=>validateField(input));
+    });
+
+    // PASSWORD TOGGLE 
+    document.querySelectorAll(".toggle-password").forEach(icon => {
+        icon.addEventListener("click", function(){
+            const input = document.getElementById(this.dataset.target);
+
+            input.type = input.type === "password" ? "text" : "password";
+
+            this.classList.toggle("fa-eye");
+            this.classList.toggle("fa-eye-slash");
+        });
+    });
+
+});
+
+// ===== FORM SUBMIT =====
+document.getElementById("registerForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    let valid = true;
+
+    document.querySelectorAll(".form-control").forEach(input=>{
+        if(!validateField(input)) valid = false;
+    });
+
+    if(!valid){
+        return;
+    }
+
+    const btn = document.querySelector(".btn");
+
+    // Disable button + loading state
+    btn.disabled = true;
+    btn.innerText = "Registering...";
+
+    const data = {
+        name: document.getElementById("nameInput").value.trim(),
+        email: document.getElementById("emailInput").value.trim(),
+        mobileNumber: document.getElementById("mobileInput").value.trim(),
+        password: document.getElementById("passwordInput").value,
+        // confirmPassword: document.getElementById("confirmPasswordInput").value,
+        // role: document.getElementById("roleInput").value
+    };
+
+    try{
+        const res = await fetch("http://localhost:8081/auth/register",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(data)
+        });
+
+        const result = await res.json().catch(() => ({}));
+
+        if(res.ok){
+            btn.innerText = "Registration Successful";
+
+            alert("registration successful ! check your email for confirmation.")
+
+            // Delay redirect
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 500);
+
+        }else{
+            alert(result.message || "Registration Failed");
+
+            // Reset button
+            btn.disabled = false;
+            btn.innerText = "Register";
+        }
+
+    }catch(err){
+        console.error(err);
+        alert("Server Error");
+
+        // Reset button
+        btn.disabled = false;
+        btn.innerText = "Register";
+    }
+
+});
+
+</script>
+
+</body>
+</html>

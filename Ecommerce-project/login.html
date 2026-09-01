@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ====================================
+   RESET
+==================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ====================================
+   BODY BACKGROUND
+==================================== */
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+
+    background:
+    linear-gradient(
+        rgba(8,35,76,0.78),
+        rgba(8,35,76,0.78)
+    ),
+    url("img/Login Page.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    padding:20px;
+}
+
+/* ====================================
+   LOGO
+==================================== */
+
+.logo{
+    position:absolute;
+    top:28px;
+    right:35px;
+    z-index:10;
+}
+
+.logo img{
+    width:150px;
+    display:block;
+}
+
+/* ====================================
+   LOGIN CARD
+==================================== */
+
+.login-card{
+    width:100%;
+    max-width:420px;
+    min-width:280px;
+
+    background:#fff;
+    border-radius:14px;
+
+    padding:30px 35px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.18);
+
+    animation:fadeIn .6s ease;
+}
+
+/* ====================================
+   ANIMATION
+==================================== */
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ====================================
+   TITLE
+==================================== */
+
+.login-title{
+    font-size:28px;
+    font-weight:600;
+    color:#0796d9;
+    margin-bottom:24px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ====================================
+   LABELS
+==================================== */
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    color:#092a49;
+    margin-bottom:6px;
+    font-family:'Segoe UI',sans-serif;
+}
+    
+
+
+label span{
+    color:red;
+}
+
+/* ====================================
+   INPUTS
+==================================== */
+
+.form-control{
+    width:100%;
+    height:42px;
+    padding:0 12px;
+    border:none;
+    border-radius:4px;
+    background:#f6f6f6;
+
+    font-size:14px;
+    color:#333;
+    font-family:'Segoe UI',sans-serif;
+
+    margin-bottom:16px;
+}
+
+.form-control::placeholder{
+    color:#9c9c9c;
+}
+
+.form-control:focus{
+    outline:none;
+    border:1px solid #0799FE;
+    background:#fff;
+}
+
+/* ====================================
+   PASSWORD
+==================================== */
+
+.password-box{
+    position:relative;
+}
+
+.password-box i{
+    position:absolute;
+    right:12px;
+    top:36%;
+    transform:translateY(-50%);
+    color:#777;
+    cursor:pointer;
+}
+
+/* ====================================
+   ERROR
+==================================== */
+
+.error-text{
+    color:red;
+    font-size:12px;
+    margin-top:-10px;
+    margin-bottom:10px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ====================================
+   OPTIONS
+==================================== */
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    font-size:14px;
+    font-weight: 600;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.options label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:0;
+    font-size:13px;
+    font-weight:500;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.options input[type="checkbox"]{
+    width:16px;
+    height:16px;
+    cursor:pointer;
+}
+
+.options a{
+    color:#0796FE;
+    text-decoration:none;
+    font-size:13px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.options a:hover{
+    text-decoration:underline;
+}
+
+/* ====================================
+   BUTTON
+==================================== */
+
+.login-btn{
+    width:100%;
+    height:46px;
+    border:none;
+    border-radius:4px;
+
+    background:#0796FE;
+    color:#fff;
+    font-family:'Segoe UI',sans-serif;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#0571c7;
+}
+
+/* ====================================
+   DIVIDER
+==================================== */
+
+hr{
+    border:none;
+    border-top:1px solid #d8d2c7;
+    margin:20px 0;
+}
+
+/* ====================================
+   REGISTER
+==================================== */
+
+.register{
+    text-align:center;
+    font-size:14px;
+    color:#092A49;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.register a{
+    color:#0796FE;
+    text-decoration:none;
+    font-weight:600;
+    margin-left:4px;
+    font-family:'Segoe UI',sans-serif;
+    font-size:14px;
+}
+
+.register a:hover{
+    color:#0571c7;
+/* border-bottom:2px solid #0d6efd; */
+    border-bottom:2px solid #0571c7;
+}
+/* ====================================
+   TABLET
+==================================== */
+
+@media screen and (max-width: 991px){
+
+    body{
+        padding:20px;
+    }
+
+    .logo{
+        top:20px;
+        right:20px;
+    }
+
+    .logo img{
+        width:120px;
+    }
+
+    .login-card{
+        max-width:450px;
+        padding:25px;
+    }
+}
+
+/* ====================================
+   MOBILE
+==================================== */
+
+@media screen and (max-width: 767px){
+
+    body{
+        padding:15px;
+    }
+
+    .logo{
+        position:fixed;
+        top:15px;
+        right:15px;
+        z-index:999;
+    }
+
+    .logo img{
+        width:100px;
+    }
+
+    .login-card{
+        width:100%;
+        max-width:400px;
+        padding:22px;
+        border-radius:12px;
+    }
+
+    .login-title{
+        font-size:28px;
+    }
+
+    .options{
+        flex-wrap:wrap;
+        gap:10px;
+    }
+}
+
+/* ====================================
+   SMALL MOBILE
+==================================== */
+
+@media screen and (max-width: 480px){
+
+    body{
+        padding:12px;
+    }
+
+    .login-card{
+        width:100%;
+        max-width:none;
+
+        padding:20px 16px;
+
+        border-radius:10px;
+    }
+
+    .login-title{
+        font-size:24px;
+        text-align:center;
+    }
+
+    .logo img{
+        width:85px;
+    }
+
+    .form-control{
+        height:42px;
+        font-size:14px;
+    }
+
+    .options{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .login-btn{
+        height:44px;
+    }
+}
+
+/* ====================================
+   iPhone SE / VERY SMALL DEVICES
+==================================== */
+
+@media screen and (max-width: 375px){
+
+    body{
+        padding:10px;
+    }
+
+    .login-card{
+        padding:18px 14px;
+    }
+
+    .login-title{
+        font-size:22px;
+    }
+
+    .logo img{
+        width:75px;
+    }
+
+    label{
+        font-size:13px;
+    }
+
+    .form-control{
+        font-size:13px;
+    }
+}
+
+/* ====================================
+   EXTRA SMALL DEVICES
+==================================== */
+
+@media screen and (max-width: 320px){
+
+    .login-card{
+        padding:15px 12px;
+    }
+
+    .login-title{
+        font-size:20px;
+    }
+
+    .logo img{
+        width:65px;
+    }
+
+    .form-control{
+        height:40px;
+        padding:0 10px;
+    }
+
+    .login-btn{
+        height:42px;
+        font-size:13px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGO -->
+<div class="logo">
+    <a href="index.html">
+        <img src="img/creativesweb.png" alt="Creatives Web Logo">
+    </a>
+</div>
+
+<!-- LOGIN CARD -->
+<div class="login-card">
+
+<h2 class="login-title">Login</h2>
+
+<form id="loginForm">
+
+<label>Email <span>*</span></label>
+<input type="email" id="emailInput" class="form-control" placeholder="Enter your email">
+<div id="emailError" class="error-text"></div>
+
+
+<label>Password <span>*</span></label>
+
+
+<div class="password-box">
+<input type="password" class="form-control" id="passwordInput" placeholder="Enter your password">
+<i class="fa fa-eye-slash" id="togglePassword"></i>
+</div>
+<div id="passwordError" class="error-text"></div>
+<div class="options">
+<label><input type="checkbox" id="rememberMe"> Remember Me</label>
+<a href="forgotpassword.html">Forgot Password</a>
+</div>
+
+<div id="errorMsg" style="color:red;margin-bottom:10px;"></div>
+
+<button type= "submit" class="login-btn">Login</button>
+
+<hr>
+
+<p class="register">
+Don't have an account?
+<a href="register.html">Register</a>
+</p>
+</form>
+</div>
+</body>
+<script>
+
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
+
+const togglePassword =
+document.getElementById("togglePassword");
+
+const passwordInput =
+document.getElementById("passwordInput");
+
+togglePassword.addEventListener(
+"click",
+function(){
+
+if(passwordInput.type === "password"){
+
+passwordInput.type = "text";
+
+this.classList.replace(
+"fa-eye-slash",
+"fa-eye"
+);
+
+}else{
+
+passwordInput.type = "password";
+
+this.classList.replace(
+"fa-eye",
+"fa-eye-slash"
+);
+
+}
+
+}
+);
+
+/* =========================================
+   FORM ELEMENTS
+========================================= */
+
+const loginForm =
+document.getElementById("loginForm");
+
+const emailInput =
+document.getElementById("emailInput");
+
+const passwordInputField =
+document.getElementById("passwordInput");
+
+const emailError =
+document.getElementById("emailError");
+
+const passwordError =
+document.getElementById("passwordError");
+
+const errorMsg =
+document.getElementById("errorMsg");
+
+const loginBtn =
+document.querySelector(".login-btn");
+
+/* =========================================
+   REMEMBER ME FIX
+========================================= */
+
+const rememberMe =
+document.getElementById("rememberMe");
+
+/* =========================================
+   LOAD REMEMBERED EMAIL
+========================================= */
+
+window.addEventListener(
+"DOMContentLoaded",
+function(){
+
+const savedEmail =
+localStorage.getItem("rememberedEmail");
+
+if(savedEmail){
+
+emailInput.value = savedEmail;
+
+if(rememberMe){
+
+rememberMe.checked = true;
+
+}
+
+}
+
+}
+);
+
+/* =========================================
+   TOKEN HELPER
+========================================= */
+
+function getToken(){
+
+return (
+
+localStorage.getItem("token") ||
+
+sessionStorage.getItem("token")
+
+);
+
+}
+
+/* =========================================
+   CLEAR OLD TOKENS
+========================================= */
+
+function clearTokens(){
+
+localStorage.removeItem("token");
+
+sessionStorage.removeItem("token");
+
+}
+
+/* =========================================
+   LOGIN SUBMIT
+========================================= */
+
+loginForm.addEventListener(
+"submit",
+async function(e){
+
+e.preventDefault();
+
+/* CLEAR ERRORS */
+
+errorMsg.innerText = "";
+
+emailError.innerText = "";
+
+passwordError.innerText = "";
+
+/* GET VALUES */
+
+const email =
+emailInput.value.trim();
+
+const password =
+passwordInputField.value.trim();
+
+/* EMAIL VALIDATION */
+
+const emailPattern =
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(email === ""){
+
+emailError.innerText =
+"Email is required";
+
+emailInput.focus();
+
+return;
+
+}
+
+if(!emailPattern.test(email)){
+
+emailError.innerText =
+"Enter valid email address";
+
+emailInput.focus();
+
+return;
+
+}
+
+/* PASSWORD VALIDATION */
+
+if(password === ""){
+
+passwordError.innerText =
+"Password is required";
+
+passwordInputField.focus();
+
+return;
+
+}
+
+/* REMEMBER EMAIL */
+
+if(
+rememberMe &&
+rememberMe.checked
+){
+
+localStorage.setItem(
+"rememberedEmail",
+email
+);
+
+}else{
+
+localStorage.removeItem(
+"rememberedEmail"
+);
+
+}
+
+/* BUTTON LOADING */
+
+loginBtn.disabled = true;
+
+loginBtn.innerText =
+"Logging in...";
+
+/* CLEAR OLD TOKENS */
+
+clearTokens();
+
+/* REQUEST DATA */
+
+const requestData = {
+
+email: email,
+
+password: password
+
+};
+
+try{
+
+console.log(
+"Sending Login Request:",
+requestData
+);
+
+const response = await fetch(
+
+"http://localhost:8081/auth/login",
+
+{
+
+method: "POST",
+
+headers: {
+"Content-Type":"application/json"
+},
+
+body: JSON.stringify(requestData)
+
+}
+
+);
+
+console.log(
+"LOGIN STATUS:",
+response.status
+);
+
+const result =
+await response.json();
+
+console.log(
+"LOGIN RESPONSE:",
+result
+);
+
+/* SUCCESS */
+
+if(response.ok && result.success){
+
+const userData =
+result.data;
+
+/* TOKEN CHECK */
+
+if(
+!userData ||
+!userData.token
+){
+
+throw new Error(
+"Token not received from server"
+);
+
+}
+
+const token =
+userData.token;
+
+console.log(
+"TOKEN RECEIVED:",
+token
+);
+
+/* STORE TOKEN */
+
+if(
+rememberMe &&
+rememberMe.checked
+){
+
+localStorage.setItem(
+"token",
+userData.token,
+token
+);
+
+console.log(
+"Token stored in localStorage"
+);
+
+}else{
+
+sessionStorage.setItem(
+"token",
+token
+);
+
+console.log(
+"Token stored in sessionStorage"
+);
+
+}
+
+/* VERIFY TOKEN */
+
+console.log(
+"FINAL TOKEN:",
+getToken()
+);
+
+/* STORE USER */
+
+
+localStorage.setItem(
+"userData",
+JSON.stringify(userData)
+);
+
+localStorage.setItem(
+"userName",
+userData.name
+);
+
+/* SUCCESS */
+
+alert(
+result.message ||
+"Login Successful"
+);
+
+/* REDIRECT */
+
+setTimeout(function(){
+
+/* ADMIN */
+
+if(
+userData.role &&
+userData.role.toUpperCase() === "ADMIN"
+){
+
+window.location.href =
+"adminpanel.html";
+
+}
+
+/* NORMAL USER */
+
+else{
+
+const previousPage =
+localStorage.getItem(
+"redirectAfterLogin"
+);
+
+if(previousPage){
+
+localStorage.removeItem(
+"redirectAfterLogin"
+);
+
+window.location.href =
+previousPage;
+
+}else{
+
+window.location.href =
+"user-dashboard.html";
+
+}
+
+}
+
+}, 500);
+
+}
+
+/* FAILED LOGIN */
+
+else{
+
+if(result.errors){
+
+let msg = "";
+
+for(const field in result.errors){
+
+msg +=
+result.errors[field] + "\n";
+
+}
+
+errorMsg.innerText = msg;
+
+}else{
+
+errorMsg.innerText =
+result.message ||
+"Invalid email or password";
+
+}
+
+}
+
+}
+catch(error){
+
+console.error(
+"LOGIN ERROR:",
+error
+);
+
+errorMsg.innerText =
+error.message ||
+"Server error. Please try again.";
+
+}
+finally{
+
+loginBtn.disabled = false;
+
+loginBtn.innerText = "Login";
+
+}
+
+}
+);
+
+</script>
+</html>

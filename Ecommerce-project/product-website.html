@@ -1,0 +1,3314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Confer - Consulting Website Template Free Download</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Consulting Website Template Free Download" name="keywords">
+        <meta content="Consulting Website Template Free Download" name="description">
+
+        <!-- Favicon -->
+        <!-- <link href="img/favicon.ico" rel="icon"> -->
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+        
+        <!-- CSS Libraries -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <!-- <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
+
+        <!-- Template Stylesheet -->
+        <!-- <link href="css/style.css" rel="stylesheet"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <style>
+
+ /* TOP BAR Start Css   */
+
+.top-bar{
+  
+background:#1f6fae;
+color:#eeeeee;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 40px;
+font-size:14px;
+font-family:'oswald', sans-serif;
+}
+
+.top-left{
+display:flex;
+}
+
+.top-item{
+display:flex;
+align-items:center;
+gap:10px;
+padding-right:20px;
+margin-right:20px;
+border-right:1px solid rgba(255,255,255,0.3);
+}
+
+.top-right{
+display:flex;
+gap:20px;
+}
+
+.social i{
+cursor:pointer;
+color: white;
+}
+
+
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 8px 12px;
+    font-size: 11px;
+    flex-wrap: nowrap;
+  }
+
+  .top-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .top-item {
+    gap: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+
+  .top-right {
+    gap: 10px;
+  }
+
+  .social i {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .top-left {
+    gap: 6px;
+  }
+
+  .top-item {
+    gap: 4px;
+    padding-right: 6px;
+    margin-right: 6px;
+  }
+
+  .social i {
+    font-size: 12px;
+  }
+}
+/* TOP BAR end CSS  */
+            
+
+
+
+/* HEADER */
+ .header {
+            background: #0A2540;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 50px;
+            flex-wrap: wrap;
+            /* important for toggle */
+        }
+
+        /* LOGO */
+
+        #brand {
+            width: 180px;
+            margin-left: -30px;
+            
+        }
+
+        /* NAVIGATION */
+
+        .nav {
+            display: flex;
+            align-items: center;
+             gap: 30px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 18px;
+            margin-right: 4px;
+            margin-top: 18px;
+        }
+
+        .nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: 0.3s;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .nav ul li a:hover,
+        .nav ul li a.active {
+            color: #1e88e5;
+            border-bottom: 2px solid #1e88e5;
+                padding-bottom: 4px;
+        }
+
+
+
+        /* BUTTONS */
+/* RIGHT SIDE */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-icon { 
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+#cartCount {
+    position: absolute;
+    right: -10px;
+    top: -8px;
+    background-color: green;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    display: none;
+    z-index: 10;
+    padding: 0 3px;
+}
+
+.avatar1 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  
+}
+
+ /* BUTTONS */
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Common Button */
+.btn {
+    padding: 8px 35px;
+    font-size: 13px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+/* LOGIN BUTTON */
+.login {
+    border: 1px solid #38bdf8;
+    color: white;
+    background: transparent;
+    transition: 0.3s;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.login:hover {
+    background: #1e88e5;
+}
+
+/* REGISTER BUTTON */
+.register {
+    border: 1px solid #1e88e5;
+    color: white;      /* blue text */
+    background: transparent;
+    transition: 0.3s;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ON HOVER / CLICK LOOK */
+.register:hover {
+    background: #1e88e5;
+    color: #fff;
+}
+  
+        /*======================================= */
+        /* HAMBURGER BUTTON */
+        /* ======================================= */
+
+        .menu-toggle {
+            display: none;
+            font-size: 26px;
+            color: white;
+            cursor: pointer;
+            margin-right: -30px;
+            
+        }
+
+        /* ===================================== */
+/* HEADER RESPONSIVE */
+/* ===================================== */
+
+@media (max-width:1024px) {
+
+    .header {
+        padding: 15px 20px;
+    }
+
+    #brand {
+        width: 150px;
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-right: 0;
+    }
+
+    .nav {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        background: #0A2540;
+        margin-top: 15px;
+    }
+
+    .nav.active {
+        display: flex;
+    }
+
+    .nav ul {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav ul li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav ul li a {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .header-right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .cart {
+        font-size: 22px;
+    }
+
+    /* LOGIN / REGISTER */
+
+    .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: auto;
+    }
+
+    .actions .btn {
+        width: 130px;
+        text-align: center;
+        padding: 10px 20px;
+        margin: 0;
+    }
+}
+
+
+/* ===================================== */
+/* TABLET */
+/* ===================================== */
+
+@media (max-width:768px) {
+
+    .header {
+        padding: 12px 15px;
+    }
+
+    #brand {
+        width: 130px;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+    }
+
+    .cart {
+        font-size: 20px;
+    }
+
+    .actions .btn {
+        width: 125px;
+        padding: 9px 18px;
+        font-size: 13px;
+    }
+}
+
+
+/* ===================================== */
+/* MOBILE */
+/* ===================================== */
+
+@media (max-width:480px) {
+
+    .header {
+        padding: 10px 12px;
+    }
+
+    #brand {
+        width: 120px;
+    }
+
+    .menu-toggle {
+        font-size: 22px;
+    }
+
+    .nav ul li a {
+        font-size: 13px;
+    }
+
+    .cart {
+        font-size: 18px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .actions .btn {
+        width: 120px;
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
+
+
+/* ===================================== */
+/* SMALL DEVICES */
+/* ===================================== */
+
+@media (max-width:320px) {
+
+    #brand {
+        width: 110px;
+    }
+
+    .menu-toggle {
+        font-size: 20px;
+    }
+
+    .actions .btn {
+        width: 110px;
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+}
+
+        /*nav bar ends here*/
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero {
+  background:
+    linear-gradient(rgba(0, 25, 45, 0.45), rgba(0, 25, 45, 0.45)),
+    url("img/2x Hero section.png") no-repeat center center;
+
+  background-size: cover;
+  width: 100%;
+  min-height: 600px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  padding: 20px;
+}
+
+/* CONTENT */
+.hero-content {
+  max-width: 760px;
+  width: 100%;
+  margin: -18px auto 0;
+  padding: 0 15px;
+}
+
+/* HEADING */
+.hero h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 54px;
+  line-height: 75px;
+  font-weight: 300;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+/* TEXT */
+.hero p {
+  font-family: lato, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  margin: 0 auto 21px;
+  line-height: 1.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* BUTTONS */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* BUTTON COMMON */
+.explore,
+.author {
+  width: 162px;
+  height: 42px;
+
+  border-radius: 6px;
+  text-decoration: none;
+
+  font-family: lato, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s ease;
+}
+
+/* LEFT BUTTON */
+.explore {
+  color: #fff;
+  border: 1px solid #fff;
+  background: transparent;
+}
+
+/* RIGHT BUTTON */
+.author {
+  color: #fff;
+  background: #0796fe;
+  border: 1px solid #0796fe;
+}
+
+/* HOVER */
+.explore:hover {
+  background: #007dd8;
+  border-color: #007dd8;
+  color: #fff;
+  text-decoration: none;
+}
+
+.author:hover {
+  background: #007dd8;
+  border-color: #007dd8;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 991px) {
+
+  .hero {
+    min-height: 520px;
+    padding: 30px 20px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    line-height: 58px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    max-width: 650px;
+  }
+
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: 480px;
+    padding: 40px 20px;
+  }
+
+  .hero-content {
+    margin-top: 0;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    line-height: 48px;
+    margin-bottom: 14px;
+  }
+
+  .hero p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .explore,
+  .author {
+    width: 150px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .hero {
+    min-height: 430px;
+    padding: 45px 18px;
+  }
+
+  .hero-content {
+    padding: 0;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .explore,
+  .author {
+    width: 100%;
+    max-width: 240px;
+    height: 42px;
+    font-size: 14px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .hero {
+    min-height: 400px;
+    padding: 40px 15px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .hero p {
+    font-size: 11px;
+  }
+
+  .explore,
+  .author {
+    max-width: 220px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+}
+
+/* banner start css  */
+.page-banner {
+    position: relative;
+    width: 100%;
+    height: 369px;
+    background: url("img/2x\ Hero\ section.png") center center/cover no-repeat;
+    border-bottom: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.breadcrumb {
+    position: absolute;
+    top: 18px;
+    left: 35px;
+    z-index: 2;
+    font-size: 18px;
+    color: #c4c4c4;
+    font-family: Lato, sans-serif;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #c4c4c4;
+}
+
+.breadcrumb a:hover {
+    color: #0796FE;
+}
+
+.breadcrumb span {
+    margin: 0 4px;
+}
+
+.breadcrumb .active {
+    color: #0796FE;
+}
+
+.banner-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -42%);
+    z-index: 2;
+    margin: 0;
+    color: #fff;
+    font-size: 64px;
+    font-weight: 300;
+    font-family: oswald, sans-serif;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+/* banner end css  */
+
+/* hero Bottom start css  */
+
+        .hero-bottom {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #e1f2ff;
+        }
+
+        /* Heading sizes slightly smaller */
+
+        .main-heading {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+
+        .blue-divider {
+            width: 80px;
+            height: 8px;
+            background: #0796FE;
+            margin: 10px auto 20px auto;
+            border-radius: 2px;
+        }
+
+        .sub-heading {
+            font-size: 40px;
+            font-weight: 300;
+            font-family: oswald, sans-serif;
+            margin-bottom: 15px;
+            color: #0a2540
+
+        }
+
+        .description {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Search Bar Styling */
+         /* Search Bar Styling */
+        .search-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+
+        }
+
+        .search-input {
+            border: none;
+            padding: 12px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            color: #797979;
+
+        }
+
+        .search-wrapper .input-group {
+            gap: 10px;
+
+        }
+
+
+
+        .search-btn {
+            border-radius: 4px;
+        }
+
+        .search-btn {
+            background-color: #0796FE;
+            border: none;
+            color: white;
+            padding: 0 30px;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+            transition: 0.3s;
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .search-btn:hover {
+            background-color: #0076cc;
+            color: white;
+        }
+
+        /* Suggestion Box Dropdown Styling */
+        .suggestion-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            z-index: 99999;
+            display: none;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-top: 5px;
+        }
+
+        .suggestion-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333333;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.15s ease, color 0.15s ease;
+            text-align: left;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover,
+        .suggestion-item.active {
+            background-color: #f8fafc;
+            color: #0796FE;
+        }
+
+        @media (max-width: 768px) {
+            .hero-top {
+                height: auto;
+                padding: 60px 20px;
+                clip-path: none;
+            }
+
+            .main-heading {
+                font-size: 2.2rem;
+            }
+
+            .sub-heading {
+                font-size: 1.4rem;
+            }
+
+            .description {
+                font-size: 0.9rem;
+            }
+        }
+        /* hero bottom end css */
+
+
+/* main section css */
+
+ /* Suggestion Box Container styling */
+        .suggestion-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            max-height: 250px;
+            overflow-y: auto;
+            display: none;
+            margin-top: -5px;
+        }
+
+        /* Individual Suggestion Item */
+        .suggestion-item {
+            padding: 12px 20px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f8f9fa;
+            text-align: left;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Hover Effect */
+        .suggestion-item:hover {
+            background-color: #f1f8ff;
+            color: #0796FE;
+            padding-left: 25px;
+        }
+
+        .suggestion-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .suggestion-box::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+
+        /* sortbar css  */
+
+        body {
+ 
+            padding: 0px;
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--bg-dark);
+            padding: 0px;
+        }
+
+        /* Sorting Bar Container */
+        .sorting-bar {
+            background-color: #ffffff;
+            padding: 15px 25px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+
+        /* Left Side Text */
+        .product-count {
+            color: #133240;
+            font-weight: 700;
+            font-size: 23px;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+        }
+
+        /* Right Side Sort Section */
+        .sort-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .sort-label {
+            color: #133240;
+            margin-right: 15px;
+            font-size: 19px;
+            font-weight: 400;
+             font-family: 'Lato', sans-serif;
+        }
+
+        /* Dropdown Styling */
+        .sort-dropdown {
+            width: 180px;
+            border: 1px solid #ced4da;
+            color: #495057;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: #fff;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .sort-dropdown:focus {
+            border-color: #0796FE;
+            box-shadow: 0 0 0 0.2rem rgba(7, 150, 254, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .sorting-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .sort-wrapper {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .sort-dropdown {
+                width: 100%;
+            }
+        }
+
+        .breadcrumb-custom {
+            font-size: 1rem;
+            color: white;
+        }
+
+        .breadcrumb-link {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .breadcrumb-link:hover {
+            color: #2ea3f2;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 8px;
+            color: white;
+        }
+
+        .breadcrumb-current {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .product {
+            color: #2ea3f2;
+            text-decoration: none;
+        }
+
+        /* sidebar css start */
+        :root {
+            --bg-dark: #133240;
+            --primary-blue: #0796FE;
+            --sub-content: #797979;
+            --font-white: #FFFFFF;
+            --light-bg: #E1f2ff;
+
+        }
+
+      
+
+        /* Sidebar Styling */
+        .sidebar {
+            background: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+             height: 100%;
+    min-height: 900px;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .clear-all {
+            color: var(--primary-blue);
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .filter-section-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .form-check-label {
+            color: var(--sub-content);
+            font-size: 0.9rem;
+        }
+
+        .star-rating-sidebar {
+            color: #FFB400;
+            font-size: 0.9rem;
+            margin-right: 5px;
+        }
+
+        /* Product Card Styling */
+        .product-card {
+            background: #fff;
+            border: none;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+            transition: 0.3s;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 140px;
+            object-fit: cover;
+            width: 100%;
+            padding: 10px;
+        }
+
+
+        .card-body {
+            padding: 10px 15px 15px 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-family: 'oswald', sans-serif;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--bg-dark);
+            margin-bottom: 8px;
+            min-height: 50px;
+        }
+
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+
+            min-height: 30px;
+
+        }
+
+
+        .price-range-box {
+            width: 100%;
+        }
+
+
+        #priceRange {
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            outline: none;
+            appearance: none;
+            background: #ddd;
+        }
+
+
+        #priceRange::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #0796FE;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            margin-top: -2px;
+            /*change */
+        }
+
+
+        #priceRange::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #0796FE;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+
+
+
+
+        /* Labels */
+        .price-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .rating-stars {
+            color: #FFB400;
+            font-size: 0.85rem;
+            margin-right: 5px;
+        }
+
+        .rating-stars,
+        .star-rating-sidebar {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .rating-count {
+            color: var(--sub-content);
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+
+        .feature-list {
+            padding: 0;
+            list-style: none;
+            margin-bottom: 10px;
+            min-height: 100px;
+        }
+
+        .feature-list li {
+            font-size: 0.8rem;
+            color: var(--sub-content);
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: "•";
+            color: #ccc;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-img {
+                height: 180px;
+            }
+
+            .product-title {
+                font-size: 1rem;
+                min-height: auto;
+            }
+
+            .feature-list {
+                min-height: auto;
+            }
+        }
+
+        /* Buttons */
+        .btn-preview {
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            background: transparent;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            width: 48%;
+        }
+
+        .btn-preview:hover {
+            background: var(--primary-blue);
+            color: #fff;
+        }
+
+        .btn-add-cart {
+            background-color: var(--primary-blue);
+            color: #fff;
+            border: none;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            width: 48%;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #0076cc;
+            color: #fff;
+        }
+
+        /* Range Slider Customization */
+        .form-range::-webkit-slider-thumb {
+            background: var(--primary-blue);
+        }
+
+        @media (max-width: 576px) {
+            .card-body .d-flex {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-preview,
+            .btn-add-cart {
+                width: 100%;
+            }
+        }
+
+        .license-container {
+            margin-top: 10px;
+        }
+
+        .license-box {
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border-radius: 6px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .license-box:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .license-box.active {
+            border-color: var(--primary-blue);
+            background: #e6f0ff;
+        }
+
+        .license-box .title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .license-box .price {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .suggestion-item.active {
+            background-color: #f1f8ff;
+            color: #0796FE;
+            padding-left: 25px;
+            outline: none;
+        }
+
+
+
+        
+    /* ========================= */
+    /* PAGINATION */
+    /* ========================= */
+
+    .pagination-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px;
+      background: #e1f2ff;
+      padding-right: 120px;
+    }
+
+    .pagination-custom {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .page-box {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: #fff;
+      font-size: 14px;
+    }
+
+    .page-box:hover {
+      background: #f1f8ff;
+    }
+
+    .page-box.active {
+      background: var(--primary-blue);
+      color: #fff;
+      border-color: var(--primary-blue);
+    }
+
+
+
+
+
+
+
+
+/* FOOTER Start CSS */
+
+ .footer {
+            background: #0A2540;
+            color: white;
+            padding: 50px 30px 20px;
+            margin-top: 60px;
+        }
+
+        /* FOOTER GRID */
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        /* FOOTER LOGO */
+
+        .footer-logo {
+            width: 170px;
+            margin-bottom: 20px;
+        }
+
+        /* CONTACT */
+
+        .footer-contact {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #cfd9e6;
+            
+        }
+
+       .footer-contact i {
+            color: #0796FE;
+            margin-top: 6px;
+        }
+
+        /* TITLES */
+
+        .footer-title {
+            font-size: 22px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #0796FE;
+        }
+
+        /* LINKS */
+
+        .footer-links {
+            list-style: none;
+            
+           
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            width: fit-content;
+            
+            
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #cfd9e6;
+            display: flex;
+            gap: 10px;
+            
+        }
+
+        .footer-links a:hover {
+            color: #1e88e5;
+        }
+
+        .footer-links i {
+            color: #1e88e5;
+            padding-top: 6px;
+        }
+
+        .footer-link {
+  color: #cfd9e6;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #1e88e5;
+  text-decoration: none;
+}
+        /* NEWSLETTER */
+
+        .footer-text {
+            color: #b8c5d6;
+            margin-bottom: 20px;
+        }
+
+        .newsletter {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #2d4a68;
+            color: white;
+        }
+
+        .newsletter button {
+            padding: 12px 20px;
+            background: #0796FE;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .newsletter button:hover {
+            background: #1e88e5;
+        }
+
+        /* FOOTER BOTTOM */
+
+        .footer-bottom {
+            border-top: 1px solid #223b55;
+            margin-top: 30px;
+            margin-bottom: -20px;
+            padding-top: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom a{
+            color: #cfd9e6;
+            text-decoration: none;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            font-size: 21px;
+            margin-top: -15px;
+        }
+
+        .footer-social i {
+            color: white;
+            transition: 0.3s;
+        }
+
+
+
+/* ===================================== */
+/* FOOTER RESPONSIVE */
+/* ===================================== */
+@media (max-width:991px){
+
+    .footer-container{
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+        align-items:flex-start;
+    }
+
+    .footer{
+        padding:40px 20px 20px;
+    }
+
+    .footer-logo{
+        margin-bottom:20px;
+    }
+
+    .footer-bottom{
+        margin-bottom:0;
+    }
+
+    .footer-social{
+        margin-top:0;
+    }
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:767px){
+
+    .footer-container{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .footer{
+        padding:35px 20px 20px;
+    }
+
+    /* KEEP EVERYTHING LEFT */
+    .footer-logo{
+        margin:0 0 20px 0;
+    }
+
+    .footer-title{
+        text-align:left;
+    }
+
+    .footer-title::after{
+        left:0;
+        transform:none;
+    }
+
+    .footer-contact{
+        justify-content:flex-start;
+        text-align:left;
+    }
+
+    .footer-links{
+        text-align:left;
+    }
+
+    .footer-links li{
+        width:100%;
+    }
+
+    .footer-links a{
+        justify-content:flex-start;
+    }
+
+    .footer-text{
+        text-align:left;
+    }
+
+    .newsletter{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .newsletter input{
+        width:100%;
+    }
+
+    .newsletter button{
+        width:100%;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        text-align:left;
+        gap:15px;
+        margin-bottom:0;
+    }
+
+    .footer-social{
+        justify-content:flex-start;
+        margin-top:0;
+    }
+}
+
+/* ==========================
+   SMALL MOBILE
+========================== */
+
+@media (max-width:480px){
+
+    .footer{
+        padding:30px 15px 15px;
+    }
+
+    .footer-title{
+        font-size:18px;
+    }
+
+    .footer-contact,
+    .footer-links a,
+    .footer-text{
+        font-size:14px;
+    }
+
+    .newsletter input,
+    .newsletter button{
+        height:46px;
+    }
+}
+
+/* mahesh footer code  */
+@media (max-width: 767px) {
+
+    .footer-links{
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        text-align: left !important;
+    }
+
+    .footer-links li{
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+
+    .footer-links a{
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    .footer-title{
+        text-align: left !important;
+    }
+
+    .footer-title::after{
+        left: 0 !important;
+        transform: none !important;
+    }
+}
+/* Footer end  CSS*/
+
+
+
+
+/* ganesh added it for the login and register toggle options */
+.profile-wrapper{
+    position:relative;
+}
+
+.profile-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.profile-circle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#0c4d91;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:600;
+    font-size:14px;
+}
+
+#profileName{
+    color:#fff; /* change to #000 if header background is white */
+    font-weight:500;
+}
+
+.profile-dropdown{
+    display:none;
+    position:absolute;
+    top:55px;
+    right:0;
+    min-width:160px;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+    overflow:hidden;
+    z-index:1000;
+}
+
+.profile-dropdown a{
+    display:block;
+    padding:12px 15px;
+    text-decoration:none;
+    color:#333;
+}
+
+.profile-dropdown a:hover{
+    background:#f5f5f5;
+}
+
+.profile-dropdown.show{
+    display:block;
+}
+
+#profileName {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    font-family: 'Lato', sans-serif;
+    /* text-transform: uppercase; */
+}
+
+#authButtons,
+#profileContainer{
+    display:none;
+}
+
+
+
+  </style>
+</head>
+<script src="/js/userauth.js"></script>
+<body>
+
+     <!-- Top Bar Start -->
+    <div class="top-bar">
+
+<div class="top-left">
+
+<div class="top-item">
+<i class="fa-regular fa-clock"></i>
+<span>10:00AM - 7:00PM Mon - Sat</span>
+</div>
+
+<div class="top-item">
+  <a href="tel:+919326246981" style="color:#eeeeee; text-decoration:none; display:flex; align-items:center; gap:10px;">
+    <i class="fa-solid fa-phone"></i>
+    <span>+91 93262 46981</span>
+  </a>
+</div>
+
+</div>
+
+<div class="top-right">
+
+  <div class="social">
+    <a href="https://www.linkedin.com/company/creativewebsolution404/?viewAsMember=true">
+      <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+  </div>
+
+  <div class="social">
+    <a href="https://www.instagram.com/creativewebsolution99?utm_source=qr&igsh=OWlxcGlvNG1tNG1s">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+  </div>
+</div>
+
+</div>
+        <!-- Top Bar End -->
+    
+
+<!-- Nav Bar Start -->
+<header class="header">
+
+    <a href="index.html"><img src="img/creativesweb.png" id="brand"></a>
+
+    <!-- Hamburger -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav class="nav" id="navMenu">
+
+       <ul>
+            <li><a href="index.html" >HOME</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="product-website.html"class="active">PRODUCT</a></li>
+            <li><a href="blog.html">BLOG</a></li>
+            <!-- <li><a href="support.html">SUPPORT</a></li> -->
+            <li><a href="contact-website.html">CONTACT</a></li>
+        </ul>
+
+        <div class="header-right">
+         <a href="cart.html" class="cart-icon">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="cartCount">0</span>
+</a>
+
+            <!-- <div id="authLoggedIn" style="display:none;">
+                <img src="https://i.pravatar.cc/40" class="avatar1" alt="User Avatar" />
+            </div> -->
+
+            <div class="actions"  id="authButtons">
+                <a href="login.html" class="btn login">LOGIN</a>
+                <a href="Register.html" class="btn register">REGISTER</a>
+            </div>
+    <div class="profile-wrapper" id="profileContainer" style="display:none;">
+
+    <div class="profile-info" id="profileBtn" >
+        <div class="profile-circle" id="profileInitials">
+            
+        </div>
+
+        <span id="profileName">User</span>
+
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+
+    <a href="user-dashboard.html">
+        <i class="fa-solid fa-gauge-high"></i>
+        Dashboard
+    </a>
+
+    <a href="#" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+        </div>
+
+    </nav>
+
+</header>
+<!-- Nav Bar End -->
+<!-- Nav Bar End -->
+
+<!-- banner start -->
+<section class="page-banner">
+    <div class="banner-overlay"></div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&gt;</span>
+        <a href="product-website.html" class="active">Product</a>
+    </div>
+
+    <h1 class="banner-title">PRODUCT</h1>
+</section>
+
+<!-- banner end  -->
+
+<!-- Bottom Light Section -->
+    <section class="hero-bottom">
+        <div class="container">
+            <h2 class="sub-heading">Browse Digital Products</h2>
+            <div class="blue-divider"></div>
+
+            <p class="description">
+                Discover ready-to-use scripts, plugins, templates, and developer tools created by <br> professional
+                developers worldwide.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="search-wrapper">
+                <div class="input-group mb-3 shadow-sm">
+                    <input type="text" class="form-control search-input" id="searchInput"
+                        placeholder="Search code, plugins, templates..." aria-label="Search">
+                    <button class="btn search-btn" type="button" id="searchBtn">Search</button>
+                </div>
+                <div id="suggestionBox" class="suggestion-box"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <!-- main section -->
+
+     <div class="container">
+        <!-- Sorting Bar Section Start -->
+        <div class="sorting-bar">
+            <h2 class="product-count" id="productCount">All products (10)</h2>
+
+            <div class="sort-wrapper">
+                <span class="sort-label">Sort by</span>
+                <select class="form-select sort-dropdown" id="sortDropdown">
+                    <!-- <option selected value="newest">Newest</option> -->
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <!-- <option value="rating">Best Rating</option> -->
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <!-- Sorting Bar Section End -->
+    <div class="container">
+        <div class="row">
+
+            <!-- SIDEBAR -->
+            <div class="col-lg-3 col-md-12">
+                <div class="sidebar">
+                    <div class="filter-title">
+                        Filter by <a href="#" class="clear-all" id="clearAllFilters">Clear all</a>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-section-title">Category</div>
+                        <select class="form-select form-select-sm text-muted" id="categoryFilter">
+                            <option value="" selected>Category</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="price-range-box">
+                        <input type="range" id="priceRange" min="0" max="20000" value="20000">
+
+                        <div class="price-labels">
+                            <span>Rs.0</span>
+                            <span id="priceValue">Rs.20,000</span>
+                        </div>
+                    </div>
+
+                    <div class="filter-section mt-4">
+                        <div class="filter-section-title">Rating</div>
+                        <div class="form-check">
+                            <input class="form-check-input rating-filter" type="checkbox" value="5" id="rating5">
+                            <label class="form-check-label star-rating-sidebar" for="rating5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </label>
+                        </div>
+                        <div class="form-check mt-1">
+                            <input class="form-check-input rating-filter" type="checkbox" value="4" id="rating4">
+                            <label class="form-check-label star-rating-sidebar" for="rating4">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="far fa-star"></i>
+                            </label>
+
+                        </div>
+                        <div class="form-check mt-1">
+                            <input class="form-check-input rating-filter" type="checkbox" value="3" id="rating3">
+                            <label class="form-check-label star-rating-sidebar" for="rating3">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="far fa-star"></i><i class="far fa-star"></i>
+                            </label>
+
+                        </div>
+                        <div class="form-check mt-1">
+                            <input class="form-check-input rating-filter" type="checkbox" value="2" id="rating2">
+                            <label class="form-check-label star-rating-sidebar" for="rating2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
+                                    class="far fa-star"></i><i class="far fa-star"></i>
+                            </label>
+
+                        </div>
+                        <div class="form-check mt-1">
+                            <input class="form-check-input rating-filter" type="checkbox" value="1" id="rating1">
+                            <label class="form-check-label star-rating-sidebar" for="rating1">
+                                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i
+                                    class="far fa-star"></i><i class="far fa-star"></i>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="filter-section mt-4">
+                        <div class="filter-section-title">Technology stack</div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value="PHP" id="techPhp"><label
+                                class="form-check-label" for="techPhp">PHP</label></div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value="Javascript" id="techJs"><label
+                                class="form-check-label" for="techJs">Javascript</label></div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value="Python" id="techPy"><label
+                                class="form-check-label" for="techPy">Python</label></div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value="Java" id="techJava"><label
+                                class="form-check-label" for="techJava">Java</label></div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value="Node Js" id="techNode"><label
+                                class="form-check-label" for="techNode">Node Js</label></div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value=".NET" id="techNet"><label
+                                class="form-check-label" for="techNet">.NET</label></div>
+                        <div class="form-check"><input class="form-check-input tech-filter" type="checkbox" value="React Native" id="techRn"><label
+                                class="form-check-label" for="techRn">.React Native</label></div>
+
+                    </div>
+
+                    <div class="filter-section mt-4">
+                        <div class="filter-section-title">Framework compatibility</div>
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="Laravel" id="fwLaravel"><label
+                                class="form-check-label" for="fwLaravel">Laravel</label></div>
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="React" id="fwReact"><label
+                                class="form-check-label" for="fwReact">React</label></div>
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="CodeIgniter" id="fwCi"><label
+                                class="form-check-label" for="fwCi">CodeIgniter</label></div>
+                      
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="Vue.Js" id="fwVue"><label
+                                class="form-check-label" for="fwVue">Vue.Js</label></div>
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="Angular" id="fwAngular"><label
+                                class="form-check-label" for="fwAngular">Angular</label></div>
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="Spring Boot" id="fwSpring"><label
+                                class="form-check-label" for="fwSpring">Spring Boot</label></div>
+                        <div class="form-check"><input class="form-check-input framework-filter" type="checkbox" value="Bootstrap" id="fwBootstrap"><label
+                                class="form-check-label" for="fwBootstrap">Bootstrap</label></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT GRID cards section start -->
+            <div class="col-lg-9 col-md-12">
+                <div class="row g-4" id="productGrid">
+                    <!-- products are loaded dynamically via JS -->
+
+                    <!-- PRODUCT GRID cards section start -->
+            <!-- <div class="col-lg-9 col-md-12">
+                <div class="row  g-4">
+
+                    <!-- Card 1 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">
+                        <div class="product-card">
+                            <img src="./img/Employee management system.png" class="product-img"
+                                alt="Software Development">
+                            <div class="card-body">
+                                <h5 class="product-title">Employee management system</h5>
+                                <div class="price-row">
+                                    <span class="price">₹9,999</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="far fa-star"></i>
+                                        <span class="rating-count">(14)</span>
+                                    </div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>Employee database management</li>
+                                    <li>Attendance & leave tracking</li>
+                                    <li>Payroll integration</li>
+                                    <li>Admin dashboard</li>
+                                </ul>
+                                
+                                <!-- Buttons 
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button class="btn btn-preview" onclick="window.location.href='product-detail.html'">
+                                        Preview
+                                    </button>
+                                    <button class="btn btn-add-cart" onclick="addToCartPW(this, 1)">
+    Add To Cart
+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Card 2 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">
+                        <div class="product-card">
+                            <img src="img/Product 3.png"  class="product-img" alt="Software Development">
+                            <div class="card-body">
+                                <h5 class="product-title">Task management System</h5>
+
+                                <div class="price-row">
+                                    <span class="price">₹9,999</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="far fa-star"></i>
+                                        <span class="rating-count">(14)</span>
+                                    </div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>Product inventory tracking</li>
+                                    <li>Order management</li>
+                                    <li>Stock alerts & reports</li>
+                                    <li>Supplier management</li>
+                                </ul>
+                                
+                                <!-- Buttons 
+                                <div class="d-flex justify-content-between mt-3">
+                                   <button class="btn btn-preview" onclick="window.location.href='product-detail.html'">
+                                        Preview
+                                    </button>
+                                    <button class="btn btn-add-cart" onclick="addToCartPW(this, 2)">
+    Add To Cart
+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">
+                        <div class="product-card">
+                            <img src="img/ProDetail5.png" class="product-img"
+                                alt="Software Development">
+                            <div class="card-body">
+                                <h5 class="product-title">CWS Inventory</h5>
+                                <div class="price-row">
+                                    <span class="price">₹6,999</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="far fa-star"></i>
+                                        <span class="rating-count">(14)</span>
+                                    </div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>Vehicle booking management</li>
+                                    <li>Car availability tracking</li>
+                                    <li>Online payment integration</li>
+                                    <li>Customer booking history</li>
+                                </ul>
+
+                                
+                                <!-- Buttons 
+                                <div class="d-flex justify-content-between mt-3">
+                                  <button class="btn btn-preview" onclick="window.location.href='product-detail.html'">
+                                        Preview
+                                    </button>
+                                  <button class="btn btn-add-cart" onclick="addToCartPW(this, 3)">
+    Add To Cart
+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- Card 4 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">
+                        <div class="product-card">
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600"  class="product-img" alt="Software Development">
+                            <div class="card-body">
+                                <h5 class="product-title">Task management System</h5>
+
+                                <div class="price-row">
+                                    <span class="price">₹7,450</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="far fa-star"></i>
+                                        <span class="rating-count">(14)</span>
+                                    </div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>Fresh produce marketplace</li>
+                                    <li>Farmer & vendor management</li>
+                                    <li>Order tracking & delivery updates</li>
+                                    <li>Secure online payments</li>
+                                </ul>
+                                
+                                <!-- Buttons 
+                                <div class="d-flex justify-content-between mt-3">
+                                   <button class="btn btn-preview" onclick="window.location.href='product-detail.html'">
+                                        Preview
+                                    </button>
+                                    <button class="btn btn-add-cart" onclick="addToCartPW(this, 4)">
+    Add To Cart
+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">
+                        <div class="product-card">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600"  class="product-img" alt="Software Development">
+                            <div class="card-body">
+                                <h5 class="product-title">Tutor Find</h5>
+
+                                <div class="price-row">
+                                    <span class="price">₹9,999</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="far fa-star"></i>
+                                        <span class="rating-count">(14)</span>
+                                    </div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>Search tutors by subject & location</li>
+                                    <li>Online class booking system</li>
+                                    <li>Tutor ratings & reviews</li>
+                                    <li>Student progress tracking</li>
+                                </ul>
+                                
+                                <!-- Buttons 
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button class="btn btn-preview" onclick="window.location.href='product-detail.html'">
+                                        Preview
+                                    </button>
+                                   <button class="btn btn-add-cart" onclick="addToCartPW(this, 5)">
+    Add To Cart
+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">
+                        <div class="product-card">
+                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600"  class="product-img" alt="Software Development">
+                            <div class="card-body">
+                                <h5 class="product-title">Virtual Classroom</h5>
+
+                                <div class="price-row">
+                                    <span class="price">₹6,999</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="far fa-star"></i>
+                                        <span class="rating-count">(14)</span>
+                                    </div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>Live video classes & webinars</li>
+                                    <li>Assignment & quiz management</li>
+                                    <li>Attendance tracking system</li>
+                                    <li>Interactive chat & discussion boards</li>
+                                </ul>
+                                
+                                <!-- Buttons 
+                                <div class="d-flex justify-content-between mt-3">
+                                  <button class="btn btn-preview" onclick="window.location.href='product-detail.html'">
+                                        Preview
+                                    </button>
+                                    <button class="btn btn-add-cart" onclick="addToCartPW(this, 6)">
+    Add To Cart
+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+            </div> -->
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+          <div class="pagination-wrapper">
+
+          <div class="pagination-custom" id="paginationBox">
+            <!-- pagination is rendered dynamically via JS -->
+          </div>
+
+  </div>
+
+  
+
+
+
+ <!-- Footer Start -->
+  <footer class="footer">
+
+<div class="footer-container">
+
+<!-- column 1 -->
+
+<div>
+
+<a href="index.html"><img src="img/creativesweb.png" class="footer-logo"></a>
+
+<div class="footer-contact">
+  <a href="https://maps.app.goo.gl/TTv8ueeyD83GUAW86" 
+     target="_blank" 
+     style="color:inherit; text-decoration:none; display:flex; gap:10px;">
+    
+    <i class="fa-solid fa-location-dot"></i>
+
+    <span>
+      LWT, 203, C/O, ITI RD, above PNG,<br>
+      near Parihar Chowk, Aundh,<br>
+      Maharashtra-411007
+    </span>
+
+  </a>
+</div>
+
+
+<!-- PHONE FIXED (TEL LINK ADDED) -->
+      <div class="footer-contact">
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:+919326246981" class="footer-link" style=" text-decoration:none; ">
+          +91 93262 46981
+        </a>
+      </div>
+
+<!-- EMAIL FIX (MAILTO ADDED) -->
+      <div class="footer-contact">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="mailto:info@creativewebsolution.in" class="footer-link">
+          info@creativewebsolution.in
+        </a>
+      </div>
+
+<div class="footer-contact">
+  <a href="https://www.creativewebsolution.in/" class="footer-link"
+     target="_blank" 
+     style=" text-decoration:none; display:flex; gap:10px;">
+    
+    <i class="fa-solid fa-globe"></i>
+
+    <span>www.creativewebsolution.in</span>
+
+  </a>
+</div>
+
+</div>
+
+
+<!-- column 2 -->
+
+<div>
+
+<h3 class="footer-title">Quick Links</h3>
+
+<ul class="footer-links">
+<li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+<li><a href="aboutus.html"><i class="fa-solid fa-chevron-right"></i> About US</a></li>
+<li><a href="product-website.html"><i class="fa-solid fa-chevron-right"></i> Product</a></li>
+<li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+<!-- <li><a href="support.html"><i class="fa-solid fa-chevron-right"></i> Support</a></li> -->
+<li><a href="contact-website.html"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+</ul>
+
+</div>
+
+
+<!-- column 3 -->
+
+<div>
+
+<h3 class="footer-title">Newsletters</h3>
+
+<p class="footer-text">
+Elevate your business with Creative Web Solution.
+Experience growth through smart websites and cutting edge digital strategies.
+</p>
+
+<div class="newsletter">
+<input type="email" placeholder="Email goes here">
+<button>Submit</button>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- footer bottom -->
+
+<div class="footer-bottom">
+
+<p style="color:#999999;">
+Copyright © 2026
+<a href="#" style="color:white;">Creative Web Solution</a>.
+ALL RIGHTS RESERVED
+</p>
+
+<div class="footer-social">
+<a href="https://www.linkedin.com/company/creativewebsolution404/?viewAsMember=true"><i class="fa-brands fa-linkedin-in"></i></a>
+<a href="https://www.instagram.com/creativewebsolution/"><i class="fa-brands fa-instagram"></i></a>
+</div>
+
+</div>
+
+</footer>
+        <!-- Footer End -->
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+
+/* toggle menu */
+
+const toggle = document.getElementById("menuToggle");
+const nav = document.getElementById("navMenu");
+
+toggle.onclick = () => {
+nav.classList.toggle("active");
+};
+
+</script>
+
+<script>
+/* ===========================================================
+   PRODUCT WEBSITE PAGE — dynamic product loading + cart logic
+   + CLIENT-SIDE SIDEBAR FILTERS (category / price / rating /
+   technology stack / framework compatibility)
+=========================================================== */
+
+var API = 'http://localhost:8081';
+var PRODUCTS_API = API + '/public/products';
+
+/* ---------- auth helpers ---------- */
+function isLoggedIn() { return !!(localStorage.getItem('token') || sessionStorage.getItem('token')); }
+function getToken()   { return localStorage.getItem('token') || sessionStorage.getItem('token') || ''; }
+function clearTokens() {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+}
+
+/* ---------- guest cart helpers ---------- */
+function getGuestCart() {
+    try { return JSON.parse(localStorage.getItem('cwsGuestCart') || '[]'); } catch (e) { return []; }
+}
+function saveGuestCart(cart) { localStorage.setItem('cwsGuestCart', JSON.stringify(cart)); }
+function guestCartProductIds() { return getGuestCart().map(function (p) { return p.productId; }); }
+
+/* ---------- toast ---------- */
+function showToast(msg, type) {
+    type = type || 'success';
+    var wrap = document.getElementById('toastWrap');
+    var t = document.createElement('div');
+    t.className = 'cws-toast ' + type;
+    t.innerHTML = (type === 'success' ? '<i class="fa-solid fa-circle-check"></i> ' : '<i class="fa-solid fa-circle-exclamation"></i> ') + msg;
+    wrap.appendChild(t);
+    setTimeout(function () {
+        t.style.animation = 'cwsOut .3s ease forwards';
+        setTimeout(function () { t.remove(); }, 300);
+    }, 3000);
+}
+
+/* ---------- cart count badge ---------- */
+async function updateCartCount() {
+    try {
+        if (isLoggedIn()) {
+            const response = await fetch(API + '/api/cart/getcart', {
+                headers: { 'Authorization': 'Bearer ' + getToken() }
+            });
+            if (response.status === 401) {
+                clearTokens();
+                var gCount = getGuestCart().length;
+                var gBadge = document.getElementById('cartCount');
+                gBadge.innerText = gCount;
+                gBadge.style.display = gCount > 0 ? 'block' : 'none';
+                return;
+            }
+            const result = await response.json();
+            if (result.success && result.data && result.data.items) {
+                const count = result.data.items.length;
+                const badge = document.getElementById('cartCount');
+                badge.innerText = count;
+                badge.style.display = count > 0 ? 'block' : 'none';
+            }
+        } else {
+            const gCount = getGuestCart().length;
+            const gBadge = document.getElementById('cartCount');
+            gBadge.innerText = gCount;
+            gBadge.style.display = gCount > 0 ? 'block' : 'none';
+        }
+    } catch (e) {
+        console.log(e);
+        const gCount = getGuestCart().length;
+        const gBadge = document.getElementById('cartCount');
+        gBadge.innerText = gCount;
+        gBadge.style.display = gCount > 0 ? 'block' : 'none';
+    }
+}
+
+/* ---------- button state helpers ---------- */
+function markViewCart(btn) {
+    btn.disabled = false;
+    btn.textContent = 'View Cart';
+    btn.classList.add('added');
+    btn.onclick = function () { window.location.href = 'cart.html'; };
+}
+
+function markAddToCart(btn, productId) {
+    btn.disabled = false;
+    btn.textContent = 'Add To Cart';
+    btn.classList.remove('added');
+    btn.onclick = function () { addToCartPW(btn, productId); };
+}
+
+function applyButtonStatesPW(cartProductIds) {
+    Object.keys(PRODUCT_DATA).forEach(function (id) {
+        var btn = document.getElementById('cartBtn-' + id);
+        if (!btn) return;
+        if (cartProductIds.indexOf(Number(id)) !== -1) { markViewCart(btn); }
+        else { markAddToCart(btn, Number(id)); }
+    });
+}
+
+function syncButtonsPW() {
+    if (isLoggedIn()) {
+        fetch(API + '/api/cart/getcart', {
+            headers: { 'Authorization': 'Bearer ' + getToken() }
+        })
+        .then(function (res) {
+            if (res.status === 401) {
+                clearTokens();
+                applyButtonStatesPW(guestCartProductIds());
+                return null;
+            }
+            return res.json();
+        })
+        .then(function (data) {
+            if (!data) return;
+            var ids = (data.success && data.data && data.data.items)
+                ? data.data.items.map(function (i) { return i.productId; }) : [];
+            applyButtonStatesPW(ids);
+        })
+        .catch(function () { applyButtonStatesPW(guestCartProductIds()); });
+    } else {
+        applyButtonStatesPW(guestCartProductIds());
+    }
+}
+
+/* ---------- add to cart ---------- */
+function addToCartPW(btn, productId) {
+    btn.disabled = true;
+    btn.textContent = '...';
+
+    if (isLoggedIn()) {
+        fetch(API + '/api/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getToken()
+            },
+            body: JSON.stringify({ productId: Number(productId), quantity: 1 })
+        })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (data.success) {
+                showToast('Product added to cart');
+                markViewCart(btn);
+                updateCartCount();
+            } else {
+                showToast(data.message || 'Failed to add to cart', 'error');
+                markAddToCart(btn, productId);
+            }
+        })
+        .catch(function () {
+            showToast('Network error. Please try again.', 'error');
+            markAddToCart(btn, productId);
+        });
+    } else {
+        var cart = getGuestCart();
+        if (!cart.find(function (p) { return p.productId === productId; })) {
+            cart.push(PRODUCT_DATA[productId]);
+            saveGuestCart(cart);
+        }
+        showToast('Product added to cart');
+        markViewCart(btn);
+        updateCartCount();
+    }
+}
+
+/* ---------- product card rendering ---------- */
+var PRODUCT_DATA = {}; // populated dynamically from the API response
+
+function starIconsPW(rating) {
+    rating = Math.round(Number(rating) || 0);
+    var html = '';
+    for (var i = 1; i <= 5; i++) {
+        html += i <= rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+    }
+    return html;
+}
+
+function buildProductCardPW(product) {
+    var features = (product.features || [])
+        .slice(0, 4)
+        .map(function (f) { return '<li>' + f + '</li>'; })
+        .join('');
+
+    return (
+        '<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex">' +
+            '<div class="product-card">' +
+                '<img src="' + product.thumbnailImage + '" class="product-img" alt="' + product.name + '">' +
+                '<div class="card-body">' +
+                    '<h5 class="product-title">' + product.name + '</h5>' +
+                    '<div class="price-row">' +
+                        '<span class="price">₹' + Number(product.price).toLocaleString('en-IN') + '</span>' +
+                        '<div class="rating-stars">' +
+                            starIconsPW(product.averageRating) +
+                            '<span class="rating-count">(' + product.totalReviews + ')</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<ul class="feature-list">' + features + '</ul>' +
+                    '<div class="d-flex justify-content-between mt-3">' +
+                        '<button class="btn btn-preview" onclick="window.location.href=\'PreviewPage.html?slug=' + product.slug + '\'">Preview</button>' +
+                        '<button class="btn btn-add-cart" id="cartBtn-' + product.id + '" onclick="addToCartPW(this, ' + product.id + ')">Add To Cart</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>'
+    );
+}
+
+/* ---------- pagination ---------- */
+function renderPaginationPW(currentPage, totalPages) {
+    var box = document.getElementById('paginationBox');
+    if (!box) return;
+    box.innerHTML = '';
+
+    if (totalPages <= 0) totalPages = 1;
+
+    function pageBox(label, page, isActive, isDisabled) {
+        var div = document.createElement('div');
+        div.className = 'page-box' + (isActive ? ' active' : '');
+        div.innerHTML = label;
+        if (!isDisabled) {
+            div.addEventListener('click', function () {
+                pwState.page = page;
+                renderCurrentPagePW();
+                var bar = document.querySelector('.sorting-bar');
+                if (bar) window.scrollTo({ top: bar.offsetTop - 20, behavior: 'smooth' });
+            });
+        } else {
+            div.style.cursor = 'default';
+            div.style.opacity = '0.5';
+        }
+        return div;
+    }
+
+    box.appendChild(pageBox('<i class="fa-solid fa-chevron-left"></i>', currentPage - 1, false, currentPage === 0));
+
+    var pagesToShow = [0];
+    for (var p = currentPage - 1; p <= currentPage + 1; p++) {
+        if (p > 0 && p < totalPages - 1) pagesToShow.push(p);
+    }
+    if (totalPages > 1) pagesToShow.push(totalPages - 1);
+    pagesToShow = pagesToShow
+        .filter(function (v, i, a) { return a.indexOf(v) === i; })
+        .sort(function (a, b) { return a - b; });
+
+    var lastShown = -1;
+    pagesToShow.forEach(function (p) {
+        if (lastShown !== -1 && p - lastShown > 1) {
+            var dots = document.createElement('div');
+            dots.className = 'page-box';
+            dots.style.cursor = 'default';
+            dots.textContent = '...';
+            box.appendChild(dots);
+        }
+        box.appendChild(pageBox(p + 1, p, p === currentPage, false));
+        lastShown = p;
+    });
+
+    box.appendChild(pageBox('<i class="fa-solid fa-chevron-right"></i>', currentPage + 1, false, currentPage === totalPages - 1));
+}
+
+/* =========================================================
+   FILTER STATE + LOGIC (pure client-side, no backend changes)
+========================================================= */
+
+var pwState = {
+    page: 0,
+    size: 6,
+    sortBy: 'createdAt',
+    sortDir: 'desc',
+    search: ''
+};
+
+var ALL_PRODUCTS_PW = [];   // full product list fetched once from the API
+var MAX_PRICE_PW = 20000;   // updated once real data arrives
+
+var filterState = {
+    category: '',
+    maxPrice: null,
+    minRatings: [],   // e.g. [3,4] means "3 stars or more" OR "4 stars or more" selected
+    tech: [],
+    frameworks: []
+};
+
+/* Reads a possible "tag list" field off a product regardless of the
+   exact field name / shape the backend uses (array or comma string). */
+function readTagFieldPW(product, candidateKeys) {
+    for (var i = 0; i < candidateKeys.length; i++) {
+        var val = product[candidateKeys[i]];
+        if (val === undefined || val === null) continue;
+        if (Array.isArray(val)) return val.map(String);
+        if (typeof val === 'string' && val.trim() !== '') {
+            return val.split(',').map(function (s) { return s.trim(); });
+        }
+    }
+    return null; // field not present on this product/API response
+}
+
+/* "category" in the real API response (ProductPublicCardResponse.category)
+   is the ProductCategory enum, which serializes as a plain string:
+   ENTERPRISE | SAAS_PLATFORM | UTILITY_SOFTWARE | E_COMMERCE */
+function productCategoryPW(product) {
+    var cat = product.category;
+    if (cat === undefined || cat === null || cat === '') return null;
+    return String(cat);
+}
+
+/* Turns the raw enum value (e.g. "SAAS_PLATFORM") into a readable label
+   ("Saas Platform") for display in the Category dropdown. The raw value
+   is still what's stored/compared in filterState.category. */
+function formatCategoryLabelPW(rawCategory) {
+    return String(rawCategory)
+        .toLowerCase()
+        .split('_')
+        .map(function (word) { return word.charAt(0).toUpperCase() + word.slice(1); })
+        .join(' ');
+}
+
+/* Backend now exposes ONE shared field — technicalRequirements (List<String>) —
+   that covers BOTH "Technology stack" and "Framework compatibility".
+   Per spec: treat tech + frameworks as a SINGLE combined backend filter,
+   and use PARTIAL (substring) matching rather than exact matching, since
+   a single technicalRequirements entry may contain extra context
+   (e.g. "Laravel 10", "React + Vite") rather than an exact label match. */
+function productTechnicalRequirementsPW(product) {
+    return readTagFieldPW(product, [
+        'technicalRequirements', 'technical_requirements', 'technicalRequirement', 'requirements'
+    ]);
+}
+
+/* Known pairings so selecting one sidebar checkbox also surfaces products
+   tagged with its commonly-associated counterpart — e.g. checking "Java"
+   should also match products whose technicalRequirements say "Spring Boot",
+   and checking "CSS"-ish entries like "Bootstrap" should match each other.
+   This is layered ON TOP of plain substring matching, not a replacement. */
+var RELATED_TECH_TERMS_PW = {
+    'java': ['spring boot', 'springboot', 'spring'],
+    'spring boot': ['java'],
+    'javascript': ['node js', 'nodejs', 'react', 'vue.js', 'angular'],
+    'node js': ['javascript'],
+    'python': ['django', 'flask'],
+    '.net': ['c#', 'asp.net'],
+    'php': ['laravel', 'codeigniter'],
+    'laravel': ['php'],
+    'codeigniter': ['php'],
+    'react native': ['javascript', 'react'],
+    'react': ['javascript', 'react native'],
+    'vue.js': ['javascript'],
+    'angular': ['javascript'],
+    'bootstrap': ['css'],
+    'css': ['bootstrap']
+};
+
+function expandWithRelatedTermsPW(terms) {
+    var expanded = terms.slice();
+    terms.forEach(function (term) {
+        var related = RELATED_TECH_TERMS_PW[term.toLowerCase()];
+        if (related) expanded = expanded.concat(related);
+    });
+    return expanded;
+}
+
+
+function matchesFiltersPW(product) {
+    // price
+    if (filterState.maxPrice !== null && Number(product.price) > filterState.maxPrice) return false;
+
+    // rating — show product if it meets ANY of the checked minimum-star thresholds
+    if (filterState.minRatings.length > 0) {
+        var rating = Number(product.averageRating) || 0;
+        var passes = filterState.minRatings.some(function (min) { return rating >= min; });
+        if (!passes) return false;
+    }
+
+    // category
+    if (filterState.category) {
+        var cat = productCategoryPW(product);
+        if (!cat || cat.toLowerCase() !== filterState.category.toLowerCase()) return false;
+    }
+
+    // Technology stack + Framework compatibility = ONE combined filter against
+    // technicalRequirements. Selecting checkboxes from EITHER group adds to the
+    // same "selected requirements" pool; a product matches if ANY one of its
+    // technicalRequirements entries PARTIALLY matches ANY selected value OR
+    // a known related term (e.g. Java <-> Spring Boot, CSS <-> Bootstrap).
+    var selectedRequirements = filterState.tech.concat(filterState.frameworks);
+    if (selectedRequirements.length > 0) {
+        var reqs = productTechnicalRequirementsPW(product);
+        if (!reqs || reqs.length === 0) return false; // no data on this product, can't match
+        var reqsLower = reqs.map(function (r) { return r.toLowerCase(); });
+        var expandedSelected = expandWithRelatedTermsPW(selectedRequirements);
+        var hasMatch = expandedSelected.some(function (selected) {
+            var selectedLower = selected.toLowerCase();
+            return reqsLower.some(function (req) {
+                // partial match in both directions, e.g. "React" matches
+                // "React Native" / "React.js", and vice versa
+                return req.indexOf(selectedLower) !== -1 || selectedLower.indexOf(req) !== -1;
+            });
+        });
+        if (!hasMatch) return false;
+    }
+
+    return true;
+}
+
+function applySortPW(list) {
+    var sorted = list.slice();
+    if (pwState.sortBy === 'price') {
+        sorted.sort(function (a, b) {
+            return pwState.sortDir === 'asc' ? a.price - b.price : b.price - a.price;
+        });
+    } else {
+        sorted.sort(function (a, b) {
+            return pwState.sortDir === 'asc'
+                ? new Date(a.createdAt) - new Date(b.createdAt)
+                : new Date(b.createdAt) - new Date(a.createdAt);
+        });
+    }
+    return sorted;
+}
+
+function applySearchPW(list) {
+    if (!pwState.search) return list;
+    var q = pwState.search.toLowerCase();
+    return list.filter(function (p) {
+        return (p.name || '').toLowerCase().indexOf(q) !== -1;
+    });
+}
+
+/* Recomputes filtered + sorted + searched + paginated product list
+   and re-renders the grid + pagination, WITHOUT hitting the API again. */
+function renderCurrentPagePW() {
+    var filtered = ALL_PRODUCTS_PW.filter(matchesFiltersPW);
+    filtered = applySearchPW(filtered);
+    filtered = applySortPW(filtered);
+
+    var totalElements = filtered.length;
+    var totalPages = Math.max(1, Math.ceil(totalElements / pwState.size));
+    if (pwState.page >= totalPages) pwState.page = totalPages - 1;
+    if (pwState.page < 0) pwState.page = 0;
+
+    var start = pwState.page * pwState.size;
+    var pageItems = filtered.slice(start, start + pwState.size);
+
+    var grid = document.getElementById('productGrid');
+    grid.innerHTML = '';
+    PRODUCT_DATA = {};
+
+    if (pageItems.length === 0) {
+        grid.innerHTML = '<div class="empty-state">No products match the selected filters.</div>';
+    }
+
+    pageItems.forEach(function (product) {
+        grid.insertAdjacentHTML('beforeend', buildProductCardPW(product));
+        PRODUCT_DATA[product.id] = {
+            productId: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.thumbnailImage,
+            license: 'Regular License'
+        };
+    });
+
+    var countEl = document.getElementById('productCount');
+    if (countEl) countEl.textContent = 'All products (' + totalElements + ')';
+
+    renderPaginationPW(pwState.page, totalPages);
+
+    syncButtonsPW();
+    updateCartCount();
+}
+
+/* ---------- populate Category dropdown from real product data ---------- */
+function populateCategoryDropdownPW() {
+    var select = document.getElementById('categoryFilter');
+    if (!select) return;
+
+    var categories = ALL_PRODUCTS_PW
+        .map(productCategoryPW)
+        .filter(function (c) { return !!c; });
+    categories = categories.filter(function (v, i, a) { return a.indexOf(v) === i; }).sort();
+
+    // keep the placeholder option, append real categories (if any exist).
+    // value = raw enum string (e.g. "SAAS_PLATFORM") so filtering still
+    // compares against exactly what the API returns; text = friendly label.
+    select.innerHTML = '<option value="">Category</option>';
+    categories.forEach(function (cat) {
+        var opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = formatCategoryLabelPW(cat);
+        select.appendChild(opt);
+    });
+}
+
+
+/* ---------- wire up sidebar filter controls ---------- */
+function initFiltersPW() {
+    var categorySelect = document.getElementById('categoryFilter');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function () {
+            filterState.category = categorySelect.value;
+            pwState.page = 0;
+            renderCurrentPagePW();
+        });
+    }
+
+    var priceRangeEl = document.getElementById('priceRange');
+    var priceValueEl = document.getElementById('priceValue');
+    if (priceRangeEl) {
+        priceRangeEl.addEventListener('input', function () {
+            priceValueEl.textContent = 'Rs.' + Number(priceRangeEl.value).toLocaleString('en-IN');
+        });
+        priceRangeEl.addEventListener('change', function () {
+            filterState.maxPrice = Number(priceRangeEl.value) >= MAX_PRICE_PW ? null : Number(priceRangeEl.value);
+            pwState.page = 0;
+            renderCurrentPagePW();
+        });
+    }
+
+    document.querySelectorAll('.rating-filter').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+            filterState.minRatings = Array.from(document.querySelectorAll('.rating-filter:checked'))
+                .map(function (el) { return Number(el.value); });
+            pwState.page = 0;
+            renderCurrentPagePW();
+        });
+    });
+
+    document.querySelectorAll('.tech-filter').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+            filterState.tech = Array.from(document.querySelectorAll('.tech-filter:checked'))
+                .map(function (el) { return el.value; });
+            pwState.page = 0;
+            renderCurrentPagePW();
+        });
+    });
+
+    document.querySelectorAll('.framework-filter').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+            filterState.frameworks = Array.from(document.querySelectorAll('.framework-filter:checked'))
+                .map(function (el) { return el.value; });
+            pwState.page = 0;
+            renderCurrentPagePW();
+        });
+    });
+
+    var clearAllEl = document.getElementById('clearAllFilters');
+    if (clearAllEl) {
+        clearAllEl.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // reset sidebar filter state
+            filterState = { category: '', maxPrice: null, minRatings: [], tech: [], frameworks: [] };
+
+            if (categorySelect) categorySelect.value = '';
+            if (priceRangeEl) {
+                priceRangeEl.value = MAX_PRICE_PW;
+                priceValueEl.textContent = 'Rs.' + Number(MAX_PRICE_PW).toLocaleString('en-IN');
+            }
+            document.querySelectorAll('.rating-filter, .tech-filter, .framework-filter').forEach(function (cb) {
+                cb.checked = false;
+            });
+
+            // also reset search box + sort dropdown + paging, so "Clear all"
+            // truly clears the entire result set back to its default state
+            pwState.search = '';
+            if (searchInputPW) searchInputPW.value = '';
+
+            pwState.sortBy = 'createdAt';
+            pwState.sortDir = 'desc';
+            var sortDropdownEl = document.getElementById('sortDropdown');
+            if (sortDropdownEl) sortDropdownEl.selectedIndex = 0;
+
+            pwState.page = 0;
+            renderCurrentPagePW();
+        });
+    }
+}
+
+/* ---------- initial fetch: pull the FULL product list once ---------- */
+async function loadProductsPW() {
+    try {
+        // Ask the API for a very large page so we effectively get everything
+        // in one request, then do search/sort/filter/pagination in JS only.
+        var params = new URLSearchParams({ page: 0, size: 1000, sortBy: 'createdAt', sortDir: 'desc' });
+
+        const response = await fetch(PRODUCTS_API + '?' + params.toString());
+        const result = await response.json();
+
+        if (!result.success || !result.data) return;
+
+        var paged = result.data;
+        ALL_PRODUCTS_PW = paged.content || [];
+
+        if (ALL_PRODUCTS_PW.length > 0) {
+            var maxPrice = Math.max.apply(null, ALL_PRODUCTS_PW.map(function (p) { return Number(p.price) || 0; }));
+            MAX_PRICE_PW = Math.max(maxPrice, 1);
+            var priceRangeEl = document.getElementById('priceRange');
+            var priceValueEl = document.getElementById('priceValue');
+            if (priceRangeEl) {
+                priceRangeEl.max = MAX_PRICE_PW;
+                priceRangeEl.value = MAX_PRICE_PW;
+                priceValueEl.textContent = 'Rs.' + Number(MAX_PRICE_PW).toLocaleString('en-IN');
+            }
+        }
+
+        populateCategoryDropdownPW();
+        renderCurrentPagePW();
+
+    } catch (error) {
+        console.error('Failed to load products:', error);
+    }
+}
+
+/* ---------- sort dropdown ---------- */
+document.getElementById('sortDropdown').addEventListener('change', function (e) {
+    if (e.target.value === 'price-low') {
+        pwState.sortBy = 'price';
+        pwState.sortDir = 'asc';
+    } else if (e.target.value === 'price-high') {
+        pwState.sortBy = 'price';
+        pwState.sortDir = 'desc';
+    } else {
+        pwState.sortBy = 'createdAt';
+        pwState.sortDir = 'desc';
+    }
+    pwState.page = 0;
+    renderCurrentPagePW();
+});
+
+/* ---------- search bar ---------- */
+/*var searchInputPW = document.getElementById('searchInput');
+var searchBtnPW = document.getElementById('searchBtn');
+
+function runSearchPW() {
+    pwState.search = searchInputPW.value.trim();
+    pwState.page = 0;
+    renderCurrentPagePW();
+}
+
+if (searchBtnPW) searchBtnPW.addEventListener('click', runSearchPW);
+if (searchInputPW) {
+    searchInputPW.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') runSearchPW();
+    });
+}
+
+/* ---------- init ---------- */
+/*document.addEventListener('DOMContentLoaded', function () {
+    initFiltersPW();
+    loadProductsPW();
+});
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') updateCartCount();
+});*/
+
+var searchInputPW = document.getElementById('searchInput');
+var searchBtnPW = document.getElementById('searchBtn');
+
+// Dynamically create and append suggestion box container to the search wrapper
+var suggestionBoxPW = document.createElement('div');
+suggestionBoxPW.id = 'suggestionBox';
+suggestionBoxPW.className = 'suggestion-box';
+if (searchInputPW && searchInputPW.parentNode) {
+    searchInputPW.parentNode.appendChild(suggestionBoxPW);
+}
+
+var activeIndexPW = -1; // Track index of active keyboard suggestion selection
+
+function runSearchPW() {
+    pwState.search = searchInputPW.value.trim();
+    pwState.page = 0;
+    renderCurrentPagePW();
+    if (suggestionBoxPW) suggestionBoxPW.style.display = 'none';
+}
+
+if (searchBtnPW) searchBtnPW.addEventListener('click', runSearchPW);
+if (searchInputPW) {
+    searchInputPW.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            if (suggestionBoxPW && suggestionBoxPW.style.display === 'block' && activeIndexPW >= 0) {
+                var items = suggestionBoxPW.querySelectorAll('.suggestion-item');
+                if (items[activeIndexPW]) {
+                    e.preventDefault();
+                    items[activeIndexPW].click();
+                    return;
+                }
+            }
+            runSearchPW();
+        }
+    });
+
+    // Keyboard navigation (Arrow Keys & Escape)
+    searchInputPW.addEventListener('keydown', function (e) {
+        var items = suggestionBoxPW.querySelectorAll('.suggestion-item');
+        if (suggestionBoxPW.style.display === 'block' && items.length > 0) {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeIndexPW = (activeIndexPW + 1) % items.length;
+                updateActiveSuggestionPW(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeIndexPW = (activeIndexPW - 1 + items.length) % items.length;
+                updateActiveSuggestionPW(items);
+            } else if (e.key === 'Escape') {
+                suggestionBoxPW.style.display = 'none';
+            }
+        }
+    });
+
+    // Auto-suggestion fetch & display on input
+    searchInputPW.addEventListener('input', function () {
+        var query = searchInputPW.value.trim().toLowerCase();
+        if (!query) {
+            suggestionBoxPW.style.display = 'none';
+            suggestionBoxPW.innerHTML = '';
+            return;
+        }
+
+        // 1. Check if a local array of products exists to filter from
+        var products = [];
+        if (typeof productsData !== 'undefined') {
+            products = productsData;
+        } else if (typeof allProducts !== 'undefined') {
+            products = allProducts;
+        } else if (typeof pwState !== 'undefined' && pwState.products) {
+            products = pwState.products;
+        } else if (typeof allProductsPW !== 'undefined') {
+            products = allProductsPW;
+        }
+
+        if (products.length > 0) {
+            var matches = products.filter(function (p) {
+                var title = p.title || p.name || '';
+                var category = p.category || '';
+                return title.toLowerCase().includes(query) || category.toLowerCase().includes(query);
+            });
+            renderSuggestionsPW(matches);
+        } else {
+            // 2. API fallback search
+            var apiUrl = (window.API_BASE_URL || 'http://127.0.0.1:8081') + '/admin/dashboard/products/search?keyword=' + encodeURIComponent(query);
+            fetch(apiUrl)
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    var items = Array.isArray(data) ? data : (data.data || []);
+                    renderSuggestionsPW(items);
+                })
+                .catch(function (err) {
+                    console.error('Error fetching suggestions:', err);
+                });
+        }
+    });
+}
+
+// Helper to visually update active classes for keyboard selection
+function updateActiveSuggestionPW(items) {
+    items.forEach(function (item, idx) {
+        if (idx === activeIndexPW) {
+            item.classList.add('active');
+            item.scrollIntoView({ block: 'nearest' });
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+// Render filtered matching recommendations
+function renderSuggestionsPW(matches) {
+    suggestionBoxPW.innerHTML = '';
+    activeIndexPW = -1;
+
+    if (matches.length === 0) {
+        suggestionBoxPW.style.display = 'none';
+        return;
+    }
+
+    matches.slice(0, 8).forEach(function (product) {
+        var div = document.createElement('div');
+        div.className = 'suggestion-item';
+        var name = product.title || product.name || '';
+        div.textContent = name;
+
+        div.addEventListener('click', function () {
+            searchInputPW.value = name;
+            suggestionBoxPW.style.display = 'none';
+            runSearchPW();
+        });
+
+        suggestionBoxPW.appendChild(div);
+    });
+
+    suggestionBoxPW.style.display = 'block';
+}
+
+// Dismiss suggestions when clicking outside
+document.addEventListener('click', function (e) {
+    if (searchInputPW && !searchInputPW.contains(e.target) && !suggestionBoxPW.contains(e.target)) {
+        suggestionBoxPW.style.display = 'none';
+    }
+});
+
+/* ---------- init ---------- */
+document.addEventListener('DOMContentLoaded', function () {
+    initFiltersPW();
+    loadProductsPW();
+});
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') updateCartCount();
+});
+</script>
+   
+
+</body>
+</html>

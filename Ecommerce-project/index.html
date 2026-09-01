@@ -1,0 +1,4433 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Confer - Consulting Website Template Free Download</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Consulting Website Template Free Download" name="keywords">
+        <meta content="Consulting Website Template Free Download" name="description">
+
+        <!-- Favicon -->
+        <!-- <link href="img/favicon.ico" rel="icon"> -->
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+        
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <!-- <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
+
+        <!-- Template Stylesheet -->
+        <!-- <link href="css/style.css" rel="stylesheet"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <style>
+
+ /* TOP BAR Start Css   */
+
+.top-bar{
+  
+background:#1f6fae;
+color:#eeeeee;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 40px;
+font-size:14px;
+font-family:'oswald', sans-serif;
+}
+
+.top-left{
+display:flex;
+}
+
+.top-item{
+display:flex;
+align-items:center;
+gap:10px;
+padding-right:20px;
+margin-right:20px;
+border-right:1px solid rgba(255,255,255,0.3);
+}
+
+.top-right{
+display:flex;
+gap:20px;
+}
+
+.social i{
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+}
+/* //Added by harsahda 25-06-2026 */
+.fa-instagram:hover{
+    color: #E4405F;
+    transform: scale(1.2);
+}
+
+.fa-linkedin-in:hover{
+    color: #0077B5;
+    transform: scale(1.2);
+}
+
+
+
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 8px 12px;
+    font-size: 11px;
+    flex-wrap: nowrap;
+  }
+
+  .top-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .top-item {
+    gap: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+
+  .top-right {
+    gap: 10px;
+  }
+
+  .social i {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .top-left {
+    gap: 6px;
+  }
+
+  .top-item {
+    gap: 4px;
+    padding-right: 6px;
+    margin-right: 6px;
+  }
+
+  .social i {
+    font-size: 12px;
+  }
+}
+/* TOP BAR end CSS  */
+            
+
+
+
+/* HEADER */
+ .header {
+            background: #0A2540;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 50px;
+            flex-wrap: wrap;
+            /* important for toggle */
+        }
+
+        /* LOGO */
+
+        #brand {
+            width: 180px;
+            margin-left: -30px;
+            
+        }
+
+        /* NAVIGATION */
+
+        .nav {
+            display: flex;
+            align-items: center;
+             gap: 30px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 18px;
+            margin-right: 4px;
+            margin-top: 18px;
+        }
+
+        .nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: 0.3s;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .nav ul li a:hover,
+        .nav ul li a.active {
+            color: #1e88e5;
+            border-bottom: 2px solid #1e88e5;
+                padding-bottom: 4px;
+        }
+
+
+
+        /* BUTTONS */
+/* RIGHT SIDE */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* .cart {
+  font-size: 20px;
+  cursor: pointer;
+  
+}
+
+.cart a {
+  color: white;
+  text-decoration: none;
+} */
+
+.cart-icon {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+#cartCount {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: green;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    display: none;
+}
+/* .avatar1 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  
+} */
+
+ /* BUTTONS */
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Common Button */
+.btn {
+    padding: 8px 35px;
+    font-size: 13px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+/* LOGIN BUTTON */
+.login {
+    border: 1px solid #38bdf8;
+    color: white;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.login:hover {
+    background: #1e88e5;
+}
+
+/* REGISTER BUTTON */
+.register {
+    border: 1px solid #1e88e5;
+    color: white;      /* blue text */
+    background: transparent;
+    transition: 0.3s;
+}
+
+/* ON HOVER / CLICK LOOK */
+.register:hover {
+    background: #1e88e5;
+    color: #fff;
+}
+  
+        /*======================================= */
+        /* HAMBURGER BUTTON */
+        /* ======================================= */
+
+        .menu-toggle {
+            display: none;
+            font-size: 26px;
+            color: white;
+            cursor: pointer;
+            margin-right: -30px;
+            
+        }
+
+        /* ===================================== */
+/* HEADER RESPONSIVE */
+/* ===================================== */
+
+@media (max-width:1024px) {
+
+    .header {
+        padding: 15px 20px;
+    }
+
+    #brand {
+        width: 150px;
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-right: 0;
+    }
+
+    .nav {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        background: #0A2540;
+        margin-top: 15px;
+    }
+
+    .nav.active {
+        display: flex;
+    }
+
+    .nav ul {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav ul li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav ul li a {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .header-right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .cart {
+        font-size: 22px;
+    }
+
+    /* LOGIN / REGISTER */
+
+    .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: auto;
+    }
+
+    .actions .btn {
+        width: 130px;
+        text-align: center;
+        padding: 10px 20px;
+        margin: 0;
+    }
+}
+
+
+/* ===================================== */
+/* TABLET */
+/* ===================================== */
+
+@media (max-width:768px) {
+
+    .header {
+        padding: 12px 15px;
+    }
+
+    #brand {
+        width: 130px;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+    }
+
+    .cart {
+        font-size: 20px;
+    }
+
+    .actions .btn {
+        width: 125px;
+        padding: 9px 18px;
+        font-size: 13px;
+    }
+}
+
+
+/* ===================================== */
+/* MOBILE */
+/* ===================================== */
+
+@media (max-width:480px) {
+
+    .header {
+        padding: 10px 12px;
+    }
+
+    #brand {
+        width: 120px;
+    }
+
+    .menu-toggle {
+        font-size: 22px;
+    }
+
+    .nav ul li a {
+        font-size: 13px;
+    }
+
+    .cart {
+        font-size: 18px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .actions .btn {
+        width: 120px;
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
+
+
+/* ===================================== */
+/* SMALL DEVICES */
+/* ===================================== */
+
+@media (max-width:320px) {
+
+    #brand {
+        width: 110px;
+    }
+
+    .menu-toggle {
+        font-size: 20px;
+    }
+
+    .actions .btn {
+        width: 110px;
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+}
+
+        /*nav bar ends here*/
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero {
+  background:
+    linear-gradient(rgba(0, 25, 45, 0.45), rgba(0, 25, 45, 0.45)),
+    url("img/2x Hero section.png") no-repeat center center;
+
+  background-size: cover;
+  width: 100%;
+  min-height: 600px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  padding: 20px;
+}
+
+/* CONTENT */
+.hero-content {
+  max-width: 760px;
+  width: 100%;
+  margin: -18px auto 0;
+  padding: 0 15px;
+}
+
+/* HEADING */
+.hero h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 55px;
+  line-height: 75px;
+  font-weight: 300;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+/* TEXT */
+.hero p {
+  font-family: lato, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  margin: 0 auto 21px;
+  line-height: 1.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* BUTTONS */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* BUTTON COMMON */
+.explore,
+.author {
+  width: 162px;
+  height: 42px;
+
+  border-radius: 6px;
+  text-decoration: none;
+
+  font-family: lato, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s ease;
+}
+
+/* LEFT BUTTON */
+.explore {
+  color: #fff;
+  border: 1px solid #fff;
+  background: transparent;
+}
+
+/* RIGHT BUTTON */
+.author {
+  color: #fff;
+  background: #0796fe;
+  border: 1px solid #0796fe;
+}
+
+/* HOVER */
+.explore:hover {
+  background: #007dd8;
+  border-color: #007dd8;
+  color: #fff;
+  text-decoration: none;
+}
+
+.author:hover {
+  background: #007dd8;
+  border-color: #007dd8;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 991px) {
+
+  .hero {
+    min-height: 520px;
+    padding: 30px 20px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    line-height: 58px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    max-width: 650px;
+  }
+
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: 480px;
+    padding: 40px 20px;
+  }
+
+  .hero-content {
+    margin-top: 0;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    line-height: 48px;
+    margin-bottom: 14px;
+  }
+
+  .hero p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .explore,
+  .author {
+    width: 150px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .hero {
+    min-height: 430px;
+    padding: 45px 18px;
+  }
+
+  .hero-content {
+    padding: 0;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .explore,
+  .author {
+    width: 100%;
+    max-width: 240px;
+    height: 42px;
+    font-size: 14px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .hero {
+    min-height: 400px;
+    padding: 40px 15px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .hero p {
+    font-size: 11px;
+  }
+
+  .explore,
+  .author {
+    max-width: 220px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+}
+/* Hero section end CSS */
+
+
+/* =========================================
+   ABOUT SECTION CSS
+========================================= */
+
+.about {
+  padding: 80px 0;
+  background: #fff;
+}
+
+/* CONTAINER */
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+
+  width: 100%;
+  max-width: 1200px;
+
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* LEFT TEXT */
+.about-text {
+  flex: 1;
+}
+
+/* HEADING */
+.about-text h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  position: relative;
+  color: #111;
+}
+
+/* BLUE UNDERLINE */
+.about-text h2::after {
+  content: "";
+  width: 80px;
+  height: 8px;
+  background: #489aed;
+  display: block;
+  margin-top: 10px;
+}
+
+/* PARAGRAPH */
+.about-text p {
+  color: #797979;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  margin-bottom: 0;
+}
+
+/* BUTTON */
+.about-btn {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 10px 42px;
+
+  border: 1px solid #0796FE;
+  color: #0796FE;
+
+  text-decoration: none;
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+
+  transition: 0.3s ease;
+}
+
+/* BUTTON HOVER */
+.about-btn:hover {
+  background: #0796FE;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+/* RIGHT IMAGE */
+.about-image {
+  flex: 1;
+  text-align: right;
+}
+
+/* IMAGE */
+.about-image img {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 991px) {
+
+  .about {
+    padding: 70px 0;
+  }
+
+  .about-container {
+    gap: 40px;
+  }
+
+  .about-text h2 {
+    font-size: 34px;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .about-image img {
+    max-width: 400px;
+  }
+
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .about {
+    padding: 60px 0;
+  }
+
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .about-text {
+    width: 100%;
+  }
+
+  .about-text h2 {
+    font-size: 32px;
+  }
+
+  .about-text h2::after {
+    margin: 10px auto 0;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 28px;
+  }
+
+  .about-btn {
+    margin-top: 28px;
+  }
+
+  .about-image {
+    text-align: center;
+    width: 100%;
+  }
+
+  .about-image img {
+    margin: auto;
+    max-width: 100%;
+  }
+
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .about {
+    padding: 50px 0;
+  }
+
+  .about-container {
+    padding: 0 18px;
+    gap: 35px;
+  }
+
+  .about-text h2 {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 16px;
+  }
+
+  .about-text h2::after {
+    width: 65px;
+    height: 6px;
+  }
+
+  .about-text p {
+    font-size: 14px;
+    line-height: 26px;
+  }
+
+  .about-btn {
+    width: 100%;
+    max-width: 220px;
+    padding: 11px 20px;
+    font-size: 14px;
+  }
+
+  .about-image img {
+    border-radius: 8px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .about {
+    padding: 45px 0;
+  }
+
+  .about-text h2 {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .about-text p {
+    font-size: 13px;
+    line-height: 24px;
+  }
+
+  .about-btn {
+    max-width: 200px;
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+
+}
+/* About Section CSS End */
+
+
+/* =========================================
+   TRENDING PRODUCTS SECTION
+========================================= */
+
+.trending-products{
+  background:#e3f4ff;
+  padding:50px 0;
+  font-family:'Lato', sans-serif;
+}
+
+/* CONTAINER */
+.products-container{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+}
+
+/* TITLE */
+.section-title1{
+  font-family:'Oswald', sans-serif;
+  font-size:40px;
+  font-weight:300;
+  color:#0A2540;
+  letter-spacing:1px;
+  margin-bottom:35px;
+  text-align:center;
+}
+
+/* GRID */
+.products-grid1{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:30px;
+}
+
+/* CARD */
+.product-inner{
+  background:#fff;
+  padding:15px;
+  border-radius:4px;
+  width:100%;
+  min-height:520px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  transition:all 0.3s ease;
+}
+
+/* HOVER */
+.product-inner:hover{
+  transform:translateY(-10px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.product-inner img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:4px;
+}
+
+/* TITLE */
+.product-inner h3{
+  font-size:20px;
+  margin:16px 0;
+  font-weight:500;
+  color:#1f2d3d;
+  padding-left:10px;
+  line-height:1.4;
+}
+
+/* PRICE + RATING */
+.price-rating{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:-10px;
+}
+
+/* PRICE */
+.price{
+  font-weight:700;
+  font-size:20px;
+  padding-left:10px;
+  color:#111;
+}
+
+/* STARS */
+.stars{
+  color:#f4a100;
+  font-size:26px;
+  padding-right:10px;
+}
+
+/* LIST */
+.product-inner ul{
+  margin:10px 0;
+  padding-left:28px;
+}
+
+.product-inner li{
+  font-size:15px;
+  color:#555;
+  margin-bottom:7px;
+  line-height:1.5;
+}
+
+/* BUTTONS */
+.product-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+
+/* PREVIEW BUTTON */
+.btn-preview{
+  border:1px solid #0796FE;
+  color:#1e88e5;
+  padding:10px 15px;
+  text-decoration:none;
+  border-radius:3px;
+  flex:1;
+  text-align:center;
+  font-size:14px;
+  transition:0.3s ease;
+}
+
+.btn-preview:hover{
+  background:#1e88e5;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* CART BUTTON */
+.btn-cart{
+  border:1px solid #0796FE;
+  background:#0796FE;
+  color:#fff;
+  padding:10px 15px;
+  text-decoration:none;
+  border-radius:3px;
+  flex:1;
+  text-align:center;
+  font-size:14px;
+  transition:0.3s ease;
+}
+
+.btn-cart:hover{
+  background:#1e88e5;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* VIEW BUTTON */
+.view-products{
+  text-align:center;
+  margin-top:35px;
+}
+
+.view-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#092a49;
+  color:#fff;
+
+  padding:10px 30px;
+  border-radius:4px;
+  text-decoration:none;
+
+  font-size:15px;
+
+  width:360px;
+  height:42px;
+
+  transition:0.3s ease;
+}
+
+.view-btn:hover{
+  background:#1e88e5;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width:991px){
+
+  .section-title1{
+    font-size:34px;
+  }
+
+  .products-grid1{
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+  }
+
+  .product-inner{
+    min-height:500px;
+  }
+
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width:768px){
+
+  .trending-products{
+    padding:45px 0;
+  }
+
+  .products-container{
+    padding:0 18px;
+  }
+
+  .section-title1{
+    font-size:30px;
+    margin-bottom:28px;
+  }
+
+  .products-grid1{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .product-inner{
+    min-height:auto;
+  }
+
+  .product-inner img{
+    height:230px;
+  }
+
+  .product-inner h3{
+    font-size:19px;
+  }
+
+  .price{
+    font-size:18px;
+  }
+
+  .stars{
+    font-size:24px;
+  }
+
+  .view-btn{
+    width:100%;
+    max-width:320px;
+  }
+
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width:576px){
+
+  .trending-products{
+    padding:40px 0;
+  }
+
+  .section-title1{
+    font-size:26px;
+    line-height:36px;
+  }
+
+  .product-inner{
+    padding:14px;
+    border-radius:6px;
+  }
+
+  .product-inner img{
+    height:210px;
+  }
+
+  .product-inner h3{
+    font-size:18px;
+    padding-left:5px;
+  }
+
+  .price{
+    font-size:17px;
+    padding-left:5px;
+  }
+
+  .stars{
+    font-size:22px;
+    padding-right:5px;
+  }
+
+  .product-inner ul{
+    padding-left:22px;
+  }
+
+  .product-inner li{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  .product-buttons{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .btn-preview,
+  .btn-cart{
+    width:100%;
+    padding:11px 15px;
+    font-size:14px;
+  }
+
+  .view-btn{
+    width:100%;
+    max-width:280px;
+    height:42px;
+    font-size:14px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width:380px){
+
+  .section-title1{
+    font-size:23px;
+    line-height:32px;
+  }
+
+  .product-inner img{
+    height:190px;
+  }
+
+  .product-inner h3{
+    font-size:17px;
+  }
+
+  .price{
+    font-size:16px;
+  }
+
+  .stars{
+    font-size:20px;
+  }
+
+  .product-inner li{
+    font-size:13px;
+  }
+
+  .btn-preview,
+  .btn-cart{
+    font-size:13px;
+    padding:10px 12px;
+  }
+
+  .view-btn{
+    max-width:240px;
+    font-size:13px;
+  }
+
+}
+/* Trending Products End CSS */
+
+
+    /* product categories start css */
+ /* =========================================
+   ROOT VARIABLES
+========================================= */
+
+:root {
+
+  --bg-color: #ffffff;
+  --card-bg: #ffffff;
+  --primary-blue: #007fff;
+  --text-main: #2b3e5b;
+  --text-muted: #64748b;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --card-radius: 8px;
+  --transition-speed: 0.3s;
+  --shadow-soft:
+    0 10px 30px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-hover:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 1px 5px rgba(0, 0, 0, 0.03);
+}
+
+/* =========================================
+   MAIN SECTION
+========================================= */
+
+.categories-section {
+
+  width: 100%;
+  max-width: 1300px;
+
+  margin: 0 auto;
+  padding: 60px 20px;
+
+  text-align: center;
+  background: var(--bg-color);
+
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.categories-header {
+  margin-bottom: 50px;
+}
+
+/* TITLE */
+
+.categories-title {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+/* BLUE DIVIDER */
+
+.categories-divider {
+  width: 88px;
+  height: 9px;
+  background-color: var(--primary-blue);
+  border-radius: 2px;
+  margin: 0 auto 16px auto;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.category-card {
+  background-color: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* HOVER */
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* =========================================
+   IMAGE WRAPPER
+========================================= */
+
+.card-image-wrapper {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f1f5f9;
+}
+
+/* IMAGE */
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* IMAGE HOVER */
+
+.category-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.card-content {
+  padding: 30px 24px 1px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* CARD TITLE */
+
+.card-title1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+/* CARD DESCRIPTION */
+
+.card-description1 {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 500;
+  font-family: var(--font-body);
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categories-title {
+    font-size: 36px;
+  }
+
+  .card-title1 {
+    font-size: 25px;
+  }
+
+  .card-description1 {
+    font-size: 17px;
+  }
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .categories-section {
+    padding: 50px 18px;
+  }
+
+  .categories-header {
+    margin-bottom: 40px;
+  }
+
+  .categories-title {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  .categories-divider {
+    width: 75px;
+    height: 7px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .card-image-wrapper {
+    height: 240px;
+  }
+
+  .card-content {
+    padding: 24px 20px 28px;
+  }
+
+  .card-title1 {
+    font-size: 24px;
+  }
+
+  .card-description1 {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .categories-section {
+    padding: 40px 16px;
+  }
+
+  .categories-title {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 10px;
+  }
+
+  .categories-divider {
+    width: 65px;
+    height: 6px;
+  }
+
+  .categories-header {
+    margin-bottom: 35px;
+  }
+
+  .card-image-wrapper {
+    height: 210px;
+  }
+
+  .card-content {
+    padding: 22px 18px 25px;
+  }
+
+  .card-title1 {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .card-description1 {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .categories-section {
+    padding: 35px 14px;
+  }
+
+  .categories-title {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .categories-divider {
+    width: 55px;
+    height: 5px;
+  }
+
+  .card-image-wrapper {
+    height: 190px;
+  }
+
+  .card-content {
+    padding: 20px 16px 22px;
+  }
+
+  .card-title1 {
+    font-size: 20px;
+  }
+
+  .card-description1 {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+}
+    /* product categories end css */
+
+    /* why choose our software start css */
+
+    /* =========================================
+   FEATURES SECTION
+========================================= */
+
+.features-section {
+  width: 100%;
+  background: #e3f4ff;
+  padding: 70px 20px;
+  margin: 0;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.features-header {
+  margin-bottom: 50px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* TITLE */
+
+.features-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: #0A2540;
+  margin-bottom: 12px;
+  letter-spacing: 0px;
+  margin-top: -25px;
+}
+
+/* DIVIDER */
+
+.features-divider {
+  width: 88px;
+  height: 9px;
+  background-color: #1293ee;
+  border-radius: 0px;
+  margin: 0 auto 16px auto;
+}
+
+/* SUBTITLE */
+
+.features-subtitle {
+  font-size: 16px;
+  color: #797979;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.feature-card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 35px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* HOVER */
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   ICON
+========================================= */
+
+.icon-container {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e3f4ff;
+  border-radius: 50%;
+}
+
+/* SVG ICON */
+
+.card-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* =========================================
+   CARD TITLE
+========================================= */
+
+.card-title {
+
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: #0A2540;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  letter-spacing: 0px;
+}
+
+/* =========================================
+   CARD DESCRIPTION
+========================================= */
+
+.card-description {
+  font-size: 20px;
+    color: #797979;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 400;
+    
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .features-title {
+    font-size: 36px;
+  }
+
+  .card-title {
+    font-size: 25px;
+  }
+
+  .card-description {
+    font-size: 17px;
+  }
+
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .features-section {
+    padding: 55px 18px;
+  }
+
+  .features-header {
+    margin-bottom: 40px;
+  }
+
+  .features-title {
+    font-size: 32px;
+    line-height: 42px;
+    margin-top: 0;
+  }
+
+  .features-divider {
+    width: 75px;
+    height: 7px;
+  }
+
+  .features-subtitle {
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 0;
+  }
+
+  .feature-card {
+    padding: 28px;
+  }
+
+  .icon-container {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+  }
+
+  .card-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .card-title {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .card-description {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .features-section {
+    padding: 45px 16px;
+  }
+
+  .features-title {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 10px;
+  }
+
+  .features-divider {
+    width: 65px;
+    height: 6px;
+  }
+
+  .features-subtitle {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .feature-card {
+    padding: 24px 20px;
+    border-radius: 6px;
+  }
+
+  .icon-container {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+
+  .card-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-title {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .card-description {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .features-section {
+    padding: 40px 14px;
+  }
+
+  .features-title {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .features-divider {
+    width: 55px;
+    height: 5px;
+  }
+
+  .features-subtitle {
+    font-size: 13px;
+  }
+
+  .feature-card {
+    padding: 22px 18px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+}
+
+     /* why choose our software end css */
+
+      /* Customer Testimonial start css */
+
+/* =========================================
+   TESTIMONIALS SECTION
+========================================= */
+
+.testimonials {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: #2b3e5b;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* BLUE DIVIDER */
+
+.divider {
+  width: 88px;
+  height: 8px;
+  background: #007fff;
+  border-radius: 2px;
+  margin: 0 auto 50px auto;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.card1 {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  min-height: 300px;
+  box-sizing: border-box;
+}
+
+/* CARD HOVER */
+
+.card1:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* AVATAR */
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+/* NAME */
+
+.name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2b3e5b;
+  margin-bottom: 2px;
+}
+
+/* =========================================
+   STAR RATING
+========================================= */
+
+.star-rating {
+  display: flex;
+  gap: 4px;
+}
+
+/* STAR */
+
+.star {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* FILLED STAR */
+
+.star.filled {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffb800'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/%3E%3C/svg%3E");
+}
+
+/* OUTLINE STAR */
+
+.star.outline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffb800' stroke-width='2'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+.text {
+  font-size: 18px;
+  color: #797979;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* =========================================
+   ARROWS
+========================================= */
+
+.slider-arrows {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+/* BUTTON */
+
+.arrow-btn {
+  width: 42px;
+  height: 42px;
+  background: #0796FE;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+/* BUTTON HOVER */
+
+.arrow-btn:hover {
+  background: #1e88e5;
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .testimonials {
+    padding: 50px 18px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .divider {
+    width: 75px;
+    height: 7px;
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .card1 {
+    padding: 30px;
+    min-height: auto;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+
+  .star {
+    width: 22px;
+    height: 22px;
+  }
+
+  .text {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .testimonials {
+    padding: 45px 16px;
+  }
+
+  .title {
+    font-size: 26px;
+    line-height: 36px;
+    margin-bottom: 10px;
+  }
+
+  .divider {
+    width: 65px;
+    height: 6px;
+    margin-bottom: 35px;
+  }
+
+  .card1 {
+    padding: 24px 20px;
+    border-radius: 6px;
+  }
+
+  .profile {
+    margin-bottom: 18px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    margin-right: 14px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .star {
+    width: 20px;
+    height: 20px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .slider-arrows {
+    margin-top: 22px;
+  }
+
+  .arrow-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 13px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .testimonials {
+    padding: 40px 14px;
+  }
+
+  .title {
+    font-size: 23px;
+    line-height: 32px;
+  }
+
+  .divider {
+    width: 55px;
+    height: 5px;
+  }
+
+  .card1 {
+  padding: 22px 18px;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+
+  .text {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .arrow-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+}
+       /* Customer Testimonial end css */
+
+/* blog start css*/
+       /* =========================================
+   BLOG SECTION
+========================================= */
+
+.blog-container-section {
+  width: 100%;
+  background-color: #e8f4fd;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   INNER WRAPPER
+========================================= */
+
+.blog-inner-wrapper {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+.blog-main-heading {
+  font-family: 'Oswald', sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: #0a2540;
+  margin-bottom: 30px;
+  letter-spacing: -0.01em;
+}
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.blog-divider-line {
+  width: 88px;
+  height: 8px;
+  background-color: #007fff;
+  border-radius: 2px;
+  margin: -10px auto 50px auto;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.blog-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+/* =========================================
+   BLOG CARD
+========================================= */
+
+.blog-post-card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* HOVER */
+
+.blog-post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.07);
+}
+
+/* =========================================
+   IMAGE BOX
+========================================= */
+
+.blog-card-img-box {
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* IMAGE */
+
+.blog-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* IMAGE HOVER */
+
+.blog-post-card:hover .blog-card-img {
+  transform: scale(1.03);
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.blog-card-content-body {
+  padding: 32px 24px 35px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* TITLE */
+
+.blog-post-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: #133240;
+  line-height: 1.35;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+/* DESCRIPTION */
+
+.blog-post-desc {
+  font-size: 20px;
+  color: #797979;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+/* =========================================
+   READ MORE LINK
+========================================= */
+
+.blog-read-more-link {
+  font-size: 18px;
+  font-weight: 500;
+  color: #0796FE;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap 0.2s ease;
+  margin-top: auto;
+  text-decoration: none;
+}
+
+/* LINK HOVER */
+
+.blog-post-card:hover .blog-read-more-link {
+  gap: 8px;
+  text-decoration: none;
+}
+
+/* =========================================
+   FOOTER BUTTON
+========================================= */
+
+.blog-footer-action-box {
+  display: flex;
+  justify-content: center;
+}
+
+/* BUTTON */
+
+.blog-view-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #092a49;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 15px;
+  width: 260px;
+  height: 42px;
+  transition: 0.3s ease;
+}
+
+.blog-view-more-btn a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* BUTTON HOVER */
+
+.blog-view-more-btn:hover {
+  background: #1e88e5;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+}
+
+/* BUTTON ACTIVE */
+
+.blog-view-more-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   LARGE TABLETS
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .blog-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .blog-main-heading {
+    font-size: 36px;
+  }
+
+  .blog-post-title {
+    font-size: 22px;
+  }
+
+  .blog-post-desc {
+    font-size: 18px;
+  }
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 768px) {
+
+  .blog-container-section {
+    padding: 60px 18px;
+  }
+
+  .blog-main-heading {
+    font-size: 32px;
+    line-height: 42px;
+    margin-bottom: 24px;
+  }
+
+  .blog-divider-line {
+    width: 75px;
+    height: 7px;
+    margin-bottom: 40px;
+  }
+
+  .blog-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+
+  .blog-card-img-box {
+    height: 240px;
+    padding: 18px;
+  }
+
+  .blog-card-content-body {
+    padding: 28px 22px 30px
+  }
+
+  .blog-post-title {
+    font-size: 22px;
+  }
+
+  .blog-post-desc {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .blog-read-more-link {
+    font-size: 17px;
+  }
+}
+
+/* =========================================
+   MOBILE DEVICES
+========================================= */
+
+@media (max-width: 576px) {
+
+  .blog-container-section {
+    padding: 50px 16px;
+  }
+
+  .blog-main-heading {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 20px;
+  }
+
+  .blog-divider-line {
+    width: 65px;
+    height: 6px;
+    margin-bottom: 35px;
+  }
+
+  .blog-card-img-box {
+    height: 210px;
+    padding: 16px;
+  }
+
+  .blog-card-content-body {
+    padding: 24px 18px 26px;
+  }
+
+  .blog-post-title {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .blog-post-desc {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .blog-read-more-link {
+    font-size: 15px;
+  }
+
+  .blog-view-more-btn {
+    width: 100%;
+    max-width: 260px;
+    height: 42px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .blog-container-section {
+    padding: 45px 14px;
+  }
+
+  .blog-main-heading {
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  .blog-divider-line {
+    width: 55px;
+    height: 5px;
+  }
+
+  .blog-card-img-box {
+    height: 190px;
+    padding: 14px;
+  }
+
+  .blog-card-content-body {
+    padding: 22px 16px 24px;
+  }
+
+  .blog-post-title {
+    font-size: 18px;
+  }
+
+  .blog-post-desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .blog-read-more-link {
+    font-size: 14px;
+  }
+
+  .blog-view-more-btn {
+    max-width: 220px;
+    font-size: 13px;
+  }
+}
+    /* blog css end/
+
+
+
+    
+/* Call To Action SECTION CSS  Start*/
+
+.grow-cta-section{
+    padding:35px 20px;
+    background:#fff;
+}
+
+.grow-cta-container{
+    max-width:1150px;
+    margin:0 auto;
+}
+
+.grow-cta-card{
+    background:url("img/CTA Bg.png") center center/cover no-repeat;
+    position:relative;
+    overflow:hidden;
+    padding:35px 40px;
+}
+/* background-image:url("./img/Author CTA.png"); */
+.grow-cta-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(4,25,70,0.20);
+}
+
+.grow-cta-content{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 280px;
+    gap:40px;
+    align-items:center;
+}
+
+.grow-cta-heading{
+    font-family:'Oswald',sans-serif;
+    font-size:40px;
+    font-weight:300;
+    color:#ffffff;
+    margin-bottom:18px;
+    line-height:1;
+}
+
+.grow-cta-description{
+    font-family:'Lato',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    color:#ffffff;
+    font-style:italic;
+    max-width:780px;
+    margin:0;
+}
+
+.grow-cta-button-wrap{
+    text-align:right;
+}
+
+.grow-cta-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:190px;
+    height:48px;
+    background:#1694ef;
+    color:#ffffff;
+    text-decoration:none;
+    font-family:'Lato',sans-serif;
+    font-size:20px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.grow-cta-btn:hover{
+    background:#0f84d9;
+    color:#ffffff;
+    text-decoration:none;
+}
+
+/* ===================================
+   LARGE LAPTOP
+=================================== */
+
+@media (max-width:1200px){
+
+    .grow-cta-heading{
+        font-size:46px;
+    }
+
+    .grow-cta-description{
+        font-size:17px;
+    }
+
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media (max-width:992px){
+
+    .grow-cta-content{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:25px;
+    }
+
+    .grow-cta-button-wrap{
+        text-align:center;
+    }
+
+    .grow-cta-heading{
+        font-size:40px;
+    }
+
+    .grow-cta-description{
+        max-width:100%;
+    }
+
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media (max-width:768px){
+
+    .grow-cta-section{
+        padding:25px 15px;
+    }
+
+    .grow-cta-card{
+        padding:30px 20px;
+    }
+
+    .grow-cta-heading{
+        font-size:32px;
+    }
+
+    .grow-cta-description{
+        font-size:16px;
+        line-height:1.7;
+    }
+
+    .grow-cta-btn{
+        width:220px;
+        height:50px;
+        font-size:18px;
+    }
+
+}
+
+/* ===================================
+   SMALL MOBILE
+=================================== */
+
+@media (max-width:480px){
+
+    .grow-cta-card{
+        padding:25px 15px;
+    }
+
+    .grow-cta-heading{
+        font-size:28px;
+    }
+
+    .grow-cta-description{
+        font-size:15px;
+    }
+
+    .grow-cta-btn{
+        width:100%;
+        max-width:220px;
+        height:48px;
+        font-size:17px;
+    }
+
+}
+
+/* ===================================
+   EXTRA SMALL MOBILE
+=================================== */
+
+@media (max-width:360px){
+
+    .grow-cta-heading{
+        font-size:24px;
+    }
+
+    .grow-cta-description{
+        font-size:14px;
+    }
+
+    .grow-cta-btn{
+        width:100%;
+        font-size:16px;
+    }
+
+}
+/* Call To Action SECTION CSS  End*/
+
+    /* FOOTER Start CSS */
+
+ .footer {
+            background: #0A2540;
+            color: white;
+            padding: 50px 30px 20px;
+            
+        }
+
+        /* FOOTER GRID */
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        /* FOOTER LOGO */
+
+        .footer-logo {
+            width: 170px;
+            margin-bottom: 20px;
+        }
+
+        /* CONTACT */
+
+        .footer-contact {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #cfd9e6;
+            
+        }
+
+       .footer-contact i {
+            color: #0796FE;
+            margin-top: 6px;
+        }
+
+        /* TITLES */
+
+        .footer-title {
+            font-size: 22px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #0796FE;
+        }
+
+        /* LINKS */
+
+        .footer-links {
+            list-style: none;
+            
+           
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            width: fit-content;
+            
+            
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #cfd9e6;
+            display: flex;
+            gap: 10px;
+            
+        }
+
+        .footer-links a:hover {
+            color: #1e88e5;
+        }
+
+        .footer-links i {
+            color: #1e88e5;
+            padding-top: 6px;
+        }
+
+        .footer-link {
+  color: #cfd9e6;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #1e88e5;
+  text-decoration: none;
+}
+        /* NEWSLETTER */
+
+        .footer-text {
+            color: #b8c5d6;
+            margin-bottom: 20px;
+        }
+
+        .newsletter {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #2d4a68;
+            color: white;
+        }
+
+        .newsletter button {
+            padding: 12px 20px;
+            background: #0796FE;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .newsletter button:hover {
+            background: #1e88e5;
+        }
+
+        /* FOOTER BOTTOM */
+
+        .footer-bottom {
+            border-top: 1px solid #223b55;
+            margin-top: 30px;
+            margin-bottom: -20px;
+            padding-top: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom a{
+            color: #cfd9e6;
+            text-decoration: none;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            font-size: 21px;
+            margin-top: -15px;
+        }
+
+        .footer-social i {
+            color: white;
+            transition: 0.3s;
+        }
+
+/* ===================================== */
+/* FOOTER RESPONSIVE */
+/* ===================================== */
+
+
+@media (max-width:991px){
+
+    .footer-container{
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+        align-items:flex-start;
+    }
+
+    .footer{
+        padding:40px 20px 20px;
+    }
+
+    .footer-logo{
+        margin-bottom:20px;
+    }
+
+    .footer-bottom{
+        margin-bottom:0;
+    }
+
+    .footer-social{
+        margin-top:0;
+    }
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:767px){
+
+    .footer-container{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .footer{
+        padding:35px 20px 20px;
+    }
+
+    /* KEEP EVERYTHING LEFT */
+    .footer-logo{
+        margin:0 0 20px 0;
+    }
+
+    .footer-title{
+        text-align:left;
+    }
+
+    .footer-title::after{
+        left:0;
+        transform:none;
+    }
+
+    .footer-contact{
+        justify-content:flex-start;
+        text-align:left;
+    }
+
+    .footer-links{
+        text-align:left;
+    }
+
+    .footer-links li{
+        width:100%;
+    }
+
+    .footer-links a{
+        justify-content:flex-start;
+    }
+
+    .footer-text{
+        text-align:left;
+    }
+
+    .newsletter{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .newsletter input{
+        width:100%;
+    }
+
+    .newsletter button{
+        width:100%;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        text-align:left;
+        gap:15px;
+        margin-bottom:0;
+    }
+
+    .footer-social{
+        justify-content:flex-start;
+        margin-top:0;
+    }
+}
+
+/* ==========================
+   SMALL MOBILE
+========================== */
+
+@media (max-width:480px){
+
+    .footer{
+        padding:30px 15px 15px;
+    }
+
+    .footer-title{
+        font-size:18px;
+    }
+
+    .footer-contact,
+    .footer-links a,
+    .footer-text{
+        font-size:14px;
+    }
+
+    .newsletter input,
+    .newsletter button{
+        height:46px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .footer-links{
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        text-align: left !important;
+    }
+
+    .footer-links li{
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+
+    .footer-links a{
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    .footer-title{
+        text-align: left !important;
+    }
+
+    .footer-title::after{
+        left: 0 !important;
+        transform: none !important;
+    }
+}
+
+#cartCount {
+    position: absolute;
+    right: -10px;
+    top: -8px;
+    background-color: green;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    display: none;
+}
+
+
+/* ganesh added it for the login and register toggle options */
+.profile-wrapper{
+    position:relative;
+}
+
+.profile-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.profile-circle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#0c4d91;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:600;
+    font-size:14px;
+}
+
+#profileName{
+    color:#fff; /* change to #000 if header background is white */
+    font-weight:500;
+}
+
+.profile-dropdown{
+    display:none;
+    position:absolute;
+    top:55px;
+    right:0;
+    min-width:160px;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+    overflow:hidden;
+    z-index:1000;
+}
+
+.profile-dropdown a{
+    display:block;
+    padding:12px 15px;
+    text-decoration:none;
+    color:#333;
+}
+
+.profile-dropdown a:hover{
+    background:#f5f5f5;
+}
+
+.profile-dropdown.show{
+    display:block;
+}
+
+#profileName {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    font-family: 'Lato', sans-serif;
+    /* text-transform: uppercase; */
+}
+#authButtons,
+#profileContainer{
+    display:none;
+}
+        
+
+/* Footer end  CSS*/
+  </style>
+</head>
+<script src="/js/userauth.js"></script>
+<body>
+
+     <!-- Top Bar Start -->
+    <div class="top-bar">
+
+<div class="top-left">
+
+<div class="top-item">
+<i class="fa-regular fa-clock"></i>
+<span>10:00AM - 7:00PM Mon - Sat</span>
+</div>
+
+<div class="top-item">
+  <a href="tel:+919326246981" style="color:#eeeeee; text-decoration:none; display:flex; align-items:center; gap:10px;">
+    <i class="fa-solid fa-phone"></i>
+    <span>+91 93262 46981</span>
+  </a>
+</div>
+
+</div>
+
+<div class="top-right">
+
+  <div class="social">
+   <a href="https://www.linkedin.com/company/creativewebsolution404/?viewAsMember=true" target="_blank" class="linkedin">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+  </div>
+
+  <div class="social">
+    <a href="https://www.instagram.com/" target="_blank" class="instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+  </div>
+</div>
+
+</div>
+        <!-- Top Bar End -->
+    
+
+<!-- Nav Bar Start -->
+
+<header class="header">
+
+    <a href="index.html"><img src="img/creativesweb.png" id="brand"></a>
+
+    <!-- Hamburger -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav class="nav" id="navMenu">
+
+       <ul>
+            <li><a href="index.html" class="active">HOME</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="product-website.html">PRODUCT</a></li>
+            <li><a href="blog.html">BLOG</a></li>
+            <!-- <li><a href="support.html">SUPPORT</a></li> -->
+            <li><a href="contact-website.html">CONTACT</a></li>
+        </ul>
+
+        <div class="header-right">
+          <!-- //added by harshada 10-06-2026 -->
+     <a href="cart.html" class="cart-icon">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="cartCount">0</span>
+</a>
+</span>
+    <!-- <a href="Cart.html" class="cart-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a> -->
+    <!-- //Added by Harshada -->
+      <div class="actions" id="authButtons">
+            <a href="login.html" class="btn login">LOGIN</a>
+            <a href="Register.html" class="btn register">REGISTER</a>
+        </div>
+      <div class="profile-wrapper" id="profileContainer" style="display:none;">
+
+    <div class="profile-info" id="profileBtn">
+        <div class="profile-circle" id="profileInitials">
+            
+        </div>
+
+        <span id="profileName">User</span>
+
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+
+    <a href="user-dashboard.html">
+        <i class="fa-solid fa-gauge-high"></i>
+        Dashboard
+    </a>
+
+    <a href="#" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+    <!-- <img src="https://i.pravatar.cc/40" class="avatar1" alt="User Avatar"> -->
+</div>
+  </div>
+
+    </nav>
+
+</header>
+</div>
+<!-- Nav Bar End -->
+
+
+<!-- Hero section -->
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>
+      Buy Digital Services Online — Fast,<br>
+      Transparent &amp; Hassle-Free
+    </h1>
+
+    <p>
+      Discover, buy, and download powerful software solutions that simplify your work and boost efficiency.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="product-website.html" class="explore">Browse Products</a>
+      <a href="contact-website.html" class="author">Contact Us</a>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- hero section end -->
+
+<!-- ABOUT SECTION START -->
+<section class="about">
+
+<div class="container about-container">
+
+<div class="about-text">
+
+<h2>About Our Store</h2>
+
+<p>Creative Web Solution is a online store offering high-quality software solutions tailored for agencies and SaaS businesses. Our products are designed with precision to deliver exceptional performance, security, and ease of use. We focus on creating tools that not only solve immediate challenges but also support long-term growth and operational excellence. <br><br>
+
+Our commitment to quality and innovation ensures that every product meets the highest standards. With continuous updates, seamless usability, and dedicated support, we provide a reliable foundation for your business operations. From purchase to implementation, we ensure a smooth and efficient experience. </p>
+
+
+<a href="aboutus.html" class="about-btn">Know More</a>
+
+</div>
+
+<div class="about-image">
+<img src="img/Rectangle 67106.png" alt="Developer working">
+</div>
+
+</div>
+</section>
+<!-- ABOUT SECTION END -->
+
+
+
+
+<!-- Trending Products Section -->
+
+<section class="trending-products">
+
+<div class="container">
+
+<h2 class="section-title1">Featured Products</h2>
+<div class="categories-divider"></div>
+<div class="title-line"></div>
+
+<div class="products-grid1" id="featuredProducts">
+  <!-- Products are rendered dynamically by loadFeaturedProducts() from the API -->
+
+  <!-- <div class="product-card">
+  <div class="product-inner">
+    <img src="img/Employee management system.png">
+
+    <h3>Employee Management System</h3>
+
+    <div class="price-rating">
+      <span class="price">₹9,999</span>
+      <span class="stars" data-rating="4"></span>
+    </div>
+
+    <ul>
+      <li>Employee database management</li>
+      <li>Attendance & leave tracking</li>
+      <li>Payroll integration</li>
+      <li>Admin dashboard</li>
+    </ul>
+
+    <div class="product-buttons">
+      <a href="PreviewPage.html" class="btn-preview">Preview</a>
+      <button class="btn-cart" id="cartBtn-1" onclick="addToCart(this, 1)">Add To Cart</button>
+    </div>
+  </div>
+</div> -->
+
+<!-- CARD -->
+<!-- <div class="product-card">
+  <div class="product-inner">
+    <img src="img/tab.png">
+
+    <h3>Stock Management</h3>
+
+    <div class="price-rating">
+      <span class="price">₹6,499</span>
+      <span class="stars" data-rating="5"></span>
+    </div>
+
+    <ul>
+      <li>Product inventory tracking</li>
+      <li>Order management</li>
+      <li>Stock alerts & reports</li>
+      <li>Supplier management</li>
+    </ul>
+
+    <div class="product-buttons">
+      <a href="PreviewPage.html" class="btn-preview">Preview</a>
+      <button class="btn-cart" id="cartBtn-2" onclick="addToCart(this, 2)">Add To Cart</button>
+    </div>
+  </div>
+</div> -->
+
+<!-- CARD -->
+<!-- <div class="product-card">
+  <div class="product-inner">
+    <img src="img/tab2.png">
+
+    <h3>Task Management System</h3>
+
+    <div class="price-rating">
+      <span class="price">₹8,199</span>
+      <span class="stars" data-rating="4"></span>
+    </div>
+
+    <ul>
+      <li>Project & task tracking</li>
+      <li>Team collaboration tools</li>
+      <li>Deadlines & notifications</li>
+      <li>Performance reports</li>
+    </ul>
+
+    <div class="product-buttons">
+      <a href="PreviewPage.html" class="btn-preview">Preview</a>
+      <button class="btn-cart" id="cartBtn-3" onclick="addToCart(this, 3)">Add To Cart</button>
+    </div>
+  </div> -->
+</div>
+
+</div>
+
+<div class="view-products">
+  <a href="product-website.html" class="view-btn">View All Products</a>
+</div>
+
+</div>
+
+</section>
+<!-- Trending Products End -->
+
+<!-- product categories start -->
+ <section class="categories-section" id="categories">
+    <div class="categories-header">
+      <h1 class="categories-title">Product Categories</h1>
+      <div class="categories-divider"></div>
+    </div>
+    <div class="categories-grid">
+      
+      <!-- Card 1: Web Applications -->
+      <div class="category-card" id="cat-web-apps">
+        <div class="card-image-wrapper">
+          <img 
+            src="img/Category 1.png"
+            alt="Web Applications Dashboard" 
+            class="card-image"
+          />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title1">Web<br>Applications</h2>
+          <p class="card-description1">Custom-built web solutions including management systems, booking platforms, and scalable marketplaces.</p>
+        </div>
+      </div>
+      <!-- Card 2: Business & Operations -->
+      <div class="category-card" id="cat-business-ops">
+        <div class="card-image-wrapper">
+          <img 
+            src="img/Category 2.png"
+            alt="Business Operations Gears Network" 
+            class="card-image"
+          />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title1">Business &<br>Operations</h2>
+          <p class="card-description1">Comprehensive tools for CRM, ERP, HRM, billing systems, and end-to-end business management.</p>
+        </div>
+      </div>
+      <!-- Card 3: E-Commerce Solutions -->
+      <div class="category-card" id="cat-ecommerce">
+        <div class="card-image-wrapper">
+          <img 
+            src="img/Category 3.png"
+            alt="E-Commerce credit card shopping" 
+            class="card-image"
+          />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title1">E-Commerce<br>Solutions</h2>
+          <p class="card-description1">Create and manage your online store or marketplace with easy-to-use SaaS solutions that support products, orders, and multi-vendor functionality.</p>
+        </div>
+      </div>
+      <!-- Card 4: Client & Project Management -->
+      <div class="category-card" id="cat-project-mgmt">
+        <div class="card-image-wrapper">
+          <img 
+            src="img/Category 4.png"
+            alt="Client and Project Management Meeting" 
+            class="card-image"
+          />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title1">Client & Project<br>Management</h2>
+          <p class="card-description1">Manage clients, projects, and workflows seamlessly with powerful tools designed to streamline operations, improve collaboration, and deliver projects efficiently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- product categories end -->
+
+<!-- why choose our software start -->
+  <section class="features-section" id="features">
+    <div class="features-header">
+      <h1 class="features-title">Why Choose Our Software</h1>
+      <div class="features-divider"></div>
+      <p class="features-subtitle">Built for performance, designed for scale, and trusted by professionals worldwide.</p>
+    </div>
+
+    <div class="features-grid">
+      
+      <!-- Card 1: Production-Ready -->
+      <div class="feature-card" id="feature-production-ready">
+        <div class="icon-container">
+          <img src="img/icon 1.png" alt="Production-Ready Icon" class="card-icon">
+        </div>
+        <h2 class="card-title">Production-Ready, High-Quality Solutions</h2>
+        <p class="card-description">Built with modern technologies and best practices for clean code, fast performance, and ready-to-launch reliability.</p>
+      </div>
+
+      <!-- Card 2: Scalable Architecture -->
+      <div class="feature-card" id="feature-scalable-architecture">
+        <div class="icon-container">
+          <img src="img/icon 2.png" alt="Scalable Architecture Icon" class="card-icon">
+        </div>
+        <h2 class="card-title">Scalable & Future-Ready Architecture</h2>
+        <p class="card-description">Built to grow with your business—handle more users, data, and features without compromising performance.</p>
+      </div>
+
+      <!-- Card 3: Easy Customization -->
+      <div class="feature-card" id="feature-easy-customization">
+        <div class="icon-container">
+          <img src="img/icon 3.png" alt="Easy Customization Icon" class="card-icon">
+        </div>
+        <h2 class="card-title">Easy Customization & Integration</h2>
+        <p class="card-description">Easily customize features, UI, and workflows with seamless integration to APIs, payment gateways, and tools.</p>
+      </div>
+
+      <!-- Card 4: Secure & Reliable -->
+      <div class="feature-card" id="feature-secure-systems">
+        <div class="icon-container">
+          <img src="img/icon 4.png" alt="Secure & Reliable Systems Icon" class="card-icon">
+        </div>
+        <h2 class="card-title">Secure & Reliable Systems</h2>
+        <p class="card-description">Built with strong security practices, including data protection, secure authentication, and safe payment integrations.</p>
+      </div>
+
+      <!-- Card 5: Regular Updates -->
+      <div class="feature-card" id="feature-regular-updates">
+        <div class="icon-container">
+          <img src="img/icon 5.png" alt="Regular Updates Icon" class="card-icon">
+        </div>
+        <h2 class="card-title">Regular Updates & Improvements</h2>
+        <p class="card-description">Stay ahead with continuous updates, new features, bug fixes, and performance enhancements to keep your software modern and competitive.</p>
+      </div>
+
+      <!-- Card 6: Cost-Effective -->
+      <div class="feature-card" id="feature-cost-effective">
+        <div class="icon-container">
+          <img src="img/icon 6.png" alt="Cost-Effective Solutions Icon" class="card-icon">
+        </div>
+        <h2 class="card-title">Cost-Effective Solutions</h2>
+        <p class="card-description">Get enterprise-level features at a fraction of the cost compared to custom development.</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- why choose our software end -->
+
+<!-- customer testimonials start -->
+  <section class="testimonials">
+    <h1 class="title">Customer Testimonial</h1>
+    <div class="divider"></div>
+    <div class="grid">
+      
+      <!-- Card 1 -->
+      <div class="card1">
+        <div class="profile">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80" alt="Vedant" class="avatar">
+          <div>
+            <h2 class="name">Vedant</h2>
+            <div class="star-rating">
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star outline"></span>
+            </div>
+          </div>
+        </div>
+        <p class="text">"This platform helped us launch our SaaS product much faster. The quality of the code assets is excellent."</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="card1">
+        <div class="profile">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80" alt="John K" class="avatar">
+          <div>
+            <h2 class="name">John K</h2>
+            <div class="star-rating">
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star outline"></span>
+              <span class="star outline"></span>
+            </div>
+          </div>
+        </div>
+        <p class="text">"Selling my developer tools here generates consistent income every month."</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="card1">
+        <div class="profile">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80" alt="Ria Kelya" class="avatar">
+          <div>
+            <h2 class="name">Ria Kelya</h2>
+            <div class="star-rating">
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star filled"></span>
+              <span class="star outline"></span>
+              <span class="star outline"></span>
+            </div>
+          </div>
+        </div>
+        <p class="text">"Very professional, good service."</p>
+      </div>
+    </div>
+    <!-- Navigation -->
+     <div class="slider-arrows">
+  <button class="arrow-btn" id="prevBtn">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+  <button class="arrow-btn" id="nextBtn">
+    <i class="fa fa-arrow-right"></i>
+  </button>
+</div>
+  </section>
+  <!-- customer testimonials end -->
+
+  <!-- blog start -->
+ <section class="blog-container-section">
+    <div class="blog-inner-wrapper">
+      
+      <h1 class="blog-main-heading">Blog</h1>
+      <div class="blog-divider-line"></div>
+      <div class="blog-cards-grid">
+        
+        <!-- Card 1 -->
+        <div class="blog-post-card" id="blog-post-saas">
+          <div class="blog-card-img-box">
+            <img 
+              src="img/Blog 1.png"
+              alt="SaaS Cloud Computing tablet workspace" 
+              class="blog-card-img"
+            />
+          </div>
+          <div class="blog-card-content-body">
+            <h2 class="blog-post-title">Top 10 SaaS product ideas you can launch in 2026</h2>
+            <p class="blog-post-desc">Explore innovative and profitable SaaS ideas that can help you build a scalable business in today's digital market...</p>
+            <a href="Blog.html" class="blog-read-more-link">Read More &rarr;</a>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="blog-post-card" id="blog-post-webapps">
+          <div class="blog-card-img-box">
+            <img 
+              src="img/Blog 2.png"
+              alt="Futuristic AI tech screens" 
+              class="blog-card-img"
+            />
+          </div>
+          <div class="blog-card-content-body">
+            <h2 class="blog-post-title">How to choose the right web application for your business</h2>
+            <p class="blog-post-desc">Discover the most powerful tools that modern developers use to build efficient, scalable, and high...</p>
+            <a href="Blog.html" class="blog-read-more-link">Read More &rarr;</a>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="blog-post-card" id="blog-post-devops">
+          <div class="blog-card-img-box">
+            <img 
+              src="img/Blog 3.png"
+              alt="Coding interface developer typing workspace" 
+              class="blog-card-img"
+            />
+          </div>
+          <div class="blog-card-content-body">
+            <h2 class="blog-post-title">Boost developer productivity with these powerful tools</h2>
+            <p class="blog-post-desc">Discover essential developer tools that can streamline your workflow and improve coding efficiency....</p>
+            <a href="Blog.html" class="blog-read-more-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <!-- Action Button -->
+      <div class="blog-footer-action-box">
+        <button class="blog-view-more-btn" id="blog-btn-view-more">
+          <a href="Blog.html">View More</a>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  
+
+<section class="grow-cta-section">
+
+    <div class="grow-cta-container">
+
+        <div class="grow-cta-card">
+
+            <div class="grow-cta-content">
+
+                <div class="grow-cta-text">
+
+                    <h2 class="grow-cta-heading">
+                        Ready to build something amazing?
+                    </h2>
+
+                    <p class="grow-cta-description">
+                       Explore our powerful software solutions and start building faster,<br>
+                        smarter, and more efficiently today.
+
+                </div>
+
+                <div class="grow-cta-button-wrap">
+
+                    <a href="contact-website.html" class="grow-cta-btn">
+                        Contact Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Call To Action End -->
+
+  <!-- Footer Start -->
+  <footer class="footer">
+
+<div class="footer-container">
+
+<!-- column 1 -->
+
+<div>
+
+<a href="index.html"><img src="img/creativesweb.png" class="footer-logo"></a>
+
+<div class="footer-contact">
+  <a href="https://maps.app.goo.gl/TTv8ueeyD83GUAW86" 
+     target="_blank" 
+     style="color:inherit; text-decoration:none; display:flex; gap:10px;">
+    
+    <i class="fa-solid fa-location-dot"></i>
+
+    <span>
+      LWT, 203, C/O, ITI RD, above PNG,<br>
+      near Parihar Chowk, Aundh,<br>
+      Maharashtra-411007
+    </span>
+
+  </a>
+</div>
+
+<!-- PHONE FIXED (TEL LINK ADDED) -->
+      <div class="footer-contact">
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:+919326246981" class="footer-link" style=" text-decoration:none; ">
+          +91 93262 46981
+        </a>
+      </div>
+
+<!-- EMAIL FIX (MAILTO ADDED) -->
+      <div class="footer-contact">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="mailto:info@creativewebsolution.in" class="footer-link">
+          info@creativewebsolution.in
+        </a>
+      </div>
+
+<div class="footer-contact">
+  <a href="https://www.creativewebsolution.in/" class="footer-link"
+     target="_blank" 
+     style=" text-decoration:none; display:flex; gap:10px;">
+    
+    <i class="fa-solid fa-globe"></i>
+
+    <span>www.creativewebsolution.in</span>
+
+  </a>
+</div>
+
+</div>
+
+
+<!-- column 2 -->
+
+<div>
+
+<h3 class="footer-title">Quick Links</h3>
+
+<ul class="footer-links">
+<li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+<li><a href="aboutus.html"><i class="fa-solid fa-chevron-right"></i> About US</a></li>
+<li><a href="product-website.html"><i class="fa-solid fa-chevron-right"></i> Product</a></li>
+<li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+<!-- <li><a href="support.html"><i class="fa-solid fa-chevron-right"></i> Support</a></li> -->
+<li><a href="contact-website.html"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+</ul>
+
+</div>
+
+
+<!-- column 3 -->
+
+<div>
+
+<h3 class="footer-title">Newsletters</h3>
+
+<p class="footer-text">
+Elevate your business with Creative Web Solution.
+Experience growth through smart websites and cutting edge digital strategies.
+</p>
+
+<div class="newsletter">
+<input type="email" placeholder="Email goes here">
+<button>Submit</button>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- footer bottom -->
+
+<div class="footer-bottom">
+
+<p style="color:#999999;">
+Copyright © 2026
+<a href="#" style="color:white;">Creative Web Solution</a>.
+ALL RIGHTS RESERVED
+</p>
+
+<div class="footer-social">
+<a href="https://www.linkedin.com/company/creativewebsolution404/?viewAsMember=true"><i class="fa-brands fa-linkedin-in"></i></a>
+<a href="https://www.instagram.com/creativewebsolution/"><i class="fa-brands fa-instagram"></i></a>
+</div>
+
+</div>
+
+</footer>
+        <!-- Footer End -->
+
+<script>
+
+/* toggle menu */
+
+const toggle = document.getElementById("menuToggle");
+const nav = document.getElementById("navMenu");
+
+toggle.onclick = () => {
+nav.classList.toggle("active");
+};
+
+</script>
+
+<!-- ===== ADD TO CART FEATURE (fully dynamic, no hardcoded product data) ===== -->
+<style>
+  .toast-wrap{position:fixed;top:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px;}
+  .cws-toast{background:#0A2540;color:#fff;padding:14px 20px;border-radius:10px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.2);min-width:260px;animation:cwsIn .3s ease;font-family:'Lato',sans-serif;}
+  .cws-toast.success{border-left:4px solid #22c55e;}
+  .cws-toast.error{border-left:4px solid #e53935;}
+  @keyframes cwsIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+  @keyframes cwsOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
+  .btn-cart.added{background:#0A2540 !important;color:#fff !important;border:none;}
+  .btn-cart.added:hover{background:#1565c0 !important;}
+</style>
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+  var API = 'http://localhost:8081';
+
+  /*
+    Cache of products currently rendered on this page, keyed by id.
+    Populated dynamically from the API response in loadFeaturedProducts().
+    This replaces the old hardcoded PRODUCT_DATA = {1: {...}, 2: {...}, 3: {...}}
+    map, so the guest cart works correctly no matter which/how many
+    products the API returns.
+  */
+  var RENDERED_PRODUCTS = {};
+
+  /* ── auth helpers — check both storages (login page uses sessionStorage when Remember Me is off) ── */
+  function isLoggedIn() { return !!(localStorage.getItem('token') || sessionStorage.getItem('token')); }
+  function getToken()   { return localStorage.getItem('token') || sessionStorage.getItem('token') || ''; }
+  function clearTokens() {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+  }
+
+  /* ── guest cart helpers ── */
+  function getGuestCart() {
+    try { return JSON.parse(localStorage.getItem('cwsGuestCart') || '[]'); } catch(e) { return []; }
+  }
+  function saveGuestCart(cart) { localStorage.setItem('cwsGuestCart', JSON.stringify(cart)); }
+  function guestCartProductIds() { return getGuestCart().map(function(p){ return p.productId; }); }
+
+  /* ── toast ── */
+  function showToast(msg, type) {
+    type = type || 'success';
+    var wrap = document.getElementById('toastWrap');
+    var t = document.createElement('div');
+    t.className = 'cws-toast ' + type;
+    t.innerHTML = (type === 'success' ? '<i class="fa-solid fa-circle-check"></i> ' : '<i class="fa-solid fa-circle-exclamation"></i> ') + msg;
+    wrap.appendChild(t);
+    setTimeout(function () {
+      t.style.animation = 'cwsOut .3s ease forwards';
+      setTimeout(function () { t.remove(); }, 300);
+    }, 3000);
+  }
+
+  /* ── mark button as View Cart ── */
+  function markViewCart(btn) {
+    btn.disabled = false;
+    btn.textContent = 'View Cart';
+    btn.classList.add('added');
+    btn.onclick = function () { window.location.href = 'cart.html'; };
+  }
+
+  /* ── mark button back to Add To Cart ── */
+  function markAddToCart(btn, productId) {
+    btn.disabled = false;
+    btn.textContent = 'Add To Cart';
+    btn.classList.remove('added');
+    btn.onclick = function () { addToCart(btn, productId); };
+  }
+
+  /*
+    ── sync all cart buttons currently rendered on the page ──
+    Reads the product ids straight off the DOM (any [id^="cartBtn-"] button),
+    so this works for however many products the API actually returned —
+    no hardcoded [1,2,3] list.
+  */
+  function syncButtons() {
+    var btns = document.querySelectorAll('[id^="cartBtn-"]');
+    if (!btns.length) return;
+
+    if (isLoggedIn()) {
+      fetch(API + '/api/cart/getcart', {
+        headers: { 'Authorization': 'Bearer ' + getToken() }
+      })
+      .then(function (res) {
+        if (res.status === 401) {
+          /* stale token — clear it and fall back to guest mode */
+          clearTokens();
+          applyButtonStates(guestCartProductIds());
+          return null;
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        var ids = (data.success && data.data && data.data.items)
+          ? data.data.items.map(function (i) { return i.productId; }) : [];
+        applyButtonStates(ids);
+      })
+      .catch(function () { applyButtonStates(guestCartProductIds()); });
+    } else {
+      applyButtonStates(guestCartProductIds());
+    }
+  }
+
+  function applyButtonStates(cartProductIds) {
+    document.querySelectorAll('[id^="cartBtn-"]').forEach(function (btn) {
+      var id = Number(btn.id.replace('cartBtn-', ''));
+      if (cartProductIds.indexOf(id) !== -1) { markViewCart(btn); }
+      else { markAddToCart(btn, id); }
+    });
+  }
+
+  /* sync on load and whenever user returns to this page */
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') syncButtons();
+  });
+
+  /* ── Add To Cart ── */
+  function addToCart(btn, productId) {
+
+    btn.disabled = true;
+    btn.textContent = '...';
+
+    if (isLoggedIn()) {
+
+        fetch(API + '/api/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getToken()
+            },
+            body: JSON.stringify({
+                productId: Number(productId),
+                quantity: 1
+            })
+        })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+
+            if (data.success) {
+                showToast('Product added to cart');
+                markViewCart(btn);
+                updateCartCount();
+            } else {
+                showToast(data.message || 'Failed to add to cart', 'error');
+                markAddToCart(btn, productId);
+            }
+        })
+        .catch(function(error) {
+
+            console.log(error);
+
+            showToast('Network error. Please try again.', 'error');
+            markAddToCart(btn, productId);
+        });
+
+    } else {
+
+        var cart = getGuestCart();
+        var product = RENDERED_PRODUCTS[productId];
+
+        if (!product) {
+            showToast('Unable to add product. Please refresh and try again.', 'error');
+            markAddToCart(btn, productId);
+            return;
+        }
+
+        if (!cart.find(function(p) {
+            return p.productId === productId;
+        })) {
+
+            cart.push(product);
+            saveGuestCart(cart);
+        }
+
+        showToast('Product added to cart');
+        markViewCart(btn);
+        updateCartCount();
+    }
+}
+</script>
+
+<!-- //Added by harshada 10-06-2026: Update cart count in header -->
+<script>
+async function updateCartCount() {
+    try {
+        if (isLoggedIn()) {
+            const response = await fetch(
+                "http://localhost:8081/api/cart/getcart",
+                {
+                    headers: {
+                        "Authorization": "Bearer " +
+                        (localStorage.getItem("token") ||
+                         sessionStorage.getItem("token") || "")
+                    }
+                }
+            );
+            const result = await response.json();
+            if (result.success && result.data && result.data.items) {
+                const count = result.data.items.length;
+                const badge = document.getElementById('cartCount');
+                badge.innerText = count;
+                badge.style.display = count > 0 ? 'block' : 'none';
+            }
+        } else {
+            // Guest user — count from localStorage
+            const gCount = getGuestCart().length;
+            const gBadge = document.getElementById('cartCount');
+            gBadge.innerText = gCount;
+            gBadge.style.display = gCount > 0 ? 'block' : 'none';
+        }
+    } catch (e) {
+        console.log(e);
+        // Fallback to guest cart on error
+        const gCount = getGuestCart().length;
+        const gBadge = document.getElementById('cartCount');
+        gBadge.innerText = gCount;
+        gBadge.style.display = gCount > 0 ? 'block' : 'none';
+    }
+}
+
+updateCartCount();
+</script>
+
+<script>
+  function renderStars() {
+
+    document.querySelectorAll(".stars").forEach(starBox => {
+
+        let rating = Number(starBox.getAttribute("data-rating")) || 0;
+        let reviews = Number(starBox.getAttribute("data-reviews")) || 0;
+
+        let stars = "";
+
+        for (let i = 1; i <= 5; i++) {
+            stars += i <= rating ? "★" : "☆";
+        }
+
+        starBox.innerHTML =
+            stars +
+            ` <span style="color:#777;font-size:12px">(${reviews})</span>`;
+    });
+}
+
+
+async function loadFeaturedProducts() {
+    try {
+
+        const response = await fetch(
+            "http://localhost:8081/public/products/top"
+        );
+
+        const result = await response.json();
+
+        const container =
+            document.getElementById("featuredProducts");
+
+        if (!result.success || !result.data) {
+            return;
+        }
+
+        container.innerHTML = "";
+
+        /* reset the rendered-products cache for this page load */
+        RENDERED_PRODUCTS = {};
+
+        result.data.forEach(product => {
+
+            /* cache full product data so addToCart() can use it for the guest cart
+               without relying on any hardcoded lookup table */
+            RENDERED_PRODUCTS[product.id] = {
+                productId: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.thumbnailImage,
+                license: product.license || 'Regular License'
+            };
+
+           container.innerHTML += `
+<div class="product-card">
+  <div class="product-inner">
+
+    <img src="${product.thumbnailImage}" alt="${product.name}">
+
+    <h3>${product.name}</h3>
+
+    <div class="price-rating">
+      <span class="price">
+        ₹${Number(product.price).toLocaleString()}
+      </span>
+
+      <span class="stars"
+      data-rating="${Math.round(product.averageRating)}"
+      data-reviews="${product.totalReviews}">
+</span>
+    </div>
+
+    <ul>
+      ${(product.features || [])
+        .slice(0, 4)
+        .map(feature => `<li>${feature}</li>`)
+        .join("")}
+    </ul>
+
+    <div class="product-buttons">
+      <a href="PreviewPage.html?slug=${product.slug}"
+         class="btn-preview">
+         Preview
+      </a>
+
+      <button class="btn-cart"
+              id="cartBtn-${product.id}"
+              onclick="addToCart(this, ${product.id})">
+          Add To Cart
+      </button>
+    </div>
+
+  </div>
+</div>
+`;
+        });
+
+  renderStars();
+syncButtons();
+
+    } catch (error) {
+        console.error(
+            "Failed to load featured products:",
+            error
+        );
+    }
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadFeaturedProducts
+);
+
+</script>
+
+</body>
+</html>

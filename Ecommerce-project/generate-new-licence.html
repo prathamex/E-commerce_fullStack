@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate New License</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: #f3f6fb; font-family: 'Lato', sans-serif; display: flex; align-items: center; justify-content: center; color: #27364a; }
+    .modal{
+    width:100%;
+    height:100%;
+    margin:0;
+    border:none;
+    box-shadow:none;
+    background:#fff;
+}
+    .modal-header { height: 48px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d9e1eb; }
+    .modal-header h2 { margin: 0; font-size: 24px; font-weight: 600; color: #181C22; }
+    .close { font-size: 35px; color: #404753; cursor: pointer; }
+    .content { padding: 16px 15px 12px; }
+    .section-title { display: flex; align-items: center; gap: 6px; margin: 2px 0 12px; font-size: 16px; color: #0796FE; text-transform: uppercase; font-weight: 300; }
+    .badge { width: 16px; height: 17px; border-radius: 2px; background: #0796FE; color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+    .form-group { margin-bottom: 12px; }
+    .row { display: flex; gap: 12px; }
+    .row .form-group { width: 50%; }
+    label { display: block; margin-bottom: 6px; font-size: 14px; color: #404753; font-weight: 400; }
+    input, select { width: 100%; height: 38px; border: 1px solid #BFC7D5; border-radius: 3px; background: #f6f6f6; color: #181C22; font-size: 14px; padding: 0 10px; outline: none; }
+    input::placeholder { color: #7d8896; }
+    select { appearance: none; background-image: linear-gradient(45deg,transparent 50%,#68788b 50%), linear-gradient(135deg,#68788b 50%,transparent 50%); background-position: calc(100% - 14px) 12px, calc(100% - 9px) 12px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 28px; }
+    .search-wrap, .date-wrap { position: relative; }
+    .search-wrap input { padding-left: 30px; }
+    .search-icon { position: absolute; left: 10px; top: 11px; width: 11px; height: 11px; border: 1.5px solid #7b8796; border-radius: 50%; }
+    .search-icon::after { content: ""; position: absolute; width: 6px; height: 1.5px; background: #7b8796; right: -5px; bottom: -3px; transform: rotate(45deg); }
+    /* User search dropdown */
+    .user-dropdown { position: absolute; top: 40px; left: 0; right: 0; background: #fff; border: 1px solid #BFC7D5; border-radius: 3px; box-shadow: 0 6px 16px rgba(20,40,70,0.14); z-index: 50; display: none; max-height: 180px; overflow-y: auto; }
+    .user-dropdown.show { display: block; }
+    .user-option { padding: 9px 12px; font-size: 14px; color: #27364a; cursor: pointer; }
+    .user-option:hover { background: #f0f6ff; }
+    .user-option .user-email { font-size: 11px; color: #888; display: block; }
+    /* License key row */
+    .license-key-row { display: flex; gap: 7px; align-items: flex-end; }
+    .license-key-row .form-group { flex: 1; margin-bottom: 12px; }
+    .manual-box { width: 74px; margin-bottom: 12px; }
+    .manual-label { display: flex; align-items: center; justify-content: flex-end; gap: 5px; margin-bottom: 12px; font-size: 11px; color: #404753; white-space: nowrap; font-weight: 400; }
+    .switch { width: 20px; height: 10px; border: 0; border-radius: 20px; background: #cbd3dc; position: relative; flex-shrink: 0; cursor: pointer; padding: 0; transition: background 0.2s ease; }
+    .switch::before { content: ""; width: 8px; height: 8px; background: #fff; border-radius: 50%; position: absolute; top: 1px; left: 1px; transition: transform 0.2s ease; }
+    .switch.active { background: #139cf3; }
+    .switch.active::before { transform: translateX(10px); }
+    .regen { width: 70px; height: 37px; border: 1px solid #cceaff; border-radius: 3px; background: #eaf7ff; color: #139cf3; font-size: 11px; cursor: pointer; }
+    .regen:disabled { opacity: 0.5; cursor: not-allowed; }
+    .date-wrap input { padding-left: 31px; cursor: pointer; }
+    .calendar { position: absolute; left: 10px; top: 12px; width: 12px; height: 13px; border: 1.5px solid #707884; border-radius: 1px; pointer-events: none; }
+    .calendar::before { content: ""; position: absolute; left: -1.5px; top: 3px; width: 12px; border-top: 1.5px solid #707f91; }
+    .date-picker { position: absolute; top: 34px; left: 0; width: 214px; background: #fff; border: 1px solid #cdd7e3; border-radius: 4px; box-shadow: 0 8px 22px rgba(20,40,70,0.18); z-index: 20; padding: 8px; display: none; }
+    .date-picker.show { display: block; }
+    .date-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; font-size: 11px; font-weight: 600; color: #26384c; }
+    .date-head button { width: 24px; height: 22px; border: 1px solid #d8e0ea; background: #f8fbff; color: #26384c; border-radius: 3px; cursor: pointer; }
+    .date-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+    .day-name, .day { height: 24px; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+    .day-name { color: #6a7889; font-weight: 600; }
+    .day { border: 0; background: #f8fbff; color: #26384c; border-radius: 3px; cursor: pointer; }
+    .day:hover, .day.selected { background: #139cf3; color: #fff; }
+    .day.empty { background: transparent; cursor: default; }
+    .footer { height: 52px; padding: 0 16px; border-top: 1px solid #e0e6ef; display: flex; align-items: center; justify-content: flex-end; gap: 18px; }
+    .cancel { border: 0; background: transparent; color: #404753; font-size: 14px; cursor: pointer; }
+    .primary { width: 220px; height: 38px; border: 0; border-radius: 4px; background: #0496FE; color: #fff; font-size: 14px; box-shadow: 0 3px 8px rgba(18,154,243,0.35); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .mail { font-size: 17px; }
+    /* Error messages */
+    .field-error { font-size: 11px; color: #d92d20; margin-top: 3px; display: block; }
+    /* Toast */
+    .toast-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 8px; }
+    .toast { padding: 12px 20px; border-radius: 8px; font-size: 14px; color: #fff; font-weight: 500; opacity: 0; transform: translateY(10px); transition: all 0.3s; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { background: #1F9D55; }
+    .toast.error { background: #d92d20; }
+    /* Success box */
+    .success-box { display: none; text-align: center; padding: 30px 20px; }
+    .success-box .check-icon { font-size: 48px; color: #1F9D55; margin-bottom: 12px; }
+    .success-box h3 { font-size: 20px; font-weight: 600; color: #101828; margin-bottom: 8px; }
+    .success-box p { font-size: 14px; color: #555; margin-bottom: 4px; }
+    .success-box .lic-key { font-size: 16px; font-weight: 700; color: #0796FE; letter-spacing: 1px; margin: 10px 0; }
+    .success-box .btn-back { margin-top: 18px; padding: 10px 28px; background: #0796FE; color: #fff; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; }
+    @media (max-width: 768px) {
+      .modal { width: calc(100% - 24px); margin: 20px auto; }
+      .modal-header { height: auto; min-height: 48px; padding: 12px 14px; }
+      .modal-header h2 { font-size: 20px; }
+      .content { padding: 14px 12px; }
+      .row { flex-direction: column; gap: 0; }
+      .row .form-group { width: 100%; }
+      .license-key-row { flex-direction: column; align-items: stretch; gap: 0; }
+      .manual-box { width: 100%; margin-bottom: 12px; }
+      .manual-label { justify-content: flex-start; margin-bottom: 8px; font-size: 12px; }
+      .regen { width: 100%; height: 38px; }
+      .date-picker { width: 100%; max-width: 260px; }
+      .footer { height: auto; padding: 14px 12px; flex-direction: column-reverse; gap: 12px; }
+      .primary, .cancel { width: 100%; height: 40px; }
+    }
+    @media (max-width: 480px) {
+      .modal { width: calc(100% - 16px); margin: 12px auto; }
+      .modal-header h2 { font-size: 18px; }
+      label { font-size: 13px; }
+      input, select { height: 40px; font-size: 13px; }
+      .section-title { font-size: 14px; }
+      .primary { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Generate New License</h2>
+      <div class="close" id="closeBtn">×</div>
+    </div>
+
+    <!-- FORM CONTENT -->
+    <div id="formContent">
+      <div class="content">
+        <!-- SECTION 1: Product Information -->
+        <div class="section-title"><span class="badge">1</span> Product Information</div>
+
+        <div class="form-group">
+          <label>Product Name</label>
+          <select id="productSelect">
+            <option value="">Loading products...</option>
+          </select>
+          <span class="field-error" id="err-product"></span>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>License Type</label>
+            <select id="licenseType">
+              <option value="TRIAL">Trial</option>
+              <option value="MONTHLY">Monthly</option>
+              <option value="YEARLY">Yearly</option>
+              <option value="LIFETIME">Lifetime</option>
+            </select>
+            <span class="field-error" id="err-licenseType"></span>
+          </div>
+          <div class="form-group">
+            <label>License Plan (Optional)</label>
+            <select id="licensePlan">
+              <option value="">Select Plan...</option>
+              <option value="BASIC">Basic</option>
+              <option value="STANDARD">Standard</option>
+              <option value="PREMIUM">Premium</option>
+              <option value="ENTERPRISE">Enterprise</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- SECTION 2: User / Customer Details -->
+        <div class="section-title"><span class="badge">2</span> User / Customer Details</div>
+
+        <div class="form-group">
+          <label>Assign To User (Optional)</label>
+          <div class="search-wrap" style="position:relative;">
+            <span class="search-icon"></span>
+            <input type="text" id="userSearch" placeholder="Search users..." autocomplete="off">
+            <div class="user-dropdown" id="userDropdown"></div>
+          </div>
+          <input type="hidden" id="assignedUserId">
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Customer Name</label>
+            <input type="text" id="customerName" placeholder="Enter name">
+            <span class="field-error" id="err-customerName"></span>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="customerEmail" placeholder="email@example.com">
+            <span class="field-error" id="err-customerEmail"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="text" id="mobileNumber" placeholder="Enter number">
+            <span class="field-error" id="err-mobileNumber"></span>
+          </div>
+          <div class="form-group">
+            <label>Company Name (Optional)</label>
+            <input type="text" id="companyName" placeholder="Enter company name">
+          </div>
+        </div>
+
+        <!-- SECTION 3: License Configuration -->
+        <div class="section-title"><span class="badge">3</span> License Configuration</div>
+
+        <div class="license-key-row">
+          <div class="form-group">
+            <label>License Key</label>
+            <input type="text" id="licenseKey" value="" placeholder="Auto-generated" readonly>
+            <span class="field-error" id="err-licenseKey"></span>
+          </div>
+          <div class="manual-box">
+            <div class="manual-label">
+              Allow Manual
+              <button class="switch" id="manualSwitch" type="button"></button>
+            </div>
+            <button class="regen" id="regenBtn" type="button">Regenerate</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Activation Limit</label>
+            <select id="activationLimit">
+              <option value="1">1 Device</option>
+              <option value="2">2 Devices</option>
+              <option value="3">3 Devices</option>
+            </select>
+            <span class="field-error" id="err-activationLimit"></span>
+          </div>
+          <div class="form-group">
+            <label>License Status</label>
+            <input type="text" value="Auto-calculated from dates" readonly style="color:#888; font-size:12px; background:#f0f0f0;">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Activation Date</label>
+            <div class="date-wrap">
+              <span class="calendar"></span>
+              <input id="activationDate" type="text" placeholder="mm/dd/yyyy" readonly>
+              <div class="date-picker" id="activationPicker"></div>
+            </div>
+            <span class="field-error" id="err-activationDate"></span>
+          </div>
+          <div class="form-group">
+            <label>Expiry Date</label>
+            <div class="date-wrap">
+              <span class="calendar"></span>
+              <input id="expiryDate" type="text" placeholder="mm/dd/yyyy" readonly>
+              <div class="date-picker" id="expiryPicker"></div>
+            </div>
+            <span class="field-error" id="err-expiryDate"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button class="cancel" id="cancelBtn">Cancel</button>
+        <button class="primary" id="generateBtn">
+          <span class="mail">✉</span>
+          Generate &amp; Email License
+        </button>
+      </div>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div class="success-box" id="successBox">
+      <div class="check-icon">✔</div>
+      <h3>License Generated!</h3>
+      <p id="successProduct"></p>
+      <p id="successCustomer"></p>
+      <div class="lic-key" id="successKey"></div>
+      <p id="successStatus"></p>
+      <p id="successExpiry"></p>
+      <p style="font-size:13px;color:#888;margin-top:8px;">📧 License details have been emailed to the customer.</p>
+      <button class="btn-back" onclick="window.location.href='licence-dashboard.html'">Back to Dashboard</button>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script>
+    const BASE_URL = 'http://localhost:8081';
+    let isManual = false;
+    let selectedDates = { activation: null, expiry: null };
+    let userSearchTimeout = null;
+
+   
+    function getToken() {
+      return localStorage.getItem('token') || sessionStorage.getItem('token');
+    }
+    function authHeaders() {
+      return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+    }
+
+    
+    function showToast(msg, type = 'success') {
+      const wrap = document.getElementById('toastWrap');
+      const t = document.createElement('div');
+      t.className = 'toast ' + type;
+      t.textContent = msg;
+      wrap.appendChild(t);
+      requestAnimationFrame(() => t.classList.add('show'));
+      setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3500);
+    }
+
+    
+    async function loadProducts() {
+      const sel = document.getElementById('productSelect');
+      try {
+        const res = await fetch(`${BASE_URL}/admin/products?size=100`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Failed');
+        const result = await res.json();
+        // Support both paged and list responses
+        const products = result.data?.content || result.data || [];
+        sel.innerHTML = '<option value="">Select product...</option>';
+        if (products.length === 0) {
+          sel.innerHTML = '<option value="">No products found</option>';
+          return;
+        }
+        products.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = p.name;
+          sel.appendChild(opt);
+        });
+      } catch (e) {
+        sel.innerHTML = '<option value="">Could not load products</option>';
+      }
+    }
+
+    // ── GENERATE AUTO LICENSE KEY ─────────────────────────────────────
+    function generateKey() {
+      const year = new Date().getFullYear();
+      const rand = () => Math.random().toString(36).substring(2, 7).toUpperCase();
+      return `LIC-${year}-${rand()}-${rand()}`;
+    }
+
+    function refreshKey() {
+      if (!isManual) {
+        document.getElementById('licenseKey').value = generateKey();
+      }
+    }
+
+   
+    document.getElementById('manualSwitch').addEventListener('click', function () {
+      isManual = !isManual;
+      this.classList.toggle('active', isManual);
+      const keyInput = document.getElementById('licenseKey');
+      const regenBtn = document.getElementById('regenBtn');
+      if (isManual) {
+        keyInput.readOnly = false;
+        keyInput.style.background = '#fff';
+        keyInput.focus();
+        regenBtn.disabled = true;
+      } else {
+        keyInput.readOnly = true;
+        keyInput.style.background = '#f6f6f6';
+        regenBtn.disabled = false;
+        refreshKey();
+      }
+    });
+
+    document.getElementById('regenBtn').addEventListener('click', refreshKey);
+
+    // ── USER SEARCH ───────────────────────────────────────────────────
+    document.getElementById('userSearch').addEventListener('input', function () {
+      const kw = this.value.trim();
+      clearTimeout(userSearchTimeout);
+      document.getElementById('assignedUserId').value = '';
+      if (!kw) { hideUserDropdown(); return; }
+      userSearchTimeout = setTimeout(() => searchUsers(kw), 350);
+    });
+
+    async function searchUsers(keyword) {
+      try {
+        const res = await fetch(`${BASE_URL}/api/users/assign-search?keyword=${encodeURIComponent(keyword)}`, {
+          headers: authHeaders()
+        });
+        if (!res.ok) throw new Error();
+        const result = await res.json();
+        const users = result.data || [];
+        renderUserDropdown(users);
+      } catch (e) {
+        hideUserDropdown();
+      }
+    }
+
+    function renderUserDropdown(users) {
+      const dd = document.getElementById('userDropdown');
+      if (!users.length) { hideUserDropdown(); return; }
+      dd.innerHTML = users.map(u => `
+        <div class="user-option" onclick="selectUser(${u.id}, '${escapeHtml(u.name)}', '${escapeHtml(u.email)}')">
+          ${escapeHtml(u.name)}
+          <span class="user-email">${escapeHtml(u.email)}</span>
+        </div>
+      `).join('');
+      dd.classList.add('show');
+    }
+
+    function selectUser(id, name, email) {
+      document.getElementById('assignedUserId').value = id;
+      document.getElementById('userSearch').value = name;
+      document.getElementById('customerName').value = name;
+      document.getElementById('customerEmail').value = email;
+      hideUserDropdown();
+    }
+
+    function hideUserDropdown() {
+      document.getElementById('userDropdown').classList.remove('show');
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!document.getElementById('userSearch').contains(e.target)) hideUserDropdown();
+      document.querySelectorAll('.date-picker').forEach(p => {
+        if (!p.previousElementSibling?.contains(e.target)) p.classList.remove('show');
+      });
+    });
+
+    
+    function createDatePicker(inputId, pickerId, dateKey) {
+      const input = document.getElementById(inputId);
+      const picker = document.getElementById(pickerId);
+      let currentDate = new Date();
+
+      function formatDate(date) {
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${m}/${d}/${date.getFullYear()}`;
+      }
+
+      function toISO(date) {
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${date.getFullYear()}-${m}-${d}`;
+      }
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const totalDays = new Date(year, month + 1, 0).getDate();
+        const monthName = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+        picker.innerHTML = `
+          <div class="date-head">
+            <button type="button" class="prev-month">‹</button>
+            <span>${monthName}</span>
+            <button type="button" class="next-month">›</button>
+          </div>
+          <div class="date-grid">
+            <div class="day-name">Sun</div><div class="day-name">Mon</div>
+            <div class="day-name">Tue</div><div class="day-name">Wed</div>
+            <div class="day-name">Thu</div><div class="day-name">Fri</div>
+            <div class="day-name">Sat</div>
+          </div>`;
+
+        const grid = picker.querySelector('.date-grid');
+        for (let i = 0; i < firstDay; i++) {
+          const e = document.createElement('div'); e.className = 'day empty'; grid.appendChild(e);
+        }
+        for (let day = 1; day <= totalDays; day++) {
+          const btn = document.createElement('button');
+          btn.type = 'button'; btn.className = 'day'; btn.textContent = day;
+          const dateValue = new Date(year, month, day);
+          const stored = selectedDates[dateKey];
+          if (stored && stored.getFullYear() === year && stored.getMonth() === month && stored.getDate() === day) {
+            btn.classList.add('selected');
+          }
+          btn.addEventListener('click', function () {
+            selectedDates[dateKey] = dateValue;
+            input.value = formatDate(dateValue);
+            input.dataset.iso = toISO(dateValue);
+            picker.classList.remove('show');
+            renderCalendar();
+          });
+          grid.appendChild(btn);
+        }
+
+        picker.querySelector('.prev-month').addEventListener('click', function (e) {
+          e.stopPropagation();
+          currentDate = new Date(year, month - 1, 1);
+          renderCalendar();
+        });
+        picker.querySelector('.next-month').addEventListener('click', function (e) {
+          e.stopPropagation();
+          currentDate = new Date(year, month + 1, 1);
+          renderCalendar();
+        });
+      }
+
+      input.addEventListener('click', function (e) {
+        e.stopPropagation();
+        document.querySelectorAll('.date-picker').forEach(p => { if (p !== picker) p.classList.remove('show'); });
+        picker.classList.toggle('show');
+        renderCalendar();
+      });
+      picker.addEventListener('click', e => e.stopPropagation());
+      renderCalendar();
+    }
+
+    
+    function clearErrors() {
+      document.querySelectorAll('.field-error').forEach(el => el.textContent = '');
+    }
+
+    function setError(id, msg) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = msg;
+    }
+
+    function validate() {
+      clearErrors();
+      let valid = true;
+      if (!document.getElementById('productSelect').value) {
+        setError('err-product', 'Product is required'); valid = false;
+      }
+      if (!document.getElementById('customerName').value.trim()) {
+        setError('err-customerName', 'Customer name is required'); valid = false;
+      }
+      const email = document.getElementById('customerEmail').value.trim();
+      if (!email) {
+        setError('err-customerEmail', 'Email is required'); valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError('err-customerEmail', 'Invalid email format'); valid = false;
+      }
+      if (!document.getElementById('mobileNumber').value.trim()) {
+        setError('err-mobileNumber', 'Mobile number is required'); valid = false;
+      }
+      if (isManual && !document.getElementById('licenseKey').value.trim()) {
+        setError('err-licenseKey', 'License key is required when manual is enabled'); valid = false;
+      }
+      if (!document.getElementById('activationDate').dataset.iso) {
+        setError('err-activationDate', 'Activation date is required'); valid = false;
+      }
+      if (!document.getElementById('expiryDate').dataset.iso) {
+        setError('err-expiryDate', 'Expiry date is required'); valid = false;
+      }
+      if (document.getElementById('activationDate').dataset.iso && document.getElementById('expiryDate').dataset.iso) {
+        if (document.getElementById('expiryDate').dataset.iso <= document.getElementById('activationDate').dataset.iso) {
+          setError('err-expiryDate', 'Expiry must be after activation date'); valid = false;
+        }
+      }
+      return valid;
+    }
+
+   
+    document.getElementById('generateBtn').addEventListener('click', async function () {
+      if (!validate()) return;
+
+      const btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<span>Generating...</span>';
+
+      const payload = {
+        productId: parseInt(document.getElementById('productSelect').value),
+        licenseType: document.getElementById('licenseType').value,
+        licensePlan: document.getElementById('licensePlan').value || null,
+        assignedUserId: document.getElementById('assignedUserId').value
+          ? parseInt(document.getElementById('assignedUserId').value) : null,
+        customerName: document.getElementById('customerName').value.trim(),
+        customerEmail: document.getElementById('customerEmail').value.trim(),
+        mobileNumber: document.getElementById('mobileNumber').value.trim(),
+        companyName: document.getElementById('companyName').value.trim() || null,
+        licenseKey: isManual ? document.getElementById('licenseKey').value.trim() : null,
+        manualKey: isManual,
+        activationLimit: parseInt(document.getElementById('activationLimit').value),
+        activationDate: document.getElementById('activationDate').dataset.iso,
+        expiryDate: document.getElementById('expiryDate').dataset.iso,
+      };
+
+      try {
+        const res = await fetch(`${BASE_URL}/admin/licenses/generate`, {
+          method: 'POST',
+          headers: authHeaders(),
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (!res.ok) {
+          // Show validation errors from backend if any
+          if (result.errors) {
+            Object.keys(result.errors).forEach(field => {
+              const errId = 'err-' + field;
+              const el = document.getElementById(errId);
+              if (el) el.textContent = result.errors[field];
+            });
+          }
+          throw new Error(result.message || 'Generation failed');
+        }
+        const d = result.data;
+        // Show success screen
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('successBox').style.display = 'block';
+        document.getElementById('successProduct').textContent = '📦 ' + (d.productName || '');
+        document.getElementById('successCustomer').textContent = '👤 ' + (d.customerName || '');
+        document.getElementById('successKey').textContent = d.licenseKey || '';
+        document.getElementById('successStatus').textContent = '🔵 Status: ' + (d.licenseStatus || '');
+        document.getElementById('successExpiry').textContent = '📅 Expires: ' + (d.expiryDate || '');
+      } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<span class="mail">✉</span> Generate &amp; Email License';
+      }
+    });
+
+   
+    // document.getElementById('cancelBtn').addEventListener('click', () => window.location.href = 'licence-dashboard.html');
+    // document.getElementById('closeBtn').addEventListener('click', () => window.location.href = 'licence-dashboard.html');
+document.getElementById('cancelBtn').addEventListener('click', () => {
+    parent.document.getElementById('generateLicenseModal').style.display = 'none';
+    parent.document.body.classList.remove('modal-blur-active');
+});
+
+document.getElementById('closeBtn').addEventListener('click', () => {
+    parent.document.getElementById('generateLicenseModal').style.display = 'none';
+    parent.document.body.classList.remove('modal-blur-active');
+});
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      //if (!getToken()) { window.location.href = 'login.html'; return; }
+      loadProducts();
+      refreshKey();
+      createDatePicker('activationDate', 'activationPicker', 'activation');
+      createDatePicker('expiryDate', 'expiryPicker', 'expiry');
+    });
+  </script>
+</body>
+</html>

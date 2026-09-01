@@ -1,0 +1,2941 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- <script src="./admin-guard.js"></script> -->
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <!-- <script src="profile.js"></script> -->
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts: Oswald and Lato -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+
+    <style>
+      :root {
+        --bg-dark: #092a49;
+        --primary-blue: #0796fe;
+        --sub-text: #797979;
+        --white: #ffffff;
+        --light-bg: #f0f2f5;
+        --table-header: #e9f1f9;
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        background-color: var(--light-bg);
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Sidebar Style */
+      .sidebar {
+        background-color: #092a49;
+        min-height: 100vh;
+        color: var(--white);
+        position: fixed;
+        width: 240px;
+        z-index: 1000;
+      }
+
+      .sidebar .logo-area {
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      .logo-img {
+        width: 160px;
+        height: auto;
+      }
+
+      .sidebar a {
+        color: #e5e5e5;
+        text-decoration: none;
+        padding: 15px 25px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        transition: 0.3s;
+        margin: 5px 10px;
+        border-radius: 5px;
+        border-left: 5px solid transparent;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--primary-blue);
+        border-left: 5px solid var(--primary-blue);
+      }
+
+      .menu-icon.blue {
+        display: none;
+      }
+
+      .sidebar i {
+        font-size: 18px;
+        margin-right: 10px;
+      }
+
+      .sidebar a:hover i,
+      .sidebar a.active i {
+        color: var(--primary-blue);
+      }
+
+      .toggle-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        margin-left: -15px;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-left: 240px;
+        width: calc(100% - 240px);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      /* EXACT HEADER STYLE */
+      .top-header {
+        background: #ffffff;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+        border-bottom: 1px solid #e0e0e0;
+        position: fixed;
+        top: 0;
+        left: 240px;
+        right: 0;
+        z-index: 999;
+      }
+
+      .search-bar {
+        background: #f8f9fa;
+        border: 1px solid #e9e9e9;
+        border-radius: 8px;
+        padding: 8px 15px;
+        width: 450px;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-bar i {
+        color: #a0a0a0;
+        margin-right: 10px;
+      }
+
+      .search-bar input {
+        border: none;
+        background: transparent;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+
+      .notification-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        color: var(--sub-text);
+        font-size: 20px;
+      }
+
+      .notification-btn .noti-text {
+        font-size: 10px;
+        margin-top: 2px;
+        color: var(--sub-text);
+      }
+
+      .notification-btn .badge {
+        position: absolute;
+        top: 0px;
+        transform: translate(40%, -40%);
+
+        background: #ef4444;
+        color: white;
+        font-size: 9px;
+        padding: 3px 5px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+      }
+
+      .user-avatar {
+        width: 42px;
+        height: 42px;
+        background: #0f477c;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .content-body {
+        padding: 30px;
+        padding-top: 85px;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .dashboard-title h2 {
+        font-family: "lato", sans-serif;
+        font-weight: 400;
+        font-size: 35px;
+        margin-bottom: 5px;
+      }
+
+      .dashboard-title p {
+        color: var(--sub-text);
+        font-size: 16px;
+      }
+
+      /* Stats Cards */
+
+      .stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: 0.3s;
+        height: 100%;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+      }
+
+      /* icon */
+      .icon-box {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .stat-text h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: #0a2540;
+      }
+
+      .stat-text p {
+        margin: 2px 0 0;
+        font-size: 16px;
+        color: #0a2540;
+      }
+
+      .sidebar a:hover .menu-icon.grey {
+        display: none;
+      }
+
+      .sidebar a:hover .menu-icon.blue {
+        display: inline;
+      }
+
+      .sidebar a.active .menu-icon.grey {
+        display: none;
+      }
+
+      .sidebar a.active .menu-icon.blue {
+        display: inline;
+      }
+
+      /* Mobile */
+      @media (max-width: 576px) {
+        .stat-card {
+          padding: 15px;
+        }
+
+        .stat-text h2 {
+          font-size: 20px;
+        }
+
+        .stat-text p {
+          font-size: 13px;
+        }
+      }
+
+      /* icon styles */
+
+      .icon-box img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .icon-box.blue {
+        background: #e7f1ff;
+        color: #0d6efd;
+      }
+
+      .icon-box.purple {
+        background: #f3e8ff;
+        color: #9333ea;
+      }
+
+      .icon-box.orange {
+        background: #fff3e6;
+        color: #f59e0b;
+      }
+
+      .icon-box.green {
+        background: #e6f9f0;
+        color: #10b981;
+      }
+
+      @media (max-width: 991.98px) {
+        .sidebar {
+          left: -240px;
+          transition: all 0.3s ease;
+        }
+
+        .sidebar.show {
+          left: 0;
+        }
+
+        .main-content {
+          margin-left: 0 !important;
+          width: 100% !important;
+        }
+
+        .top-header {
+          left: 0 !important;
+        }
+
+        .search-bar {
+          width: 150px;
+        }
+
+        .notification-btn .noti-text {
+          display: none;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .search-bar {
+          width: 450px;
+        }
+      }
+
+      /* Mobile only wrap */
+      @media (max-width: 576px) {
+        .stat-card {
+          flex-wrap: wrap;
+        }
+      }
+
+      /* Tablet + Desktop */
+      @media (min-width: 577px) {
+        .stat-card {
+          flex-wrap: nowrap;
+          align-items: center;
+        }
+      }
+
+      /* --- Purchase Main Section Styles --- */
+      .purchase-body-container {
+        padding: 30px;
+        margin-top: 70px;
+        /* Offset for fixed header */
+      }
+
+      .content-box {
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        border-radius: 5px;
+        box-shadow: 0 10px 24px rgba(15, 41, 86, 0.06);
+        padding: 20px;
+        margin-bottom: 0 !important;
+      }
+
+      /* Header & Title */
+      .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .page-heading {
+        font-family: "Lato", sans-serif;
+        font-size: 28px;
+        font-weight: 400;
+        color: #1e293b;
+        margin: 0;
+      }
+
+      /* Action Bar (Search + Filter) */
+      .action-bar {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .inner-search {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 15px;
+        width: 280px;
+        display: flex;
+        align-items: center;
+      }
+
+      .inner-search i {
+        color: #94a3b8;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+
+      .inner-search input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+      }
+
+      /* Wrapper */
+      .filter-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Button */
+      .filter-btn {
+        background: var(--primary-blue);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .filter-btn:hover {
+        background: #0796fe;
+        color: #fff;
+        border-color: #0d8bff;
+        box-shadow: 0 4px 12px rgba(13, 139, 255, 0.25);
+        transform: translateY(-2px);
+      }
+
+      /* Wrapper */
+      .filter-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Button */
+
+      .large-filter-icon {
+        font-size: 1.25rem !important;
+        line-height: 1;
+        vertical-align: -0.125em;
+      }
+
+      .filter-btn {
+        background: var(--primary-blue);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 7px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .filter-btn i {
+        font-size: 15px;
+      }
+
+      /* DROPDOWN PANEL (SMALL + TIGHT) */
+      .filter-panel {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 240px;
+        /* smaller */
+        background: #fff;
+        border-radius: 8px;
+        padding: 14px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        display: none;
+        z-index: 9999;
+      }
+
+      /* Show */
+      .filter-panel.active {
+        display: block;
+      }
+
+      /* Header */
+      .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .filter-header h4 {
+        font-size: 14px;
+        margin: 0;
+      }
+
+      .clear-btn {
+        font-size: 12px;
+        color: #0d6efd;
+        cursor: pointer;
+      }
+
+      /* Form */
+      .filter-group {
+        margin-bottom: 10px;
+      }
+
+      .filter-group label {
+        font-size: 12px;
+        margin-bottom: 3px;
+      }
+
+      .filter-group input,
+      .filter-group select {
+        width: 100%;
+        padding: 7px 8px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-size: 12px;
+      }
+
+      /* Date icon */
+      .input-box {
+        position: relative;
+      }
+
+      .input-box i {
+        position: absolute;
+        left: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px;
+      }
+
+      .input-box input {
+        padding-left: 24px;
+      }
+
+      /* Button */
+      .apply-btn {
+        width: 100%;
+        padding: 8px;
+        font-size: 13px;
+        background: #1e88e5;
+        border: none;
+        color: #fff;
+        border-radius: 6px;
+      }
+
+      /* ✅ MOBILE FIX (REAL DROPDOWN, NOT FULL WIDTH) */
+      @media (max-width: 768px) {
+        .filter-panel {
+          position: absolute;
+          /* keep dropdown behavior */
+          top: 40px;
+          right: 0;
+          left: auto;
+          /* prevent stretching */
+          width: 220px;
+          /* smaller on mobile */
+          border-radius: 8px;
+        }
+      }
+
+      /* EXTRA SMALL DEVICES */
+      @media (max-width: 480px) {
+        .filter-panel {
+          width: 200px;
+          /* tighter */
+          padding: 12px;
+        }
+      }
+
+      /* Table Container Card */
+      .table-card {
+        background: #ffffff;
+        border-radius: 0px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+
+      /* Table Design */
+      .table thead th {
+        background-color: var(--table-header);
+        color: #475569;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 15px 20px;
+        border-bottom: none;
+        white-space: nowrap;
+      }
+
+      .table tbody td {
+        padding: 15px 20px;
+        color: #334155;
+        font-size: 14px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .order-id {
+        color: #64748b;
+        font-weight: 500;
+      }
+
+      /* Product Info Cell */
+      .product-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .product-cell img {
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        object-fit: cover;
+      }
+
+      .product-cell span {
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      /* Status Badges */
+      .status-badge {
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status-badge.completed {
+        background-color: #dbf7eb;
+        color: #0f9f71;
+      }
+
+      .status-badge.processing {
+        background-color: #f1f2f6;
+        color: #6f7f9a;
+      }
+
+      .action-dots {
+        color: #94a3b8;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* --- Mobile Responsiveness --- */
+      @media (max-width: 991px) {
+        .main-content {
+          margin-left: 0;
+          width: 100%;
+        }
+
+        .top-header {
+          left: 0;
+        }
+
+        .inner-search {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .purchase-body-container {
+          padding: 15px;
+        }
+
+        .content-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .action-bar {
+          width: 100%;
+        }
+
+        .inner-search {
+          flex: 1;
+        }
+      }
+
+      .action-menu {
+        display: none;
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .action-menu a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .action-menu a:hover {
+        background: #f0f0f0;
+      }
+
+      /* Pagination */
+      /* Base */
+      body {
+        font-family: "lato", sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Container */
+      .main {
+        flex: 1;
+        display: flex;
+        justify-content: right;
+        padding: 20px 40px;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* Page Box */
+      .page-box {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+        font-size: 14px;
+      }
+
+      .page-box i {
+        font-size: 14px;
+      }
+
+      /* Hover */
+      .page-box:hover {
+        background: #eee;
+      }
+
+      /* Active */
+      .page-box.active {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+      }
+
+      /* Disabled */
+      .page-box.disabled {
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      /* ========================= */
+      /* MOBILE RESPONSIVE */
+      /* ========================= */
+
+      /* Tablet */
+      @media (max-width: 768px) {
+        .main {
+          justify-content: right; /* center pagination */
+          padding: 15px;
+        }
+
+        .page-box {
+          width: 30px;
+          height: 30px;
+          font-size: 13px;
+        }
+      }
+
+      /* Small Mobile */
+      @media (max-width: 480px) {
+        .pagination {
+          justify-content: right;
+          gap: 6px;
+        }
+
+        .page-box {
+          width: 28px;
+          height: 28px;
+          font-size: 12px;
+          border-radius: 6px;
+        }
+      }
+
+      /* Extra Small Devices */
+      @media (max-width: 360px) {
+        .page-box {
+          width: 24px;
+          height: 24px;
+          font-size: 11px;
+        }
+      }
+
+      /* ==============================18=*/
+
+      /* ========================= */
+      /* PAGE WRAPPER */
+      /* ========================= */
+
+      .users-page-wrapper {
+        padding: 95px 20px 20px;
+      }
+
+      .users-breadcrumb a {
+        font-size: 18px;
+        margin-bottom: 12px;
+        color: #797979;
+        text-decoration: none;
+      }
+
+      .users-breadcrumb a:hover {
+        color: #0796fe;
+      }
+
+      .users-breadcrumb .active {
+        color: #0796fe;
+        font-size: 18px;
+      }
+
+      .users-main-card {
+        background: #fff;
+        border: 1px solid #e4e7ec;
+        border-radius: 6px;
+        overflow: visible;
+      }
+
+      /* ========================= */
+      /* TOPBAR */
+      /* ========================= */
+
+      .users-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .users-title {
+        font-size: 32px;
+        font-weight: 200;
+        color: #101828;
+        font-family: oswald, sans-serif;
+      }
+
+      .users-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+     .users-search-box {
+        width: 330px;
+        height: 44px;
+        border: 1px solid #dbe1e8;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background: #fff;
+        position: relative;
+      }
+
+      .users-search-box i {
+        color: #9ca3af;
+        margin-right: 10px;
+      }
+
+      .users-search-box input {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        flex: 1; /* Changed from width: 100% to fit the clear button nicely */
+      }
+
+      /* Style for the clear button */
+      .search-clear-btn {
+        cursor: pointer;
+        color: #94a3b8;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1;
+        display: none; /* Controlled dynamically by JS */
+        user-select: none;
+        margin-left: 8px;
+        transition: color 0.15s ease;
+      }
+
+      .search-clear-btn:hover {
+        color: #64748b;
+      }
+      /* kajal changes */
+      /* SUGGESTION DROPDOWN */
+      #suggestionBox {
+        position: absolute;
+        top: 48px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #dbe1e8;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        z-index: 9999;
+        max-height: 250px;
+        overflow-y: auto;
+        display: none;
+      }
+
+      .suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  background: #fff;
+  transition: background 0.15s ease;
+}
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: #f3f4f6; /* light grey selection background */
+}
+      /* kajal changes */
+
+      .filter-btn {
+        height: 44px;
+        padding: 0 24px;
+        border: 1px solid var(--primary-blue);
+        border-radius: 8px;
+        background: #fff;
+        color: #0796fe;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .add-btn {
+        
+        height: 44px;
+        padding: 0 24px;
+        border: none;
+        border-radius: 8px;
+        background: #0796fe;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .add-btn:hover {
+        background: #0077e6;
+        box-shadow: 0 4px 12px rgba(0, 119, 230, 0.35);
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 480px) {
+  .filter-btn,
+  .add-btn {
+    width: 100%;
+    height: 44px !important;
+    min-height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+      /* ========================= */
+      /* TABLE */
+      /* ========================= */
+
+      .users-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .users-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .users-table thead {
+        background: #e1f2ff;
+      }
+
+      .users-table thead th {
+        padding: 16px 22px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #3c4452;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .users-table tbody td {
+        padding: 28px 22px;
+        border-bottom: 1px solid #edf2f7;
+        font-size: 13.46px;
+        color: #092a49;
+        white-space: nowrap;
+      }
+
+      /* ========================= */
+      /* BADGES */
+      /* ========================= */
+
+      .status-badge {
+        min-width: 90px;
+        height: 28px;
+        padding: 0 14px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .active-status {
+        background: #ddf8e8;
+        color: #1f9d55;
+      }
+
+      .blocked-status {
+        background: #ffe3e3;
+        color: #d92d02;
+      }
+
+      .deleted-status {
+        background: #717171;
+        color: #fff;
+      }
+
+      /* ========================= */
+      /* ACTION MENU */
+      /* ========================= */
+
+      .action-cell {
+        position: relative;
+      }
+
+      .menu-btn {
+        border: none;
+        background: transparent;
+        color: #64748b;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .dropdown-menu-custom {
+        position: absolute;
+        top: 35px;
+        right: 0;
+        width: 120px;
+        background: #fff;
+        border: 1px solid #dbe1e8;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        display: none;
+        z-index: 999;
+      }
+
+      .dropdown-menu-custom.show {
+        display: block;
+      }
+
+      .dropdown-menu-custom a {
+        display: block;
+        padding: 8px 12px;
+        text-decoration: none;
+        color: var(--text-color);
+        font-size: 13px;
+      }
+
+      .dropdown-menu-custom a:hover {
+        background: #f5f7fb;
+      }
+
+      /* ========================= */
+      /* PAGINATION */
+      /* ========================= */
+
+      .pagination-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        background: #fff;
+      }
+
+      .pagination-custom {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .page-box {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background: #fff;
+        font-size: 14px;
+      }
+
+      .page-box.active {
+        background: var(--primary-blue);
+        color: #fff;
+        border-color: var(--primary-blue);
+      }
+
+      /* ========================= */
+
+      /* Footer */
+
+      .orders-footer-text {
+        text-align: center;
+        font-size: 16px;
+        color: #797979;
+        margin-top: 14px;
+      }
+
+      .orders-footer-text span {
+        color: #092a49;
+        font-weight: 400;
+      }
+
+      /* Kajal changes */
+
+    /* added for the notification 
+      .notification-wrapper {
+        position: relative;
+      }
+
+      
+      .notification-dropdown {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 380px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        display: none;
+        z-index: 9999;
+        overflow: hidden;
+      }
+
+      
+      .notification-dropdown.show {
+        display: block;
+      }
+
+            .dropdown-header {
+        padding: 18px 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .dropdown-header h5 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      
+      .notification-list {
+        max-height: 220px;
+        overflow-y: auto;
+      }
+
+      
+      .notification-item {
+        padding: 18px 20px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .notification-item:hover {
+        background: #f8fafc;
+      }
+
+      .notification-item.unread {
+        background: #eef6ff;
+      }
+
+      .notification-title {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 6px;
+      }
+
+      .notification-title strong {
+        font-weight: 700;
+      }
+
+      .notification-time {
+        font-size: 13px;
+        color: #888;
+      }
+
+      
+      .dropdown-footer {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .dropdown-footer button {
+        border: 1px solid #0d6efd;
+        background: transparent;
+        color: #0d6efd;
+        padding: 8px 25px;
+        border-radius: 6px;
+      }
+
+      
+      @media (max-width: 576px) {
+        .notification-dropdown {
+          width: 320px;
+          right: -100px;
+        }
+      }
+      */
+      /*  NOTIFICATION DROPDOWN  */
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -10px;
+  width: 340px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+  border: 1px solid #e5e7eb;
+  z-index: 9999;
+  overflow: hidden;
+}
+.notif-dropdown.show { display: block; }
+
+.notif-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.notif-dropdown-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0A2540;
+}
+.notif-mark-all {
+  font-size: 12px;
+  color: #0796FE;
+  cursor: pointer;
+}
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+.notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-items: center;
+}
+.notif-item:hover { background: #f8fafc; }
+.notif-item.unread { background: #EFF6FF; }
+.notif-item.unread:hover { background: #dbeafe; }
+
+.notif-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #E7F1FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0796FE;
+  font-size: 14px;
+}
+.notif-content {
+  flex: 1;
+  min-width: 0;
+}
+.notif-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-message {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-time { font-size: 11px; color: #94a3b8; }
+
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: #0796FE;
+}
+.notif-loading, .notif-empty {
+  text-align: center;
+  padding: 30px 16px;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.notif-dropdown-footer {
+  padding: 10px 16px;
+  text-align: center;
+  border-top: 1px solid #f1f5f9;
+}
+.notif-dropdown-footer a {
+  font-size: 13px;
+  color: #0796FE;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+  /* //Added by harshada */
+  
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    display: none;
+    z-index: 9999;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background: #f5f5f5;
+}
+
+.highlight-row {
+    background: #fff3cd !important;
+}
+
+/* mahesh code landspace*/
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar .logo-area {
+    padding: 15px 20px;
+  }
+
+  .sidebar a {
+    padding: 10px 20px;
+  }
+}
+
+/* mahesh code notificaton responsive */
+@media (max-width: 768px){
+
+    .header-right{
+        gap: 12px;
+    }
+
+    .notification-btn{
+        font-size: 18px;
+        position: relative;
+    }
+
+    .notif-dropdown{
+        width: min(280px, calc(100vw - 20px));
+        right: -24px;
+        left: auto;
+    }
+}
+
+
+/* =========================
+   MOBILE RESPONSIVE FIX
+========================= */
+
+@media (max-width: 991px) {
+
+  .top-header{
+    padding: 0 12px;
+  }
+
+  .header-right{
+    gap:10px;
+  }
+
+  .search-bar{
+    width:220px !important;
+  }
+
+  .users-page-wrapper{
+    padding:85px 10px 15px;
+  }
+
+  .users-topbar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .users-actions{
+    width:100%;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .users-search-box{
+    width:100%;
+  }
+
+  .filter-btn,
+  .add-btn{
+    flex:1;
+    min-width:120px;
+  }
+
+  .pagination-wrapper{
+    justify-content:center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px){
+
+  .users-title{
+    font-size:24px;
+  }
+
+  .users-table-wrapper{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .users-table{
+    min-width:850px;
+  }
+
+  .notif-dropdown{
+    width:min(280px,calc(100vw - 20px));
+    right:0;
+  }
+
+  .filter-panel{
+    width:min(260px,calc(100vw - 20px)) !important;
+    right:0 !important;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px){
+
+  .search-bar{
+    width:150px !important;
+  }
+
+  .user-avatar{
+    width:36px;
+    height:36px;
+    font-size:12px;
+  }
+
+  .filter-btn,
+  .add-btn{
+    width:100%;
+  }
+
+  .users-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .filter-panel{
+    width:calc(100vw - 30px) !important;
+    right:-10px !important;
+  }
+}
+
+
+/* mahesh code landspace filter button */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+
+  .users-actions{
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    gap:10px;
+  }
+
+  .users-search-box{
+    flex:1;
+    min-width:200px;
+  }
+
+  .filter-btn,
+  .add-btn{
+    flex:0 0 auto;
+    min-width:100px;
+  }
+
+  .filter-wrapper{
+    position:relative;
+  }
+
+  .filter-panel{
+    right:0;
+    left:auto;
+    max-width:250px;
+  }
+}
+
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .filter-panel{
+    width:220px !important;
+    right:0 !important;
+    left:auto !important;
+  }
+}
+
+/* Ganesh Added css for the profile dropdown */
+/* Profile Dropdown */
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.profile-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+/* Filter Responsive */
+
+@media (max-width: 768px) {
+
+  .users-actions{
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .filter-wrapper{
+    width: 100%;
+  }
+
+  .filter-btn{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filter-panel{
+    width: 100%;
+    max-width: 100%;
+    right: 0;
+    left: 0;
+    top: 50px;
+  }
+}
+
+@media (max-width: 480px){
+
+  .filter-panel{
+    width: calc(100vw - 30px);
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    padding: 12px;
+  }
+
+  .filter-group input,
+  .filter-group select{
+    font-size: 14px;
+  }
+
+  .apply-btn{
+    height: 42px;
+  }
+}
+    </style>
+  </head>
+  <script src="/js/admin-guard.js"></script>
+
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo-area">
+  <img
+    src="./img/creativesweb.png"
+    alt="Logo"
+    class="logo-img"
+    onclick="window.location.href='index.html';"
+    style="cursor:pointer;"
+  />
+</div>
+      <nav>
+        <a href="adminpanel.html">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="product.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Products</span>
+        </a>
+
+        <a href="admin-order.html">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span>Orders</span>
+        </a>
+
+        <a href="licence-dashboard.html">
+          <i class="fa-solid fa-id-card"></i>
+          <span>License</span>
+        </a>
+
+        <a href="admin-user.html" class="active">
+          <i class="fa-regular fa-user"></i>
+          <span>User</span>
+        </a>
+
+        <a href="Admin-setting.html">
+          <i class="bi bi-gear me-2"></i>
+          <span>Setting</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <div class="top-header">
+        <div class="d-flex align-items-center">
+          <button class="btn d-lg-none me-2 toggle-btn" id="sidebarToggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+           <!-- //Added by harshada -->
+        <div class="search-bar search-wrapper">
+          <i class="fa fa-search"></i>
+          <input type="text" id="headerSearch" placeholder="Search">
+          <div id="searchSuggestions" class="search-suggestions"></div>
+        </div>
+        </div>
+        <div class="header-right">
+          <!-- <div class="notification-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge">1</span>
+            <small class="noti-text">Notification</small>
+          </div> -->
+          <!-- Notification 
+          <div class="notification-wrapper">
+            <div class="notification-btn" id="notificationToggle">
+              <i class="fa-regular fa-bell"></i>
+
+              
+              <span class="badge" id="notificationCount">0</span>
+
+              <small class="noti-text">Notification</small>
+            </div>
+
+            
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="dropdown-header">
+                <h5>Notifications</h5>
+              </div>
+
+             
+              <div class="notification-list" id="notificationList">
+             
+              </div>
+
+              <div class="dropdown-footer">
+                <button id="closeDropdown">Close</button>
+              </div>
+            </div>
+          </div>
+        -->
+
+        <!--Rahul's code for Notification Button -->
+       <div class="notification-btn" id="notifBtn" onclick="toggleNotifDropdown(event)">
+  <i class="fa-regular fa-bell"></i>
+  <span class="badge" id="notifBadge" style="display:none;">0</span>
+  <small class="noti-text">Notification</small>
+
+  <!-- Notification Dropdown Panel -->
+  <div class="notif-dropdown" id="notifDropdown" onclick="event.stopPropagation()">
+    <div class="notif-dropdown-header">
+      <span class="notif-dropdown-title">Notifications</span>
+      <span class="notif-mark-all" onclick="markAllRead()">Mark all as read</span>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-loading">Loading...</div>
+    </div>
+    <div class="notif-dropdown-footer">
+      <a href="#" onclick="loadAllNotifications(); return false;">View all notifications</a>
+    </div>
+  </div>
+</div>
+          
+          <!-- <div class="user-avatar">AS</div> -->
+          <!-- <div class="user-avatar" id="userAvatar">AS</div> -->
+           <div class="profile-wrapper">
+    <div class="user-avatar" id="userAvatar" onclick="toggleProfileDropdown()">
+        AS
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+</div>
+
+        </div>
+      </div>
+
+      <!-- USERS PAGE -->
+
+      <div class="users-page-wrapper">
+        <!-- Breadcrumb -->
+
+        <div class="users-breadcrumb">
+          <a href="adminpanel.html">Home</a>
+          > <span class="active">Users</span>
+        </div>
+
+        <!-- MAIN CARD -->
+
+        <div class="users-main-card">
+          <!-- TOPBAR -->
+
+          <div class="users-topbar">
+            <h2 class="users-title">Users</h2>
+
+            <!-- <div class="users-actions">
+
+            <div class="users-search-box">
+              <i class="fa fa-search"></i>
+              <input type="text" placeholder="Search">
+            </div> -->
+
+            <div class="users-actions">
+              <div class="users-search-box">
+                <i class="fa fa-search"></i>
+                <input type="text" id="userSearchInput" placeholder="Search" />
+                <div id="suggestionBox"></div>
+              </div>
+
+              <!-- <button class="filter-btn">
+                <i class="bi bi-filter large-filter-icon"></i>
+                Filter
+              </button> -->
+
+              <div class="filter-wrapper">
+                <button class="filter-btn" id="filterBtn">
+                  <i class="bi bi-filter large-filter-icon"></i>
+                  Filter
+                </button>
+
+                <div class="filter-panel" id="filterPanel">
+                  <div class="filter-header">
+                    <h4>Filter Users</h4>
+                    <span class="clear-btn" id="clearFilter"> Clear </span>
+                  </div>
+
+                  <div class="filter-group">
+                    <label>Status</label>
+
+                    <select id="statusFilter">
+                      <option value="">All</option>
+                      <option value="ACTIVE">Active</option>
+                      <option value="BLOCKED">Blocked</option>
+                      <option value="DELETED">Deleted</option>
+                    </select>
+                  </div>
+
+                  <button class="apply-btn" id="applyFilter">
+                    Apply Filter
+                  </button>
+                </div>
+                
+              </div><tbody id="usersTableBody">
+
+                <!-- remove  by harsahda 25-06-2026 -->
+              <!-- <button class="add-btn">Add User</button> -->
+            </div>
+          </div>
+
+          <!-- TABLE -->
+
+          <div class="users-table-wrapper">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Purchase History</th>
+                  <th>Account Status</th>
+                  <th>Last Updated</th>
+                  <th>Action</th> 
+                </tr>
+              </thead>
+
+              <tbody id="usersTableBody">
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION -->
+
+          <div class="pagination-wrapper">
+            <div class="pagination-custom" id="paginationControls">
+              <!-- pages injected by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="orders-footer-text">
+          Copyright © 2025 - 2026
+          <span>Creative Web Solution.</span>
+          ALL RIGHTS RESERVED
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- SCRIPT -->
+    <!-- ========================= -->
+
+    <script>
+      function toggleDropdown(event, button) {
+        event.stopPropagation();
+
+        const dropdown = button.nextElementSibling;
+
+        document.querySelectorAll(".dropdown-menu-custom").forEach((menu) => {
+          if (menu !== dropdown) {
+            menu.classList.remove("show");
+          }
+        });
+
+        dropdown.classList.toggle("show");
+      }
+
+      document.addEventListener("click", function () {
+        document.querySelectorAll(".dropdown-menu-custom").forEach((menu) => {
+          menu.classList.remove("show");
+        });
+      });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebarToggle = document.getElementById("sidebarToggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        if (sidebarToggle) {
+          sidebarToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("show");
+          });
+        }
+
+        document.addEventListener("click", function (event) {
+          const isClickInsideSidebar = sidebar.contains(event.target);
+          const isClickInsideButton = sidebarToggle.contains(event.target);
+
+          if (
+            !isClickInsideSidebar &&
+            !isClickInsideButton &&
+            sidebar.classList.contains("show")
+          ) {
+            sidebar.classList.remove("show");
+          }
+        });
+      });
+    </script>
+
+    <!-- kajal changes -->
+    <script>
+   
+const searchInput = document.getElementById("userSearchInput");
+const tableBody = document.getElementById("usersTableBody");
+const suggestionBox = document.getElementById("suggestionBox");
+
+// Create clear button dynamically inside the search box container
+const clearBtn = document.createElement("span");
+clearBtn.className = "search-clear-btn";
+clearBtn.innerHTML = "&times;";
+searchInput.parentElement.appendChild(clearBtn);
+
+// Toggle visibility of the clear button
+function toggleClearBtn() {
+  clearBtn.style.display = searchInput.value.trim() ? "block" : "none";
+}
+
+// Clear search action
+clearBtn.addEventListener("click", function () {
+  searchInput.value = "";
+  toggleClearBtn();
+  suggestionBox.style.display = "none";
+  loadUsers();
+  searchInput.focus();
+});
+
+// Update visibility on manual typing or pasting
+searchInput.addEventListener("input", toggleClearBtn);
+
+let activeIndex = -1; // Track index of active suggestion item
+
+// ===== PAGINATION STATE (added) =====
+let allUsersData = [];   // full dataset, sorted newest-first
+let currentPage = 1;
+const PAGE_SIZE = 10;
+
+// Sort newest first — relies on createdAt if present, falls back to updatedAt/id
+function sortUsersNewestFirst(users) {
+  return [...users].sort((a, b) => {
+    const aTime = new Date(a.createdAt || a.updatedAt || 0).getTime();
+    const bTime = new Date(b.createdAt || b.updatedAt || 0).getTime();
+    if (bTime !== aTime) return bTime - aTime;
+    return (b.id || 0) - (a.id || 0); // fallback tiebreaker
+  });
+}
+
+function renderPage(page) {
+  const totalPages = Math.max(1, Math.ceil(allUsersData.length / PAGE_SIZE));
+  currentPage = Math.min(Math.max(1, page), totalPages);
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = allUsersData.slice(start, start + PAGE_SIZE);
+
+  displayUsers(pageItems);
+  renderPaginationControls(totalPages);
+}
+
+function renderPaginationControls(totalPages) {
+  const wrap = document.getElementById("paginationControls");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+
+  // Prev arrow (always visible; disabled/greyed when on page 1 or only one page)
+  wrap.innerHTML += `
+    <div class="page-box ${currentPage === 1 ? "disabled" : ""}" onclick="renderPage(${currentPage - 1})">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>`;
+
+  if (totalPages <= 1) {
+    // Only one page -> just show "1", no ellipsis or extra numbers
+    wrap.innerHTML += `<div class="page-box active">1</div>`;
+  } else {
+    // Page numbers with ellipsis
+    const pages = getPageList(currentPage, totalPages);
+    pages.forEach((p) => {
+      if (p === "...") {
+        wrap.innerHTML += `<div class="page-box disabled">...</div>`;
+      } else {
+        wrap.innerHTML += `
+          <div class="page-box ${p === currentPage ? "active" : ""}" onclick="renderPage(${p})">
+            ${p}
+          </div>`;
+      }
+    });
+  }
+
+  // Next arrow (always visible; disabled/greyed when on last page or only one page)
+  wrap.innerHTML += `
+    <div class="page-box ${currentPage === totalPages ? "disabled" : ""}" onclick="renderPage(${currentPage + 1})">
+      <i class="fa-solid fa-chevron-right"></i>
+    </div>`;
+}
+
+// Builds something like: 1 ... 4 [5] 6 ... 10
+function getPageList(current, total) {
+  const delta = 1;
+  const range = [];
+  for (let i = 1; i <= total; i++) {
+    if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
+      range.push(i);
+    }
+  }
+  const withDots = [];
+  let prev = null;
+  range.forEach((i) => {
+    if (prev !== null && i - prev > 1) withDots.push("...");
+    withDots.push(i);
+    prev = i;
+  });
+  return withDots;
+}
+// ===== END PAGINATION STATE (added) =====
+
+function displayUsers(users) {
+  tableBody.innerHTML = "";
+  users.forEach((user) => {
+    let statusClass = "";
+    if (user.status === "ACTIVE") {
+      statusClass = "active-status";
+    } else if (user.status === "BLOCKED") {
+      statusClass = "blocked-status";
+    } else {
+      statusClass = "deleted-status";
+    }
+    tableBody.innerHTML += `
+      <tr>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${user.totalOrders ?? 0} Orders</td>
+        <td>
+          <span class="status-badge ${statusClass}">
+            ${user.status}
+          </span>
+        </td>
+        <td>${user.updatedAt ? new Date(user.updatedAt).toLocaleString() : "-"}</td>
+        <td class="action-cell">
+          <button class="menu-btn" onclick="toggleDropdown(event,this)">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+          <div class="dropdown-menu-custom">
+            <a href="javascript:void(0)" onclick="viewUser(${user.id})">View</a>
+            <a href="javascript:void(0)" onclick="deleteUser(${user.id})">Delete</a>
+            <a href="javascript:void(0)" onclick="activateUser(${user.id})">Active</a>
+            <a href="javascript:void(0)" onclick="blockUser(${user.id})">Block</a>
+          </div>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// LOAD USERS
+async function loadUsers(keyword = "") {
+  try {
+    const response = await fetch(
+      `http://localhost:8081/api/users/search?keyword=${keyword}`,
+    );
+    const result = await response.json();
+    // changed: sort newest-first and paginate, always resetting to page 1
+    allUsersData = sortUsersNewestFirst(result.data);
+    renderPage(1); // newest/newly registered user always shows first
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+// KEYDOWN KEYBOARD NAV EVENT LISTENER
+searchInput.addEventListener("keydown", (e) => {
+  const items = suggestionBox.querySelectorAll(".suggestion-item");
+  if (suggestionBox.style.display === "block" && items.length > 0) {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % items.length;
+      updateActiveSuggestion(items);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+      updateActiveSuggestion(items);
+    } else if (e.key === "Enter") {
+      if (activeIndex >= 0 && activeIndex < items.length) {
+        e.preventDefault();
+        items[activeIndex].click(); // Select and open item
+      }
+    } else if (e.key === "Escape") {
+      suggestionBox.style.display = "none";
+    }
+  }
+});
+
+// Helper to visually update active states and scroll active items into view
+function updateActiveSuggestion(items) {
+  items.forEach((item, index) => {
+    if (index === activeIndex) {
+      item.classList.add("active");
+      item.scrollIntoView({ block: "nearest" });
+    } else {
+      item.classList.remove("active");
+    }
+  });
+}
+
+function showSuggestions(users) {
+  suggestionBox.innerHTML = "";
+  activeIndex = -1; // Reset selected item index on fresh list populate
+  if (users.length === 0) {
+    suggestionBox.style.display = "none";
+    return;
+  }
+  users.forEach((user) => {
+    const div = document.createElement("div");
+    div.classList.add("suggestion-item");
+    div.innerText = `${user.name} - ${user.email}`;
+    // Mouse hover events synchronized with keyboard index
+    div.addEventListener("mouseenter", () => {
+      const items = suggestionBox.querySelectorAll(".suggestion-item");
+      activeIndex = Array.from(items).indexOf(div);
+      updateActiveSuggestion(items);
+    });
+    div.addEventListener("mouseleave", () => {
+      const items = suggestionBox.querySelectorAll(".suggestion-item");
+      activeIndex = -1;
+      updateActiveSuggestion(items);
+    });
+    div.onclick = () => {
+      searchInput.value = user.name;
+      toggleClearBtn(); // Show clear button since value is set
+      suggestionBox.style.display = "none";
+      loadUsers(user.name);
+    };
+    suggestionBox.appendChild(div);
+  });
+  suggestionBox.style.display = "block";
+}
+
+// SEARCH EVENT
+searchInput.addEventListener("keyup", async (e) => {
+  // Guard clause against running lookup logic during keyboard navigation
+  if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
+    return;
+  }
+  const keyword = searchInput.value.trim();
+  if (keyword === "") {
+    suggestionBox.style.display = "none";
+    loadUsers();
+    return;
+  }
+  try {
+    const response = await fetch(
+      `http://localhost:8081/api/users/search?keyword=${keyword}`,
+    );
+    const result = await response.json();
+    const users = result.data;
+    // changed: paginate the search results too
+    allUsersData = sortUsersNewestFirst(users);
+    renderPage(1);
+    showSuggestions(users);
+  } catch (error) {
+    console.error(error);
+  }
+});
+// INITIAL LOAD
+loadUsers();
+document.addEventListener("click", (e) => {
+  if (
+    !searchInput.contains(e.target) &&
+    !suggestionBox.contains(e.target)
+  ) {
+    suggestionBox.style.display = "none";
+  }
+});
+/* ===== Rahul's Code for NOTIFICATION API CONNECTION ===== */
+const NOTIF_BASE = window.API_BASE_URL || 'http://localhost:8081';
+function getAuthHeaders() {
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  };
+}
+async function loadNotifCount() {
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/unread/count', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const count = data.data;
+    const badge = document.getElementById('notifBadge');
+    if (count > 0) {
+      badge.textContent = count > 99 ? '99+' : count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (err) {
+    console.error('Notif count error:', err);
+  }
+}
+function toggleNotifDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById('notifDropdown');
+  const isOpen = dropdown.classList.contains('show');
+  dropdown.classList.toggle('show', !isOpen);
+  if (!isOpen) loadUnreadNotifications();
+}
+document.addEventListener('click', function (e) {
+  const btn = document.getElementById('notifBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  if (btn && dropdown && !btn.contains(e.target)) {
+    dropdown.classList.remove('show');
+  }
+});
+async function loadUnreadNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/unread', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    renderNotifItems(data.data || []);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>Could not load notifications.</div>';
+  }
+}
+async function loadAllNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading all...</div>';
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications?page=0&size=20', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    const items = (data.data && data.data.content) ? data.data.content : [];
+    renderNotifItems(items);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty">Could not load notifications.</div>';
+  }
+}
+function renderNotifItems(notifications) {
+  const list = document.getElementById('notifList');
+  if (!notifications.length) {
+    list.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No new notifications</div>';
+    return;
+  }
+  list.innerHTML = notifications.map(function (n) {
+    return '<div class="notif-item ' + (n.isRead ? '' : 'unread') + '" data-id="' + n.id + '" onclick="markAsRead(' + n.id + ', this)">'
+      + '<div class="notif-icon"><i class="fa-solid fa-bell"></i></div>'
+      + '<div class="notif-content">'
+      + '<div class="notif-title">' + escapeHtml(n.title) + '</div>'
+      + '<div class="notif-message">' + escapeHtml(n.message) + '</div>'
+      + '<div class="notif-time">' + formatNotifTime(n.createdAt) + '</div>'
+      + '</div>'
+      + (!n.isRead ? '<div class="notif-dot"></div>' : '')
+      + '</div>';
+  }).join('');
+}
+async function markAsRead(notificationId, element) {
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/' + notificationId + '/read', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    element.classList.remove('unread');
+    const dot = element.querySelector('.notif-dot');
+    if (dot) dot.remove();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAsRead error:', err);
+  }
+}
+async function markAllRead() {
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/read-all', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) {
+      console.error('markAllRead failed:', res.status);
+      return;
+    }
+    loadUnreadNotifications();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAllRead error:', err);
+  }
+}
+function formatNotifTime(createdAt) {
+  if (!createdAt) return '';
+  const date = new Date(createdAt);
+  const diffMs = Date.now() - date.getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  return Math.floor(hrs / 24) + 'd ago';
+}
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+document.addEventListener('DOMContentLoaded', function () {
+  loadNotifCount();
+  setInterval(loadNotifCount, 60000);
+});
+    </script>
+
+    <script>
+      const usersTableBody = document.getElementById("usersTableBody");
+    </script>
+
+    <script>
+      async function activateUser(id) {
+        try {
+          const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+          const response = await fetch(
+            `http://localhost:8081/api/users/${id}/activate`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            },
+          );
+
+          const result = await response.json();
+
+          alert(result.message);
+
+          //getAllUsers();
+          loadUsers();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      async function blockUser(id) {
+        try {
+          const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+          const response = await fetch(
+            `http://localhost:8081/api/users/${id}/block`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            },
+          );
+
+          const result = await response.json();
+
+          alert(result.message);
+
+          //getAllUsers();
+          loadUsers();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      async function deleteUser(id) {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this user?",
+        );
+
+        if (!confirmDelete) return;
+
+        try {
+          const response = await fetch(
+            `http://localhost:8081/api/users/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            },
+          );
+
+          if (!response.ok) {
+            console.log("Status:", response.status);
+            const errorText = await response.text();
+            console.log(errorText);
+            return;
+          }
+
+          const result = await response.json();
+
+          alert(result.message);
+
+          loadUsers();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      function viewUser(id) {
+        alert("User ID : " + id);
+
+        // later you can open modal here
+      }
+    </script>
+
+    <script>
+      const filterBtn = document.getElementById("filterBtn");
+      const filterPanel = document.getElementById("filterPanel");
+
+      filterBtn.addEventListener("click", () => {
+        filterPanel.classList.toggle("active");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!filterBtn.contains(e.target) && !filterPanel.contains(e.target)) {
+          filterPanel.classList.remove("active");
+        }
+      });
+    </script>
+
+    <script>
+      document
+        .getElementById("applyFilter")
+        .addEventListener("click", async () => {
+          const status = document.getElementById("statusFilter").value;
+
+          if (status === "") {
+            loadUsers();
+            filterPanel.classList.remove("active");
+            return;
+          }
+          const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+          try {
+            const response = await fetch(
+              `http://localhost:8081/api/users/filter?status=${status}`,
+              {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              },
+            );
+
+            const result = await response.json();
+
+            // changed: paginate filtered results, reset to page 1
+            allUsersData = sortUsersNewestFirst(result.data);
+            renderPage(1);
+
+            filterPanel.classList.remove("active");
+          } catch (error) {
+            console.error(error);
+          }
+        });
+    </script>
+
+    <script>
+      document.getElementById("clearFilter").addEventListener("click", () => {
+        document.getElementById("statusFilter").value = "";
+
+        loadUsers();
+
+        filterPanel.classList.remove("active");
+      });
+    </script>
+
+    <script>
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const userName =
+//         localStorage.getItem("userName") ||
+//         sessionStorage.getItem("userName");
+
+//     setUserAvatar(userName);
+// });
+</script>
+    
+
+<!-- Kajal changes -->
+<script>
+      //Rahul's code for notification
+
+      //Rahul's code for notification
+    function getBase() {
+  return window.API_BASE_URL || 'http://127.0.0.1:8081';
+}
+
+function getAuthHeaders() {
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  };
+}
+
+async function loadNotifCount() {
+  try {
+    const res = await fetch(getBase() + '/notifications/unread/count', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const count = data.data;
+    const badge = document.getElementById('notifBadge');
+    if (count > 0) {
+      const NOTIF_BADGE_MAX = 99;
+      badge.textContent = count > NOTIF_BADGE_MAX ? NOTIF_BADGE_MAX + '+' : count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (err) {
+    console.error('Notif count error:', err);
+  }
+}
+
+function toggleNotifDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById('notifDropdown');
+  const isOpen = dropdown.classList.contains('show');
+  dropdown.classList.toggle('show', !isOpen);
+  if (!isOpen) loadUnreadNotifications();
+}
+
+document.addEventListener('click', function (e) {
+  const btn = document.getElementById('notifBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  if (btn && dropdown && !btn.contains(e.target)) {
+    dropdown.classList.remove('show');
+  }
+});
+
+async function loadUnreadNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+  try {
+    const res = await fetch(getBase() + '/notifications/unread', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    renderNotifItems(data.data || []);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>Could not load notifications.</div>';
+  }
+}
+
+async function loadAllNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading all...</div>';
+  try {
+    const NOTIF_PAGE_SIZE = 20;
+    const res = await fetch(getBase() + '/notifications?page=0&size=' + NOTIF_PAGE_SIZE, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    const items = (data.data && data.data.content) ? data.data.content : [];
+    renderNotifItems(items);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty">Could not load notifications.</div>';
+  }
+}
+
+function getNotifIcon(type) {
+  var map = {
+    'ORDER':   'fa-solid fa-cart-shopping',
+    'PAYMENT': 'fa-solid fa-credit-card',
+    'PRODUCT': 'fa-solid fa-box',
+    'LICENSE': 'fa-solid fa-id-card',
+    'SYSTEM':  'fa-solid fa-gear'
+  };
+  return map[type] || 'fa-solid fa-bell';
+}
+
+function renderNotifItems(notifications) {
+  const list = document.getElementById('notifList');
+  if (!notifications.length) {
+    list.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No new notifications</div>';
+    return;
+  }
+  list.innerHTML = notifications.map(function (n) {
+    return '<div class="notif-item ' + (n.isRead ? '' : 'unread') + '" data-id="' + n.id + '" onclick="markAsRead(' + n.id + ', this)">'
+      + '<div class="notif-icon"><i class="' + getNotifIcon(n.type) + '"></i></div>'
+      + '<div class="notif-content">'
+      + '<div class="notif-title">' + escapeHtml(n.title) + '</div>'
+      + '<div class="notif-message">' + escapeHtml(n.message) + '</div>'
+      + '<div class="notif-time">' + formatNotifTime(n.createdAt) + '</div>'
+      + '</div>'
+      + (!n.isRead ? '<div class="notif-dot"></div>' : '')
+      + '</div>';
+  }).join('');
+}
+async function markAsRead(notificationId, element) {
+  try {
+    const res = await fetch(getBase() + '/notifications/' + notificationId + '/read', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!notificationId) { console.error('markAsRead: missing id'); return; }
+    if (!res.ok) return;
+    element.classList.remove('unread');
+    const dot = element.querySelector('.notif-dot');
+    if (dot) dot.remove();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAsRead error:', err);
+  }
+}
+
+async function markAllRead() {
+  try {
+    const res = await fetch(getBase() + '/notifications/read-all', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) {
+      console.error('markAllRead failed:', res.status);
+      return;
+    }
+    loadUnreadNotifications();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAllRead error:', err);
+  }
+}
+
+function formatNotifTime(createdAt) {
+  if (!createdAt) return '';
+  const date = new Date(createdAt);
+  const diffMs = Date.now() - date.getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  return Math.floor(hrs / 24) + 'd ago';
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+const NOTIF_POLL_MS   = 60000;
+document.addEventListener('DOMContentLoaded', function () {
+  loadNotifCount();
+  setInterval(loadNotifCount, NOTIF_POLL_MS);
+
+  // const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  // if (token) {
+  //   try {
+  //     const payload = JSON.parse(atob(token.split('.')[1]));
+  //     const name = payload.sub || payload.email || 'AS';
+  //     document.getElementById('userAvatar').textContent =
+  //       name.substring(0, 2).toUpperCase();
+  //   } catch(e) {}
+  // }
+  
+});
+      
+    </script>
+
+    <!-- //Added by Harshada -->
+
+     <script>
+const searchBox = document.getElementById("headerSearch");
+const suggestions = document.getElementById("searchSuggestions");
+
+const TABLE_ROWS = "#usersTableBody tr";
+
+// Create clear button dynamically inside the search box container
+const clearBtn = document.createElement("span");
+clearBtn.className = "search-clear-btn";
+clearBtn.innerHTML = "&times;";
+searchBox.parentElement.appendChild(clearBtn);
+
+// Toggle visibility of the clear button
+function toggleClearBtn() {
+    clearBtn.style.display = searchBox.value.trim() ? "block" : "none";
+}
+
+// Clear search action
+clearBtn.addEventListener("click", function () {
+    searchBox.value = "";
+    toggleClearBtn();
+    suggestions.innerHTML = "";
+    suggestions.style.display = "none";
+    // Remove highlights from rows
+    document.querySelectorAll(TABLE_ROWS)
+        .forEach(row => row.classList.remove("highlight-row"));
+    searchBox.focus();
+});
+
+// Update visibility on manual typing or pasting
+searchBox.addEventListener("input", toggleClearBtn);
+
+// SEARCH WHILE TYPING
+searchBox.addEventListener("keyup", function () {
+
+    const keyword = this.value.toLowerCase().trim();
+
+    const rows = document.querySelectorAll(TABLE_ROWS);
+
+    suggestions.innerHTML = "";
+
+    // ❌ empty input → clear highlight
+    if (!keyword) {
+        rows.forEach(row => row.classList.remove("highlight-row"));
+        suggestions.style.display = "none";
+        return;
+    }
+
+    suggestions.style.display = "block";
+    suggestions.style.display = "none";
+
+    rows.forEach(row => {
+
+        const text = row.innerText.toLowerCase();
+
+        if (text.includes(keyword)) {
+
+            const item = document.createElement("div");
+            item.className = "search-item";
+
+            item.innerText =
+                row.cells[0]?.innerText ||
+                row.innerText.split("\n")[0];
+
+            item.onclick = function () {
+
+                // remove old highlight
+                rows.forEach(r => r.classList.remove("highlight-row"));
+
+                // highlight selected row
+                row.classList.add("highlight-row");
+
+                row.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                searchBox.value = item.innerText;
+                toggleClearBtn(); // Show clear button since value is set
+                suggestions.innerHTML = "";
+                suggestions.style.display = "none";
+            };
+
+            suggestions.appendChild(item);
+        }
+    });
+});
+
+// ENTER KEY SEARCH
+searchBox.addEventListener("keydown", function (e) {
+
+    if (e.key === "Enter") {
+
+        suggestions.style.display = "none";
+        suggestions.innerHTML = "";
+
+        const keyword = this.value.toLowerCase().trim();
+        const rows = document.querySelectorAll(TABLE_ROWS);
+
+        rows.forEach(row => row.classList.remove("highlight-row"));
+
+        if (!keyword) return;
+
+        rows.forEach(row => {
+            if (row.innerText.toLowerCase().includes(keyword)) {
+                row.classList.add("highlight-row");
+
+                row.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+        });
+
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+    }
+});
+
+// CLICK OUTSIDE → CLEAR EVERYTHING
+document.addEventListener("click", function (e) {
+
+    if (
+        !searchBox.contains(e.target) &&
+        !suggestions.contains(e.target) &&
+        !clearBtn.contains(e.target) // Prevent click-outside when clicking clear button
+    ) {
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+
+        document.querySelectorAll(TABLE_ROWS)
+            .forEach(row => row.classList.remove("highlight-row"));
+    }
+});
+</script>
+
+<script>
+
+async function loadDashboardUsers() {
+
+    const dashboardUserBody =
+        document.getElementById("dashboardUserBody");
+
+    const response =
+        await fetch("http://localhost:8081/api/users");
+
+    const result = await response.json();
+
+    const users = result.data;
+
+    dashboardUserBody.innerHTML = "";
+
+    users.forEach(user => {
+      console.log(user);
+
+        dashboardUserBody.innerHTML += `
+            <tr>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.totalOrders}</td>
+                <td>${user.status}</td>
+            </tr>
+        `;
+    });
+}
+
+loadDashboardUsers();
+
+</script>
+
+    
+  </body>
+</html>

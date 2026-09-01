@@ -1,0 +1,4147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- <script src="./admin-guard.js"></script> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase</title>
+  <!-- pratik -->
+  <script src="/js/profile.js"></script>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Oswald and Lato -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Oswald:wght@200;400&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --bg-dark: #0A2540;
+      --primary-blue: #0796FE;
+      --sub-text: #797979;
+      --white: #FFFFFF;
+      --light-bg: #F0F2F5;
+      --table-header: #E9F1F9;
+      }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--light-bg);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sidebar Style */
+    .sidebar {
+      background-color: var(--bg-dark);
+      min-height: 100vh;
+      color: var(--white);
+      position: fixed;
+      width: 240px;
+      z-index: 1000;
+    }
+
+    .sidebar .logo-area {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 160px;
+      height: auto;
+    }
+
+    .sidebar a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      transition: 0.3s;
+      margin: 5px 10px;
+      border-radius: 5px;
+      
+      border-left: 5px solid transparent;
+    }
+
+
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--primary-blue);
+      border-left: 5px solid var(--primary-blue);
+    }
+
+    .menu-icon.blue {
+      display: none;
+    }
+
+    .sidebar i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .sidebar a:hover i,
+    .sidebar a.active i {
+      color: var(--primary-blue);
+    }
+
+    .toggle-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      margin-left: -15px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 240px;
+      width: calc(100% - 240px);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* EXACT HEADER STYLE */
+    .top-header {
+      background: #FFFFFF;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      border-bottom: 1px solid #E0E0E0;
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      z-index: 999;
+    }
+/* 
+    .search-bar {
+      background: #F8F9FA;
+      border: 1px solid #E9E9E9;
+      border-radius: 8px;
+      padding: 8px 15px;
+      width: 450px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar i {
+      color: #A0A0A0;
+      margin-right: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      color: #333;
+    } */
+    .search-bar {
+    background: #F8F9FA;
+    border: 1px solid #E9E9E9;
+    border-radius: 8px;
+    width: 450px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.search-bar i:first-child {
+    color: #A0A0A0;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    margin: 0 10px;
+    min-width: 0;
+}
+
+/* Clear button */
+#clearSearch {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    cursor: pointer;
+    color: #A0A0A0;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+#clearSearch:hover {
+    color: #333;
+}
+
+/* Suggestions */
+#suggestions {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #E9E9E9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    z-index: 99999;
+    display: none;
+    max-height: 250px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+    background: #F8F9FA;
+}
+    
+
+
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+
+    .notification-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      color: var(--sub-text);
+      font-size: 20px;
+    }
+
+    .notification-btn .noti-text {
+      font-size: 10px;
+      margin-top: 2px;
+      color: var(--sub-text);
+    }
+
+    .notification-btn .badge {
+      position: absolute;
+      top: 0px;
+      transform: translate(40%, -40%);
+
+      background: #EF4444;
+      color: white;
+      font-size: 9px;
+      padding: 3px 5px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      background: #0F477C;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .content-body {
+      padding: 30px;
+      padding-top: 85px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .dashboard-title h2 {
+      font-family: 'lato', sans-serif;
+      font-weight: 400;
+      font-size: 35px;
+      margin-bottom: 5px;
+    }
+
+    .dashboard-title p {
+      color: var(--sub-text);
+      font-size: 16px;
+    }
+
+
+    /* Stats Cards */
+
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+      height: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* icon */
+    .icon-box {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-text h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: #0A2540;
+    }
+
+    .stat-text p {
+      margin: 2px 0 0;
+      font-size: 16px;
+      color: #0A2540;
+    }
+
+    .sidebar a:hover .menu-icon.grey {
+      display: none;
+    }
+
+    .sidebar a:hover .menu-icon.blue {
+      display: inline;
+    }
+
+    .sidebar a.active .menu-icon.grey {
+      display: none;
+    }
+
+    .sidebar a.active .menu-icon.blue {
+      display: inline;
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-text h2 {
+        font-size: 20px;
+      }
+
+      .stat-text p {
+        font-size: 13px;
+      }
+    }
+
+    /* icon styles */
+
+
+    .icon-box img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .icon-box.blue {
+      background: #E7F1FF;
+      color: #0d6efd;
+    }
+
+    .icon-box.purple {
+      background: #F3E8FF;
+      color: #9333ea;
+    }
+
+    .icon-box.orange {
+      background: #FFF3E6;
+      color: #f59e0b;
+    }
+
+    .icon-box.green {
+      background: #E6F9F0;
+      color: #10b981;
+    }
+
+
+
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        left: -240px;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+      }
+
+      .top-header {
+        left: 0 !important;
+      }
+
+      .search-bar {
+        width: 150px;
+      }
+
+      .notification-btn .noti-text {
+        display: none;
+      }
+    }
+
+
+
+
+
+    @media (min-width: 992px) {
+      .search-bar {
+        width: 450px;
+      }
+    }
+
+
+
+    /* Mobile only wrap */
+    @media (max-width: 576px) {
+      .stat-card {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Tablet + Desktop */
+    @media (min-width: 577px) {
+      .stat-card {
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+    }
+
+
+
+
+
+
+    /* --- Purchase Main Section Styles --- */
+    .purchase-body-container {
+      padding: 30px;
+      margin-top: 70px;
+      /* Offset for fixed header */
+    }
+
+    .content-box {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      box-shadow: 0 10px 24px rgba(15, 41, 86, 0.06);
+      padding: 20px;
+      margin-bottom: 0 !important
+    }
+
+    /* Header & Title */
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .page-heading {
+      font-family: 'Lato', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    /* Action Bar (Search + Filter) */
+    .action-bar {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .inner-search {
+      background: #FFFFFF;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 15px;
+      width: 280px;
+      display: flex;
+      align-items: center;
+    }
+
+    .inner-search i {
+      color: #94a3b8;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .inner-search input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    /* Wrapper */
+    .filter-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Button */
+    .filter-btn {
+      background: var(--primary-blue);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* Wrapper */
+    .filter-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Button */
+    .filter-btn {
+      background: var(--primary-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* DROPDOWN PANEL (SMALL + TIGHT) */
+    .filter-panel {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      width: 240px;
+      /* smaller */
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      display: none;
+      z-index: 9999;
+    }
+
+    /* Show */
+    .filter-panel.active {
+      display: block;
+    }
+
+    /* Header */
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .filter-header h4 {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .clear-btn {
+      font-size: 12px;
+      color: #0d6efd;
+      cursor: pointer;
+    }
+
+    /* Form */
+    .filter-group {
+      margin-bottom: 10px;
+    }
+
+    .filter-group label {
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 12px;
+    }
+
+    /* Date icon */
+    .input-box {
+      position: relative;
+    }
+
+    .input-box i {
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+    }
+
+    .input-box input {
+      padding-left: 24px;
+    }
+
+    /* Button */
+    .apply-btn {
+      width: 100%;
+      padding: 8px;
+      font-size: 13px;
+      background: #1e88e5;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    /* ✅ MOBILE FIX (REAL DROPDOWN, NOT FULL WIDTH) */
+    @media (max-width: 768px) {
+
+      .filter-panel {
+        position: absolute;
+        /* keep dropdown behavior */
+        top: 40px;
+        right: 0;
+        left: auto;
+        /* prevent stretching */
+        width: 220px;
+        /* smaller on mobile */
+        border-radius: 8px;
+      }
+
+    }
+
+    /* EXTRA SMALL DEVICES */
+    @media (max-width: 480px) {
+
+      .filter-panel {
+        width: 200px;
+        /* tighter */
+        padding: 12px;
+      }
+
+    }
+
+    /* Table Container Card */
+    .table-card {
+      background: #FFFFFF;
+      border-radius: 0px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* Table Design */
+    .table thead th {
+      background-color: var(--table-header);
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 15px 20px;
+      border-bottom: none;
+      white-space: nowrap;
+    }
+
+    .table tbody td {
+      padding: 15px 20px;
+      color: #334155;
+      font-size: 14px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .order-id {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Product Info Cell */
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .product-cell img {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .product-cell span {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    /* Status Badges */
+    .status-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-badge.completed {
+      background-color: #DBF7EB;
+      color: #0F9F71;
+    }
+
+    .status-badge.processing {
+      background-color: #F1F2F6;
+      color: #6F7F9A;
+    }
+
+    .action-dots {
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 991px) {
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .top-header {
+        left: 0;
+      }
+
+      .inner-search {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .purchase-body-container {
+        padding: 15px;
+      }
+
+      .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .action-bar {
+        width: 100%;
+      }
+
+      .inner-search {
+        flex: 1;
+      }
+    }
+
+
+
+
+
+    .action-menu {
+      display: none;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .action-menu a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .action-menu a:hover {
+      background: #f0f0f0;
+    }
+
+    /* Pagination */
+    /* Base */
+body {
+  font-family: 'lato', sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Container */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  padding: 20px 40px;
+  
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  
+}
+ 
+
+
+/* Page Box */
+.page-box {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.page-box i {
+  font-size: 14px;
+}
+
+/* Hover */
+.page-box:hover {
+  background: #eee;
+}
+
+/* Active */
+.page-box.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* Disabled */
+.page-box.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ========================= */
+/* MOBILE RESPONSIVE */
+/* ========================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .main {
+    justify-content: right; /* center pagination */
+    padding: 15px;
+  }
+
+  .page-box {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .pagination {
+    justify-content: right;
+    gap: 6px;
+  }
+
+  .page-box {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .page-box {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+}
+
+
+
+
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+    padding:25px;
+    margin-top:70px;
+}
+
+.dashboard h2{
+    font-size:32px;
+    margin-bottom:10px;
+    color:#092A49 ;
+    font-weight:200;
+    line-height:28px;
+    font-family: 'oswald', sans-serif;
+}
+
+.dashboard p{
+    color:#797979;
+    margin-bottom:25px;
+    font-size:16px;
+}
+
+/* ================= CARDS ================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top: 20px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    width:100%;
+}
+
+.card-top{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.icon-box{
+    width:55px;
+    height:55px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    flex-shrink:0;
+}
+
+.green{
+    background:#e7f8ee;
+    color:#31b36b;
+}
+
+.purple{
+    background:#f3eaff;
+    color:#9a55ff;
+}
+
+.blue{
+    background:#edf2ff;
+    color:#4c6fff;
+}
+
+.card h3{
+    font-size:18px;
+    color:#092A49;
+    font-weight:400;
+    line-height:1.4;
+}
+
+.card h1{
+    font-size:30px;
+    color:#092A49;
+    font-weight:700;
+    word-break:break-word;
+}
+
+/* ================= LARGE TABLET ================= */
+
+@media(max-width:1024px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard h2{
+        font-size:36px;
+    }
+
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:768px){
+
+    .dashboard{
+        padding:20px;
+        margin-top:60px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    .dashboard h2{
+        font-size:32px;
+    }
+
+    .dashboard p{
+        font-size:16px;
+        margin-bottom:20px;
+    }
+
+    .card h3{
+        font-size:18px;
+    }
+
+    .card h1{
+        font-size:28px;
+    }
+
+    .icon-box{
+        width:50px;
+        height:50px;
+        font-size:20px;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:480px){
+
+    .dashboard{
+        padding:25px;
+        margin-top:70px;
+    }
+
+    .dashboard h2{
+        font-size:28px;
+        margin-bottom:8px;
+    }
+
+    .dashboard p{
+        font-size:25px;
+        margin-bottom:18px;
+    }
+
+    .cards{
+       margin-top:10px;   
+    margin-bottom:15px;
+        gap:20px;
+
+    }
+
+    .card{
+        padding:18px;
+        border-radius:8px;
+    }
+
+    .card-top{
+        gap:12px;
+        margin-bottom:15px;
+    }
+
+    .icon-box{
+        width:45px;
+        height:45px;
+        font-size:18px;
+        border-radius:8px;
+    }
+
+    .card h3{
+        font-size:16px;
+    }
+
+    .card h1{
+        font-size:24px;
+    }
+
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:360px){
+
+    .dashboard h2{
+        font-size:24px;
+    }
+
+    .dashboard p{
+        font-size:14px;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .card h3{
+        font-size:15px;
+    }
+
+    .card h1{
+        font-size:22px;
+    }
+
+    .icon-box{
+        width:42px;
+        height:42px;
+        font-size:16px;
+    }
+
+}
+
+/* ================= GRID ================= */
+
+.dash-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* ================= CARD ================= */
+
+.dash-card{
+    background:#fff;
+    border:1px solid #e0e0e0;
+    border-radius:4px;
+    padding:0;
+    box-shadow:0 2px 4px rgba(0,0,0,0.05);
+    overflow:hidden;
+}
+
+/* ================= HEADER ================= */
+
+.dash-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.dash-card-title{
+    margin:0;
+    font-size:19px;
+    font-weight:500;
+}
+
+/* ================= BUTTON ================= */
+
+.dash-view-btn{
+    background:transparent;
+    border:1px solid #0796FE;
+    color:#0796FE;
+    padding:4px 12px;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:12px;
+    transition:0.3s;
+}
+
+.dash-view-btn:hover{
+    background:#0796FE;
+    color:#fff;
+}
+
+/* ================= TABLE ================= */
+
+.dash-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    table-layout:auto;
+}
+
+.dash-table thead tr{
+    background-color:#E1F2FF;
+}
+
+.dash-table th{
+    text-align:left;
+    padding:12px 20px;
+    font-weight:500;
+    color:#555;
+}
+
+.dash-table td{
+    padding:15px 20px;
+    border-bottom:1px solid #f0f0f0;
+}
+
+.dash-table tr:last-child td{
+    border-bottom:none;
+}
+
+.dash-table th:last-child,
+.dash-table td:last-child{
+    text-align:right;
+    padding-right:20px;
+    width:1%;
+    white-space:nowrap;
+}
+
+/* ================= PRODUCT INFO ================= */
+
+.dash-product{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.dash-product-img{
+    width:40px;
+    height:40px;
+    border-radius:4px;
+    object-fit:cover;
+}
+
+/* ================= ACTION ICON ================= */
+
+.dash-action{
+    color:#999;
+    cursor:pointer;
+    display:inline-block;
+    padding:5px;
+    margin-right: 12px;
+}
+
+/* ================= BADGES ================= */
+
+.dash-badge{
+    padding:4px 12px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+    display:inline-block;
+    white-space:nowrap;
+}
+
+/* GREEN */
+
+.dash-published,
+.dash-completed,
+.dash-active{
+    background-color:#e8f5e9;
+    color:#2e7d32;
+}
+
+/* GRAY */
+
+.dash-draft,
+.dash-cancelled,
+.dash-inactive{
+    background-color:#eeeeee;
+    color:#616161;
+}
+
+/* YELLOW */
+
+.dash-pending{
+    background-color:#fff8e1;
+    color:#f9a825;
+}
+
+/* BLUE */
+
+.dash-progress{
+    background-color:#E1F2FF;
+    color:#1565c0;
+}
+
+/* RED */
+
+.dash-expired{
+    background-color:#ffebee;
+    color:#c62828;
+}
+
+/* PURPLE */
+
+.dash-suspended{
+    background-color:#f3e5f5;
+    color:#7b1fa2;
+}
+
+/* ================= LAPTOP ================= */
+
+@media(max-width:1200px){
+
+    .dash-table th,
+    .dash-table td{
+        padding:12px 15px;
+        font-size:14px;
+    }
+
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:992px){
+
+    .dash-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dash-card{
+        overflow-x:auto;
+    }
+
+    .dash-table{
+        min-width:700px;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .dash-grid{
+        gap:16px;
+    }
+
+    .dash-card-head{
+        padding:14px 15px;
+    }
+
+    .dash-card-title{
+        font-size:18px;
+    }
+
+    .dash-view-btn{
+        font-size:13px;
+        padding:4px 10px;
+    }
+
+    .dash-table{
+        min-width:650px;
+    }
+
+    .dash-table th{
+        font-size:13px;
+        padding:12px 14px;
+    }
+
+    .dash-table td{
+        font-size:13px;
+        padding:14px;
+    }
+
+    .dash-product{
+        gap:8px;
+    }
+
+    .dash-product-img{
+        width:36px;
+        height:36px;
+    }
+
+    .dash-badge{
+        font-size:11px;
+        padding:4px 10px;
+    }
+
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:480px){
+
+    .dash-grid{
+        gap:14px;
+    }
+
+    .dash-card{
+        border-radius:6px;
+    }
+
+    .dash-card-head{
+        padding:12px;
+    }
+
+    .dash-card-title{
+        font-size:16px;
+    }
+
+    .dash-view-btn{
+        font-size:12px;
+        padding:3px 8px;
+    }
+
+    .dash-table{
+        min-width:600px;
+    }
+
+    .dash-table th{
+        font-size:12px;
+        padding:10px 12px;
+    }
+
+    .dash-table td{
+        font-size:12px;
+        padding:12px;
+    }
+
+    .dash-product-img{
+        width:32px;
+        height:32px;
+    }
+
+    .dash-badge{
+        font-size:10px;
+        padding:3px 8px;
+    }
+
+    .dash-action{
+        font-size:13px;
+    }
+
+}
+
+
+
+
+
+/* ================= GRID ================= */
+
+.dash-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* ================= CARD ================= */
+
+.dash-card{
+    background:#fff;
+    border:1px solid #e0e0e0;
+    border-radius:4px;
+    padding:0;
+    box-shadow:0 2px 4px rgba(0,0,0,0.05);
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.dash-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:auto;
+    height:100%;
+}
+
+.dash-table tbody{
+    height:100%;
+}
+
+.dash-table tbody tr{
+    height:auto;
+}
+
+.dash-card{
+    height:100%;
+}
+
+.dash-grid{
+    align-items:stretch;
+}
+
+/* ================= HEADER ================= */
+
+.dash-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.dash-card-title{
+    margin:0;
+    font-size:18px; /* was 1.2rem */
+    font-weight:500;
+}
+
+/* ================= BUTTON ================= */
+
+.dash-view-btn{
+    background:transparent;
+    border:1px solid #0796FE;
+    color:#0796FE;
+    padding:4px 12px;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:12px; /* was 0.85rem */
+    transition:0.3s;
+}
+
+.dash-view-btn:hover{
+    background:#0796FE;
+    color:#fff;
+}
+
+/* ================= TABLE ================= */
+
+.dash-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px; /* was 0.9rem */
+    table-layout:auto;
+}
+
+.dash-table thead tr{
+    background-color:#E1F2FF;
+}
+
+.dash-table th{
+    text-align:left;
+    padding:12px 20px;
+    font-weight:500;
+    color:#3C4452;
+    font-size:12px;
+    white-space:nowrap;
+}
+
+.dash-table td{
+    padding:15px 20px;
+    border-bottom:1px solid #f0f0f0;
+    font-size:13.46px;
+}
+
+.dash-table tr:last-child td{
+    border-bottom:none;
+}
+
+.dash-table th:last-child,
+.dash-table td:last-child{
+    text-align:right;
+    padding-right:20px;
+    width:1%;
+    white-space:nowrap;
+}
+
+/* ================= PRODUCT INFO ================= */
+
+.dash-product{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.dash-product-img{
+    width:40px;
+    height:40px;
+    border-radius:4px;
+    object-fit:cover;
+}
+
+/* ================= ACTION ICON ================= */
+
+.dash-action{
+    color:#999;
+    cursor:pointer;
+    display:inline-block;
+    padding:5px;
+    font-size:14px;
+}
+
+/* ================= BADGES ================= */
+
+.dash-badge{
+    padding:4px 12px;
+    border-radius:12px;
+    font-size:12px; /* was 0.75rem */
+    font-weight:600;
+    display:inline-block;
+    white-space:nowrap;
+}
+
+/* GREEN */
+
+.dash-published,
+.dash-completed,
+.dash-active{
+    background-color:#e8f5e9;
+    color:#2e7d32;
+}
+
+/* GRAY */
+
+.dash-draft,
+.dash-cancelled,
+.dash-inactive{
+    background-color:#eeeeee;
+    color:#616161;
+}
+
+/* YELLOW */
+
+.dash-pending{
+    background-color:#fff8e1;
+    color:#f9a825;
+}
+
+/* BLUE */
+
+.dash-progress{
+    background-color:#E1F2FF;
+    color:#1565c0;
+}
+
+/* RED */
+
+.dash-expired{
+    background-color:#ffebee;
+    color:#c62828;
+}
+
+/* PURPLE */
+
+.dash-suspended{
+    background-color:#f3e5f5;
+    color:#7b1fa2;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* ================= LAPTOP ================= */
+
+@media(max-width:1200px){
+
+    .dash-table th,
+    .dash-table td{
+        padding:12px 15px;
+        font-size:14px;
+    }
+
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:992px){
+
+    .dash-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dash-card{
+        overflow-x:auto;
+    }
+
+    .dash-table{
+        min-width:700px;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .dash-grid{
+        gap:16px;
+    }
+
+    .dash-card-head{
+        padding:14px 15px;
+    }
+
+    .dash-card-title{
+        font-size:18px;
+    }
+
+    .dash-view-btn{
+        font-size:13px;
+        padding:4px 10px;
+    }
+
+    .dash-table{
+        min-width:650px;
+    }
+
+    .dash-table th{
+        font-size:13px;
+        padding:12px 14px;
+    }
+
+    .dash-table td{
+        font-size:13px;
+        padding:14px;
+    }
+
+    .dash-product{
+        gap:8px;
+    }
+
+    .dash-product-img{
+        width:36px;
+        height:36px;
+    }
+
+    .dash-badge{
+        font-size:11px;
+        padding:4px 10px;
+    }
+
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:480px){
+
+    .dash-grid{
+        gap:14px;
+    }
+
+    .dash-card{
+        border-radius:6px;
+    }
+
+    .dash-card-head{
+        padding:12px;
+    }
+
+    .dash-card-title{
+        font-size:16px;
+    }
+
+    .dash-view-btn{
+        font-size:12px;
+        padding:3px 8px;
+    }
+
+    .dash-table{
+        min-width:600px;
+    }
+
+    .dash-table th{
+        font-size:12px;
+        padding:10px 12px;
+    }
+
+    .dash-table td{
+        font-size:12px;
+        padding:12px;
+    }
+
+    .dash-product-img{
+        width:32px;
+        height:32px;
+    }
+
+    .dash-badge{
+        font-size:10px;
+        padding:3px 8px;
+    }
+
+    .dash-action{
+        font-size:13px;
+    }
+
+}
+
+
+
+/* added for the notification 
+
+.notification-wrapper{
+  position: relative;
+}
+
+
+.notification-dropdown{
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 380px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  display: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+
+.notification-dropdown.show{
+  display: block;
+}
+
+
+.dropdown-header{
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-header h5{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+.notification-list{
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+
+.notification-item{
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.notification-item:hover{
+  background: #f8fafc;
+}
+
+.notification-title{
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.notification-title strong{
+  font-weight: 700;
+}
+
+.notification-time{
+  font-size: 13px;
+  color: #888;
+}
+
+
+.dropdown-footer{
+  padding: 15px;
+  text-align: center;
+}
+
+.dropdown-footer button{
+  border: 1px solid #0d6efd;
+  background: transparent;
+  color: #0d6efd;
+  padding: 8px 25px;
+  border-radius: 6px;
+}
+
+
+@media(max-width:576px){
+
+  .notification-dropdown{
+    width: 320px;
+    right: -100px;
+  }
+
+}
+  */
+  /* =====Rahul's code NEW NOTIFICATION CSS  ===== */
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -10px;
+  width: 340px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+  border: 1px solid #e5e7eb;
+  z-index: 9999;
+  overflow: hidden;
+}
+.notif-dropdown.show { display: block; }
+
+.notif-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.notif-dropdown-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0A2540;
+}
+.notif-mark-all {
+  font-size: 12px;
+  color: #0796FE;
+  cursor: pointer;
+}
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+.notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-items: center;
+}
+.notif-item:hover { background: #f8fafc; }
+.notif-item.unread { background: #EFF6FF; }
+.notif-item.unread:hover { background: #dbeafe; }
+
+.notif-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #E7F1FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0796FE;
+  font-size: 14px;
+}
+.notif-content {
+  flex: 1;
+  min-width: 0;
+}
+.notif-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-message {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-time { font-size: 11px; color: #94a3b8; }
+
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: #0796FE;
+}
+.notif-loading, .notif-empty {
+  text-align: center;
+  padding: 30px 16px;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.notif-dropdown-footer {
+  padding: 10px 16px;
+  text-align: center;
+  border-top: 1px solid #f1f5f9;
+}
+.notif-dropdown-footer a {
+  font-size: 13px;
+  color: #0796FE;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* //Added by harshada for search bar */
+.search-wrapper{
+    position: relative;
+    width: 400px;
+}
+
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    display: none;
+    z-index: 9999;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background: #f5f5f5;
+}
+
+/* mahesh code landspace*/
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar .logo-area {
+    padding: 15px 20px;
+  }
+
+  .sidebar a {
+    padding: 10px 20px;
+  }
+}
+
+/* mahesh code notificaton responsive */
+@media (max-width: 768px){
+
+    .header-right{
+        gap: 12px;
+    }
+
+    .notification-btn{
+        font-size: 18px;
+        position: relative;
+    }
+
+    .notif-dropdown{
+        width: min(280px, calc(100vw - 20px));
+        right: -20;
+        left: auto;
+    }
+}
+
+/* Ganesh Added css for the profile dropdown */
+/* Profile Dropdown */
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+.profile-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+
+  </style>
+</head>
+<script src="/js/admin-guard.js"></script>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+      <div class="logo-area">
+  <img
+    src="./img/creativesweb.png"
+    alt="Logo"
+    class="logo-img"
+    onclick="window.location.href='index.html';"
+    style="cursor:pointer;"
+  />
+</div>
+   <nav>
+      <a href="#" class="active">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="product.html">
+        <i class="fa-solid fa-box"></i>
+        <span>Products</span>
+      </a>
+
+      <a href="admin-order.html">
+        <i class="fa-solid fa-shopping-cart"></i>
+        <span>Orders</span>
+      </a>
+
+      <a href="licence-dashboard.html">
+        <i class="fa-solid fa-id-card"></i>
+        <span>License</span>
+      </a>
+
+      
+
+       <a href="admin-user.html">
+        <i class="fa-regular fa-user"></i>
+        <span>User</span>
+      </a>
+
+
+      <a href="Admin-setting.html">
+        <i class="bi bi-gear me-2"></i>
+        <span>Setting</span>
+      </a>
+    </nav>
+  </div>
+
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+
+    <div class="top-header">
+      <div class="d-flex align-items-center">
+        <button class="btn d-lg-none me-2 toggle-btn" id="sidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      <!-- //Added by harshada -->
+        <div class="search-bar">
+          <i class="fa fa-search"></i>
+    
+        <div class="search-wrapper">
+ <input type="text" id="globalSearch" placeholder="Search...">
+    <div id="suggestions"></div>
+</div>
+        </div>
+      </div>
+      <div class="header-right">
+
+        <!-- <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="badge">1</span>
+          <small class="noti-text">Notification</small>
+        </div> -->
+
+        <!-- Notification 
+<div class="notification-wrapper">
+
+  <div class="notification-btn" id="notificationToggle">
+    <i class="fa-regular fa-bell"></i>
+
+    
+    <span class="badge" id="notificationCount">0</span>
+
+    <small class="noti-text">Notification</small>
+  </div>
+
+  <div class="notification-dropdown" id="notificationDropdown">
+
+    <div class="dropdown-header">
+      <h5>Notifications</h5>
+    </div>
+
+    
+    <div class="notification-list" id="notificationList">
+
+      
+
+    </div>
+
+    <div class="dropdown-footer">
+      <button id="closeDropdown">Close</button>
+    </div>
+
+  </div>
+
+</div>
+-->
+
+        <!--Rahul's Code for NOTIFICATION  -->
+<div class="notification-btn" id="notifBtn" onclick="toggleNotifDropdown(event)">
+  <i class="fa-regular fa-bell"></i>
+  <span class="badge" id="notifBadge" style="display:none;">0</span>
+  <small class="noti-text">Notification</small>
+
+  <div class="notif-dropdown" id="notifDropdown" onclick="event.stopPropagation()">
+    <div class="notif-dropdown-header">
+      <span class="notif-dropdown-title">Notifications</span>
+      <span class="notif-mark-all" onclick="markAllRead()">Mark all as read</span>
+    </div>
+    <div class="notif-list" id="notifList">
+      <div class="notif-loading">Loading...</div>
+    </div>
+    <div class="notif-dropdown-footer">
+      <a href="#" onclick="loadAllNotifications(); return false;">View all notifications</a>
+    </div>
+  </div>
+</div>
+        <!-- <div class="user-avatar" id="userAvatar" onclick="toggleProfileDropdown()"></div>
+        <div class="profile-dropdown" id="profileDropdown">
+        <a href="#" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+       </a>
+</div> -->
+<div class="profile-wrapper">
+    <div class="user-avatar" id="userAvatar" onclick="toggleProfileDropdown()">
+        AS
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
+</div>
+
+
+      </div>
+    </div>
+
+
+<!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+            <h2>Dashboard</h2>
+            <p>Welcome back.</p>
+
+            <!-- CARDS -->
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-top">
+                        <div class="icon-box green">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <h3>Total Revenue</h3>
+                    </div>
+
+                    <h1 id="totalRevenue">Rs.0</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <div class="icon-box purple">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <h3>Total Users</h3>
+                    </div>
+
+                    <h1 id="totalUsers">0</h1>
+		
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <div class="icon-box blue">
+                            <i class="fa-solid fa-download"></i>
+                        </div>
+                        <h3>Product Downloads</h3>
+                    </div>
+
+                    <h1 id="totalDownloads">0</h1>
+                </div>
+
+            </div>
+
+    
+ <div class="dash-grid">
+
+        <!-- PRODUCTS SECTION -->
+
+        <div class="dash-card">
+
+            <div class="dash-card-head">
+                <h3 class="dash-card-title">Products</h3>
+              <button class="dash-view-btn" onclick="window.location.href='product.html'">
+                View All
+              </button>
+            </div>
+
+            <table class="dash-table">
+
+                <thead>
+                   <tr class="search-row">
+                        <th>Product Title</th>
+                        <th>Sales</th>
+                        <th>Revenue</th>
+                        <th>Status</th>
+                        <!-- <th>Action</th> -->
+                    </tr>
+                </thead>
+
+                <!-- //Added by harshada 08-06-2026 -->
+                    <tbody id="dashboardProductsBody">
+
+                 <!-- <tr class="search-row">
+
+                        <td>
+                            <div class="dash-product">
+
+                                <img class="dash-product-img"
+                                    src="img/Stock management system.png"
+                                    alt="Stock">
+
+                                <span>Stock Management System</span>
+
+                            </div>
+                        </td>
+
+                        <td>145</td>
+
+                        <td>Rs.3200</td>
+
+                        <td>
+                            <span class="dash-badge dash-published">
+                                Published
+                            </span>
+                        </td>
+
+                        <td>
+                            <i class="fas fa-ellipsis-v dash-action"></i>
+                        </td>
+
+                    </tr> -->
+
+                    <!-- <tr class="search-row">
+
+                        <td>
+                            <div class="dash-product">
+
+                                <img class="dash-product-img"
+                                    src="img/Employee management system.png"
+                                    alt="Employee">
+
+                                <span>Employee Management System</span>
+
+                            </div>
+                        </td>
+
+                        <td>50</td>
+
+                        <td>Rs.5200</td>
+
+                        <td>
+                            <span class="dash-badge dash-published">
+                                Published
+                            </span>
+                        </td>
+
+                        <td>
+                            <i class="fas fa-ellipsis-v dash-action"></i>
+                        </td>
+
+                    </tr> -->
+<!-- <tr class="search-row">
+
+                        <td>
+                            <div class="dash-product">
+
+                                <img class="dash-product-img"
+                                    src="img/TMS.png"
+                                    alt="Task">
+
+                                <span>Task Management System</span>
+
+                            </div>
+                        </td>
+
+                        <td>20</td>
+
+                        <td>Rs.1200</td>
+
+                        <td>
+                            <span class="dash-badge dash-draft">
+                                Draft
+                            </span>
+                        </td>
+
+                        <td>
+                            <i class="fas fa-ellipsis-v dash-action"></i>
+                        </td>
+
+                    </tr> -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- ORDERS SECTION -->
+
+        <div class="dash-card">
+<div class="dash-card-head">
+    <h3 class="dash-card-title">Orders</h3>
+    <button class="dash-view-btn"
+        onclick="window.location.href='admin-order.html'">
+        View All
+    </button>
+</div>
+
+            <table class="dash-table">
+
+                <thead>
+                    <tr class="search-row">
+                        <th>Order ID</th>
+                        <th>Name</th>
+                        <th>Product Purchase</th>
+                        <th>Payment Method</th>
+                        <!-- <th>Action</th> -->
+                    </tr>
+                </thead>
+
+                    <!-- //Added by harshada for order section 08-06-2026 -->
+               <tbody id="dashboardOrdersTableBody">
+
+                   <!-- <tr class="search-row">
+
+                        <td>#ORD-101</td>
+                        <td>Ujjwala G</td>
+                        <td>UPI</td>
+
+                        <td>
+                            <span class="dash-badge dash-completed">
+                                Completed
+                            </span>
+                        </td>
+
+                        <td>
+                            <i class="fas fa-ellipsis-v dash-action"></i>
+                        </td>
+
+                    </tr> -->
+<!-- 
+                   <tr class="search-row">
+
+                        <td>#ORD-145</td>
+                        <td>Yash B</td>
+                        <td>Bank Transfer</td>
+
+                        <td>
+                            <span class="dash-badge dash-pending">
+                                Pending
+                            </span>
+                        </td>
+
+                        <td>
+                            <i class="fas fa-ellipsis-v dash-action"></i>
+                        </td>
+
+                    </tr> -->
+<!-- 
+                   <tr class="search-row">
+
+                        <td>#ORD-123</td>
+                        <td>Sakshi P</td>
+                        <td>UPI</td>
+
+                        <td>
+                            <span class="dash-badge dash-progress">
+                                In Progress
+                            </span>
+                        </td>
+
+                        <td>
+                            <i class="fas fa-ellipsis-v dash-action"></i>
+                        </td>
+
+                    </tr> -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- LICENSE SECTION -->
+
+        <div class="dash-card">
+
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">License</h3>
+            <button class="dash-view-btn" onclick="window.location.href='licence-dashboard.html'">
+              View All
+            </button>
+          </div>
+
+            <table class="dash-table">
+
+                <thead>
+                    <tr class="search-row">
+                        <th>License Key</th>
+                        <th>Product Name</th>
+                        <th>Activation Status</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+
+                <!-- //Added by harshada for license section 08-06-2026 -->
+              <tbody id="dashboardLicenseBody">
+
+                    <!-- <tr class="search-row">
+
+                        <td>LIC-2027-984521</td>
+
+                        <td>Inventory Management</td>
+
+                        <td>
+                            <span class="dash-badge dash-active">
+                                Active
+                            </span>
+                        </td>
+
+                        <td>10/05/2027</td>
+
+                    </tr> -->
+<!-- 
+                    <tr class="search-row">
+
+                        <td>LIC-2027-452318</td>
+
+                        <td>Employee Management System</td>
+
+                        <td>
+                            <span class="dash-badge dash-expired">
+                                Expired
+                            </span>
+                        </td>
+
+                        <td>30/04/2026</td>
+
+                    </tr> -->
+
+                    <!-- <tr class="search-row">
+
+                        <td>LIC-2027-763204</td>
+
+                        <td>Task Management System</td>
+
+                        <td>
+                            <span class="dash-badge dash-suspended">
+                                Suspended
+                            </span>
+                        </td>
+
+                        <td>10/05/2027</td>
+
+                    </tr> -->
+
+                    <!-- <tr class="search-row">
+
+                        <td>LIC-2027-118907</td>
+
+                        <td>Employee Management System</td>
+
+                        <td>
+                            <span class="dash-badge dash-cancelled">
+                                Cancelled
+                            </span>
+                        </td>
+
+                        <td>01/01/2027</td>
+
+                    </tr> -->
+
+                </tbody> 
+
+            </table>
+
+        </div>
+
+        <!-- USER MANAGEMENT SECTION -->
+
+        <div class="dash-card">
+
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">User Management</h3>
+            <button class="dash-view-btn" onclick="window.location.href='admin-user.html'">
+              View All
+            </button>
+          </div>
+
+            <table class="dash-table">
+
+                <thead>
+                    <tr class="search-row">
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Purchase History</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                 <!-- //added by harshada for user section 08-06-2026 -->
+                <tbody id="dashboardUsersBody">
+
+                    <!-- <tr class="search-row">
+
+                        <td>Raj Shah</td>
+                        <td>rajshah@gmail.com</td>
+                        <td>12 Orders</td>
+
+                        <td>
+                            <span class="dash-badge dash-active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr> -->
+
+                    <!-- <tr class="search-row">
+
+                        <td>Soham Seth</td>
+                        <td>sohams@gmail.com</td>
+                        <td>5 Orders</td>
+
+                        <td>
+                            <span class="dash-badge dash-expired">
+                                Suspended
+                            </span>
+                        </td>
+
+                    </tr> -->
+<!-- 
+                    <tr class="search-row">
+
+                        <td>Siddhi Kadam</td>
+                        <td>siddhikadam@gmail.com</td>
+                        <td>18 Orders</td>
+
+                        <td>
+                            <span class="dash-badge dash-inactive">
+                                Inactive
+                            </span>
+                        </td>
+
+                    </tr> -->
+
+                    <!-- <tr class="search-row">
+
+                        <td>Omkar Patil</td>
+                        <td>omkarpatil@gmail.com</td>
+                        <td>9 Orders</td>
+
+                        <td>
+                            <span class="dash-badge dash-active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr> -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Footer -->
+                <div class="text-center mt-3" style="font-size: 14px; color:#797979;">
+                    Copyright © 2025 - 2026 <span style="color: #092a09; font-weight: 500;"> Creative Web Solution.</span>
+                    ALL RIGHTS RESERVED
+                </div>
+
+
+
+
+
+
+  
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        if (sidebarToggle) {
+          sidebarToggle.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+          });
+        }
+
+        document.addEventListener('click', function (event) {
+          const isClickInsideSidebar = sidebar.contains(event.target);
+          const isClickInsideButton = sidebarToggle.contains(event.target);
+
+          if (!isClickInsideSidebar && !isClickInsideButton && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+          }
+        });
+      });
+    </script>
+
+
+<!-- Search Bar Script -->
+<!-- <script>
+//const searchInput = document.getElementById("searchInput");
+const searchInput = document.getElementById("globalSearch");
+const tableRows = document.querySelectorAll("#tableBody tr");
+
+searchInput.addEventListener("keyup", function () {
+  const value = this.value.toLowerCase();
+
+  tableRows.forEach(row => {
+    const text = row.innerText.toLowerCase();
+
+    if (text.includes(value)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});
+</script> -->
+
+<!-- <script>
+
+const searchInput = document.getElementById("globalSearch");
+
+searchInput.addEventListener("keyup", function () {
+
+    let searchValue = this.value.toLowerCase();
+
+    let rows = document.querySelectorAll(".search-row");
+
+    rows.forEach(function(row) {
+
+        let rowText = row.innerText.toLowerCase();
+
+        if (rowText.includes(searchValue)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+
+    });
+
+});
+
+</script> -->
+<!-- <script>
+
+// (() => {
+
+//   /* added for the testing purpose */
+
+//   localStorage.setItem(
+//     "token",
+//     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzaG9wLmNvbSIsImlhdCI6MTc3OTM0MTk0MiwiZXhwIjoxNzc5MzQ1NTQyfQ.0D8XCBvvo7R3ZubhNHm-wF0OpcFvW39CjKo9XuISbVA"
+//   );
+
+// })(); 
+
+const bellBtn = document.getElementById("notificationToggle");
+const dropdown = document.getElementById("notificationDropdown");
+const closeBtn = document.getElementById("closeDropdown");
+const notificationList = document.getElementById("notificationList");
+const notificationCount = document.getElementById("notificationCount");
+
+/* Toggle Dropdown */
+bellBtn.addEventListener("click", async function () {
+
+  dropdown.classList.toggle("show");
+
+  if (dropdown.classList.contains("show")) {
+    await loadNotifications();
+  }
+
+});
+
+/* Close Button */
+closeBtn.addEventListener("click", function () {
+  dropdown.classList.remove("show");
+});
+
+/* Outside Click Close */
+document.addEventListener("click", function (e) {
+
+  if (
+    !bellBtn.contains(e.target) &&
+    !dropdown.contains(e.target)
+  ) {
+    dropdown.classList.remove("show");
+  }
+
+});
+
+/* Time Ago Function */
+function timeAgo(dateString) {
+
+  const now = new Date();
+  const created = new Date(dateString);
+
+  const seconds = Math.floor((now - created) / 1000);
+
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (seconds < 60) {
+    return "Just now";
+  }
+
+  if (minutes < 60) {
+    return `${minutes} min ago`;
+  }
+
+  if (hours < 24) {
+    return `${hours} hour ago`;
+  }
+
+  return `${days} day ago`;
+
+}
+
+/* Mark Notification As Read */
+async function markAsRead(notificationId, element) {
+
+  try {
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:8081/notifications/${notificationId}/read`,
+      {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to mark notification as read");
+    }
+
+    /* Remove Notification From UI */
+    element.remove();
+
+    /* Update Count */
+    let currentCount = parseInt(notificationCount.innerText);
+
+    currentCount = currentCount - 1;
+
+    notificationCount.innerText = currentCount;
+
+    /* If No Notifications Left */
+    if (currentCount <= 0) {
+
+      notificationList.innerHTML = `
+        <div class="notification-item">
+          <div class="notification-title">
+            No notifications found
+          </div>
+        </div>
+      `;
+
+      notificationCount.innerText = 0;
+    }
+
+  }
+  catch (error) {
+
+    console.log("Mark As Read Error:", error);
+
+  }
+
+}
+
+/* Load Notifications */
+async function loadNotifications() {
+
+  try {
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      "http://localhost:8081/notifications/unread",
+      {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    notificationList.innerHTML = "";
+
+    /* No Notifications */
+    if (!data.data || data.data.length === 0) {
+
+      notificationList.innerHTML = `
+        <div class="notification-item">
+          <div class="notification-title">
+            No notifications.
+          </div>
+        </div>
+      `;
+
+      notificationCount.innerText = 0;
+
+      return;
+    }
+
+    /* Render Notifications */
+    data.data.forEach(notification => {
+
+      const notificationDiv = document.createElement("div");
+
+      notificationDiv.className = "notification-item";
+
+      notificationDiv.innerHTML = `
+      
+        <div class="notification-title">
+          <strong>${notification.title}</strong>: ${notification.message}
+        </div>
+
+        <div class="notification-time">
+          ${timeAgo(notification.createdAt)}
+        </div>
+
+      `;
+
+      /* Click To Mark As Read */
+      notificationDiv.addEventListener("click", function () {
+
+        markAsRead(notification.id, notificationDiv);
+
+      });
+
+      notificationList.appendChild(notificationDiv);
+
+    });
+
+    /* Update Count */
+    notificationCount.innerText = data.data.length;
+
+  }
+  catch (error) {
+
+    console.log("Notification Error:", error);
+
+  }
+
+}
+
+/* Auto Load */
+window.addEventListener("load", loadNotifications);
+
+</script> -->
+
+
+<script>
+
+/* CONFIG
+
+const BASE_URL = "http://localhost:8081";
+const PAGE_SIZE = 10;
+
+
+
+function getToken() {
+
+  return (
+    localStorage.getItem("token") ||
+    sessionStorage.getItem("token")
+  );
+
+}
+
+
+
+const bellBtn =
+  document.getElementById("notificationToggle");
+
+const dropdown =
+  document.getElementById("notificationDropdown");
+
+const closeBtn =
+  document.getElementById("closeDropdown");
+
+const notificationList =
+  document.getElementById("notificationList");
+
+const notificationCount =
+  document.getElementById("notificationCount");
+
+
+let currentPage = 0;
+let isLastPage = false;
+let isLoading = false;
+
+
+
+function getHeaders() {
+
+  return {
+    "Authorization": `Bearer ${getToken()}`,
+    "Content-Type": "application/json"
+  };
+
+}
+
+
+
+function timeAgo(dateString) {
+
+  const now = new Date();
+  const created = new Date(dateString);
+
+  const seconds =
+    Math.floor((now - created) / 1000);
+
+  if (seconds < 60) {
+    return "Just now";
+  }
+
+  const minutes =
+    Math.floor(seconds / 60);
+
+  if (minutes < 60) {
+    return `${minutes} min ago`;
+  }
+
+  const hours =
+    Math.floor(minutes / 60);
+
+  if (hours < 24) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  }
+
+  const days =
+    Math.floor(hours / 24);
+
+  return `${days} day${days > 1 ? "s" : ""} ago`;
+
+}
+
+
+
+function resetNotifications() {
+
+  notificationList.innerHTML = "";
+
+  currentPage = 0;
+
+  isLastPage = false;
+
+}
+
+
+
+async function fetchUnreadCount() {
+
+  try {
+
+    const response = await fetch(
+      `${BASE_URL}/notifications/unread/count`,
+      {
+        method: "GET",
+        headers: getHeaders()
+      }
+    );
+
+    if (!response.ok) return;
+
+    const data = await response.json();
+
+    const count = data?.data || 0;
+
+    notificationCount.textContent = count;
+
+    notificationCount.style.display =
+      count > 0 ? "inline-flex" : "none";
+
+  }
+  catch(error){
+
+    console.error(
+      "Unread Count Error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+async function markAsRead(
+  notificationId,
+  element
+) {
+
+  try {
+
+    const response = await fetch(
+      `${BASE_URL}/notifications/${notificationId}/read`,
+      {
+        method: "PUT",
+        headers: getHeaders()
+      }
+    );
+
+    if (!response.ok) return;
+
+    element.classList.remove("unread");
+
+    await fetchUnreadCount();
+
+  }
+  catch(error){
+
+    console.error(
+      "Mark Read Error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+function createNotification(notification) {
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    notification.read
+      ? "notification-item"
+      : "notification-item unread";
+
+  div.innerHTML = `
+    <div class="notification-title">
+      <strong>${notification.title}</strong>
+      : ${notification.message}
+    </div>
+
+    <div class="notification-time">
+      ${timeAgo(notification.createdAt)}
+    </div>
+  `;
+
+  div.addEventListener(
+    "click",
+    async function(){
+
+      if(!notification.read){
+
+        notification.read = true;
+
+        await markAsRead(
+          notification.id,
+          div
+        );
+
+      }
+
+    }
+  );
+
+  return div;
+
+}
+
+
+async function loadNotifications() {
+
+  if (isLoading || isLastPage) return;
+
+  isLoading = true;
+
+  try {
+
+    const response = await fetch(
+      `${BASE_URL}/notifications?page=${currentPage}&size=${PAGE_SIZE}`,
+      {
+        method: "GET",
+        headers: getHeaders()
+      }
+    );
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Failed to load notifications"
+      );
+
+    }
+
+    const data = await response.json();
+
+    const notifications =
+      data?.data?.content || [];
+
+    if (
+      currentPage === 0 &&
+      notifications.length === 0
+    ) {
+
+      notificationList.innerHTML = `
+        <div class="notification-item">
+          <div class="notification-title">
+            No notifications found
+          </div>
+        </div>
+      `;
+
+      return;
+
+    }
+
+    notifications.forEach(notification => {
+
+      notificationList.appendChild(
+        createNotification(notification)
+      );
+
+    });
+
+    isLastPage =
+      data?.data?.last ?? true;
+
+    currentPage++;
+
+  }
+  catch(error){
+
+    console.error(
+      "Notification Error:",
+      error
+    );
+
+  }
+  finally {
+
+    isLoading = false;
+
+  }
+
+}
+
+
+
+bellBtn.addEventListener(
+  "click",
+  async function(e){
+
+    e.stopPropagation();
+
+    dropdown.classList.toggle("show");
+
+    if(dropdown.classList.contains("show")){
+
+      resetNotifications();
+
+      await loadNotifications();
+
+    }
+
+  }
+);
+
+
+
+closeBtn.addEventListener(
+  "click",
+  function(){
+
+    dropdown.classList.remove("show");
+
+  }
+);
+
+
+
+document.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      !dropdown.contains(e.target) &&
+      !bellBtn.contains(e.target)
+    ){
+
+      dropdown.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+
+notificationList.addEventListener(
+  "scroll",
+  function(){
+
+    const reachedBottom =
+
+      notificationList.scrollTop +
+      notificationList.clientHeight >=
+      notificationList.scrollHeight - 5;
+
+    if(reachedBottom){
+
+      loadNotifications();
+
+    }
+
+  }
+);
+
+
+
+window.addEventListener(
+  "load",
+  fetchUnreadCount
+);
+
+*/
+
+// ===================== CONFIG =====================
+// const BASE_URL            = window.location.hostname === 'localhost'
+//                             ? 'http://localhost:8081'
+//                             : 'https://your-production-api.com'; // TODO: update before deployment
+const BASE_URL = "http://localhost:8081";
+const NOTIF_BASE          = BASE_URL;
+const NOTIF_PAGE_SIZE     = 20;
+const NOTIF_BADGE_MAX     = 99;
+const NOTIF_POLL_INTERVAL = 60000;
+// ==================================================
+
+function getAuthHeaders() {
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  };
+}
+
+// function loadUserAvatar() {
+//   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+//   if (!token) return;
+//   try {
+//     const payload = JSON.parse(atob(token.split('.')[1]));
+//     const email = payload.sub || payload.email || '';
+//     document.getElementById('userAvatar').textContent = email.substring(0, 2).toUpperCase();
+//   } catch (e) {
+//     console.error('Avatar error:', e);
+//   }
+// }
+
+function loadUserAvatar() {
+
+    const userData =
+        JSON.parse(localStorage.getItem("userData"));
+
+    if (!userData || !userData.name) return;
+
+    const parts = userData.name.trim().split(" ");
+
+    let initials = "";
+
+    if (parts.length >= 2) {
+        initials =
+            parts[0].charAt(0).toUpperCase() +
+            parts[1].charAt(0).toUpperCase();
+    } else {
+        initials =
+            parts[0].charAt(0).toUpperCase();
+    }
+
+    document.getElementById("userAvatar").textContent = initials;
+}
+
+async function loadNotifCount() {
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/unread/count', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const count = data.data;
+    const badge = document.getElementById('notifBadge');
+    if (count > 0) {
+      badge.textContent = count > NOTIF_BADGE_MAX ? NOTIF_BADGE_MAX + '+' : count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (err) {
+    console.error('Notif count error:', err);
+  }
+}
+
+function toggleNotifDropdown(event) {
+  event.stopPropagation();
+  const dropdown = document.getElementById('notifDropdown');
+  const isOpen = dropdown.classList.contains('show');
+  dropdown.classList.toggle('show', !isOpen);
+  if (!isOpen) loadUnreadNotifications();
+}
+
+document.addEventListener('click', function (e) {
+  const btn = document.getElementById('notifBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  if (btn && dropdown && !btn.contains(e.target)) {
+    dropdown.classList.remove('show');
+  }
+});
+
+async function loadUnreadNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>';
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/unread', {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    renderNotifItems(data.data || []);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>Could not load notifications.</div>';
+  }
+}
+
+async function loadAllNotifications() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = '<div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading all...</div>';
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications?page=0&size=' + NOTIF_PAGE_SIZE, {
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) throw new Error('Unauthorized');
+    const data = await res.json();
+    const items = (data.data && data.data.content) ? data.data.content : [];
+    renderNotifItems(items);
+  } catch (err) {
+    document.getElementById('notifList').innerHTML =
+      '<div class="notif-empty">Could not load notifications.</div>';
+  }
+}
+
+function renderNotifItems(notifications) {
+  const list = document.getElementById('notifList');
+  if (!notifications.length) {
+    list.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No new notifications</div>';
+    return;
+  }
+  list.innerHTML = notifications.map(function (n) {
+    return '<div class="notif-item ' + (n.isRead ? '' : 'unread') + '" data-id="' + n.id + '" onclick="markAsRead(' + n.id + ', this)">'
+      + '<div class="notif-icon"><i class="fa-solid fa-bell"></i></div>'
+      + '<div class="notif-content">'
+      + '<div class="notif-title">' + escapeHtml(n.title) + '</div>'
+      + '<div class="notif-message">' + escapeHtml(n.message) + '</div>'
+      + '<div class="notif-time">' + formatNotifTime(n.createdAt) + '</div>'
+      + '</div>'
+      + (!n.isRead ? '<div class="notif-dot"></div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+async function markAsRead(notificationId, element) {
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/' + notificationId + '/read', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) return;
+    element.classList.remove('unread');
+    const dot = element.querySelector('.notif-dot');
+    if (dot) dot.remove();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAsRead error:', err);
+  }
+}
+
+
+async function markAllRead() {
+  try {
+    const res = await fetch(NOTIF_BASE + '/notifications/read-all', {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    if (!res.ok) {
+      console.error('markAllRead failed:', res.status);
+      return;
+    }
+    loadUnreadNotifications();
+    loadNotifCount();
+  } catch (err) {
+    console.error('markAllRead error:', err);
+  }
+}
+
+function formatNotifTime(createdAt) {
+  if (!createdAt) return '';
+  const date = new Date(createdAt);
+  const diffMs = Date.now() - date.getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  return Math.floor(hrs / 24) + 'd ago';
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  loadNotifCount();
+  loadUserAvatar();
+  setInterval(loadNotifCount, NOTIF_POLL_INTERVAL);
+});
+
+</script>
+<script>
+
+async function loadDashboardData() {
+
+    try {
+
+        const response = await fetch(
+            BASE_URL + "/admin/dashboard/products/dashboard",
+            {
+                method: "GET",
+                headers: getAuthHeaders()
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error("Failed to load dashboard");
+        }
+
+        const data = await response.json();
+
+        // Set Revenue
+        document.getElementById("totalRevenue")
+            .innerText = `Rs.${data.totalRevenue}`;
+
+        // Set Users
+        document.getElementById("totalUsers")
+            .innerText = data.totalUsers;
+
+        // Set Downloads
+        document.getElementById("totalDownloads")
+            .innerText = data.totalDownloads;
+
+    }
+    catch (error) {
+
+        console.log("Dashboard Error:", error);
+
+    }
+}
+
+// Auto Load
+window.addEventListener(
+    "load",
+    () => {
+        loadDashboardData();
+        loadDashboardProducts();    //added by  Harshada for product section 08-06-2026  
+        loadDashboardOrders();      //added by  Harshada for order section 08-06-2026  
+       loadDashboardLicenses(); // Added by  Harshada for license section 08-06-2026
+        loadDashboardUsers();      //added by  Harshada for user section 08-06-2026
+    }
+);
+
+</script>
+<!-- //Added by harshada  -->
+<Script>
+
+</Script>
+<!-- Global Search added by ashutosh -->
+<script>
+// const searchInput = document.getElementById("globalSearch");
+// const suggestions = document.getElementById("suggestions");
+
+// // Show suggestions while typing
+// searchInput.addEventListener("input", function () {
+
+//     const value = this.value.toLowerCase().trim();
+//     suggestions.innerHTML = "";
+
+//     if (value === "") {
+//         suggestions.style.display = "none";
+
+//         // Remove highlights when textbox is empty
+//         document.querySelectorAll("tbody tr").forEach(row => {
+//             row.style.backgroundColor = "";
+//             row.style.border = "";
+//         });
+
+//         return;
+//     }
+
+//     let results = new Set();
+
+//     document.querySelectorAll("tbody tr").forEach(row => {
+
+//         const rowText = row.innerText.trim();
+
+//         if (rowText.toLowerCase().includes(value)) {
+//             results.add(rowText);
+//         }
+//     });
+
+//     if (results.size > 0) {
+
+//         suggestions.style.display = "block";
+
+//         results.forEach(item => {
+
+//             const div = document.createElement("div");
+//             div.className = "suggestion-item";
+
+//             // Show only first line as suggestion
+//             div.textContent = item.split("\n")[0];
+
+//             div.onclick = function () {
+//                 searchInput.value = this.textContent;
+//                 suggestions.style.display = "none";
+//             };
+
+//             suggestions.appendChild(div);
+//         });
+
+//     } else {
+//         suggestions.style.display = "none";
+//     }
+// });
+
+// // Highlight row on Enter
+// searchInput.addEventListener("keypress", function (e) {
+
+//     if (e.key === "Enter") {
+
+//         const searchText = this.value.toLowerCase().trim();
+
+//         document.querySelectorAll("tbody tr").forEach(row => {
+
+//             row.style.backgroundColor = "";
+//             row.style.border = "";
+
+//             if (row.innerText.toLowerCase().includes(searchText)) {
+
+//                 row.style.backgroundColor = "#fff3cd";
+//                 row.style.border = "2px solid #ffc107";
+
+//                 row.scrollIntoView({
+//                     behavior: "smooth",
+//                     block: "center"
+//                 });
+//             }
+//         });
+
+//         suggestions.style.display = "none";
+//     }
+// });
+
+const searchInput = document.getElementById("globalSearch");
+const suggestions = document.getElementById("suggestions");
+
+let activeIndex = -1; // Tracks current index of keyboard suggestion selection
+
+// Dynamically create and inject the clear (X) button inside the search-bar
+const clearBtn = document.createElement("span");
+clearBtn.id = "clearSearch";
+clearBtn.innerHTML = "&times;";
+searchInput.parentNode.appendChild(clearBtn);
+
+// Helper function to handle highlighting table rows
+function highlightRows(searchText) {
+    const term = searchText.toLowerCase().trim();
+    document.querySelectorAll("tbody tr").forEach(row => {
+        row.style.backgroundColor = "";
+        row.style.border = "";
+
+        if (term !== "" && row.innerText.toLowerCase().includes(term)) {
+            row.style.backgroundColor = "#fff3cd";
+            row.style.border = "2px solid #ffc107";
+
+            row.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+    });
+}
+
+// Helper to visually update active keyboard selection states and scroll items into view
+function updateActiveSuggestion(items) {
+    items.forEach((item, index) => {
+        if (index === activeIndex) {
+            item.classList.add("active");
+            item.scrollIntoView({ block: "nearest" });
+        } else {
+            item.classList.remove("active");
+        }
+    });
+}
+
+// Show suggestions while typing
+searchInput.addEventListener("input", function () {
+    const value = this.value.toLowerCase().trim();
+    suggestions.innerHTML = "";
+    activeIndex = -1; // Reset keyboard index selection
+
+    if (value === "") {
+        suggestions.style.display = "none";
+        clearBtn.style.display = "none";
+
+        // Remove highlights when textbox is empty
+        document.querySelectorAll("tbody tr").forEach(row => {
+            row.style.backgroundColor = "";
+            row.style.border = "";
+        });
+
+        return;
+    }
+
+    // Show clear button when input contains text
+    clearBtn.style.display = "block";
+
+    let results = new Set();
+
+    document.querySelectorAll("tbody tr").forEach(row => {
+        const rowText = row.innerText.trim();
+
+        if (rowText.toLowerCase().includes(value)) {
+            results.add(rowText);
+        }
+    });
+
+    if (results.size > 0) {
+        suggestions.style.display = "block";
+
+        results.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "suggestion-item";
+
+            // Show only first line as suggestion
+            div.textContent = item.split("\n")[0];
+
+            // Click suggestion selection
+            div.onclick = function () {
+                searchInput.value = this.textContent;
+                suggestions.style.display = "none";
+                highlightRows(this.textContent);
+            };
+
+            // Mouse hover event sync with activeIndex keyboard state
+            div.addEventListener("mouseenter", () => {
+                const items = suggestions.querySelectorAll(".suggestion-item");
+                activeIndex = Array.from(items).indexOf(div);
+                updateActiveSuggestion(items);
+            });
+            div.addEventListener("mouseleave", () => {
+                const items = suggestions.querySelectorAll(".suggestion-item");
+                activeIndex = -1;
+                updateActiveSuggestion(items);
+            });
+
+            suggestions.appendChild(div);
+        });
+
+    } else {
+        suggestions.style.display = "none";
+    }
+});
+
+// Keydown listener for keyboard dropdown navigation
+searchInput.addEventListener("keydown", function (e) {
+    const items = suggestions.querySelectorAll(".suggestion-item");
+    if (suggestions.style.display === "block" && items.length > 0) {
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            activeIndex = (activeIndex + 1) % items.length;
+            updateActiveSuggestion(items);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            activeIndex = (activeIndex - 1 + items.length) % items.length;
+            updateActiveSuggestion(items);
+        } else if (e.key === "Enter") {
+            if (activeIndex >= 0 && activeIndex < items.length) {
+                e.preventDefault();
+                items[activeIndex].click(); // Selects item and triggers highlight rows search
+            }
+        } else if (e.key === "Escape") {
+            suggestions.style.display = "none";
+        }
+    }
+});
+
+// Highlight row on Enter when dropdown selection is not active/closed
+searchInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        // If suggestion box is open and navigation selection is active, ignore this handler
+        if (suggestions.style.display === "block" && activeIndex >= 0) {
+            return;
+        }
+
+        const searchText = this.value.toLowerCase().trim();
+        highlightRows(searchText);
+        suggestions.style.display = "none";
+    }
+});
+
+// Clear button click listener
+clearBtn.onclick = function () {
+    searchInput.value = "";
+    suggestions.style.display = "none";
+    clearBtn.style.display = "none";
+    activeIndex = -1;
+
+    // Clear highlights
+    document.querySelectorAll("tbody tr").forEach(row => {
+        row.style.backgroundColor = "";
+        row.style.border = "";
+    });
+
+    searchInput.focus();
+};
+
+// Close dropdown when clicking outside
+document.addEventListener("click", (e) => {
+    if (
+        !searchInput.contains(e.target) &&
+        !suggestions.contains(e.target) &&
+        !clearBtn.contains(e.target)
+    ) {
+        suggestions.style.display = "none";
+    }
+});
+</script>
+
+
+<!-- //Added by harshada for product section 08-06-2026 -->
+<Script>
+async function loadDashboardProducts() {
+    try {
+        const response = await fetch(
+            `${BASE_URL}/admin/dashboard/products/search`,
+            {
+                headers: getAuthHeaders()
+            }
+        );
+
+        const data = await response.json();
+        const products = data.data || data;
+
+        const tbody = document.getElementById("dashboardProductsBody");
+        tbody.innerHTML = "";
+
+        products.slice(0, 5).forEach(product => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${product.name}</td>
+                    <td>${product.salesCount}</td>
+                    <td>₹${product.revenue}</td>
+                    <td>${product.status}</td>
+                </tr>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Error loading products:", error);
+    }
+}
+</Script>
+
+
+<!-- //Added by harshada for order section 05-06-2026 -->
+<!-- FIXED: now uses getAuthHeaders() (checks localStorage AND sessionStorage) + checks response.ok before parsing JSON -->
+<Script>
+async function loadDashboardOrders() {
+
+  const tableBody = document.getElementById("dashboardOrdersTableBody");
+
+  try {
+
+    const response = await fetch(
+      `${BASE_URL}/api/admin/orders`,
+      {
+        headers: getAuthHeaders()
+      }
+    );
+
+    if (!response.ok) {
+      console.error("Orders fetch failed:", response.status);
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="4" style="text-align:center">
+            Unable to load orders (${response.status})
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    const orders = await response.json();
+
+    tableBody.innerHTML = "";
+
+    if (!orders || orders.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="4" style="text-align:center">
+            No Orders Found
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    orders.slice(0, 5).forEach(order => {
+
+      tableBody.innerHTML += `
+        <tr>
+          <td>${order.orderId}</td>
+          <td>${order.customerName}</td>
+          <td>${order.productPurchased}</td>
+          <td>${order.paymentMethod}</td>
+         <!-- <td>${order.transactionStatus}</td> -->
+         <!-- <td>${new Date(order.updatedAt).toLocaleString()}</td> -->
+        </tr>
+      `;
+
+    });
+
+  } catch (error) {
+    console.error("Error loading dashboard orders:", error);
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="4" style="text-align:center">
+          Error loading orders
+        </td>
+      </tr>
+    `;
+  }
+}
+</Script>
+
+
+<!-- //Added by harshada for license section 08-06-2026 -->
+<!-- FIXED: now uses getAuthHeaders() (checks localStorage AND sessionStorage) + checks response.ok before parsing JSON -->
+<Script>
+async function loadDashboardLicenses() {
+
+    const tbody = document.getElementById("dashboardLicenseBody");
+
+    try {
+
+        const response = await fetch(
+            `${BASE_URL}/admin/licenses?page=0&size=5`,
+            {
+                headers: getAuthHeaders()
+            }
+        );
+
+        if (!response.ok) {
+            console.error("License fetch failed:", response.status);
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" style="text-align:center">
+                        Unable to load licenses (${response.status})
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        const result = await response.json();
+
+        const licenses = result.data.content || [];
+
+        tbody.innerHTML = "";
+
+        licenses.forEach(license => {
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${license.licenseId}</td>
+                    <td>${license.productName}</td>
+                    <td>${license.activationStatus}</td>
+                    <td>${license.expiryDate}</td>
+                </tr>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Error loading licenses:", error);
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align:center">
+                    Error loading licenses
+                </td>
+            </tr>
+        `;
+    }
+}
+</Script>
+
+
+<!-- //Added by harshada for user section 08-06-2026 -->
+<!-- FIXED: now uses getAuthHeaders() (checks localStorage AND sessionStorage) + checks response.ok before parsing JSON -->
+<script>
+async function loadDashboardUsers() {
+
+    const tbody = document.getElementById("dashboardUsersBody");
+
+    try {
+
+        const response = await fetch(
+            `${BASE_URL}/api/users`,
+            {
+                headers: getAuthHeaders()
+            }
+        );
+
+        if (!response.ok) {
+            console.error("Users fetch failed:", response.status);
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" style="text-align:center">
+                        Unable to load users (${response.status})
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        const result = await response.json();
+
+        console.log("Users API Response:", result);
+
+        // Try common response structures
+        const users = result.data || result.content || result;
+
+        tbody.innerHTML = "";
+
+        users.forEach(user => {
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${user.fullName || user.name || ""}</td>
+                    <td>${user.email || ""}</td>
+                    <td>${user.totalOrders ?? 0} Orders</td>
+                    <td>${user.role || ""}</td>
+                </tr>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Error loading users:", error);
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align:center">
+                    Error loading users
+                </td>
+            </tr>
+        `;
+    }
+}
+</script>
+
+
+</body>
+
+</html>
